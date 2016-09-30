@@ -6,7 +6,7 @@ var util = require("./util_module.js");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(__dirname + "/clients/go"));
+app.use(express.static(__dirname + "/../js_go"));
 app.post("/go_msg", express_http.post);
 app.get("/go_msg", express_http.get);
 app.use(express_http.not_found);

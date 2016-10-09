@@ -13,8 +13,8 @@ module.exports = {
 function goContainerObject (cluster_object_val) {
     "use strict";
     this.theUtilModule = require("./../util_module.js");
-    this.theClusterModule = require("./../cluster_module.js");
-    this.theSessionModule = require("./../session_entry_module.js");
+    this.theClusterModule = require("./../fibre_folder/cluster_module.js");
+    this.theSessionModule = require("./../fibre_folder/session_entry_module.js");
     this.theConfigModule = require("./go_config_module.js");
     this.theGameModule = require("./go_game_module.js");
     this.theEngineModule = require("./go_engine_module.js");

@@ -14,9 +14,9 @@ module.exports = {
 
 function SessionEntryObject() {
     "use strict";
-    this.theUtilModule = require("./util_module.js");
-    this.theQueueModule = require("./queue_module.js");
-    this.theRingModule = require("./ring_module.js");
+    this.theUtilModule = require("./../util_module.js");
+    this.theQueueModule = require("./../queue_module.js");
+    this.theRingModule = require("./../ring_module.js");
     this.theClusterModule = require("./cluster_module.js");
 
     this.objectName = function () {

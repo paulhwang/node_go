@@ -12,9 +12,9 @@ module.exports = {
 
 function clusterObject () {
     "use strict";
-    this.theUtilModule = require("./util_module.js");
-    this.theQueueModule = require("./queue_module.js");
-    this.theGoContainerModule = require("./go_game/go_container_module.js")
+    this.theUtilModule = require("./../util_module.js");
+    this.theQueueModule = require("./../queue_module.js");
+    this.theGoContainerModule = require("./../go_game/go_container_module.js")
 
     this.objectName = function () {
         return "clusterObject";

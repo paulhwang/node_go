@@ -12,7 +12,7 @@ module.exports = {
 
 function goContainerObject (cluster_object_val) {
     "use strict";
-    this.theUtilModule = require("./../util_module.js");
+    this.theUtilModule = require("./../util_modules/util_module.js");
     this.theClusterModule = require("./../fibre_modules/cluster_module.js");
     this.theSessionModule = require("./../fibre_modules/session_entry_module.js");
     this.theConfigModule = require("./go_config_module.js");

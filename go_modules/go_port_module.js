@@ -12,7 +12,7 @@ module.exports = {
 
 function GoPortObject(container_val) {
     "use strict";
-    this.theUtilModule = require("./../util_module.js");
+    this.theUtilModule = require("./../util_modules/util_module.js");
     this.theGoDefineModule = require("./go_define_module.js");
     this.theContainerModule = require("./go_container_module.js");
 

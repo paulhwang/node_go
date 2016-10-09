@@ -13,7 +13,7 @@ module.exports = {
 function GoGroupListObject(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val) {
     "use strict";
     this.theGoDefineModule = require("./go_define_module.js");
-    this.theUtilModule = require("./../util_module.js");
+    this.theUtilModule = require("./../util_modules/util_module.js");
     this.theContainerModule = require("./go_container_module.js");
     this.theGroupModule = require("./go_group_module.js");
 

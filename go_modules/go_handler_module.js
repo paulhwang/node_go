@@ -12,7 +12,7 @@ module.exports = {
 
 function GoHandlerObject(container_val) {
     "use strict";
-    this.theUtilModule = require("./../util_module.js");
+    this.theUtilModule = require("./../util_modules/util_module.js");
     //this.theGoContainerModule = require("./go_container_module.js")
     this.theGoMoveModule = require("./go_move_module.js")
     this.theGoBoardModule = require("./go_board_module.js")

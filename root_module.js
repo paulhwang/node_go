@@ -57,8 +57,8 @@ function RootObject () {
         this.utilModule().logit(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.theUtilObject = require("./util_module.js");
-    this.theQueueModule = require("./queue_module.js");
+    this.theUtilObject = require("./util_modules/util_module.js");
+    this.theQueueModule = require("./util_modules/queue_module.js");
     this.theLinkMgrModule = require("./fibre_modules/link_mgr_module.js");
     this.theSessionMgrModule = require("./fibre_modules/session_mgr_module.js");
     this.linkMgrModule().init(this);

@@ -7,7 +7,7 @@
 //var util = require("./util_module.js");
 var root = require("./root_module.js");
 var queue = require("./queue_module.js");
-var link_entry = require("./fibre_folder/link_entry_module.js");
+var link_entry = require("./fibre_modules/link_entry_module.js");
 var express = require('express');
 var bodyParser = require('body-parser');
 var state;

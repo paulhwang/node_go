@@ -15,12 +15,6 @@ function goContainerObject (cluster_object_val) {
     this.theUtilModule = require("./../util_modules/util_module.js");
     this.theClusterModule = require("./../fibre_modules/cluster_module.js");
     this.theSessionModule = require("./../fibre_modules/session_entry_module.js");
-    this.theConfigModule = require("./go_config_module.js");
-    this.theGameModule = require("./go_game_module.js");
-    this.theEngineModule = require("./go_engine_module.js");
-    this.theBoardModule = require("./go_board_module.js");
-    this.theHandlerModule = require("./go_handler_module.js");
-    this.thePortModule = require("./go_port_module.js");
     this.theGoDefineModule = require("./go_define_module.js");
 
     this.theClusterObject = cluster_object_val;
@@ -33,49 +27,32 @@ function goContainerObject (cluster_object_val) {
         return this.theClusterModule;
     };
 
-    this.handlerModule = function () {
-        return this.theHandlerModule;
-    };
-
-    this.portModule = function () {
-        return this.thePortModule;
-    };
-
     this.sessionModule = function () {
         return this.theSessionModule;
     };
 
-    this.configModule = function () {
-        return this.theConfigModule;
-    };
-
-    this.gameModule = function () {
-        return this.theGameModule;
-    };
-
-    this.engineModule = function () {
-        return this.theEngineModule;
-    };
-
-    this.boardModule = function () {
-        return this.theBoardModule;
+    this.GO = function () {
+        return this.theGoDefineModule;
     };
 
     this.mallocObjects = function () {
-        this.theConfigObject = this.configModule().malloc(this);
-        this.theBoardObject = this.boardModule().malloc(this);
-        this.theEngineObject = this.engineModule().malloc(this);
-        this.theGameObject = this.gameModule().malloc(this);
-        this.theHandlerObject = this.handlerModule().malloc(this);
-        this.thePortObject = this.portModule().malloc(this);
+        var config_module = require("./go_config_module.js");
+        var board_module = require("./go_board_module.js");
+        var engine_module = require("./go_engine_module.js");
+        var game_module = require("./go_game_module.js");
+        var handler_module = require("./go_handler_module.js");
+        var port_module = require("./go_port_module.js");
+
+        this.theConfigObject = config_module.malloc(this);
+        this.theBoardObject = board_module.malloc(this);
+        this.theEngineObject = engine_module.malloc(this);
+        this.theGameObject = game_module.malloc(this);
+        this.theHandlerObject = handler_module.malloc(this);
+        this.thePortObject = port_module.malloc(this);
     }
 
     this.objectName = function () {
         return "GoContainerObject";
-    };
-
-    this.GO = function () {
-        return this.theGoDefineModule;
     };
 
     this.clusterObject = function () {

@@ -5,8 +5,8 @@
  */
 
 module.exports = {
-    malloc: function (topic_object_val) {
-        return new goContainerObject(topic_object_val);
+    malloc: function (cluster_object_val) {
+        return new goContainerObject(cluster_object_val);
     },
 };
 
@@ -24,11 +24,6 @@ function goContainerObject (cluster_object_val) {
     this.theGoDefineModule = require("./go_define_module.js");
 
     this.theClusterObject = cluster_object_val;
-    //this.theSessionObject.setContainerObject(this);
-
-    this.objectName = function () {
-        return "GoContainerObject";
-    };
 
     this.utilModule = function () {
         return this.theUtilModule;
@@ -38,8 +33,12 @@ function goContainerObject (cluster_object_val) {
         return this.theClusterModule;
     };
 
-    this.GO = function () {
-        return this.theGoDefineModule;
+    this.handlerModule = function () {
+        return this.theHandlerModule;
+    };
+
+    this.portModule = function () {
+        return this.thePortModule;
     };
 
     this.sessionModule = function () {
@@ -62,12 +61,21 @@ function goContainerObject (cluster_object_val) {
         return this.theBoardModule;
     };
 
-    this.handlerModule = function () {
-        return this.theHandlerModule;
+    this.mallocObjects = function () {
+        this.theConfigObject = this.configModule().malloc(this);
+        this.theBoardObject = this.boardModule().malloc(this);
+        this.theEngineObject = this.engineModule().malloc(this);
+        this.theGameObject = this.gameModule().malloc(this);
+        this.theHandlerObject = this.handlerModule().malloc(this);
+        this.thePortObject = this.portModule().malloc(this);
+    }
+
+    this.objectName = function () {
+        return "GoContainerObject";
     };
 
-    this.portModule = function () {
-        return this.thePortModule;
+    this.GO = function () {
+        return this.theGoDefineModule;
     };
 
     this.clusterObject = function () {
@@ -213,13 +221,7 @@ function goContainerObject (cluster_object_val) {
         });
     };
 
-    this.theConfigObject = this.configModule().malloc(this);
-    //this.theUiObject = new GoUiObject(this);
-    this.theBoardObject = this.boardModule().malloc(this);
-    this.theEngineObject = this.engineModule().malloc(this);
-    this.theGameObject = this.gameModule().malloc(this);
-    this.theHandlerObject = this.handlerModule().malloc(this);
-    this.thePortObject = this.portModule().malloc(this);
+    this.mallocObjects();
 }
 
 var GO = new GoDefineObject;

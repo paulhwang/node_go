@@ -22,7 +22,7 @@ function GoGroupObject(group_list_val) {
     };
 
     this.setGroupListObject = function (group_list_val) {
-        return this.theGroupListObject = group_list_val;
+        this.theGroupListObject = group_list_val;
     };
 
     this.containerObject = function () {

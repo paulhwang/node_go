@@ -658,8 +658,8 @@ function GoEngineObject(container_object_val) {
         this.resetMarkedGroupLists();
         this.resetEmptyGroupLists();
 
-       this.theCaptureCount = null;
-       this.theLastDeadStone = null;
+        this.theCaptureCount = null;
+        this.theLastDeadStone = null;
 
         this.theBlackCaptureStones = 0;
         this.theWhiteCaptureStones = 0;

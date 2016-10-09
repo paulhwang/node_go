@@ -5,9 +5,9 @@
  */
 
 module.exports = {
-    malloc: function (session_mgr_val, my_name_val, his_name_val, session_id_val, topic_val) {
+    malloc: function (session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val) {
         session = new SessionEntryObject();
-        session.resetIt(session_mgr_val, my_name_val, his_name_val, session_id_val, topic_val);
+        session.resetIt(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val);
         return session;
     },
 };
@@ -17,7 +17,7 @@ function SessionEntryObject() {
     this.theUtilModule = require("./util_module.js");
     this.theQueueModule = require("./queue_module.js");
     this.theRingModule = require("./ring_module.js");
-    this.theTopicModule = require("./topic_module.js");
+    this.theClusterModule = require("./cluster_module.js");
 
     this.objectName = function () {
         return "SessionEntryObject";
@@ -35,12 +35,8 @@ function SessionEntryObject() {
         return this.theRingModule;
     };
 
-    this.topicModule = function () {
-        return this.theTopicModule;
-    };
-
-    this.topicObject = function () {
-        return this.theTopicObject;
+    this.clusterModule = function () {
+        return this.theClusterModule;
     };
 
     this.sessionId = function () {
@@ -87,15 +83,15 @@ function SessionEntryObject() {
         return this.theReceiveRing;
     };
 
-    this.topicObject = function () {
-        return this.theTopicObject;
+    this.clusterObject = function () {
+        return this.theClusterObject;
     };
 
     this.sessionMgrObject = function () {
         return this.theSessionMgrObject;
     };
 
-    this.resetIt = function (session_mgr_val, my_name_val, his_name_val, session_id_val, topic_val) {
+    this.resetIt = function (session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val) {
         this.theSessionMgrObject = session_mgr_val;
         this.theSessionId = session_id_val;
         this.theMyName = my_name_val;
@@ -106,8 +102,8 @@ function SessionEntryObject() {
         this.theReceiveQueue = this.queueModule().malloc();
         this.theTransmitQueue = this.queueModule().malloc();
         this.theReceiveRing = this.ringModule().malloc();
-        this.theTopicObject = topic_val;
-        this.topicObject().addAdditionalSession(this);
+        this.theClusterObject = cluster_val;
+        this.clusterObject().addAdditionalSession(this);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

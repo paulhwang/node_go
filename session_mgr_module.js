@@ -34,7 +34,7 @@ module.exports = {
 
 function SessionMgrObject(root_object_val) {
     "use strict";
-    this.theTopicModule = require("./topic_module.js");
+    this.theClusterModule = require("./cluster_module.js");
 
     this.theRootObject = root_object_val;
 
@@ -54,8 +54,8 @@ function SessionMgrObject(root_object_val) {
         return this.rootObject().queueModule();
     };
 
-    this.topicModule = function () {
-        return this.theTopicModule;
+    this.clusterModule = function () {
+        return this.theClusterModule;
     };
 
     this.sessionModule = function () {
@@ -109,15 +109,15 @@ function SessionMgrObject(root_object_val) {
     this.searchAndCreate = function (my_name_val, his_name_val, session_id_val) {
         var session = this.searchIt(my_name_val, his_name_val, session_id_val);
         if (!session) {
-            var topic = this.topicModule().malloc();
-            session = this.mallocIt(my_name_val, his_name_val, topic);
+            var cluster = this.clusterModule().malloc();
+            session = this.mallocIt(my_name_val, his_name_val, cluster);
             this.sessionQueue().enQueue(session);
 
             if (my_name_val === his_name_val) {
                 session.setHisName(his_name_val);
                 session.setHisSession(session);
             } else {
-                var his_session = this.mallocIt(his_name_val, my_name_val, topic);
+                var his_session = this.mallocIt(his_name_val, my_name_val, cluster);
                 session.setHisSession(his_session);
                 his_session.setHisSession(session);
                 this.sessionQueue().enQueue(his_session);
@@ -126,14 +126,14 @@ function SessionMgrObject(root_object_val) {
         return session;
     };
 
-    this.mallocIt = function (my_name_val, his_name_val, topic_val) {
+    this.mallocIt = function (my_name_val, his_name_val, cluster_val) {
         var entry;
 
         if (!this.poolHead()) {
-            entry = this.sessionModule().malloc(this, my_name_val, his_name_val, this.globalSessionId(), topic_val);
+            entry = this.sessionModule().malloc(this, my_name_val, his_name_val, this.globalSessionId(), cluster_val);
         } else {
             entry = this.poolHead();
-            entry.resetIt(my_name_val, his_name_val, this.globalSessionId(), topic_val);
+            entry.resetIt(my_name_val, his_name_val, this.globalSessionId(), cluster_val);
             this.setHead(entry.next());
             this.decrementPoolSize();
         }

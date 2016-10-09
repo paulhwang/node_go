@@ -66,8 +66,8 @@ function GoPortObject(container_val) {
         return this.containerObject().engineObject();
     };
 
-    this.topicObject = function () {
-        return this.containerObject().topicObject();
+    this.clusterObject = function () {
+        return this.containerObject().clusterObject();
     };
 
     this.GoHandlerObject = function () {
@@ -114,8 +114,8 @@ function GoPortObject(container_val) {
     };
 
     this.transmitData = function (data_val) {
-        this.topicObject().enqueueTransmitData(data_val);
-        this.topicObject().processTransmitData();
+        this.clusterObject().enqueueTransmitData(data_val);
+        this.clusterObject().processTransmitData();
     };
 
     this.receiveStringData = function (str_val) {

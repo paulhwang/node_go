@@ -10,10 +10,10 @@ module.exports = {
     },
 };
 
-function goContainerObject (topic_object_val) {
+function goContainerObject (cluster_object_val) {
     "use strict";
     this.theUtilModule = require("./../util_module.js");
-    this.theTopicModule = require("./../topic_module.js");
+    this.theClusterModule = require("./../cluster_module.js");
     this.theSessionModule = require("./../session_entry_module.js");
     this.theConfigModule = require("./go_config_module.js");
     this.theGameModule = require("./go_game_module.js");
@@ -23,7 +23,7 @@ function goContainerObject (topic_object_val) {
     this.thePortModule = require("./go_port_module.js");
     this.theGoDefineModule = require("./go_define_module.js");
 
-    this.theTopicObject = topic_object_val;
+    this.theClusterObject = cluster_object_val;
     //this.theSessionObject.setContainerObject(this);
 
     this.objectName = function () {
@@ -34,8 +34,8 @@ function goContainerObject (topic_object_val) {
         return this.theUtilModule;
     };
 
-    this.topicModule = function () {
-        return this.theTopicModule;
+    this.clusterModule = function () {
+        return this.theClusterModule;
     };
 
     this.GO = function () {
@@ -70,8 +70,8 @@ function goContainerObject (topic_object_val) {
         return this.thePortModule;
     };
 
-    this.topicObject = function () {
-        return this.theTopicObject;
+    this.clusterObject = function () {
+        return this.theClusterObject;
     };
 
     this.rootObject = function () {
@@ -147,13 +147,13 @@ function goContainerObject (topic_object_val) {
     };
 
     this.goLog = function (s1_val, s2_val) {
-        if (this.topicObject().sessionArrayLength() === 1) {
-            this.utilModule().utilLogit(this.topicObject().sessionArray(0).sessionId() + "<=>" +
-                                        this.topicObject().sessionArray(0).sessionId() + " " + s1_val, s2_val);
+        if (this.clusterObject().sessionArrayLength() === 1) {
+            this.utilModule().utilLogit(this.clusterObject().sessionArray(0).sessionId() + "<=>" +
+                                        this.clusterObject().sessionArray(0).sessionId() + " " + s1_val, s2_val);
         }
         else {
-            this.utilModule().utilLogit(this.topicObject().sessionArray(0).sessionId() + "<=>" +
-                                        this.topicObject().sessionArray(1).sessionId() + " " + s1_val, s2_val);
+            this.utilModule().utilLogit(this.clusterObject().sessionArray(0).sessionId() + "<=>" +
+                                        this.clusterObject().sessionArray(1).sessionId() + " " + s1_val, s2_val);
         }
     };
 

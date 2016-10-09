@@ -1,23 +1,23 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: go_topic_module.js
+ * File name: go_cluster_module.js
  */
 
 module.exports = {
     malloc: function (session_val) {
-        return new topicObject(session_val);
+        return new clusterObject(session_val);
     },
 };
 
-function topicObject () {
+function clusterObject () {
     "use strict";
     this.theUtilModule = require("./util_module.js");
     this.theQueueModule = require("./queue_module.js");
     this.theGoContainerModule = require("./go_game/go_container_module.js")
 
     this.objectName = function () {
-        return "topicObject";
+        return "clusterObject";
     };
 
     this.utilModule = function () {

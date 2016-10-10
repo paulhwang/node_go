@@ -12,12 +12,10 @@ module.exports = {
 
 function goContainerObject (cluster_object_val) {
     "use strict";
-    this.theGoDefineModule = require("./go_define_module.js");
-
     this.theClusterObject = cluster_object_val;
 
     this.GO = function () {
-        return this.theGoDefineModule;
+       return require("./go_define_module.js");
     };
 
     this.mallocObjects = function () {

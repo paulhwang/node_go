@@ -14,14 +14,17 @@ function GoEngineObject(container_object_val) {
     "use strict";
     this.theUtilModule = require("./../util_modules/util_module.js");
     this.theGoDefineModule = require("./go_define_module.js");
-    this.theContainerModule = require("./go_container_module.js");
-    this.theGroupModule = require("./go_group_module.js");
 
     this.theContainerObject = container_object_val;
 
     this.mallocGroupList = function (engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val) {
         var group_list_module = require("./go_group_list_module.js");
         return group_list_module.malloc(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val);
+    };
+
+    this.mallocGroup = function (group_list_val) {
+        var group_module = require("./go_group_module.js");
+        return group_module.malloc(group_list_val);
     };
 
     this.objectName = function () {
@@ -34,18 +37,6 @@ function GoEngineObject(container_object_val) {
 
     this.GO = function () {
         return this.theGoDefineModule;
-    };
-
-    this.containerModule = function () {
-        return this.theContainerModule;
-    };
-
-    this.groupListModule = function () {
-        return this.theGroupListModule;
-    };
-
-    this.groupModule = function () {
-        return this.theGroupModule;
     };
 
     this.containerObject = function () {
@@ -270,7 +261,7 @@ function GoEngineObject(container_object_val) {
 
         var group = g_list.findCandidateGroup(move_val.xX(), move_val.yY());
         if (!group) {
-            group = this.groupModule().malloc(g_list);
+            group = this.mallocGroup(g_list);
             group.insertStoneToGroup(move_val.xX(), move_val.yY(), false);
             g_list.insertGroupToGroupList(group);
             //g_list.printGroupList();

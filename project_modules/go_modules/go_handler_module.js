@@ -12,18 +12,18 @@ module.exports = {
 
 function GoHandlerObject(container_val) {
     "use strict";
-    this.theGoMoveModule = require("./go_move_module.js")
     this.theGoDefineModule = require("./go_define_module.js");
 
     this.theObjectName = "GoHandlerObject";
     this.theContainerObject = container_val;
 
-    this.objectName = function () {
-        return this.theObjectName;
+    this.mallocMove = function (str_val, x_val, y_val, color_val, turn_val, container_val) {
+        var move_module = require("./go_move_module.js");
+        return move_module.malloc(str_val, x_val, y_val, color_val, turn_val, container_val);
     };
 
-    this.moveModule = function () {
-        return this.theGoMoveModule;
+    this.objectName = function () {
+        return this.theObjectName;
     };
 
     this.GO = function () {
@@ -70,7 +70,7 @@ function GoHandlerObject(container_val) {
             this.engineObject().abendEngine();
             this.portObject().thansmitBoardData();
         } else {
-            var move = this.moveModule().malloc(str_val, 0, 0, 0, 0, this.containerObject());
+            var move = this.mallocMove(str_val, 0, 0, 0, 0, this.containerObject());
             this.gameObject().addNewMoveAndFight(move);
             this.portObject().thansmitBoardData();
         }

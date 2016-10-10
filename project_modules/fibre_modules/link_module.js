@@ -84,7 +84,7 @@ function LinkObject(my_name_val, link_id_val) {
         var time_out = setInterval(function (link_val) {
             console.log("resetTimeout(***timeout occurs)", "my_name=" + link_val.myName() + " link_id=" + link_val.linkId());
             clearInterval(link_val.keep_alive_timer);
-            link_val.linkMgrModule().remove_link(link_val);
+            link_val.linkMgrObject().freeLink(link_val);
         }, 20000, this);
         return time_out;
     };

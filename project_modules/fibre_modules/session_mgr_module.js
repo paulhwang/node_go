@@ -94,14 +94,14 @@ function SessionMgrObject(root_object_val) {
         var session = this.searchIt(my_name_val, his_name_val, session_id_val);
         if (!session) {
             var cluster = this.clusterModuleMalloc();
-            session = this.mallocIt(my_name_val, his_name_val, cluster);
+            session = this.mallocSession(my_name_val, his_name_val, cluster);
             this.sessionQueue().enQueue(session);
 
             if (my_name_val === his_name_val) {
                 session.setHisName(his_name_val);
                 session.setHisSession(session);
             } else {
-                var his_session = this.mallocIt(his_name_val, my_name_val, cluster);
+                var his_session = this.mallocSession(his_name_val, my_name_val, cluster);
                 session.setHisSession(his_session);
                 his_session.setHisSession(session);
                 this.sessionQueue().enQueue(his_session);
@@ -110,7 +110,7 @@ function SessionMgrObject(root_object_val) {
         return session;
     };
 
-    this.mallocIt = function (my_name_val, his_name_val, cluster_val) {
+    this.mallocSession = function (my_name_val, his_name_val, cluster_val) {
         var entry;
 
         if (!this.poolHead()) {
@@ -127,10 +127,10 @@ function SessionMgrObject(root_object_val) {
         return entry;
     };
 
-    this.freeIt = function (entry_val) {
+    this.freeSession = function (session_val) {
         this.incrementPoolSize();
-        entry_val.setNext(this.poolHead());
-        this.setHead(entry_val);
+        session_val.setNext(this.poolHead());
+        this.setHead(session_val);
         this.abendIt();
     };
 

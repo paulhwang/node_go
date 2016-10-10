@@ -80,7 +80,7 @@ function LinkMgrObject(root_object_val) {
     this.searchAndCreate = function (my_name_val, link_id_val) {
         var link = this.searchLink(my_name_val, link_id_val);
         if (!link) {
-            link = this.mallocIt(my_name_val);
+            link = this.mallocLink(my_name_val);
             this.debug(false, "searchAndCreate", "malloc link: name=" + link.myName() + "=link_id=" + link.link_id);
             this.linkQueue().enQueue(link);
         }
@@ -107,7 +107,7 @@ function LinkMgrObject(root_object_val) {
         return name_array;
     };
 
-    this.mallocIt = function (my_name_val) {
+    this.mallocLink = function (my_name_val) {
         var entry;
         if (!this.poolHead()) {
             entry = this.linkModuleMalloc(my_name_val, this.globalLinkId());
@@ -123,10 +123,10 @@ function LinkMgrObject(root_object_val) {
         return entry;
     };
 
-    this.freeIt = function (entry_val) {
+    this.freeLink = function (link_val) {
         this.incrementPoolSize();
-        entry_val.setNext(this.poolHead());
-        this.setHead(entry_val);
+        link_val.setNext(this.poolHead());
+        this.setHead(link_val);
         this.abendIt();
     };
 

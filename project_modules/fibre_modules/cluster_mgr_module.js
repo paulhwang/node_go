@@ -69,11 +69,11 @@ function clusterMgrObject(fibre_val) {
     };
 
     this.abend = function (str1_val, str2_val) {
-        this.utilModule().utilAbend(this.objectName() + "." + str1_val, str2_val);
+        this.utilObject().utilAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.logit = function (str1_val, str2_val) {
-        this.utilModule().utilLogit(this.objectName() + "." + str1_val, str2_val);
+        this.utilObject().utilLogit(this.objectName() + "." + str1_val, str2_val);
     };
  
     this.theGlobalClusterId = 100;

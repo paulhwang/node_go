@@ -15,22 +15,6 @@ module.exports = {
         return theLinkMgrObject;
     },
 
-    search: function (my_name_val, link_id_val) {
-        return theLinkMgrObject.searchLink(my_name_val, link_id_val);
-    },
-
-    search_and_create: function (my_name_val, link_id_val) {
-        return theLinkMgrObject.searchAndCreate(my_name_val, link_id_val);
-    },
-
-    remove_link: function (link_val) {
-        theLinkMgrObject.removeLink(link_val);
-    },
-
-    get_name_list: function () {
-        return theLinkMgrObject.getNameList();
-    },
-
     malloc: function (my_name_val) {
          return theLinkMgrObject.mallocIt(my_name_val);
     },
@@ -43,7 +27,11 @@ module.exports = {
 function LinkMgrObject(root_object_val) {
     "use strict";
     this.theRootObject = root_object_val;
-    this.theLinkModule = require("./link_entry_module.js");
+
+    this.mallocLink = function (my_name_val, link_id_val) {
+        var link_module = require("./link_entry_module.js");
+        return link_module.malloc(my_name_val, link_id_val);
+    };
 
     this.objectName = function () {
         return "LinkMgrObject";
@@ -51,10 +39,6 @@ function LinkMgrObject(root_object_val) {
 
     this.rootObject = function () {
         return this.theRootObject;
-    };
-
-    this.linkModule = function () {
-        return this.theLinkModule;
     };
 
     this.utilObject = function () {
@@ -138,7 +122,7 @@ function LinkMgrObject(root_object_val) {
     this.mallocIt = function (my_name_val) {
         var entry;
         if (!this.poolHead()) {
-            entry = this.linkModule().malloc(my_name_val, this.globalLinkId());
+            entry = this.mallocLink(my_name_val, this.globalLinkId());
         } else {
             entry = this.poolHead();
             entry.resetIt(my_name_val, this.globalLinkId());

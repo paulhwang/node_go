@@ -5,8 +5,8 @@
  */
 
 module.exports = {
-    malloc: function (session_val) {
-        return new clusterObject(session_val);
+    malloc: function () {
+        return new clusterObject();
     },
 };
 

@@ -15,14 +15,6 @@ module.exports = {
         return theSessionMgrObject;
     },
 
-    search: function (my_name_val, his_name_val, session_id_val) {
-        return theSessionMgrObject.searchIt(my_name_val, his_name_val, session_id_val);
-    },
-
-    search_and_create: function (my_name_val, his_name_val, session_id_val) {
-        return theSessionMgrObject.searchAndCreate(my_name_val, his_name_val, session_id_val);
-    },
-
     malloc: function (my_name_val, his_name_val) {
          return theSessionMgrObject.mallocIt(my_name_val, his_name_val);
     },
@@ -34,9 +26,12 @@ module.exports = {
 
 function SessionMgrObject(root_object_val) {
     "use strict";
-    this.theClusterModule = require("./cluster_module.js");
-
     this.theRootObject = root_object_val;
+
+    this.mallocCluster = function () {
+        var cluster_module = require("./cluster_module.js");
+        return cluster_module.malloc();
+    };
 
     this.objectName = function () {
         return "SessionMgrObject";
@@ -52,10 +47,6 @@ function SessionMgrObject(root_object_val) {
 
     this.queueModule = function () {
         return this.rootObject().queueModule();
-    };
-
-    this.clusterModule = function () {
-        return this.theClusterModule;
     };
 
     this.sessionModule = function () {
@@ -109,7 +100,7 @@ function SessionMgrObject(root_object_val) {
     this.searchAndCreate = function (my_name_val, his_name_val, session_id_val) {
         var session = this.searchIt(my_name_val, his_name_val, session_id_val);
         if (!session) {
-            var cluster = this.clusterModule().malloc();
+            var cluster = this.mallocCluster();
             session = this.mallocIt(my_name_val, his_name_val, cluster);
             this.sessionQueue().enQueue(session);
 

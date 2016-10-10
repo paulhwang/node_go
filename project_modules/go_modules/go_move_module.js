@@ -17,12 +17,8 @@ function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, container_val)
         return this.theObjectName;
     };
 
-    this.utilModule = function () {
-        return this.theUtilModule;
-    };
-
     this.GO = function () {
-        return this.theGoDefineModule;
+        return this.containerObject().GO();
     };
 
     this.containerModule = function () {

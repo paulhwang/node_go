@@ -12,8 +12,6 @@ module.exports = {
 
 function GoGameObject(container_val, str_val) {
     "use strict";
-    this.theGoDefineModule = require("./go_define_module.js");
-
     this.theContainerObject = container_val;
 
     this.objectName = function () {
@@ -21,7 +19,7 @@ function GoGameObject(container_val, str_val) {
     };
 
     this.GO = function () {
-        return this.theGoDefineModule;
+        return this.containerObject().GO();
     };
 
     this.containerObject = function () {

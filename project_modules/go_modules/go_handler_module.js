@@ -12,7 +12,6 @@ module.exports = {
 
 function GoHandlerObject(container_val) {
     "use strict";
-    this.theGoDefineModule = require("./go_define_module.js");
 
     this.theObjectName = "GoHandlerObject";
     this.theContainerObject = container_val;
@@ -27,7 +26,7 @@ function GoHandlerObject(container_val) {
     };
 
     this.GO = function () {
-        return this.theGoDefineModule;
+        return this.containerObject().GO();
     };
 
     this.containerObject = function () {

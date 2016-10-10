@@ -12,14 +12,13 @@ module.exports = {
 
 function GoGroupListObject(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val) {
     "use strict";
-    this.theGoDefineModule = require("./go_define_module.js");
 
     this.objectName = function () {
         return this.theObjectName;
     };
 
     this.GO = function () {
-        return this.theGoDefineModule;
+        return this.containerObject().GO();
     };
 
     this.engineObject = function () {

@@ -12,8 +12,6 @@ module.exports = {
 
 function GoPortObject(container_val) {
     "use strict";
-    this.theGoDefineModule = require("./go_define_module.js");
-
     this.theContainerObject = container_val;
 
     this.GO_PROTOCOL_CODE_SIZE = 7;

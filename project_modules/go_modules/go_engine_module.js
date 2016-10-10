@@ -12,8 +12,6 @@ module.exports = {
 
 function GoEngineObject(container_object_val) {
     "use strict";
-    this.theGoDefineModule = require("./go_define_module.js");
-
     this.theContainerObject = container_object_val;
 
     this.mallocGroupList = function (engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val) {
@@ -31,7 +29,7 @@ function GoEngineObject(container_object_val) {
     };
 
     this.GO = function () {
-        return this.theGoDefineModule;
+        return this.containerObject().GO();
     };
 
     this.containerObject = function () {

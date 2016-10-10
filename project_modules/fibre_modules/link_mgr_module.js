@@ -7,14 +7,14 @@
 var theLinkMgrObject;
 
 module.exports = {
-    malloc: function (root_object_val) {
-        return new LinkMgrObject(root_object_val);
+    malloc: function (fibre_val) {
+        return new LinkMgrObject(fibre_val);
     },
 };
 
-function LinkMgrObject(root_object_val) {
+function LinkMgrObject(fibre_val) {
     "use strict";
-    this.theRootObject = root_object_val;
+    this.theFibreObject = fibre_val;
 
     this.linkModuleMalloc = function (my_name_val, link_id_val) {
         var link_module = require("./link_module.js");
@@ -29,8 +29,12 @@ function LinkMgrObject(root_object_val) {
         return "LinkMgrObject";
     };
 
+    this.fibreObject = function () {
+        return this.theFibreObject;
+    };
+
     this.rootObject = function () {
-        return this.theRootObject;
+        return this.fibreObject().rootObject();
     };
 
     this.utilObject = function () {

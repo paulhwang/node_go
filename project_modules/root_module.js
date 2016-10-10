@@ -17,12 +17,8 @@ function RootObject () {
 
     this.mallocModules = function () {
         var fibre_module = require("./fibre_modules/fibre_module.js");
-        var link_mgr_module = require("./fibre_modules/link_mgr_module.js");
-        var session_mgr_module = require("./fibre_modules/session_mgr_module.js");
 
         this.theFibreObject = fibre_module.malloc(this);
-        this.theLinkMgrObject = link_mgr_module.malloc(this);
-        this.theSessionMgrObject = session_mgr_module.malloc(this);
     };
 
     this.objectName = function () {
@@ -42,11 +38,15 @@ function RootObject () {
     };
 
     this.linkMgrObject = function () {
-        return this.theLinkMgrObject;
+        return this.fibreObject().linkMgrObject();
     };
 
     this.sessionMgrObject = function () {
-        return this.theSessionMgrObject;
+        return this.fibreObject().sessionMgrObject();
+    };
+
+    this.clusterMgrObject = function () {
+        return this.fibreObject().clusterMgrObject();
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

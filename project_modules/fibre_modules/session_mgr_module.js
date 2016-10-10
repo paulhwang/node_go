@@ -7,14 +7,14 @@
 var theSessionMgrObject;
 
 module.exports = {
-    malloc: function (root_object_val) {
-        return new SessionMgrObject(root_object_val);
+    malloc: function (fibre_val) {
+        return new SessionMgrObject(fibre_val);
     },
 };
 
-function SessionMgrObject(root_object_val) {
+function SessionMgrObject(fibre_val) {
     "use strict";
-    this.theRootObject = root_object_val;
+    this.theFibreObject = fibre_val;
 
     this.sessionModuleMalloc = function (session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val) {
         var session_module = require("./session_module.js");
@@ -38,8 +38,12 @@ function SessionMgrObject(root_object_val) {
         return "SessionMgrObject";
     };
 
+    this.fibreObject = function () {
+        return this.theFibreObject;
+    };
+
     this.rootObject = function () {
-        return this.theRootObject;
+        return this.fibreObject().rootObject();
     };
 
     this.utilObject = function () {

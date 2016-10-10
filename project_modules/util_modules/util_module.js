@@ -5,6 +5,10 @@
  */
 
 module.exports = {
+    malloc: function (root_val) {
+        new UtilObject(root_val);
+    },
+
     logit: function (str1_val, str2_val) {
         theUtilObject.logit(str1_val, str2_val);
     },
@@ -24,12 +28,17 @@ module.exports = {
 
 var theUtilObject = new UtilObject();
 
-function UtilObject() {
+function UtilObject(root_val) {
     "use strict";
+    this.theRootObject = root_val;
     this.theUserIndex = 0;
 
     this.objectName = function () {
         return "UtilObject";
+    };
+
+    this.rootObject = function () {
+        return this.theRootObject;
     };
 
     this.userIndex = function () {

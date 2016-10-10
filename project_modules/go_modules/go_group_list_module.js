@@ -153,7 +153,7 @@ function GoGroupListObject(engine_val, index_val, color_val, dead_val, big_stone
 
         exist_group1 = this.findCandidateGroup(x_val, y_val);
         if (exist_group1 == null) {
-            var new_group1 = this.groupModule().malloc(this);
+            var new_group1 = this.engineObject().mallocGroup(this);
             new_group1.insertStoneToGroup(x_val, y_val, dead_val);
 
             this.setListArray(this.groupCount(), new_group1);

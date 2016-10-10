@@ -12,7 +12,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var state;
 
-var theExpressHttpObject = new ExpressHttpObject(root.object());
+var theExpressHttpObject = new ExpressHttpObject(root.malloc());
 
 module.exports = {
     post: function (req, res) {

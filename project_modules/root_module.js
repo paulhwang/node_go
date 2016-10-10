@@ -5,12 +5,10 @@
  */
 
 module.exports = {
-    object: function () {
-        return theRootObject;
+    malloc: function () {
+        return new RootObject();
     },
 };
-
-var theRootObject = new RootObject();
 
 function RootObject () {
     "use strict";

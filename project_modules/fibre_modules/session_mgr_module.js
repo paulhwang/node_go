@@ -8,8 +8,7 @@ var theSessionMgrObject;
 
 module.exports = {
     malloc: function (root_object_val) {
-        var session_mgr = new SessionMgrObject(root_object_val);
-        return session_mgr;
+        return new SessionMgrObject(root_object_val);
     },
 };
 

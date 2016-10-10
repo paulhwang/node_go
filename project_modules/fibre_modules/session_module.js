@@ -17,6 +17,8 @@ function SessionObject(session_mgr_val, my_name_val, his_name_val, session_id_va
     this.theRingModule = require("./../util_modules/ring_module.js");
     this.theClusterModule = require("./cluster_module.js");
 
+    this.theSessionMgrObject = session_mgr_val;
+
     this.objectName = function () {
         return "SessionObject";
     };
@@ -35,6 +37,10 @@ function SessionObject(session_mgr_val, my_name_val, his_name_val, session_id_va
 
     this.clusterModule = function () {
         return this.theClusterModule;
+    };
+
+    this.SessionMgrObject = function () {
+        return this.theSessionMgrObject;
     };
 
     this.sessionId = function () {
@@ -111,11 +117,11 @@ function SessionObject(session_mgr_val, my_name_val, his_name_val, session_id_va
     };
 
     this.abend = function (str1_val, str2_val) {
-        this.utilModule().utilAbend(this.sessionId() + " " + this.objectName() + "." + str1_val, str2_val);
+        this.SessionMgrObject().abend(this.sessionId() + " " + this.objectName() + "." + str1_val, str2_val);
     };
 
     this.logit = function (str1_val, str2_val) {
-        this.utilModule().utilLogit(this.sessionId() + " " + this.objectName() + "." + str1_val, str2_val);
+        this.SessionMgrObject().logit(this.sessionId() + " " + this.objectName() + "." + str1_val, str2_val);
     };
 
     this.enqueueTransmitData = function (data_val) {

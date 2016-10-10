@@ -12,6 +12,8 @@ module.exports = {
 
 function clusterMgrObject(fibre_val) {
     "use strict";
+    this.theUtilModule = require("./../util_modules/util_module.js");
+
     this.theFibreObject = fibre_val;
 
     this.linkModuleMalloc = function (my_name_val, link_id_val) {
@@ -37,5 +39,13 @@ function clusterMgrObject(fibre_val) {
 
     this.utilObject = function () {
         return this.rootObject().utilObject();
+    };
+
+    this.abend = function (str1_val, str2_val) {
+        this.utilModule().utilAbend(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.logit = function (str1_val, str2_val) {
+        this.utilModule().utilLogit(this.objectName() + "." + str1_val, str2_val);
     };
 }

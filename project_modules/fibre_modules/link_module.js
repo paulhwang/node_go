@@ -5,17 +5,19 @@
  */
 
 module.exports = {
-    malloc: function (my_name_val, link_id_val) {
-        return new LinkObject(my_name_val, link_id_val);
+    malloc: function (link_mgr_val, my_name_val, link_id_val) {
+        return new LinkObject(link_mgr_val, my_name_val, link_id_val);
     },
 };
 
-function LinkObject(my_name_val, link_id_val) {
+function LinkObject(link_mgr_val, my_name_val, link_id_val) {
     "use strict";
     this.theUtilModule = require("./../util_modules/util_module.js");
     this.theQueueModule = require("./../util_modules/queue_module.js");
     this.theRingModule = require("./../util_modules/ring_module.js");
     this.theLinkMgrModule = require("./link_mgr_module.js");
+
+    this.theLinkMgrObject  = link_mgr_val;
 
     this.objectName = function () {
         return "LinkObject";
@@ -35,6 +37,10 @@ function LinkObject(my_name_val, link_id_val) {
 
     this.linkMgrModule = function () {
         return this.theLinkMgrModule;
+    };
+
+    this.linkMgrObject = function () {
+        return this.theLinkMgrObject;
     };
 
     this.linkId = function () {
@@ -96,11 +102,11 @@ function LinkObject(my_name_val, link_id_val) {
     };
 
     this.abend = function (str1_val, str2_val) {
-        this.utilModule().abend(this.objectName() + "." + str1_val, str2_val);
+        this.linkMgrObject().abend(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.logit = function (str1_val, str2_val) {
-        this.utilModule().logit(this.objectName() + "." + str1_val, str2_val);
+        this.linkMgrObject().logit(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.resetIt(my_name_val, link_id_val);

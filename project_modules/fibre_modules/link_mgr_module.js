@@ -33,6 +33,10 @@ function LinkMgrObject(root_object_val) {
         return link_module.malloc(my_name_val, link_id_val);
     };
 
+    this.queueModule = function () {
+        return this.rootObject().queueModule();
+    };
+
     this.objectName = function () {
         return "LinkMgrObject";
     };
@@ -43,10 +47,6 @@ function LinkMgrObject(root_object_val) {
 
     this.utilObject = function () {
         return this.rootObject().utilObject();
-    };
-
-    this.queueModule = function () {
-        return this.rootObject().queueModule();
     };
 
     this.linkQueue = function () {

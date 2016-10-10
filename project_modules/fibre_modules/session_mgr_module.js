@@ -33,6 +33,14 @@ function SessionMgrObject(root_object_val) {
         return cluster_module.malloc();
     };
 
+    this.sessionModule = function () {
+        return require("./session_entry_module.js");
+    };
+
+    this.queueModule = function () {
+        return this.rootObject().queueModule();
+    };
+
     this.objectName = function () {
         return "SessionMgrObject";
     };
@@ -43,14 +51,6 @@ function SessionMgrObject(root_object_val) {
 
     this.utilObject = function () {
         return this.rootObject().utilObject();
-    };
-
-    this.queueModule = function () {
-        return this.rootObject().queueModule();
-    };
-
-    this.sessionModule = function () {
-        return this.theSessionModule;
     };
 
     this.sessionQueue = function () {
@@ -171,7 +171,6 @@ function SessionMgrObject(root_object_val) {
         this.utilObject().logit(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.theSessionModule = require("./session_entry_module.js");
     this.theSessionQueue = this.queueModule().malloc();
     this.thePreSessionQueue = this.queueModule().malloc();
     this.theGlobalSessionId = 1000;

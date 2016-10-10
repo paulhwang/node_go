@@ -23,14 +23,12 @@ function GoObject (cluster_object_val) {
         var board_module = require("./go_board_module.js");
         var engine_module = require("./go_engine_module.js");
         var game_module = require("./go_game_module.js");
-        var handler_module = require("./go_handler_module.js");
         var port_module = require("./go_port_module.js");
 
         this.theConfigObject = config_module.malloc(this);
         this.theBoardObject = board_module.malloc(this);
         this.theEngineObject = engine_module.malloc(this);
         this.theGameObject = game_module.malloc(this);
-        this.theHandlerObject = handler_module.malloc(this);
         this.thePortObject = port_module.malloc(this);
     };
 

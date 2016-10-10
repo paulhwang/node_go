@@ -41,6 +41,11 @@ function goContainerObject (cluster_object_val) {
         this.thePortObject = port_module.malloc(this);
     };
 
+    this.utilModuleUtilLogit = function (str1_val, str2_val) {
+        var util_module = require("./../util_modules/util_module.js");
+        return util_module.utilLogit(str1_val, str2_val);
+    };
+
     this.objectName = function () {
         return "GoContainerObject";
     };
@@ -123,12 +128,12 @@ function goContainerObject (cluster_object_val) {
 
     this.goLog = function (s1_val, s2_val) {
         if (this.clusterObject().sessionArrayLength() === 1) {
-            this.utilModule().utilLogit(this.clusterObject().sessionArray(0).sessionId() + "<=>" +
-                                        this.clusterObject().sessionArray(0).sessionId() + " " + s1_val, s2_val);
+            this.utilModuleUtilLogit(this.clusterObject().sessionArray(0).sessionId() + "<=>" +
+                                     this.clusterObject().sessionArray(0).sessionId() + " " + s1_val, s2_val);
         }
         else {
-            this.utilModule().utilLogit(this.clusterObject().sessionArray(0).sessionId() + "<=>" +
-                                        this.clusterObject().sessionArray(1).sessionId() + " " + s1_val, s2_val);
+            this.utilModuleUtilLogit(this.clusterObject().sessionArray(0).sessionId() + "<=>" +
+                                     this.clusterObject().sessionArray(1).sessionId() + " " + s1_val, s2_val);
         }
     };
 

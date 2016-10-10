@@ -161,5 +161,5 @@ function LinkMgrObject(fibre_val) {
     this.theGlobalLinkId = 10;
     this.thePoolHead = null;
     this.thePoolSize = 0;
-    this.theLinkQueue = this.queueModule().malloc();
+    this.theLinkQueue = this.utilObject().queueModule().malloc();
 }

@@ -16,9 +16,9 @@ function clusterMgrObject(fibre_val) {
 
     this.theFibreObject = fibre_val;
 
-    this.linkModuleMalloc = function (my_name_val, link_id_val) {
-        var link_module = require("./link_module.js");
-        return link_module.malloc(my_name_val, link_id_val);
+    this.clusterModuleMalloc = function () {
+        var cluster_module = require("./cluster_module.js");
+        return cluster_module.malloc(this);
     };
 
     this.objectName = function () {
@@ -45,6 +45,29 @@ function clusterMgrObject(fibre_val) {
         return this.thePoolQueue;
     };
 
+    this.globalClusterId = function () {
+        return this.theGlobalClusterId;
+    };
+
+    this.incrementGlobalClusterId = function () {
+        return this.theGlobalClusterId += 1;
+    };
+
+    this.mallocCluster = function (my_name_val) {
+        var entry = this.poolQueue().deQueue();
+        if (!entry) {
+            entry = this.clusterModuleMalloc();
+        } else {
+            entry.resetIt();
+        }
+        this.incrementGlobalClusterId();
+        return entry;
+    };
+
+    this.freeCluster = function (cluster_val) {
+        this.poolQueue().enQueue(cluster_val);
+    };
+
     this.abend = function (str1_val, str2_val) {
         this.utilModule().utilAbend(this.objectName() + "." + str1_val, str2_val);
     };
@@ -53,6 +76,7 @@ function clusterMgrObject(fibre_val) {
         this.utilModule().utilLogit(this.objectName() + "." + str1_val, str2_val);
     };
  
+    this.theGlobalClusterId = 100;
     this.theClusterQueue = this.utilObject().queueModule().malloc();
     this.thePoolQueue = this.utilObject().queueModule().malloc();
 }

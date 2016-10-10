@@ -12,7 +12,6 @@ module.exports = {
 
 function LinkObject(link_mgr_val, my_name_val, link_id_val) {
     "use strict";
-    this.theUtilModule = require("./../util_modules/util_module.js");
     this.theQueueModule = require("./../util_modules/queue_module.js");
     this.theRingModule = require("./../util_modules/ring_module.js");
     this.theLinkMgrModule = require("./link_mgr_module.js");
@@ -21,10 +20,6 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
 
     this.objectName = function () {
         return "LinkObject";
-    };
-
-    this.utilModule = function () {
-        return this.theUtilModule;
     };
 
     this.queueModule = function () {

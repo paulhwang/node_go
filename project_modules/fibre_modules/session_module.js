@@ -12,7 +12,6 @@ module.exports = {
 
 function SessionObject(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val) {
     "use strict";
-    this.theUtilModule = require("./../util_modules/util_module.js");
     this.theQueueModule = require("./../util_modules/queue_module.js");
     this.theRingModule = require("./../util_modules/ring_module.js");
     this.theClusterModule = require("./cluster_module.js");
@@ -21,10 +20,6 @@ function SessionObject(session_mgr_val, my_name_val, his_name_val, session_id_va
 
     this.objectName = function () {
         return "SessionObject";
-    };
-
-    this.utilModule = function () {
-        return this.theUtilModule;
     };
 
     this.queueModule = function () {

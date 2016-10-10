@@ -6,13 +6,11 @@
 
 module.exports = {
     malloc: function (session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val) {
-        session = new SessionEntryObject();
-        session.resetIt(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val);
-        return session;
+        return new SessionEntryObject(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val);
     },
 };
 
-function SessionEntryObject() {
+function SessionEntryObject(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val) {
     "use strict";
     this.theUtilModule = require("./../util_modules/util_module.js");
     this.theQueueModule = require("./../util_modules/queue_module.js");
@@ -148,4 +146,6 @@ function SessionEntryObject() {
 
         return data;
     };
+
+    this.resetIt(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val);
 }

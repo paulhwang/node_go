@@ -49,7 +49,7 @@ function goContainerObject (cluster_object_val) {
         this.theGameObject = game_module.malloc(this);
         this.theHandlerObject = handler_module.malloc(this);
         this.thePortObject = port_module.malloc(this);
-    }
+    };
 
     this.objectName = function () {
         return "GoContainerObject";

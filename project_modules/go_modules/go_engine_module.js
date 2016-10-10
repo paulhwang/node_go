@@ -18,6 +18,10 @@ function GoEngineObject(container_object_val) {
     this.theGroupListModule = require("./go_group_list_module.js");
     this.theGroupModule = require("./go_group_module.js");
 
+    this.mallocGroupList = function (engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val) {
+        group_list_module = require("./go_group_list_module.js");
+        return group_list_module.malloc(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val);
+    };
 
     this.objectName = function () {
         return this.theObjectName;

@@ -12,10 +12,7 @@ module.exports = {
 
 function GoGameObject(container_val, str_val) {
     "use strict";
-    this.theUtilModule = require("./../util_modules/util_module.js");
     this.theGoDefineModule = require("./go_define_module.js");
-    this.theContainerModule = require("./go_container_module.js");
-    this.theGroupListModule = require("./go_group_list_module.js");
 
     this.theContainerObject = container_val;
 
@@ -23,20 +20,8 @@ function GoGameObject(container_val, str_val) {
         return "GoGameObject";
     };
 
-    this.utilModule = function () {
-        return this.theUtilModule;
-    };
-
     this.GO = function () {
         return this.theGoDefineModule;
-    };
-
-    this.containerModule = function () {
-        return this.theContainerModule;
-    };
-
-    this.groupListModule = function () {
-        return this.theGroupListModule;
     };
 
     this.containerObject = function () {

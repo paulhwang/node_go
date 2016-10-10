@@ -30,16 +30,11 @@ var theUtilObject = new UtilObject();
 
 function UtilObject(root_val) {
     "use strict";
+    this.theQueueModule = require("./queue_module.js");
+    this.theRingModule = require("./ring_module.js");
+
     this.theRootObject = root_val;
     this.theUserIndex = 0;
-
-    this.mallocModules = function () {
-        var queue_module = require("./queue_module.js");
-        var ring_module = require("./ring_module.js");
-
-        this.theQueueObject = queue_module.malloc(this);
-        this.theRingObject = ring_module.malloc(this);
-    };
 
     this.objectName = function () {
         return "UtilObject";
@@ -49,12 +44,12 @@ function UtilObject(root_val) {
         return this.theRootObject;
     };
 
-    this.queueObject = function () {
-        return this.theQueueObject;
+    this.queueModule = function () {
+        return this.theQueueModule;
     };
 
-    this.ringObject = function () {
-        return this.theRingObject;
+    this.ringNodule = function () {
+        return this.theRingModule;
     };
 
     this.userIndex = function () {
@@ -97,6 +92,4 @@ function UtilObject(root_val) {
         //alert("abend: " + str1_val + "() " + str2_val);
         //var x = junk;
     };
-
-    this.mallocModules();
 }

@@ -20,8 +20,7 @@ function SessionMgrObject(fibre_val) {
     };
 
     this.clusterModuleMalloc = function () {
-        var cluster_module = require("./cluster_module.js");
-        return cluster_module.malloc();
+        return this.fibreObject().clusterMgrObject().mallocCluster();
     };
 
     this.sessionModule = function () {

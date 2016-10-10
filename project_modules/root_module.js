@@ -16,9 +16,11 @@ function RootObject () {
     this.theQueueModule = require("./util_modules/queue_module.js");
 
     this.mallocModules = function () {
+        var fibre_module = require("./fibre_modules/fibre_module.js");
         var link_mgr_module = require("./fibre_modules/link_mgr_module.js");
         var session_mgr_module = require("./fibre_modules/session_mgr_module.js");
 
+        this.theFibreObject = fibre_module.malloc(this);
         this.theLinkMgrObject = link_mgr_module.malloc(this);
         this.theSessionMgrObject = session_mgr_module.malloc(this);
     };
@@ -33,6 +35,10 @@ function RootObject () {
 
     this.queueModule = function () {
         return this.theQueueModule;
+    };
+
+    this.fibreObject = function () {
+        return this.theFibreObject;
     };
 
     this.linkMgrObject = function () {

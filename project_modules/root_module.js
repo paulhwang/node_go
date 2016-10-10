@@ -35,20 +35,12 @@ function RootObject () {
         return this.theQueueModule;
     };
 
-    this.linkMgrModule = function () {
-        return this.theLinkMgrModule;
-    };
-
-    this.sessionMgrModule = function () {
-        return this.theSessionMgrModule;
-    };
-
     this.linkMgrObject = function () {
-        return this.linkMgrModule().object();
+        return this.theLinkMgrObject;
     };
 
     this.sessionMgrObject = function () {
-        return this.sessionMgrModule().object();
+        return this.theSessionMgrObject;
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

@@ -54,14 +54,6 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
         return this.theReceiveRing;
     };
 
-    this.next = function () {
-        return this.theNext;
-    };
-
-    this.setNext = function (val) {
-        this.theNext = val;
-    };
-
     this.resetIt = function (my_name_val, link_id_val) {
         this.theLinkId = link_id_val;
         this.theMyName = my_name_val;
@@ -70,7 +62,6 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
         this.theReceiveQueue = this.utilObject().queueModule().malloc();
         this.theReceiveRing = this.utilObject().ringModule().malloc();
         this.keep_alive_timer = this.resetTimeout();
-        this.theNext = null;
 };
 
     this.resetKeepAliveTimer = function () {

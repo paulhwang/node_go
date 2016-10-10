@@ -28,10 +28,6 @@ function SessionMgrObject(fibre_val) {
         return require("./session_entry_module.js");
     };
 
-    this.queueModule = function () {
-        return this.rootObject().queueModule();
-    };
-
     this.objectName = function () {
         return "SessionMgrObject";
     };
@@ -166,8 +162,8 @@ function SessionMgrObject(fibre_val) {
         this.utilObject().logit(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.theSessionQueue = this.queueModule().malloc();
-    this.thePreSessionQueue = this.queueModule().malloc();
+    this.theSessionQueue = this.utilObject().queueModule().malloc();
+    this.thePreSessionQueue = this.utilObject().queueModule().malloc();
     this.theGlobalSessionId = 1000;
     this.thePoolHead = null;
     this.thePoolSize = 0;

@@ -21,10 +21,6 @@ function clusterMgrObject(fibre_val) {
         return link_module.malloc(my_name_val, link_id_val);
     };
 
-    this.queueModule = function () {
-        return this.rootObject().queueModule();
-    };
-
     this.objectName = function () {
         return "clusterMgrObject";
     };

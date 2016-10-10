@@ -17,7 +17,7 @@ function FibreObject(root_object_val) {
     this.mallocModules = function () {
         var link_mgr_module = require("./link_mgr_module.js");
         var session_mgr_module = require("./session_mgr_module.js");
-        var cluster_mgr_module = require("./session_mgr_module.js");
+        var cluster_mgr_module = require("./cluster_mgr_module.js");
 
         this.theLinkMgrObject = link_mgr_module.malloc(this);
         this.theSessionMgrObject = session_mgr_module.malloc(this);

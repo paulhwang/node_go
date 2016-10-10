@@ -4,8 +4,6 @@
  * File name: link_mgr_module.js
  */
 
-var theLinkMgrObject;
-
 module.exports = {
     malloc: function (fibre_val) {
         return new LinkMgrObject(fibre_val);

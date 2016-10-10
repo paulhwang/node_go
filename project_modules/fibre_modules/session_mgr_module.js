@@ -4,8 +4,6 @@
  * File name: session_mgr_module.js
  */
 
-var theSessionMgrObject;
-
 module.exports = {
     malloc: function (fibre_val) {
         return new SessionMgrObject(fibre_val);

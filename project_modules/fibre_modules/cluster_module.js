@@ -14,7 +14,7 @@ function clusterObject () {
     "use strict";
     this.theUtilModule = require("./../util_modules/util_module.js");
     this.theQueueModule = require("./../util_modules/queue_module.js");
-    this.theGoContainerModule = require("./../go_modules/go_container_module.js")
+    this.theGoContainerModule = require("./../go_modules/go_module.js")
 
     this.objectName = function () {
         return "clusterObject";

@@ -1,16 +1,16 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: go_container_module.js
+ * File name: go_module.js
  */
 
 module.exports = {
     malloc: function (cluster_object_val) {
-        return new goContainerObject(cluster_object_val);
+        return new GoObject(cluster_object_val);
     },
 };
 
-function goContainerObject (cluster_object_val) {
+function GoObject (cluster_object_val) {
     "use strict";
     this.theClusterObject = cluster_object_val;
 
@@ -45,7 +45,7 @@ function goContainerObject (cluster_object_val) {
     };
 
     this.objectName = function () {
-        return "GoContainerObject";
+        return "GoObject";
     };
 
     this.clusterObject = function () {

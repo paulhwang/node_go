@@ -12,10 +12,7 @@ module.exports = {
 
 function GoHandlerObject(container_val) {
     "use strict";
-    this.theUtilModule = require("./../util_modules/util_module.js");
-    //this.theGoContainerModule = require("./go_container_module.js")
     this.theGoMoveModule = require("./go_move_module.js")
-    this.theGoBoardModule = require("./go_board_module.js")
     this.theGoDefineModule = require("./go_define_module.js");
 
     this.theObjectName = "GoHandlerObject";
@@ -27,10 +24,6 @@ function GoHandlerObject(container_val) {
 
     this.moveModule = function () {
         return this.theGoMoveModule;
-    };
-
-    this.boardModule = function () {
-        return this.theGoBoardModule;
     };
 
     this.GO = function () {
@@ -81,14 +74,6 @@ function GoHandlerObject(container_val) {
             this.gameObject().addNewMoveAndFight(move);
             this.portObject().thansmitBoardData();
         }
-    };
-
-    this.updateBoard______ = function (str_val) {
-        //this.goLog("updateBoard", str_val);
-        var board = this.boardModule().malloc(this.containerObject());
-        board.decodeBoard(str_val);
-        this.boardObject().compareBoards(board);
-        //this.uiObject().drawBoard(this.engineObject());
     };
 
     this.aSpecialMoveIsPlayed = function (special_str) {

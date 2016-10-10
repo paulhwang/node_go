@@ -12,12 +12,10 @@ module.exports = {
 
 function GoPortObject(container_val) {
     "use strict";
-    this.theUtilModule = require("./../util_modules/util_module.js");
     this.theGoDefineModule = require("./go_define_module.js");
-    this.theContainerModule = require("./go_container_module.js");
 
-    this.theObjectName = "GoPortObject";
     this.theContainerObject = container_val;
+
     this.GO_PROTOCOL_CODE_SIZE = 7;
     this.GO_PROTOCOL_CODE_PROPOSE = "Propose";
     this.GO_PROTOCOL_CODE_ACCEPT = "Accept ";
@@ -27,7 +25,7 @@ function GoPortObject(container_val) {
     this.GO_PROTOCOL_CODE_BOARD_DATA = "Board  ";
 
     this.objectName = function () {
-        return this.theObjectName;
+        return "GoPortObject";
     };
 
     this.containerObject = function () {

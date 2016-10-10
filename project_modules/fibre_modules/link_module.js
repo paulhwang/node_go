@@ -33,6 +33,10 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
         return this.theLinkMgrObject;
     };
 
+    this.FibreObject = function () {
+        return this.linkMgrObject().FibreObject();
+    };
+
     this.linkId = function () {
         return this.theLinkId;
     };

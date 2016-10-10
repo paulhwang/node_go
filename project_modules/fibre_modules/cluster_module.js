@@ -5,16 +5,18 @@
  */
 
 module.exports = {
-    malloc: function () {
-        return new clusterObject();
+    malloc: function (cluster_mgr_val) {
+        return new clusterObject(cluster_mgr_val);
     },
 };
 
-function clusterObject () {
+function clusterObject (cluster_mgr_val) {
     "use strict";
     this.theUtilModule = require("./../util_modules/util_module.js");
     this.theQueueModule = require("./../util_modules/queue_module.js");
     this.theGoContainerModule = require("./../go_modules/go_module.js")
+
+    this.theClusterMgrObject = cluster_mgr_val;
 
     this.objectName = function () {
         return "clusterObject";
@@ -38,6 +40,14 @@ function clusterObject () {
 
     this.goContainerObject = function () {
         return this.theGoContainerObject;
+    };
+
+    this.clusterMgrObject = function () {
+        return this.theClusterMgrObject;
+    };
+
+    this.FibreObject = function () {
+        return this.clusterMgrObject().FibreObject();
     };
 
     this.sessionArray = function (index_val) {

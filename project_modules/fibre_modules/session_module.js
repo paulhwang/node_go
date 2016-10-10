@@ -38,6 +38,10 @@ function SessionObject(session_mgr_val, my_name_val, his_name_val, session_id_va
         return this.theSessionMgrObject;
     };
 
+    this.FibreObject = function () {
+        return this.SessionMgrObject().FibreObject();
+    };
+
     this.sessionId = function () {
         return this.theSessionId;
     };

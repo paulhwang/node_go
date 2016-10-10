@@ -12,21 +12,10 @@ module.exports = {
 
 function LinkObject(link_mgr_val, my_name_val, link_id_val) {
     "use strict";
-    this.theQueueModule = require("./../util_modules/queue_module.js");
-    this.theRingModule = require("./../util_modules/ring_module.js");
-
     this.theLinkMgrObject  = link_mgr_val;
 
     this.objectName = function () {
         return "LinkObject";
-    };
-
-    this.queueModule = function () {
-        return this.theQueueModule;
-    };
-
-    this.ringModule = function () {
-        return this.theRingModule;
     };
 
     this.linkMgrObject = function () {
@@ -35,6 +24,10 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
 
     this.FibreObject = function () {
         return this.linkMgrObject().FibreObject();
+    };
+
+    this.utilObject = function () {
+        return this.linkMgrObject().utilObject();
     };
 
     this.linkId = function () {
@@ -66,8 +59,8 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
         this.theMyName = my_name_val;
         this.up_seq = 0;
         this.down_seq = 0;
-        this.theReceiveQueue = this.queueModule().malloc();
-        this.theReceiveRing = this.ringModule().malloc();
+        this.theReceiveQueue = this.utilObject().queueModule().malloc();
+        this.theReceiveRing = this.utilObject().ringModule().malloc();
         this.keep_alive_timer = this.resetTimeout();
     };
 

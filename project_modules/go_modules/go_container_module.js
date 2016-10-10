@@ -12,14 +12,9 @@ module.exports = {
 
 function goContainerObject (cluster_object_val) {
     "use strict";
-    this.theUtilModule = require("./../util_modules/util_module.js");
     this.theGoDefineModule = require("./go_define_module.js");
 
     this.theClusterObject = cluster_object_val;
-
-    this.utilModule = function () {
-        return this.theUtilModule;
-    };
 
     this.GO = function () {
         return this.theGoDefineModule;
@@ -44,6 +39,11 @@ function goContainerObject (cluster_object_val) {
     this.utilModuleUtilLogit = function (str1_val, str2_val) {
         var util_module = require("./../util_modules/util_module.js");
         return util_module.utilLogit(str1_val, str2_val);
+    };
+
+    this.utilModuleUtilAbend = function (str1_val, str2_val) {
+        var util_module = require("./../util_modules/util_module.js");
+        return util_module.utilAbend(str1_val, str2_val);
     };
 
     this.objectName = function () {
@@ -139,12 +139,12 @@ function goContainerObject (cluster_object_val) {
 
     this.goAbend = function (s1_val, s2_val) {
         if (this.topicObject().sessionArrayLength() === 1) {
-            this.utilModule().utilAbend(this.topicObject().sessionArray(0).sessionId() + "<=>" +
-                                        this.topicObject().sessionArray(0).sessionId() + " " + s1_val, s2_val);
+            this.utilModuleUtilAbend(this.topicObject().sessionArray(0).sessionId() + "<=>" +
+                                     this.topicObject().sessionArray(0).sessionId() + " " + s1_val, s2_val);
         }
         else {
-            this.utilModule().utilAbend(this.topicObject().sessionArray(0).sessionId() + "<=>" +
-                                        this.topicObject().sessionArray(1).sessionId() + " " + s1_val, s2_val);
+            this.utilModuleUtilAbend(this.topicObject().sessionArray(0).sessionId() + "<=>" +
+                                     this.topicObject().sessionArray(1).sessionId() + " " + s1_val, s2_val);
         }
     };
 

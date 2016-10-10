@@ -61,6 +61,6 @@ function RootObject () {
     this.theQueueModule = require("./util_modules/queue_module.js");
     this.theLinkMgrModule = require("./fibre_modules/link_mgr_module.js");
     this.theSessionMgrModule = require("./fibre_modules/session_mgr_module.js");
-    this.linkMgrModule().init(this);
-    this.sessionMgrModule().init(this);
+    this.linkMgrModule().malloc(this);
+    this.sessionMgrModule().malloc(this);
 }

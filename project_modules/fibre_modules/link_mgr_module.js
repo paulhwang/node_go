@@ -7,7 +7,7 @@
 var theLinkMgrObject;
 
 module.exports = {
-    init: function (root_object_val) {
+    malloc: function (root_object_val) {
         theLinkMgrObject = new LinkMgrObject(root_object_val);
     },
 

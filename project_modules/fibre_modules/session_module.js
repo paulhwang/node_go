@@ -12,22 +12,12 @@ module.exports = {
 
 function SessionObject(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val) {
     "use strict";
-    this.theQueueModule = require("./../util_modules/queue_module.js");
-    this.theRingModule = require("./../util_modules/ring_module.js");
     this.theClusterModule = require("./cluster_module.js");
 
     this.theSessionMgrObject = session_mgr_val;
 
     this.objectName = function () {
         return "SessionObject";
-    };
-
-    this.queueModule = function () {
-        return this.theQueueModule;
-    };
-
-    this.ringModule = function () {
-        return this.theRingModule;
     };
 
     this.clusterModule = function () {
@@ -40,6 +30,10 @@ function SessionObject(session_mgr_val, my_name_val, his_name_val, session_id_va
 
     this.FibreObject = function () {
         return this.SessionMgrObject().FibreObject();
+    };
+
+    this.utilObject = function () {
+        return this.SessionMgrObject().utilObject();
     };
 
     this.sessionId = function () {
@@ -102,9 +96,9 @@ function SessionObject(session_mgr_val, my_name_val, his_name_val, session_id_va
         this.theHisSession = null;
         this.up_seq = 0;
         this.down_seq = 0;
-        this.theReceiveQueue = this.queueModule().malloc();
-        this.theTransmitQueue = this.queueModule().malloc();
-        this.theReceiveRing = this.ringModule().malloc();
+        this.theReceiveQueue = this.utilObject().queueModule().malloc();
+        this.theTransmitQueue = this.utilObject().queueModule().malloc();
+        this.theReceiveRing = this.utilObject().ringModule().malloc();
         this.theClusterObject = cluster_val;
         this.clusterObject().addAdditionalSession(this);
     };

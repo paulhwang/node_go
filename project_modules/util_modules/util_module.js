@@ -48,7 +48,7 @@ function UtilObject(root_val) {
         return this.theQueueModule;
     };
 
-    this.ringNodule = function () {
+    this.ringModule = function () {
         return this.theRingModule;
     };
 

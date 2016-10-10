@@ -12,7 +12,6 @@ module.exports = {
 
 function clusterObject (cluster_mgr_val) {
     "use strict";
-    this.theUtilModule = require("./../util_modules/util_module.js");
     this.theQueueModule = require("./../util_modules/queue_module.js");
     this.theGoContainerModule = require("./../go_modules/go_module.js")
 
@@ -20,10 +19,6 @@ function clusterObject (cluster_mgr_val) {
 
     this.objectName = function () {
         return "clusterObject";
-    };
-
-    this.utilModule = function () {
-        return this.theUtilModule;
     };
 
     this.queueModule = function () {
@@ -46,8 +41,8 @@ function clusterObject (cluster_mgr_val) {
         return this.theClusterMgrObject;
     };
 
-    this.FibreObject = function () {
-        return this.clusterMgrObject().FibreObject();
+    this.fibreObject = function () {
+        return this.clusterMgrObject().fibreObject();
     };
 
     this.sessionArray = function (index_val) {
@@ -77,11 +72,11 @@ function clusterObject (cluster_mgr_val) {
     };
 
     this.abend = function (str1_val, str2_val) {
-        this.utilModule().utilAbend(this.objectName() + "." + str1_val, str2_val);
+        this.clusterMgrObject().abend(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.logit = function (str1_val, str2_val) {
-        this.utilModule().utilLogit(this.objectName() + "." + str1_val, str2_val);
+        this.clusterMgrObject().logit(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.addAdditionalSession = function (session_val) {

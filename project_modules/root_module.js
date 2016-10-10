@@ -12,14 +12,13 @@ module.exports = {
 
 function RootObject () {
     "use strict";
-    this.theUtilObject = require("./util_modules/util_module.js");
     this.theQueueModule = require("./util_modules/queue_module.js");
 
     this.mallocModules = function () {
         var util_module = require("./util_modules/util_module.js");
         var fibre_module = require("./fibre_modules/fibre_module.js");
 
-        //this.theUtilObject = util_module.malloc(this);
+        this.theUtilObject = util_module.malloc(this);
         this.theFibreObject = fibre_module.malloc(this);
     };
 

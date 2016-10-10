@@ -6,7 +6,7 @@
 
 module.exports = {
     malloc: function (root_val) {
-        new UtilObject(root_val);
+        return new UtilObject(root_val);
     },
 
     logit: function (str1_val, str2_val) {

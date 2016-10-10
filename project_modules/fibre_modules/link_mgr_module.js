@@ -8,12 +8,8 @@ var theLinkMgrObject;
 
 module.exports = {
     malloc: function (root_object_val) {
-        theLinkMgrObject = new LinkMgrObject(root_object_val);
-        return theLinkMgrObject;
-    },
-
-    object: function () {
-        return theLinkMgrObject;
+        var link_mgr = new LinkMgrObject(root_object_val);
+        return link_mgr;
     },
 };
 

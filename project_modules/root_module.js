@@ -14,6 +14,8 @@ var theRootObject = new RootObject();
 
 function RootObject () {
     "use strict";
+    this.theUtilObject = require("./util_modules/util_module.js");
+    this.theQueueModule = require("./util_modules/queue_module.js");
 
     this.mallocModules = function () {
         var link_mgr_module = require("./fibre_modules/link_mgr_module.js");
@@ -57,9 +59,5 @@ function RootObject () {
         this.utilModule().logit(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.theUtilObject = require("./util_modules/util_module.js");
-    this.theQueueModule = require("./util_modules/queue_module.js");
-    this.theLinkMgrModule = require("./fibre_modules/link_mgr_module.js");
-    this.theSessionMgrModule = require("./fibre_modules/session_mgr_module.js");
     this.mallocModules();
 }

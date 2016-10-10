@@ -18,8 +18,9 @@ function RootObject () {
     this.mallocModules = function () {
         var link_mgr_module = require("./fibre_modules/link_mgr_module.js");
         var session_mgr_module = require("./fibre_modules/session_mgr_module.js");
-        link_mgr_module.malloc(this);
-        session_mgr_module.malloc(this);
+
+        this.theLinkMgrObject = link_mgr_module.malloc(this);
+        this.theSessionMgrObject = session_mgr_module.malloc(this);
     };
 
     this.objectName = function () {

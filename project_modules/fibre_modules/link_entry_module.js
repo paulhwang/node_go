@@ -6,13 +6,11 @@
 
 module.exports = {
     malloc: function (my_name_val, link_id_val) {
-        link = new LinkEntryObject();
-        link.resetIt(my_name_val, link_id_val);
-        return link;
+        return new LinkEntryObject(my_name_val, link_id_val);
     },
 };
 
-function LinkEntryObject() {
+function LinkEntryObject(my_name_val, link_id_val) {
     "use strict";
     this.theUtilModule = require("./../util_modules/util_module.js");
     this.theQueueModule = require("./../util_modules/queue_module.js");
@@ -104,4 +102,6 @@ function LinkEntryObject() {
     this.logit = function (str1_val, str2_val) {
         this.utilModule().logit(this.objectName() + "." + str1_val, str2_val);
     };
+
+    this.resetIt(my_name_val, link_id_val);
 }

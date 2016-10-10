@@ -44,5 +44,17 @@ function FibreObject(root_object_val) {
         return this.theClusterMgrObject;
     };
 
+    this.utilObject = function () {
+        return this.utilObject().utilObject();
+    };
+
+    this.queueObject = function () {
+        return this.utilObject().queueObject();
+    };
+
+    this.ringObject = function () {
+        return this.utilObject().ringObject();
+    };
+
     this.mallocModules();
 }

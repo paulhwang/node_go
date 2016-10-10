@@ -22,6 +22,11 @@ function GoPortObject(container_val) {
     this.GO_PROTOCOL_CODE_SPECIAL_MOVE = "Special";
     this.GO_PROTOCOL_CODE_BOARD_DATA = "Board  ";
 
+    this.mallocMove = function (str_val, x_val, y_val, color_val, turn_val, container_val) {
+        var move_module = require("./go_move_module.js");
+        return move_module.malloc(str_val, x_val, y_val, color_val, turn_val, container_val);
+    };
+
     this.objectName = function () {
         return "GoPortObject";
     };
@@ -128,14 +133,42 @@ function GoPortObject(container_val) {
         //this.goLog("receiveStringData", data);
 
         if (code == this.GO_PROTOCOL_CODE_MOVE_DATA) {
-            this.GoHandlerObject().aMoveIsPlayed(data);
+            this.aMoveIsPlayed(data);
             return;
         }
 
         if (code == this.GO_PROTOCOL_CODE_SPECIAL_MOVE) {
-            this.GoHandlerObject().aSpecialMoveIsPlayed(data);
+            this.aSpecialMoveIsPlayed(data);
             return;
         }
+    };
+
+    this.aMoveIsPlayed = function (str_val) {
+        //this.goLog("aMoveIsPlayed", str_val);
+        if (this.gameObject().gameIsOver()) {
+            var index = 0;
+            var x = (str_val.charAt(index++) - '0') * 10;
+            x += (str_val.charAt(index++) - '0');
+            var y = (str_val.charAt(index++) - '0') * 10;
+            y += (str_val.charAt(index++) - '0');
+            if ((str_val.charAt(index++) - '0') !== this.GO().MARK_DEAD_STONE_DIFF()) {
+                this.abend("aMoveIsPlayed", "game is over");
+                return;
+            }
+            this.engineObject().markDeadGroup(x, y);
+            this.engineObject().abendEngine();
+            this.thansmitBoardData();
+        } else {
+            var move = this.mallocMove(str_val, 0, 0, 0, 0, this.containerObject());
+            this.gameObject().addNewMoveAndFight(move);
+            this.thansmitBoardData();
+        }
+    };
+
+    this.aSpecialMoveIsPlayed = function (special_str) {
+        //GO.goLog("GoHandlerObject.aSpecialMoveIsPlayed", special_str);
+        this.gameObject().receiveSpecialMoveFromOpponent(special_str);
+        //this.uiObject().drawBoard(this.engineObject());
     };
 
     this.abend = function (str1_val, str2_val) {

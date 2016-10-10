@@ -39,32 +39,16 @@ function LinkMgrObject(fibre_val) {
         return this.theLinkQueue;
     };
 
+    this.poolQueue = function () {
+        return this.thePoolQueue;
+    };
+
     this.globalLinkId = function () {
         return this.theGlobalLinkId;
     };
 
     this.incrementGlobalLinkId = function () {
         return this.theGlobalLinkId += 1;
-    };
-
-    this.poolHead = function () {
-        return this.thePoolHead;
-    };
-
-    this.setPoolHead = function (val) {
-        this.thePoolHead = val;
-    };
-
-    this.poolSize = function () {
-        return this.thePoolSize;
-    };
-
-    this.incrementPoolSize = function () {
-        return this.thePoolSize += 1;
-    };
-
-    this.decrementPoolSize = function () {
-        return this.thePoolSize -= 1;
     };
 
     this.searchLink = function (my_name_val, link_id_val) {
@@ -106,42 +90,18 @@ function LinkMgrObject(fibre_val) {
     };
 
     this.mallocLink = function (my_name_val) {
-        var entry;
-        if (!this.poolHead()) {
+        var entry = this.poolQueue().deQueue();
+        if (!entry) {
             entry = this.linkModuleMalloc(my_name_val, this.globalLinkId());
         } else {
-            entry = this.poolHead();
             entry.resetIt(my_name_val, this.globalLinkId());
-            this.setHead(entry.next());
-            this.decrementPoolSize();
         }
         this.incrementGlobalLinkId();
-
-        this.abendIt();
         return entry;
     };
 
     this.freeLink = function (link_val) {
-        this.incrementPoolSize();
-        link_val.setNext(this.poolHead());
-        this.setHead(link_val);
-        this.abendIt();
-    };
-
-    this.abendIt = function () {
-        var i = 0;
-        var p = this.poolHead();
-        while (p) {
-            p = p.next();
-            i += 1;
-        }
-        if (i !== this.poolSize()) {
-            this.abend("abendIt", "size=" + this.poolSize() + " i=" + i);
-        }
-
-        if (this.poolSize() > 5) {
-            this.abend("abendIt", "size=" + this.poolSize());
-        }
+        this.poolQueue().enQueue(link_val);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
@@ -159,7 +119,6 @@ function LinkMgrObject(fibre_val) {
     };
 
     this.theGlobalLinkId = 10;
-    this.thePoolHead = null;
-    this.thePoolSize = 0;
     this.theLinkQueue = this.utilObject().queueModule().malloc();
+    this.thePoolQueue = this.utilObject().queueModule().malloc();
 }

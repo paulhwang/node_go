@@ -88,6 +88,14 @@ function SessionObject(session_mgr_val, my_name_val, his_name_val, session_id_va
         return this.theSessionMgrObject;
     };
 
+    this.next = function () {
+        return this.theNext;
+    };
+
+    this.setNext = function (val) {
+        this.theNext = val;
+    };
+
     this.resetIt = function (session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val) {
         this.theSessionMgrObject = session_mgr_val;
         this.theSessionId = session_id_val;
@@ -101,6 +109,7 @@ function SessionObject(session_mgr_val, my_name_val, his_name_val, session_id_va
         this.theReceiveRing = this.utilObject().ringModule().malloc();
         this.theClusterObject = cluster_val;
         this.clusterObject().addAdditionalSession(this);
+        this.theNext = null;
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

@@ -70,6 +70,14 @@ function clusterObject (cluster_mgr_val) {
         return this.theTransmitQueue;
     };
 
+    this.next = function () {
+        return this.theNext;
+    };
+
+    this.setNext = function (val) {
+        this.theNext = val;
+    };
+
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
             this.logit(str1_val, "==" + str2_val);
@@ -161,4 +169,5 @@ function clusterObject (cluster_mgr_val) {
     this.theGoContainerObject = this.goContainerModule().malloc(this);
     this.theReceiveQueue = this.queueModule().malloc();
     this.theTransmitQueue = this.queueModule().malloc();
+    this.theNext = null;
 }

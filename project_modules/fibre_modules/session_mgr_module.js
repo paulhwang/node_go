@@ -48,16 +48,12 @@ function SessionMgrObject(fibre_val) {
         return this.theSessionQueue;
     };
 
+    this.poolQueue = function () {
+        return this.thePoolQueue;
+    };
+
     this.preSessionQueue = function () {
         return this.thePreSessionQueue;
-    };
-
-    this.poolHead = function () {
-        return this.thePoolHead;
-    };
-
-    this.setHead = function (val) {
-        this.thePoolHead = val;
     };
 
     this.globalSessionId = function () {
@@ -66,18 +62,6 @@ function SessionMgrObject(fibre_val) {
 
     this.incrementGlobalSessionId = function () {
         return this.theGlobalSessionId += 1;
-    };
-
-    this.poolSize = function () {
-        return this.thePoolSize;
-    };
-
-    this.incrementPoolSize = function () {
-        return this.thePoolSize += 1;
-    };
-
-    this.decrementPoolSize = function () {
-        return this.thePoolSize -= 1;
     };
 
     this.searchIt = function (my_name_val, his_name_val, session_id_val) {
@@ -109,43 +93,18 @@ function SessionMgrObject(fibre_val) {
     };
 
     this.mallocSession = function (my_name_val, his_name_val, cluster_val) {
-        var entry;
-
-        if (!this.poolHead()) {
+        var entry = this.poolQueue().deQueue();  
+        if (!entry) {
             entry = this.sessionModuleMalloc(this, my_name_val, his_name_val, this.globalSessionId(), cluster_val);
         } else {
-            entry = this.poolHead();
             entry.resetIt(my_name_val, his_name_val, this.globalSessionId(), cluster_val);
-            this.setHead(entry.next());
-            this.decrementPoolSize();
         }
         this.incrementGlobalSessionId();
-
-        this.abendIt();
         return entry;
     };
 
     this.freeSession = function (session_val) {
-        this.incrementPoolSize();
-        session_val.setNext(this.poolHead());
-        this.setHead(session_val);
-        this.abendIt();
-    };
-
-    this.abendIt = function () {
-        var i = 0;
-        var p = this.poolHead();
-        while (p) {
-            p = p.next();
-            i += 1;
-        }
-        if (i !== this.poolSize()) {
-            this.abend("abendIt", "size=" + this.poolSize() + " i=" + i);
-        }
-
-        if (this.poolSize() > 5) {
-            this.abend("abendIt", "size=" + this.poolSize());
-        }
+        this.poolQueue().enQueue(link_val);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
@@ -164,7 +123,6 @@ function SessionMgrObject(fibre_val) {
 
     this.theSessionQueue = this.utilObject().queueModule().malloc();
     this.thePreSessionQueue = this.utilObject().queueModule().malloc();
+    this.thePoolQueue = this.utilObject().queueModule().malloc();
     this.theGlobalSessionId = 1000;
-    this.thePoolHead = null;
-    this.thePoolSize = 0;
 }

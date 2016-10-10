@@ -37,6 +37,14 @@ function clusterMgrObject(fibre_val) {
         return this.rootObject().utilObject();
     };
 
+    this.clusterQueue = function () {
+        return this.theClusterQueue;
+    };
+
+    this.poolQueue = function () {
+        return this.thePoolQueue;
+    };
+
     this.abend = function (str1_val, str2_val) {
         this.utilModule().utilAbend(this.objectName() + "." + str1_val, str2_val);
     };
@@ -44,4 +52,7 @@ function clusterMgrObject(fibre_val) {
     this.logit = function (str1_val, str2_val) {
         this.utilModule().utilLogit(this.objectName() + "." + str1_val, str2_val);
     };
+ 
+    this.theClusterQueue = this.utilObject().queueModule().malloc();
+    this.thePoolQueue = this.utilObject().queueModule().malloc();
 }

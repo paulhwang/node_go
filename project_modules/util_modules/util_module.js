@@ -49,6 +49,14 @@ function UtilObject(root_val) {
         return this.theRootObject;
     };
 
+    this.queueObject = function () {
+        return this.theQueueObject;
+    };
+
+    this.ringObject = function () {
+        return this.theRingObject;
+    };
+
     this.userIndex = function () {
         return this.theUserIndex;
     };

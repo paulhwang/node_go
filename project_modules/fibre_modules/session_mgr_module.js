@@ -14,21 +14,18 @@ module.exports = {
     object: function () {
         return theSessionMgrObject;
     },
-
-    malloc: function (my_name_val, his_name_val) {
-         return theSessionMgrObject.mallocIt(my_name_val, his_name_val);
-    },
-
-    free: function (entry_val) {
-        theSessionMgrObject.freeIt(entry_val);
-    },
 };
 
 function SessionMgrObject(root_object_val) {
     "use strict";
     this.theRootObject = root_object_val;
 
-    this.mallocCluster = function () {
+    this.sessionModuleMalloc = function (session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val) {
+        var session_module = require("./session_entry_module.js");
+        return session_module.malloc(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val);
+    };
+
+    this.clusterModuleMalloc = function () {
         var cluster_module = require("./cluster_module.js");
         return cluster_module.malloc();
     };
@@ -100,7 +97,7 @@ function SessionMgrObject(root_object_val) {
     this.searchAndCreate = function (my_name_val, his_name_val, session_id_val) {
         var session = this.searchIt(my_name_val, his_name_val, session_id_val);
         if (!session) {
-            var cluster = this.mallocCluster();
+            var cluster = this.clusterModuleMalloc();
             session = this.mallocIt(my_name_val, his_name_val, cluster);
             this.sessionQueue().enQueue(session);
 
@@ -121,7 +118,7 @@ function SessionMgrObject(root_object_val) {
         var entry;
 
         if (!this.poolHead()) {
-            entry = this.sessionModule().malloc(this, my_name_val, his_name_val, this.globalSessionId(), cluster_val);
+            entry = this.sessionModuleMalloc(this, my_name_val, his_name_val, this.globalSessionId(), cluster_val);
         } else {
             entry = this.poolHead();
             entry.resetIt(my_name_val, his_name_val, this.globalSessionId(), cluster_val);

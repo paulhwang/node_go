@@ -14,14 +14,6 @@ module.exports = {
     object: function () {
         return theLinkMgrObject;
     },
-
-    malloc: function (my_name_val) {
-         return theLinkMgrObject.mallocIt(my_name_val);
-    },
-
-    free: function (entry_val) {
-        theLinkMgrObject.freeIt(entry_val);
-    },
 };
 
 function LinkMgrObject(root_object_val) {

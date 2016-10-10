@@ -28,7 +28,7 @@ function LinkMgrObject(root_object_val) {
     "use strict";
     this.theRootObject = root_object_val;
 
-    this.mallocLink = function (my_name_val, link_id_val) {
+    this.linkModuleMalloc = function (my_name_val, link_id_val) {
         var link_module = require("./link_entry_module.js");
         return link_module.malloc(my_name_val, link_id_val);
     };
@@ -122,7 +122,7 @@ function LinkMgrObject(root_object_val) {
     this.mallocIt = function (my_name_val) {
         var entry;
         if (!this.poolHead()) {
-            entry = this.mallocLink(my_name_val, this.globalLinkId());
+            entry = this.linkModuleMalloc(my_name_val, this.globalLinkId());
         } else {
             entry = this.poolHead();
             entry.resetIt(my_name_val, this.globalLinkId());

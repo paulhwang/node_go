@@ -24,11 +24,6 @@ function FibreObject(root_object_val) {
         this.theClusterMgrObject = cluster_mgr_module.malloc(this);
     };
 
-    this.linkModuleMalloc = function (my_name_val, link_id_val) {
-        var link_module = require("./link_module.js");
-        return link_module.malloc(my_name_val, link_id_val);
-    };
-
     this.objectName = function () {
         return "FibreObject";
     };

@@ -15,16 +15,17 @@ function GoEngineObject(container_object_val) {
     this.theUtilModule = require("./../util_modules/util_module.js");
     this.theGoDefineModule = require("./go_define_module.js");
     this.theContainerModule = require("./go_container_module.js");
-    this.theGroupListModule = require("./go_group_list_module.js");
     this.theGroupModule = require("./go_group_module.js");
 
+    this.theContainerObject = container_object_val;
+
     this.mallocGroupList = function (engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val) {
-        group_list_module = require("./go_group_list_module.js");
+        var group_list_module = require("./go_group_list_module.js");
         return group_list_module.malloc(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val);
     };
 
     this.objectName = function () {
-        return this.theObjectName;
+        return "GoEngineObject";
     };
 
     this.utilModule = function () {
@@ -72,15 +73,15 @@ function GoEngineObject(container_object_val) {
     };
 
     this.resetMarkedGroupLists = function () {
-        this.theGroupListArray[3] = this.groupListModule().malloc(this, 3, this.GO().BLACK_STONE(), true, "black", "gray");
-        this.theGroupListArray[4] = this.groupListModule().malloc(this, 4, this.GO().WHITE_STONE(), true, "white", "gray");
+        this.theGroupListArray[3] = this.mallocGroupList(this, 3, this.GO().BLACK_STONE(), true, "black", "gray");
+        this.theGroupListArray[4] = this.mallocGroupList(this, 4, this.GO().WHITE_STONE(), true, "white", "gray");
         this.boardObject().resetMarkedBoardObjectData();
    };
 
     this.resetEmptyGroupLists = function () {
-        this.theGroupListArray[0] = this.groupListModule().malloc(this, 0, this.GO().EMPTY_STONE(), false, null, null);
-        this.theGroupListArray[5] = this.groupListModule().malloc(this, 5, this.GO().EMPTY_STONE(), false, null, "black");
-        this.theGroupListArray[6] = this.groupListModule().malloc(this, 6, this.GO().EMPTY_STONE(), false, null, "white");
+        this.theGroupListArray[0] = this.mallocGroupList(this, 0, this.GO().EMPTY_STONE(), false, null, null);
+        this.theGroupListArray[5] = this.mallocGroupList(this, 5, this.GO().EMPTY_STONE(), false, null, "black");
+        this.theGroupListArray[6] = this.mallocGroupList(this, 6, this.GO().EMPTY_STONE(), false, null, "white");
    };
 
     this.emptyGroupList = function () {
@@ -657,8 +658,8 @@ function GoEngineObject(container_object_val) {
 
     this.resetEngineObjectData = function () {
         this.theGroupListArray = [7];
-        this.theGroupListArray[1] = this.groupListModule().malloc(this, 1, this.GO().BLACK_STONE(), false, null, null);
-        this.theGroupListArray[2] = this.groupListModule().malloc(this, 2, this.GO().WHITE_STONE(), false, null, null);
+        this.theGroupListArray[1] = this.mallocGroupList(this, 1, this.GO().BLACK_STONE(), false, null, null);
+        this.theGroupListArray[2] = this.mallocGroupList(this, 2, this.GO().WHITE_STONE(), false, null, null);
         this.resetMarkedGroupLists();
         this.resetEmptyGroupLists();
 
@@ -669,8 +670,5 @@ function GoEngineObject(container_object_val) {
         this.theWhiteCaptureStones = 0;
     };
 
-    this.theObjectName = "GoEngineObject";
-    this.theContainerObject = container_object_val;
     this.resetEngineObjectData();
 }
-1

@@ -12,8 +12,6 @@ module.exports = {
 
 function clusterMgrObject(fibre_val) {
     "use strict";
-    this.theUtilModule = require("./../util_modules/util_module.js");
-
     this.theFibreObject = fibre_val;
 
     this.clusterModuleMalloc = function () {

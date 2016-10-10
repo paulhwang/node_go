@@ -12,7 +12,6 @@ module.exports = {
 
 function SessionObject(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val) {
     "use strict";
-
     this.theSessionMgrObject = session_mgr_val;
 
     this.objectName = function () {

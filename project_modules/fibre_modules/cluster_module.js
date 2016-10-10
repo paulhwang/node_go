@@ -12,8 +12,6 @@ module.exports = {
 
 function clusterObject (cluster_mgr_val) {
     "use strict";
-    this.theQueueModule = require("./../util_modules/queue_module.js");
-
     this.theClusterMgrObject = cluster_mgr_val;
 
     this.goObjectMalloc = function () {
@@ -23,10 +21,6 @@ function clusterObject (cluster_mgr_val) {
 
     this.objectName = function () {
         return "clusterObject";
-    };
-
-    this.queueModule = function () {
-        return this.theQueueModule;
     };
 
     this.sessionObject = function () {
@@ -43,6 +37,10 @@ function clusterObject (cluster_mgr_val) {
 
     this.fibreObject = function () {
         return this.clusterMgrObject().fibreObject();
+    };
+
+    this.utilObject = function () {
+        return this.clusterMgrObject().utilObject();
     };
 
     this.sessionArray = function (index_val) {
@@ -154,7 +152,7 @@ function clusterObject (cluster_mgr_val) {
     this.theSessionArray = [2];
     this.theSessionArrayLength = 0;
     this.theGoContainerObject = this.goObjectMalloc();
-    this.theReceiveQueue = this.queueModule().malloc();
-    this.theTransmitQueue = this.queueModule().malloc();
+    this.theReceiveQueue = this.utilObject().queueModule().malloc();
+    this.theTransmitQueue = this.utilObject().queueModule().malloc();
     this.theNext = null;
 }

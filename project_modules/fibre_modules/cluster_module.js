@@ -13,9 +13,13 @@ module.exports = {
 function clusterObject (cluster_mgr_val) {
     "use strict";
     this.theQueueModule = require("./../util_modules/queue_module.js");
-    this.theGoContainerModule = require("./../go_modules/go_module.js")
 
     this.theClusterMgrObject = cluster_mgr_val;
+
+    this.goObjectMalloc = function () {
+        var go_module = require("./../go_modules/go_module.js")
+        return go_module.malloc(this);
+    },
 
     this.objectName = function () {
         return "clusterObject";
@@ -23,10 +27,6 @@ function clusterObject (cluster_mgr_val) {
 
     this.queueModule = function () {
         return this.theQueueModule;
-    };
-
-    this.goContainerModule = function () {
-        return this.theGoContainerModule;
     };
 
     this.sessionObject = function () {
@@ -153,7 +153,7 @@ function clusterObject (cluster_mgr_val) {
 
     this.theSessionArray = [2];
     this.theSessionArrayLength = 0;
-    this.theGoContainerObject = this.goContainerModule().malloc(this);
+    this.theGoContainerObject = this.goObjectMalloc();
     this.theReceiveQueue = this.queueModule().malloc();
     this.theTransmitQueue = this.queueModule().malloc();
     this.theNext = null;

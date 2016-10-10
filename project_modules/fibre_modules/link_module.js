@@ -1,16 +1,16 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: link_entry_module.js
+ * File name: link_module.js
  */
 
 module.exports = {
     malloc: function (my_name_val, link_id_val) {
-        return new LinkEntryObject(my_name_val, link_id_val);
+        return new LinkObject(my_name_val, link_id_val);
     },
 };
 
-function LinkEntryObject(my_name_val, link_id_val) {
+function LinkObject(my_name_val, link_id_val) {
     "use strict";
     this.theUtilModule = require("./../util_modules/util_module.js");
     this.theQueueModule = require("./../util_modules/queue_module.js");
@@ -18,7 +18,7 @@ function LinkEntryObject(my_name_val, link_id_val) {
     this.theLinkMgrModule = require("./link_mgr_module.js");
 
     this.objectName = function () {
-        return "LinkEntryObject";
+        return "LinkObject";
     };
 
     this.utilModule = function () {

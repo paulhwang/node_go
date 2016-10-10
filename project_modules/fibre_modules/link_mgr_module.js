@@ -17,7 +17,7 @@ function LinkMgrObject(root_object_val) {
     this.theRootObject = root_object_val;
 
     this.linkModuleMalloc = function (my_name_val, link_id_val) {
-        var link_module = require("./link_entry_module.js");
+        var link_module = require("./link_module.js");
         return link_module.malloc(my_name_val, link_id_val);
     };
 

@@ -17,7 +17,7 @@ function SessionMgrObject(root_object_val) {
     this.theRootObject = root_object_val;
 
     this.sessionModuleMalloc = function (session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val) {
-        var session_module = require("./session_entry_module.js");
+        var session_module = require("./session_module.js");
         return session_module.malloc(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val);
     };
 

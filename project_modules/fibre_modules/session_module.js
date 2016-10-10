@@ -1,16 +1,16 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: session_entry_module.js
+ * File name: session_module.js
  */
 
 module.exports = {
     malloc: function (session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val) {
-        return new SessionEntryObject(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val);
+        return new SessionObject(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val);
     },
 };
 
-function SessionEntryObject(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val) {
+function SessionObject(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val) {
     "use strict";
     this.theUtilModule = require("./../util_modules/util_module.js");
     this.theQueueModule = require("./../util_modules/queue_module.js");
@@ -18,7 +18,7 @@ function SessionEntryObject(session_mgr_val, my_name_val, his_name_val, session_
     this.theClusterModule = require("./cluster_module.js");
 
     this.objectName = function () {
-        return "SessionEntryObject";
+        return "SessionObject";
     };
 
     this.utilModule = function () {

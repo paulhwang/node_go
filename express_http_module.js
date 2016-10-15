@@ -60,12 +60,12 @@ function ExpressHttpObject(root_object_val) {
         var link_id = Number(go_request.link_id);
         var link = this.linkMgrObject().searchLink(go_request.my_name, link_id);
         if (!link) {
-            res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
+            //res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
             this.abend("getLink", "null link" + "link_id=" + link_id + " my_name=" + go_request.my_name);
             return null;
         }
         if (link.link_id === 0) {
-            res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
+            //res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
             this.abend("getLink", "link_id = 0");
             return null;
         }
@@ -156,13 +156,13 @@ function ExpressHttpObject(root_object_val) {
         }
 
         var data = this.dispatchRequest(res, go_request);
-        if (data) {
-            this.sendResponse(res, go_request, data);
-        }
+        this.sendResponse(res, go_request, data);
     };
 
     this.dispatchRequest = function (res, go_request) {
-       if (go_request.command === "setup_link") {
+        this.debug(false, "dispatchRequest", "command=" + go_request.command);
+
+        if (go_request.command === "setup_link") {
             return this.setupLink(res, go_request);
         }
 
@@ -187,18 +187,15 @@ function ExpressHttpObject(root_object_val) {
         }
 
         if (go_request.command === "setup_session") {
-            this.setupSession(res, go_request);
-            return null;
+            return this.setupSession(res, go_request);
         }
 
         if (go_request.command === "get_session_data") {
-            this.getSessionData(res, go_request);
-            return null;
+            return this.getSessionData(res, go_request);
         }
 
         if (go_request.command === "put_session_data") {
-            this.putSessionData(res, go_request);
-            return null;
+            return this.putSessionData(res, go_request);
         }
     }
 
@@ -207,6 +204,7 @@ function ExpressHttpObject(root_object_val) {
                         command: go_request.command,
                         ajax_id: go_request.ajax_id,
                         data: data_val,
+                        res_data: data_val,
                     });
         res.type('application/json');
         res.send(json_str);
@@ -255,7 +253,7 @@ function ExpressHttpObject(root_object_val) {
         if (!link) {
             res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
             this.abend("keepAlive", "***null link***" + "link_id=" + my_link_id + " my_name=" + go_request.my_name);
-            return;
+            return null;
         }
         link.resetKeepAliveTimer();
 
@@ -286,7 +284,7 @@ function ExpressHttpObject(root_object_val) {
             this.logit("getLinkData", "link_id=" + go_request.link_id + " my_name="  + go_request.my_name + " data={" + data + "}");
         }
         res.type('application/json');
-        res.send(json_str);
+        //res.send(json_str);
         return data;
     };
 
@@ -295,7 +293,7 @@ function ExpressHttpObject(root_object_val) {
 
         var my_link = this.getLink(res, go_request);
         if (!my_link) {
-            return;
+            return null;
         }
         my_link.resetKeepAliveTimer();
 
@@ -316,7 +314,7 @@ function ExpressHttpObject(root_object_val) {
     this.getNameList = function (res, go_request) {
         var link = this.getLink(res, go_request);
         if (!link) {
-            return;
+            return null;
         }
         link.resetKeepAliveTimer();
 
@@ -339,14 +337,14 @@ function ExpressHttpObject(root_object_val) {
             if (!session) {
                 res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
                 this.abend("setupSession", "null session");
-                return;
+                return null;
             }
         }
 
         var his_link = this.linkMgrObject().searchLink(go_request.his_name, 0);
         if (!his_link) {
             res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
-            return;
+            return null;
         }
 
         this.debug(true, "setupSession", "(" + go_request.link_id + "," + session.sessionId() + "," + session.hisSession().sessionId() + ") " + go_request.my_name + "=>" + go_request.his_name + " data=" + go_request.data);
@@ -365,7 +363,7 @@ function ExpressHttpObject(root_object_val) {
                     });
         his_link.receiveQueue().enQueue(data);
         this.sessionMgrObject().preSessionQueue().enQueue(data)
-        this.setupSessionReply(res, session, go_request);
+        return this.setupSessionReply(res, session, go_request);
     }
 
     this.setupSessionReply = function (res, session_val, go_request) {
@@ -379,30 +377,31 @@ function ExpressHttpObject(root_object_val) {
                         ajax_id: go_request.ajax_id,
                         data: data,
                     });
-        res.send(json_str);
+        //res.send(json_str);
         this.logit("setupSessionReply", "(" + go_request.link_id + "," + session_val.sessionId() + "," + session_val.hisSession().sessionId() + ") " + go_request.my_name + "=>" + go_request.his_name);
+        return data;
     };
 
     this.getSessionData = function (res, go_request) {
         this.debug(false, "getSessionData", "(" + go_request.link_id + "," + go_request.session_id + ") my_name=" + go_request.my_name + "=>" + go_request.his_name);
         var link = this.getLink(res, go_request);
         if (!link) {
-            return;
+            return null;
         }
         link.resetKeepAliveTimer();
 
         var session = this.sessionMgrObject().searchIt(go_request.my_name, go_request.his_name, Number(go_request.session_id));
         if (!session) {
-            res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
+            //res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
             this.abend("getSessionData", "null session" + " session_id=" + go_request.session_id);
-            return;
+            return null;
         }
 
         var res_data = session.dequeueTransmitData();
         if (!res_data) {
             this.debug(false, "getSessionData", "no data");
-            res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
-            return;
+            //res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
+            return null;
         }
         this.logit("getSessionData", "res_data=" + res_data);
 
@@ -416,7 +415,8 @@ function ExpressHttpObject(root_object_val) {
         this.logit("getSessionData", "(" + go_request.link_id + "," + go_request.session_id + ") "  + go_request.his_name + "=>" + go_request.my_name + " {" + res_data + "}");
         this.logit("getSessionData", json_str);
         res.type('application/json');
-        res.send(json_str);
+        //res.send(json_str);
+        return res_data;
     };
 
     this.putSessionData = function (res, go_request) {
@@ -429,7 +429,7 @@ function ExpressHttpObject(root_object_val) {
 
         var link = this.getLink(res, go_request);
         if (!link) {
-            return;
+            return null;
         }
         link.resetKeepAliveTimer();
 
@@ -437,7 +437,7 @@ function ExpressHttpObject(root_object_val) {
         if (!my_session) {
             res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
             this.abend("putSessionData", "null my_session" + " session_id=" + go_request.session_id + " my_name=" + go_request.my_name + " his_name=" + go_request.his_name);
-            return;
+            return null;
         }
 
         this.debug(true, "putSessionData", "(" + go_request.link_id + "," + go_request.session_id + ") "  + go_request.my_name + "=>" + go_request.his_name + " {" + go_request.data + "} " + go_request.xmt_seq + "=>" + my_session.up_seq);
@@ -458,7 +458,8 @@ function ExpressHttpObject(root_object_val) {
         }
 
         this.debug(true, "putSessionData", "queue_size=" + my_session.receiveQueue().size());
-        res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
+        //res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
+        return null;
     };
 
     this.processNotFound = function (req, res) {

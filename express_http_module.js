@@ -122,6 +122,9 @@ function ExpressHttpObject(root_object_val) {
     };
 
     this.processGet = function (req, res) {
+        this.rootObject().portObject().ajaxObject().processGet(req, res);
+        return;
+
         if (!req.headers.gorequest) {
             this.abend("processGet", "null gorequest");
             return;
@@ -142,10 +145,17 @@ function ExpressHttpObject(root_object_val) {
         }
 
         var data = this.rootObject().fibreObject().dispatchObject().dispatchRequest(go_request);
-        this.sendResponse(res, go_request, data);
+        var json_str = JSON.stringify({
+                        command: go_request.command,
+                        ajax_id: go_request.ajax_id,
+                        data: data,
+                        res_data: data,
+                    });
+        res.type('application/json');
+        res.send(json_str);
     };
 
-    this.sendResponse = function (res, go_request, data_val) {
+    this.sendResponse_______ = function (res, go_request, data_val) {
         var json_str = JSON.stringify({
                         command: go_request.command,
                         ajax_id: go_request.ajax_id,

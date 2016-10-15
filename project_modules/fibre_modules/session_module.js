@@ -101,20 +101,6 @@ function SessionObject(session_mgr_val, my_name_val, his_name_val, session_id_va
         this.clusterObject().addAdditionalSession(this);
     };
 
-    this.debug = function (debug_val, str1_val, str2_val) {
-        if (debug_val) {
-            this.logit(str1_val, "==" + str2_val);
-        }
-    };
-
-    this.abend = function (str1_val, str2_val) {
-        this.SessionMgrObject().abend(this.sessionId() + " " + this.objectName() + "." + str1_val, str2_val);
-    };
-
-    this.logit = function (str1_val, str2_val) {
-        this.SessionMgrObject().logit(this.sessionId() + " " + this.objectName() + "." + str1_val, str2_val);
-    };
-
     this.enqueueTransmitData = function (data_val) {
         this.debug(true, "enqueueTransmitData", data_val);
         this.transmitQueue().enQueue(data_val);
@@ -142,6 +128,20 @@ function SessionObject(session_mgr_val, my_name_val, his_name_val, session_id_va
         }
 
         return data;
+    };
+
+    this.debug = function (debug_val, str1_val, str2_val) {
+        if (debug_val) {
+            this.logit(str1_val, "==" + str2_val);
+        }
+    };
+
+    this.logit = function (str1_val, str2_val) {
+        this.SessionMgrObject().logit(this.sessionId() + " " + this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.abend = function (str1_val, str2_val) {
+        this.SessionMgrObject().abend(this.sessionId() + " " + this.objectName() + "." + str1_val, str2_val);
     };
 
     this.resetIt(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val);

@@ -304,11 +304,11 @@ function DispatchObject(fibre_val) {
         }
     };
 
-    this.abend = function (str1_val, str2_val) {
-        this.utilObject().abend(this.objectName() + "." + str1_val, str2_val);
+    this.logit = function (str1_val, str2_val) {
+        this.utilObject().utilLogit(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.logit = function (str1_val, str2_val) {
-        this.utilObject().logit(this.objectName() + "." + str1_val, str2_val);
+    this.abend = function (str1_val, str2_val) {
+        this.utilObject().utilAbend(this.objectName() + "." + str1_val, str2_val);
     };
 }

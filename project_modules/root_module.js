@@ -62,12 +62,12 @@ function RootObject () {
         }
     };
 
-    this.abend = function (str1_val, str2_val) {
-        this.utilModule().abend(this.objectName() + "." + str1_val, str2_val);
-    };
-
     this.logit = function (str1_val, str2_val) {
         this.utilModule().logit(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.abend = function (str1_val, str2_val) {
+        this.utilModule().abend(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.mallocModules();

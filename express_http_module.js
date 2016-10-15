@@ -56,22 +56,6 @@ function ExpressHttpObject(root_object_val) {
         return this.rootObject().sessionMgrObject();
     };
 
-    this.getLink = function (go_request) {
-        var link_id = Number(go_request.link_id);
-        var link = this.linkMgrObject().searchLink(go_request.my_name, link_id);
-        if (!link) {
-            //res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
-            this.abend("getLink", "null link" + "link_id=" + link_id + " my_name=" + go_request.my_name);
-            return null;
-        }
-        if (link.link_id === 0) {
-            //res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
-            this.abend("getLink", "link_id = 0");
-            return null;
-        }
-        return link;
-    };
-
     this.processPost = function (req, res) {
         var my_link_id, my_session, his_session;
 

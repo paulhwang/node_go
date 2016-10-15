@@ -48,6 +48,14 @@ function ExpressHttpObject(root_object_val) {
         return this.rootObject().utilObject();
     };
 
+    this.portObject = function () {
+        return this.rootObject().portObject();
+    };
+
+    this.ajaxObject = function () {
+        return this.portObject().ajaxObject();
+    };
+
     this.linkMgrObject = function () {
         return this.rootObject().linkMgrObject();
     };
@@ -122,49 +130,8 @@ function ExpressHttpObject(root_object_val) {
     };
 
     this.processGet = function (req, res) {
-        this.rootObject().portObject().ajaxObject().processGet(req, res);
-        return;
-
-        if (!req.headers.gorequest) {
-            this.abend("processGet", "null gorequest");
-            return;
-        }
-
-        this.debug(false, "processGet", "req.headers.gorequest=" + req.headers.gorequest);
-
-        var go_request = JSON.parse(req.headers.gorequest);
-        if (!go_request) {
-            this.abend("processGet", "null go_request");
-            return;
-        }
-
-        if ((go_request.command !== "keep_alive") &&
-            (go_request.command !== "get_name_list") &&
-            (go_request.command !== "get_session_data")) {
-            this.debug(false, "processGet", "command=" + go_request.command);
-        }
-
-        var data = this.rootObject().fibreObject().dispatchObject().dispatchRequest(go_request);
-        var json_str = JSON.stringify({
-                        command: go_request.command,
-                        ajax_id: go_request.ajax_id,
-                        data: data,
-                        res_data: data,
-                    });
-        res.type('application/json');
-        res.send(json_str);
+        this.ajaxObject().processGet(req, res);
     };
-
-    this.sendResponse_______ = function (res, go_request, data_val) {
-        var json_str = JSON.stringify({
-                        command: go_request.command,
-                        ajax_id: go_request.ajax_id,
-                        data: data_val,
-                        res_data: data_val,
-                    });
-        res.type('application/json');
-        res.send(json_str);
-    }
 
     this.processNotFound = function (res) {
         console.log(req.headers);

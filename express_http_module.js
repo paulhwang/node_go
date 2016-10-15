@@ -163,8 +163,7 @@ function ExpressHttpObject(root_object_val) {
 
     this.dispatchRequest = function (res, go_request) {
        if (go_request.command === "setup_link") {
-            this.setupLink(res, go_request);
-            return null;
+            return this.setupLink(res, go_request);
         }
 
         if (go_request.command === "keep_alive") {
@@ -174,8 +173,7 @@ function ExpressHttpObject(root_object_val) {
         }
 
         if (go_request.command === "get_link_data") {
-            this.getLinkData(res, go_request);
-            return null;
+            return this.getLinkData(res, go_request);
         }
 
         if (go_request.command === "put_link_data") {
@@ -185,8 +183,7 @@ function ExpressHttpObject(root_object_val) {
         }
 
         if (go_request.command === "get_name_list") {
-            this.getNameList(res, go_request);
-            return null;
+            return this.getNameList(res, go_request);
         }
 
         if (go_request.command === "setup_session") {
@@ -211,6 +208,7 @@ function ExpressHttpObject(root_object_val) {
                         ajax_id: go_request.ajax_id,
                         data: data_val,
                     });
+        res.type('application/json');
         res.send(json_str);
     }
 
@@ -226,14 +224,14 @@ function ExpressHttpObject(root_object_val) {
     this.setupLink = function (res, go_request) {
         if (!go_request) {
             this.abend("setupLink", "null go_request");
-            return;
+            return null;
         }
 
         var link = this.linkMgrObject().searchAndCreate(go_request.my_name, 0);
         if (!link) {
             res.send(this.jsonStingifyData(req.headers.command, go_request.ajax_id, null));
             this.abend("setupLink", "null link");
-            return;
+            return null;
         } else {
             link.resetKeepAliveTimer();
         }
@@ -245,7 +243,7 @@ function ExpressHttpObject(root_object_val) {
                         data: link_id_str,
                     });
 
-        res.send(json_str);
+        //res.send(json_str);
         this.logit("setupLink", "name=" + go_request.my_name + " link_id=" + link.linkId());
         return link_id_str;
     };
@@ -273,7 +271,7 @@ function ExpressHttpObject(root_object_val) {
 
         var link = this.getLink(res, go_request);
         if (!link) {
-            return;
+            return null;
         }
         link.resetKeepAliveTimer();
 
@@ -289,6 +287,7 @@ function ExpressHttpObject(root_object_val) {
         }
         res.type('application/json');
         res.send(json_str);
+        return data;
     };
 
     this.putLinkData = function (res, go_request) {
@@ -328,8 +327,9 @@ function ExpressHttpObject(root_object_val) {
                         ajax_id: go_request.ajax_id,
                         data: name_array_str,
                     });
-        res.send(json_str);
+        //res.send(json_str);
         this.debug(true, "getNameList", "(" + link.linkId() + ",0) " + go_request.my_name + "=>server " + name_array_str);
+        return name_array_str;
     };
 
     this.setupSession = function (res, go_request) {

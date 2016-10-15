@@ -155,7 +155,11 @@ function ExpressHttpObject(root_object_val) {
             this.debug(false, "processGet", "command=" + go_request.command);
         }
 
-        if (go_request.command === "setup_link") {
+        this.dispatchRequest(res, go_request);
+   };
+
+    this.dispatchRequest = function (res, go_request) {
+       if (go_request.command === "setup_link") {
             this.setupLink(res, go_request);
             return;
         }
@@ -196,9 +200,7 @@ function ExpressHttpObject(root_object_val) {
             this.putSessionData(res, go_request);
             return;
         }
-
-        this.abend("processGet", "what?");
-    };
+    }
 
     this.sendResponse = function (go_request, data_val) {
         var json_str = JSON.stringify({

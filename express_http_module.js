@@ -138,60 +138,61 @@ function ExpressHttpObject(root_object_val) {
     };
 
     this.processGet = function (req, res) {
-        if ((req.headers.command !== "keep_alive") &&
-            (req.headers.command !== "get_name_list") &&
-            (req.headers.command !== "get_session_data")) {
-            this.debug(false, "processGet", "command=" + req.headers.command);
+        if (!req.headers.gorequest) {
+            this.abend(false, "processGet", "null gorequest");
+            return;
         }
 
-        var go_request;
+        var go_request = JSON.parse(req.headers.gorequest);
+        if (!go_request) {
+            this.abend(false, "processGet", "null go_request");
+            return;
+        }
 
-        if (req.headers.command === "setup_link") {
-            go_request = JSON.parse(req.headers.gorequest);
+        if ((go_request.command !== "keep_alive") &&
+            (go_request.command !== "get_name_list") &&
+            (go_request.command !== "get_session_data")) {
+            this.debug(false, "processGet", "command=" + go_request.command);
+        }
+
+        if (go_request.command === "setup_link") {
             this.setupLink(res, go_request);
             return;
         }
 
-        if (req.headers.command === "keep_alive") {
+        if (go_request.command === "keep_alive") {
             this.abend("processGet", "keep_alive gorequest=" + req.headers.gorequest);
-            go_request = JSON.parse(req.headers.gorequest);
             this.keepAlive(res, go_request);
             return;
         }
 
-        if (req.headers.command === "get_link_data") {
-            go_request = JSON.parse(req.headers.gorequest);
+        if (go_request.command === "get_link_data") {
             this.getLinkData(res, go_request);
             return;
         }
 
-        if (req.headers.command === "put_link_data") {
+        if (go_request.command === "put_link_data") {
             this.abend("processGet", "put_link_data gorequest=" + req.headers.gorequest);
-            go_request = JSON.parse(req.headers.gorequest);
             this.putLinkData(res, go_request);
             return;
         }
 
-        if (req.headers.command === "get_name_list") {
-            go_request = JSON.parse(req.headers.gorequest);
+        if (go_request.command === "get_name_list") {
             this.getNameList(res, go_request);
             return;
         }
 
-        if (req.headers.command === "setup_session") {
-            go_request = JSON.parse(req.headers.gorequest);
+        if (go_request.command === "setup_session") {
             this.setupSession(res, go_request);
             return;
         }
 
-        if (req.headers.command === "get_session_data") {
-            go_request = JSON.parse(req.headers.gorequest);
+        if (go_request.command === "get_session_data") {
             this.getSessionData(res, go_request);
             return;
         }
 
-        if (req.headers.command === "put_session_data") {
-            go_request = JSON.parse(req.headers.gorequest);
+        if (go_request.command === "put_session_data") {
             this.putSessionData(res, go_request);
             return;
         }

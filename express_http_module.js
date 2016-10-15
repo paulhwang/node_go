@@ -56,7 +56,7 @@ function ExpressHttpObject(root_object_val) {
         return this.rootObject().sessionMgrObject();
     };
 
-    this.getLink = function (res, go_request) {
+    this.getLink = function (go_request) {
         var link_id = Number(go_request.link_id);
         var link = this.linkMgrObject().searchLink(go_request.my_name, link_id);
         if (!link) {
@@ -155,47 +155,45 @@ function ExpressHttpObject(root_object_val) {
             this.debug(false, "processGet", "command=" + go_request.command);
         }
 
-        var data = this.dispatchRequest(res, go_request);
+        var data = this.dispatchRequest(go_request);
         this.sendResponse(res, go_request, data);
     };
 
-    this.dispatchRequest = function (res, go_request) {
+    this.dispatchRequest = function (go_request) {
         this.debug(false, "dispatchRequest", "command=" + go_request.command);
 
         if (go_request.command === "setup_link") {
-            return this.setupLink(res, go_request);
+            return this.setupLink(go_request);
         }
 
         if (go_request.command === "keep_alive") {
-            this.abend("processGet", "keep_alive gorequest=" + req.headers.gorequest);
-            this.keepAlive(res, go_request);
-            return null;
+            this.abend("processGet", "keep_alive gorequest=" + go_request.gorequest);
+            return this.keepAlive(go_request);
         }
 
         if (go_request.command === "get_link_data") {
-            return this.getLinkData(res, go_request);
+            return this.getLinkData(go_request);
         }
 
         if (go_request.command === "put_link_data") {
-            this.abend("processGet", "put_link_data gorequest=" + req.headers.gorequest);
-            this.putLinkData(res, go_request);
-            return null;
+            this.abend("processGet", "put_link_data gorequest=" + go_request.gorequest);
+            return this.putLinkData(go_request);
         }
 
         if (go_request.command === "get_name_list") {
-            return this.getNameList(res, go_request);
+            return this.getNameList(go_request);
         }
 
         if (go_request.command === "setup_session") {
-            return this.setupSession(res, go_request);
+            return this.setupSession(go_request);
         }
 
         if (go_request.command === "get_session_data") {
-            return this.getSessionData(res, go_request);
+            return this.getSessionData(go_request);
         }
 
         if (go_request.command === "put_session_data") {
-            return this.putSessionData(res, go_request);
+            return this.putSessionData(go_request);
         }
     }
 
@@ -219,7 +217,7 @@ function ExpressHttpObject(root_object_val) {
         return json_str;
     };
 
-    this.setupLink = function (res, go_request) {
+    this.setupLink = function (go_request) {
         if (!go_request) {
             this.abend("setupLink", "null go_request");
             return null;
@@ -246,7 +244,7 @@ function ExpressHttpObject(root_object_val) {
         return link_id_str;
     };
 
-    this.keepAlive = function (res, go_request) {
+    this.keepAlive = function (go_request) {
         var my_link_id = Number(go_request.link_id);
         this.debug(false, "keepAlive", "link_id=" + my_link_id + " my_name=" + go_request.my_name);
         var link = this.linkMgrObject().searchLink(go_request.my_name, my_link_id);
@@ -261,13 +259,14 @@ function ExpressHttpObject(root_object_val) {
                         command: go_request.command,
                         ajax_id: go_request.ajax_id,
                     });
-        res.send(json_str);
+        //res.send(json_str);
+        return null;
     };
 
-    this.getLinkData = function (res, go_request) {
+    this.getLinkData = function (go_request) {
         this.debug(false, "getLinkData", "link_id=" + go_request.link_id + " my_name=" + go_request.my_name + " ajax_id=" + go_request.ajax_id);
 
-        var link = this.getLink(res, go_request);
+        var link = this.getLink(go_request);
         if (!link) {
             return null;
         }
@@ -283,7 +282,7 @@ function ExpressHttpObject(root_object_val) {
         if (data) {
             this.logit("getLinkData", "link_id=" + go_request.link_id + " my_name="  + go_request.my_name + " data={" + data + "}");
         }
-        res.type('application/json');
+        //res.type('application/json');
         //res.send(json_str);
         return data;
     };
@@ -307,12 +306,13 @@ function ExpressHttpObject(root_object_val) {
 
         }
 
-        res.type('application/json');
-        res.send(json_str);
+        //res.type('application/json');
+        return data;
+        //res.send(json_str);
     };
 
-    this.getNameList = function (res, go_request) {
-        var link = this.getLink(res, go_request);
+    this.getNameList = function (go_request) {
+        var link = this.getLink(go_request);
         if (!link) {
             return null;
         }
@@ -330,7 +330,7 @@ function ExpressHttpObject(root_object_val) {
         return name_array_str;
     };
 
-    this.setupSession = function (res, go_request) {
+    this.setupSession = function (go_request) {
         var session = this.sessionMgrObject().searchIt(go_request.my_name, go_request.his_name, Number(go_request.link_id));
         if (!session){
             session = this.sessionMgrObject().searchAndCreate(go_request.my_name, go_request.his_name, 0);
@@ -363,10 +363,10 @@ function ExpressHttpObject(root_object_val) {
                     });
         his_link.receiveQueue().enQueue(data);
         this.sessionMgrObject().preSessionQueue().enQueue(data)
-        return this.setupSessionReply(res, session, go_request);
+        return this.setupSessionReply(session, go_request);
     }
 
-    this.setupSessionReply = function (res, session_val, go_request) {
+    this.setupSessionReply = function (session_val, go_request) {
         var session_id_str = "" + session_val.sessionId();
         var data = JSON.stringify({
                         session_id: session_id_str,
@@ -382,9 +382,9 @@ function ExpressHttpObject(root_object_val) {
         return data;
     };
 
-    this.getSessionData = function (res, go_request) {
+    this.getSessionData = function (go_request) {
         this.debug(false, "getSessionData", "(" + go_request.link_id + "," + go_request.session_id + ") my_name=" + go_request.my_name + "=>" + go_request.his_name);
-        var link = this.getLink(res, go_request);
+        var link = this.getLink(go_request);
         if (!link) {
             return null;
         }
@@ -414,12 +414,12 @@ function ExpressHttpObject(root_object_val) {
         this.debug(false, "getSessionData", "ajax_id=" + go_request.ajax_id);
         this.logit("getSessionData", "(" + go_request.link_id + "," + go_request.session_id + ") "  + go_request.his_name + "=>" + go_request.my_name + " {" + res_data + "}");
         this.logit("getSessionData", json_str);
-        res.type('application/json');
+        //res.type('application/json');
         //res.send(json_str);
         return res_data;
     };
 
-    this.putSessionData = function (res, go_request) {
+    this.putSessionData = function (go_request) {
         //console.log(req.headers);
         this.debug(true, "putSessionData ", "ajax_id=" + go_request.ajax_id);
         this.debug(true, "putSessionData ", "(" + go_request.link_id + "," + go_request.session_id + ") "  + go_request.his_name + "=>" + go_request.my_name + " {" + go_request.data + "}");
@@ -427,7 +427,7 @@ function ExpressHttpObject(root_object_val) {
         var session_id = Number(go_request.session_id);
         var xmt_seq = Number(go_request.xmt_seq);
 
-        var link = this.getLink(res, go_request);
+        var link = this.getLink(go_request);
         if (!link) {
             return null;
         }
@@ -462,7 +462,7 @@ function ExpressHttpObject(root_object_val) {
         return null;
     };
 
-    this.processNotFound = function (req, res) {
+    this.processNotFound = function (res) {
         console.log(req.headers);
         this.logit("processNotFound", "*****");
         res.type('text/plain');

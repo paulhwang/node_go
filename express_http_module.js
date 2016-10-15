@@ -56,16 +56,16 @@ function ExpressHttpObject(root_object_val) {
         return this.rootObject().sessionMgrObject();
     };
 
-    this.getLink = function (req, res) {
-        var link_id = Number(req.headers.link_id);
-        var link = this.linkMgrObject().searchLink(req.headers.my_name, link_id);
+    this.getLink = function (res, go_request) {
+        var link_id = Number(go_request.link_id);
+        var link = this.linkMgrObject().searchLink(go_request.my_name, link_id);
         if (!link) {
-            res.send(this.jsonStingifyData(req.headers.command, req.headers.ajax_id, null));
-            this.abend("getLink", "null link" + "link_id=" + link_id + " my_name=" + req.headers.my_name);
+            res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
+            this.abend("getLink", "null link" + "link_id=" + link_id + " my_name=" + go_request.my_name);
             return null;
         }
         if (link.link_id === 0) {
-            res.send(this.jsonStingifyData(req.headers.command, req.headers.ajax_id, null));
+            res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
             this.abend("getLink", "link_id = 0");
             return null;
         }
@@ -144,43 +144,55 @@ function ExpressHttpObject(root_object_val) {
             this.debug(false, "processGet", "command=" + req.headers.command);
         }
 
+        var go_request;
+
         if (req.headers.command === "setup_link") {
-            this.setupLink(req, res);
+            go_request = JSON.parse(req.headers.gorequest);
+            this.setupLink(res, go_request);
             return;
         }
 
         if (req.headers.command === "keep_alive") {
-            this.keepAlive(req, res);
+            this.abend("processGet", "keep_alive gorequest=" + req.headers.gorequest);
+            go_request = JSON.parse(req.headers.gorequest);
+            this.keepAlive(res, go_request);
             return;
         }
 
         if (req.headers.command === "get_link_data") {
-            this.getLinkData(req, res);
+            go_request = JSON.parse(req.headers.gorequest);
+            this.getLinkData(res, go_request);
             return;
         }
 
         if (req.headers.command === "put_link_data") {
-            this.putLinkData(req, res);
+            this.abend("processGet", "put_link_data gorequest=" + req.headers.gorequest);
+            go_request = JSON.parse(req.headers.gorequest);
+            this.putLinkData(res, go_request);
             return;
         }
 
         if (req.headers.command === "get_name_list") {
-            this.getNameList(req, res);
+            go_request = JSON.parse(req.headers.gorequest);
+            this.getNameList(res, go_request);
             return;
         }
 
         if (req.headers.command === "setup_session") {
-            this.setupSession(req, res);
+            go_request = JSON.parse(req.headers.gorequest);
+            this.setupSession(res, go_request);
             return;
         }
 
         if (req.headers.command === "get_session_data") {
-            this.getSessionData(req, res);
+            go_request = JSON.parse(req.headers.gorequest);
+            this.getSessionData(res, go_request);
             return;
         }
 
         if (req.headers.command === "put_session_data") {
-            this.putSessionData(req, res);
+            go_request = JSON.parse(req.headers.gorequest);
+            this.putSessionData(res, go_request);
             return;
         }
 
@@ -196,10 +208,15 @@ function ExpressHttpObject(root_object_val) {
         return json_str;
     };
 
-    this.setupLink = function (req, res) {
-        var link = this.linkMgrObject().searchAndCreate(req.headers.my_name, 0);
+    this.setupLink = function (res, go_request) {
+        if (!go_request) {
+            this.abend("setupLink", "null go_request");
+            return;
+        }
+
+        var link = this.linkMgrObject().searchAndCreate(go_request.my_name, 0);
         if (!link) {
-            res.send(this.jsonStingifyData(req.headers.command, req.headers.ajax_id, null));
+            res.send(this.jsonStingifyData(req.headers.command, go_request.ajax_id, null));
             this.abend("setupLink", "null link");
             return;
         } else {
@@ -208,37 +225,37 @@ function ExpressHttpObject(root_object_val) {
 
         var link_id_str = "" + link.linkId();
         var json_str = JSON.stringify({
-                        command: req.headers.command,
-                        ajax_id: req.headers.ajax_id,
+                        command: go_request.command,
+                        ajax_id: go_request.ajax_id,
                         data: link_id_str,
                     });
 
         res.send(json_str);
-        this.logit("setupLink", "name=" + req.headers.my_name + " link_id=" + link.linkId());
+        this.logit("setupLink", "name=" + go_request.my_name + " link_id=" + link.linkId());
     };
 
-    this.keepAlive = function (req, res) {
-        var my_link_id = Number(req.headers.link_id);
-        this.debug(false, "keepAlive", "link_id=" + my_link_id + " my_name=" + req.headers.my_name);
-        var link = this.linkMgrObject().searchLink(req.headers.my_name, my_link_id);
+    this.keepAlive = function (res, go_request) {
+        var my_link_id = Number(go_request.link_id);
+        this.debug(false, "keepAlive", "link_id=" + my_link_id + " my_name=" + go_request.my_name);
+        var link = this.linkMgrObject().searchLink(go_request.my_name, my_link_id);
         if (!link) {
-            res.send(this.jsonStingifyData(req.headers.command, req.headers.ajax_id, null));
-            this.abend("keepAlive", "***null link***" + "link_id=" + my_link_id + " my_name=" + req.headers.my_name);
+            res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
+            this.abend("keepAlive", "***null link***" + "link_id=" + my_link_id + " my_name=" + go_request.my_name);
             return;
         }
         link.resetKeepAliveTimer();
 
         var json_str = JSON.stringify({
-                        command: req.headers.command,
-                        ajax_id: req.headers.ajax_id,
+                        command: go_request.command,
+                        ajax_id: go_request.ajax_id,
                     });
         res.send(json_str);
     };
 
-    this.getLinkData = function (req, res) {
-        this.debug(false, "getLinkData", "link_id=" + req.headers.link_id + " my_name=" + req.headers.my_name + " ajax_id=" + req.headers.ajax_id);
+    this.getLinkData = function (res, go_request) {
+        this.debug(false, "getLinkData", "link_id=" + go_request.link_id + " my_name=" + go_request.my_name + " ajax_id=" + go_request.ajax_id);
 
-        var link = this.getLink(req, res);
+        var link = this.getLink(res, go_request);
         if (!link) {
             return;
         }
@@ -246,22 +263,22 @@ function ExpressHttpObject(root_object_val) {
 
         var data = link.receiveQueue().deQueue();
         var json_str = JSON.stringify({
-                        command: req.headers.command,
-                        ajax_id: req.headers.ajax_id,
+                        command: go_request.command,
+                        ajax_id: go_request.ajax_id,
                         data: data,
                     });
 
         if (data) {
-            this.logit("getLinkData", "link_id=" + req.headers.link_id + " my_name="  + req.headers.my_name + " data={" + data + "}");
+            this.logit("getLinkData", "link_id=" + go_request.link_id + " my_name="  + go_request.my_name + " data={" + data + "}");
         }
         res.type('application/json');
         res.send(json_str);
     };
 
-    this.putLinkData = function (req, res) {
-        this.debug(true, "putLinkData", "link_id=" + req.headers.link_id + " my_name=" + req.headers.my_name + " data=" + req.headers.data);
+    this.putLinkData = function (res, go_request) {
+        this.debug(true, "putLinkData", "link_id=" + go_request.link_id + " my_name=" + go_request.my_name + " data=" + go_request.data);
 
-        var my_link = this.getLink(req, res);
+        var my_link = this.getLink(res, go_request);
         if (!my_link) {
             return;
         }
@@ -270,9 +287,9 @@ function ExpressHttpObject(root_object_val) {
         if (data.order === "setup_session_reply") {
             var data_str = this.sessionMgrObject().preSessionQueue().unQueue(function(data_val, param_val1) {
                 return (data_val === param_val1);
-            }, req.headers.data);
+            }, go_request.data);
             if (data_str) {
-                var data = JSON.parse(req.headers.data);
+                var data = JSON.parse(go_request.data);
             }
 
         }
@@ -281,8 +298,8 @@ function ExpressHttpObject(root_object_val) {
         res.send(json_str);
     };
 
-    this.getNameList = function (req, res) {
-        var link = this.getLink(req, res);
+    this.getNameList = function (res, go_request) {
+        var link = this.getLink(res, go_request);
         if (!link) {
             return;
         }
@@ -291,141 +308,141 @@ function ExpressHttpObject(root_object_val) {
         var name_array = this.linkMgrObject().getNameList();
         var name_array_str = JSON.stringify(name_array);
         var json_str = JSON.stringify({
-                        command: req.headers.command,
-                        ajax_id: req.headers.ajax_id,
+                        command: go_request.command,
+                        ajax_id: go_request.ajax_id,
                         data: name_array_str,
                     });
         res.send(json_str);
-        this.debug(true, "getNameList", "(" + link.linkId() + ",0) " + req.headers.my_name + "=>server " + name_array_str);
+        this.debug(true, "getNameList", "(" + link.linkId() + ",0) " + go_request.my_name + "=>server " + name_array_str);
     };
 
-    this.setupSession = function (req, res) {
-        var session = this.sessionMgrObject().searchIt(req.headers.my_name, req.headers.his_name, Number(req.headers.link_id));
+    this.setupSession = function (res, go_request) {
+        var session = this.sessionMgrObject().searchIt(go_request.my_name, go_request.his_name, Number(go_request.link_id));
         if (!session){
-            session = this.sessionMgrObject().searchAndCreate(req.headers.my_name, req.headers.his_name, 0);
+            session = this.sessionMgrObject().searchAndCreate(go_request.my_name, go_request.his_name, 0);
             if (!session) {
-                res.send(this.jsonStingifyData(req.headers.command, req.headers.ajax_id, null));
+                res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
                 this.abend("setupSession", "null session");
                 return;
             }
         }
 
-        var his_link = this.linkMgrObject().searchLink(req.headers.his_name, 0);
+        var his_link = this.linkMgrObject().searchLink(go_request.his_name, 0);
         if (!his_link) {
-            res.send(this.jsonStingifyData(req.headers.command, req.headers.ajax_id, null));
+            res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
             return;
         }
 
-        this.debug(true, "setupSession", "(" + req.headers.link_id + "," + session.sessionId() + "," + session.hisSession().sessionId() + ") " + req.headers.my_name + "=>" + req.headers.his_name + " data=" + req.headers.data);
+        this.debug(true, "setupSession", "(" + go_request.link_id + "," + session.sessionId() + "," + session.hisSession().sessionId() + ") " + go_request.my_name + "=>" + go_request.his_name + " data=" + go_request.data);
 
-        if (req.headers.data !== null) {
-            session.clusterObject().processSetupLinkData(req.headers.data);
+        if (go_request.data !== null) {
+            session.clusterObject().processSetupLinkData(go_request.data);
         }
 
         var session_id_str = "" + session.hisSession().sessionId();
         var data = JSON.stringify({
                         order: "setup_session",
                         session_id: session_id_str,
-                        his_name: req.headers.my_name,
-                        my_name: req.headers.his_name,
-                        extra_data: req.headers.data,
+                        his_name: go_request.my_name,
+                        my_name: go_request.his_name,
+                        extra_data: go_request.data,
                     });
         his_link.receiveQueue().enQueue(data);
         this.sessionMgrObject().preSessionQueue().enQueue(data)
-        this.setupSessionReply(req, res, session);
+        this.setupSessionReply(res, session, go_request);
     }
 
-    this.setupSessionReply = function (req, res, session_val) {
+    this.setupSessionReply = function (res, session_val, go_request) {
         var session_id_str = "" + session_val.sessionId();
         var data = JSON.stringify({
                         session_id: session_id_str,
-                        extra_data: req.headers.data,
+                        extra_data: go_request.data,
                     });
         var json_str = JSON.stringify({
-                        command: req.headers.command,
-                        ajax_id: req.headers.ajax_id,
+                        command: go_request.command,
+                        ajax_id: go_request.ajax_id,
                         data: data,
                     });
         res.send(json_str);
-        this.logit("setupSessionReply", "(" + req.headers.link_id + "," + session_val.sessionId() + "," + session_val.hisSession().sessionId() + ") " + req.headers.my_name + "=>" + req.headers.his_name);
+        this.logit("setupSessionReply", "(" + go_request.link_id + "," + session_val.sessionId() + "," + session_val.hisSession().sessionId() + ") " + go_request.my_name + "=>" + go_request.his_name);
     };
 
-    this.getSessionData = function (req, res) {
-        this.debug(false, "getSessionData", "(" + req.headers.link_id + "," + req.headers.session_id + ") my_name=" + req.headers.my_name + "=>" + req.headers.his_name);
-        var link = this.getLink(req, res);
+    this.getSessionData = function (res, go_request) {
+        this.debug(false, "getSessionData", "(" + go_request.link_id + "," + go_request.session_id + ") my_name=" + go_request.my_name + "=>" + go_request.his_name);
+        var link = this.getLink(res, go_request);
         if (!link) {
             return;
         }
         link.resetKeepAliveTimer();
 
-        var session = this.sessionMgrObject().searchIt(req.headers.my_name, req.headers.his_name, Number(req.headers.session_id));
+        var session = this.sessionMgrObject().searchIt(go_request.my_name, go_request.his_name, Number(go_request.session_id));
         if (!session) {
-            res.send(this.jsonStingifyData(req.headers.command, req.headers.ajax_id, null));
-            this.abend("getSessionData", "null session" + " session_id=" + req.headers.session_id);
+            res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
+            this.abend("getSessionData", "null session" + " session_id=" + go_request.session_id);
             return;
         }
 
         var res_data = session.dequeueTransmitData();
         if (!res_data) {
             this.debug(false, "getSessionData", "no data");
-            res.send(this.jsonStingifyData(req.headers.command, req.headers.ajax_id, null));
+            res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
             return;
         }
         this.logit("getSessionData", "res_data=" + res_data);
 
         var json_str = JSON.stringify({
-                        command: req.headers.command,
-                        ajax_id: req.headers.ajax_id,
+                        command: go_request.command,
+                        ajax_id: go_request.ajax_id,
                         res_data: res_data,
                     });
 
-        this.debug(false, "getSessionData", "ajax_id=" + req.headers.ajax_id);
-        this.logit("getSessionData", "(" + req.headers.link_id + "," + req.headers.session_id + ") "  + req.headers.his_name + "=>" + req.headers.my_name + " {" + res_data + "}");
+        this.debug(false, "getSessionData", "ajax_id=" + go_request.ajax_id);
+        this.logit("getSessionData", "(" + go_request.link_id + "," + go_request.session_id + ") "  + go_request.his_name + "=>" + go_request.my_name + " {" + res_data + "}");
         this.logit("getSessionData", json_str);
         res.type('application/json');
         res.send(json_str);
     };
 
-    this.putSessionData = function (req, res) {
+    this.putSessionData = function (res, go_request) {
         //console.log(req.headers);
-        this.debug(true, "putSessionData ", "ajax_id=" + req.headers.ajax_id);
-        this.debug(true, "putSessionData ", "(" + req.headers.link_id + "," + req.headers.session_id + ") "  + req.headers.his_name + "=>" + req.headers.my_name + " {" + req.headers.data + "}");
+        this.debug(true, "putSessionData ", "ajax_id=" + go_request.ajax_id);
+        this.debug(true, "putSessionData ", "(" + go_request.link_id + "," + go_request.session_id + ") "  + go_request.his_name + "=>" + go_request.my_name + " {" + go_request.data + "}");
 
-        var session_id = Number(req.headers.session_id);
-        var xmt_seq = Number(req.headers.xmt_seq);
+        var session_id = Number(go_request.session_id);
+        var xmt_seq = Number(go_request.xmt_seq);
 
-        var link = this.getLink(req, res);
+        var link = this.getLink(res, go_request);
         if (!link) {
             return;
         }
         link.resetKeepAliveTimer();
 
-        var my_session = this.sessionMgrObject().searchIt(req.headers.my_name, req.headers.his_name, Number(req.headers.session_id));
+        var my_session = this.sessionMgrObject().searchIt(go_request.my_name, go_request.his_name, Number(go_request.session_id));
         if (!my_session) {
-            res.send(this.jsonStingifyData(req.headers.command, req.headers.ajax_id, null));
-            this.abend("putSessionData", "null my_session" + " session_id=" + req.headers.session_id + " my_name=" + req.headers.my_name + " his_name=" + req.headers.his_name);
+            res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
+            this.abend("putSessionData", "null my_session" + " session_id=" + go_request.session_id + " my_name=" + go_request.my_name + " his_name=" + go_request.his_name);
             return;
         }
 
-        this.debug(true, "putSessionData", "(" + req.headers.link_id + "," + req.headers.session_id + ") "  + req.headers.my_name + "=>" + req.headers.his_name + " {" + req.headers.data + "} " + req.headers.xmt_seq + "=>" + my_session.up_seq);
+        this.debug(true, "putSessionData", "(" + go_request.link_id + "," + go_request.session_id + ") "  + go_request.my_name + "=>" + go_request.his_name + " {" + go_request.data + "} " + go_request.xmt_seq + "=>" + my_session.up_seq);
 
         if (xmt_seq === my_session.up_seq) {
-            my_session.clusterObject().enqueAndPocessReceiveData(req.headers.data);
+            my_session.clusterObject().enqueAndPocessReceiveData(go_request.data);
             my_session.up_seq += 1;
         } else if (xmt_seq < my_session.up_seq) {
             if (xmt_seq === 0) {
-                my_session.clusterObject().enqueAndPocessReceiveData(req.headers.data);
+                my_session.clusterObject().enqueAndPocessReceiveData(go_request.data);
                 my_session.up_seq = 1;
-                this.logit("putSessionData", req.headers.data + " post " + xmt_seq + " reset");
+                this.logit("putSessionData", go_request.data + " post " + xmt_seq + " reset");
             } else {
-                this.logit("putSessionData", "(" + link_id + "," + session_id + ") "  + req.headers.my_name + "=>" + req.headers.his_name + " {" + req.headers.data + "} " + xmt_seq + " dropped");
+                this.logit("putSessionData", "(" + link_id + "," + session_id + ") "  + go_request.my_name + "=>" + go_request.his_name + " {" + go_request.data + "} " + xmt_seq + " dropped");
             }
         } else {
-            this.logit("***abend: putSessionData", req.headers.data + " post seq=" + xmt_seq + " dropped");
+            this.logit("***abend: putSessionData", go_request.data + " post seq=" + xmt_seq + " dropped");
         }
 
         this.debug(true, "putSessionData", "queue_size=" + my_session.receiveQueue().size());
-        res.send(this.jsonStingifyData(req.headers.command, req.headers.ajax_id, null));
+        res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
     };
 
     this.processNotFound = function (req, res) {

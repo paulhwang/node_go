@@ -123,13 +123,15 @@ function ExpressHttpObject(root_object_val) {
 
     this.processGet = function (req, res) {
         if (!req.headers.gorequest) {
-            this.abend(false, "processGet", "null gorequest");
+            this.abend("processGet", "null gorequest");
             return;
         }
 
+        this.debug(false, "processGet", "req.headers.gorequest=" + req.headers.gorequest);
+
         var go_request = JSON.parse(req.headers.gorequest);
         if (!go_request) {
-            this.abend(false, "processGet", "null go_request");
+            this.abend("processGet", "null go_request");
             return;
         }
 

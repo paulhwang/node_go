@@ -51,7 +51,7 @@ function DispatchObject(fibre_val) {
         }
 
         if (go_request.command === "keep_alive") {
-            this.abend("processGet", "keep_alive gorequest=" + go_request.gorequest);
+            this.abend("dispatchRequest", "keep_alive gorequest=");
             return this.keepAlive(go_request);
         }
 
@@ -60,7 +60,7 @@ function DispatchObject(fibre_val) {
         }
 
         if (go_request.command === "put_link_data") {
-            this.abend("processGet", "put_link_data gorequest=" + go_request.gorequest);
+            this.abend("dispatchRequest", "put_link_data");
             return this.putLinkData(go_request);
         }
 
@@ -79,6 +79,8 @@ function DispatchObject(fibre_val) {
         if (go_request.command === "put_session_data") {
             return this.putSessionData(go_request);
         }
+
+         this.abend("dispatchRequest", "command=" + go_request.command);
     }
 
     this.setupLink = function (go_request) {

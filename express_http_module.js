@@ -200,6 +200,15 @@ function ExpressHttpObject(root_object_val) {
         this.abend("processGet", "what?");
     };
 
+    this.sendResponse = function (go_request, data_val) {
+        var json_str = JSON.stringify({
+                        command: go_request.command,
+                        ajax_id: go_request.ajax_id,
+                        data: data_val,
+                    });
+        res.send(json_str);
+    }
+
     this.jsonStingifyData = function (command_val, ajax_id_val, data_val) {
         var json_str = JSON.stringify({
                         command: command_val,
@@ -233,6 +242,7 @@ function ExpressHttpObject(root_object_val) {
 
         res.send(json_str);
         this.logit("setupLink", "name=" + go_request.my_name + " link_id=" + link.linkId());
+        return link_id_str;
     };
 
     this.keepAlive = function (res, go_request) {

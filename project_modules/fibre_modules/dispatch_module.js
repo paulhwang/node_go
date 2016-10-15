@@ -91,7 +91,6 @@ function DispatchObject(fibre_val) {
 
         var link = this.linkMgrObject().searchAndCreate(go_request.my_name, 0);
         if (!link) {
-            res.send(this.jsonStingifyData(req.headers.command, go_request.ajax_id, null));
             this.abend("setupLink", "null link");
             return null;
         } else {
@@ -120,40 +119,16 @@ function DispatchObject(fibre_val) {
     };
 
     this.getLink = function (go_request) {
-        var link_id = Number(go_request.link_id);
-        var link = this.linkMgrObject().searchLink(go_request.my_name, link_id);
+        var link = this.linkMgrObject().searchLink(go_request.my_name, go_request.link_id);
         if (!link) {
-            //res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
-            this.abend("getLink", "null link" + "link_id=" + link_id + " my_name=" + go_request.my_name);
+            this.abend("getLink", "null link" + "link_id=" + go_request.link_id + " my_name=" + go_request.my_name);
             return null;
         }
         if (link.link_id === 0) {
-            //res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
             this.abend("getLink", "link_id = 0");
             return null;
         }
         return link;
-    };
-
-    this.putLinkData111111111 = function (res, go_request) {
-        this.debug(true, "putLinkData", "link_id=" + go_request.link_id + " my_name=" + go_request.my_name + " data=" + go_request.data);
-
-        var my_link = this.getLink(res, go_request);
-        if (!my_link) {
-            return null;
-        }
-        my_link.resetKeepAliveTimer();
-
-        if (data.order === "setup_session_reply") {
-            var data_str = this.sessionMgrObject().preSessionQueue().unQueue(function(data_val, param_val1) {
-                return (data_val === param_val1);
-            }, go_request.data);
-            if (data_str) {
-                var data = JSON.parse(go_request.data);
-            }
-
-        }
-        return data;
     };
 
     this.getNameList = function (go_request) {
@@ -170,7 +145,7 @@ function DispatchObject(fibre_val) {
     };
 
     this.setupSession = function (go_request) {
-        var session = this.sessionMgrObject().searchIt(go_request.my_name, go_request.his_name, Number(go_request.link_id));
+        var session = this.sessionMgrObject().searchIt(go_request.my_name, go_request.his_name, go_request.link_id);
         if (!session){
             session = this.sessionMgrObject().searchAndCreate(go_request.my_name, go_request.his_name, 0);
             if (!session) {
@@ -223,7 +198,7 @@ function DispatchObject(fibre_val) {
         }
         link.resetKeepAliveTimer();
 
-        var session = this.sessionMgrObject().searchIt(go_request.my_name, go_request.his_name, Number(go_request.session_id));
+        var session = this.sessionMgrObject().searchIt(go_request.my_name, go_request.his_name, go_request.session_id);
         if (!session) {
             //res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
             this.abend("getSessionData", "null session" + " session_id=" + go_request.session_id);
@@ -248,16 +223,13 @@ function DispatchObject(fibre_val) {
         this.debug(true, "putSessionData ", "ajax_id=" + go_request.ajax_id);
         this.debug(true, "putSessionData ", "(" + go_request.link_id + "," + go_request.session_id + ") "  + go_request.his_name + "=>" + go_request.my_name + " {" + go_request.data + "}");
 
-        var session_id = Number(go_request.session_id);
-        var xmt_seq = Number(go_request.xmt_seq);
-
         var link = this.getLink(go_request);
         if (!link) {
             return null;
         }
         link.resetKeepAliveTimer();
 
-        var my_session = this.sessionMgrObject().searchIt(go_request.my_name, go_request.his_name, Number(go_request.session_id));
+        var my_session = this.sessionMgrObject().searchIt(go_request.my_name, go_request.his_name, go_request.session_id);
         if (!my_session) {
             res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
             this.abend("putSessionData", "null my_session" + " session_id=" + go_request.session_id + " my_name=" + go_request.my_name + " his_name=" + go_request.his_name);
@@ -266,10 +238,10 @@ function DispatchObject(fibre_val) {
 
         this.debug(true, "putSessionData", "(" + go_request.link_id + "," + go_request.session_id + ") "  + go_request.my_name + "=>" + go_request.his_name + " {" + go_request.data + "} " + go_request.xmt_seq + "=>" + my_session.up_seq);
 
-        if (xmt_seq === my_session.up_seq) {
+        if (go_request.xmt_seq === my_session.up_seq) {
             my_session.clusterObject().enqueAndPocessReceiveData(go_request.data);
             my_session.up_seq += 1;
-        } else if (xmt_seq < my_session.up_seq) {
+        } else if (go_request.xmt_seq < my_session.up_seq) {
             if (xmt_seq === 0) {
                 my_session.clusterObject().enqueAndPocessReceiveData(go_request.data);
                 my_session.up_seq = 1;
@@ -286,7 +258,7 @@ function DispatchObject(fibre_val) {
     };
 
     this.keepAlive1111111111111111 = function (go_request) {
-        var my_link_id = Number(go_request.link_id);
+        var my_link_id = go_request.link_id;
         this.debug(false, "keepAlive", "link_id=" + my_link_id + " my_name=" + go_request.my_name);
         var link = this.linkMgrObject().searchLink(go_request.my_name, my_link_id);
         if (!link) {

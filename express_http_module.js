@@ -154,15 +154,6 @@ function ExpressHttpObject(root_object_val) {
         res.send(json_str);
     }
 
-    this.jsonStingifyData = function (command_val, ajax_id_val, data_val) {
-        var json_str = JSON.stringify({
-                        command: command_val,
-                        ajax_id: ajax_id_val,
-                        data: data_val,
-                    });
-        return json_str;
-    };
-
     this.processNotFound = function (res) {
         console.log(req.headers);
         this.logit("processNotFound", "*****");

@@ -18,10 +18,12 @@ function FibreObject(root_object_val) {
         var link_mgr_module = require("./link_mgr_module.js");
         var session_mgr_module = require("./session_mgr_module.js");
         var cluster_mgr_module = require("./cluster_mgr_module.js");
+        var dispatch_module = require("./dispatch_module.js");
 
         this.theLinkMgrObject = link_mgr_module.malloc(this);
         this.theSessionMgrObject = session_mgr_module.malloc(this);
         this.theClusterMgrObject = cluster_mgr_module.malloc(this);
+        this.theDispatchObject = dispatch_module.malloc(this);
     };
 
     this.objectName = function () {
@@ -42,6 +44,10 @@ function FibreObject(root_object_val) {
 
     this.clusterMgrObject = function () {
         return this.theClusterMgrObject;
+    };
+
+    this.dispatchObject = function () {
+        return this.theDispatchObject;
     };
 
     this.utilObject = function () {

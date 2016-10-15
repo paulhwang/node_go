@@ -17,9 +17,11 @@ function RootObject () {
     this.mallocModules = function () {
         var util_module = require("./util_modules/util_module.js");
         var fibre_module = require("./fibre_modules/fibre_module.js");
+        var port_module = require("./port_modules/port_module.js");
 
         this.theUtilObject = util_module.malloc(this);
         this.theFibreObject = fibre_module.malloc(this);
+        this.thePortObject = port_module.malloc(this);
     };
 
     this.objectName = function () {
@@ -36,6 +38,10 @@ function RootObject () {
 
     this.fibreObject = function () {
         return this.theFibreObject;
+    };
+
+    this.portObject = function () {
+        return this.thePortObject;
     };
 
     this.linkMgrObject = function () {

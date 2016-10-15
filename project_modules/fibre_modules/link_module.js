@@ -88,12 +88,12 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
         }
     };
 
-    this.abend = function (str1_val, str2_val) {
-        this.linkMgrObject().abend(this.objectName() + "." + str1_val, str2_val);
-    };
-
     this.logit = function (str1_val, str2_val) {
         this.linkMgrObject().logit(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.abend = function (str1_val, str2_val) {
+        this.linkMgrObject().abend(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.resetIt(my_name_val, link_id_val);

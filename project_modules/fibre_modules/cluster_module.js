@@ -63,20 +63,6 @@ function clusterObject (cluster_mgr_val) {
         return this.theTransmitQueue;
     };
 
-    this.debug = function (debug_val, str1_val, str2_val) {
-        if (debug_val) {
-            this.logit(str1_val, "==" + str2_val);
-        }
-    };
-
-    this.abend = function (str1_val, str2_val) {
-        this.clusterMgrObject().abend(this.objectName() + "." + str1_val, str2_val);
-    };
-
-    this.logit = function (str1_val, str2_val) {
-        this.clusterMgrObject().logit(this.objectName() + "." + str1_val, str2_val);
-    };
-
     this.addAdditionalSession = function (session_val) {
         this.theSessionArray[this.sessionArrayLength()] = session_val;
         this.incrementSessionArrayLength();
@@ -147,7 +133,19 @@ function clusterObject (cluster_mgr_val) {
         this.goContainerObject().portObject().receiveStringData(str_val);
     };
 
-    this.logit(this.objectName(), "aaa");
+    this.debug = function (debug_val, str1_val, str2_val) {
+        if (debug_val) {
+            this.logit(str1_val, "==" + str2_val);
+        }
+    };
+
+    this.logit = function (str1_val, str2_val) {
+        this.clusterMgrObject().logit(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.abend = function (str1_val, str2_val) {
+        this.clusterMgrObject().abend(this.objectName() + "." + str1_val, str2_val);
+    };
 
     this.theSessionArray = [2];
     this.theSessionArrayLength = 0;

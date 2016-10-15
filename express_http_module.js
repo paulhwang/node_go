@@ -233,13 +233,6 @@ function ExpressHttpObject(root_object_val) {
         }
 
         var link_id_str = "" + link.linkId();
-        var json_str = JSON.stringify({
-                        command: go_request.command,
-                        ajax_id: go_request.ajax_id,
-                        data: link_id_str,
-                    });
-
-        //res.send(json_str);
         this.logit("setupLink", "name=" + go_request.my_name + " link_id=" + link.linkId());
         return link_id_str;
     };
@@ -254,12 +247,6 @@ function ExpressHttpObject(root_object_val) {
             return null;
         }
         link.resetKeepAliveTimer();
-
-        var json_str = JSON.stringify({
-                        command: go_request.command,
-                        ajax_id: go_request.ajax_id,
-                    });
-        //res.send(json_str);
         return null;
     };
 
@@ -273,17 +260,9 @@ function ExpressHttpObject(root_object_val) {
         link.resetKeepAliveTimer();
 
         var data = link.receiveQueue().deQueue();
-        var json_str = JSON.stringify({
-                        command: go_request.command,
-                        ajax_id: go_request.ajax_id,
-                        data: data,
-                    });
-
         if (data) {
             this.logit("getLinkData", "link_id=" + go_request.link_id + " my_name="  + go_request.my_name + " data={" + data + "}");
         }
-        //res.type('application/json');
-        //res.send(json_str);
         return data;
     };
 
@@ -305,10 +284,7 @@ function ExpressHttpObject(root_object_val) {
             }
 
         }
-
-        //res.type('application/json');
         return data;
-        //res.send(json_str);
     };
 
     this.getNameList = function (go_request) {
@@ -320,12 +296,6 @@ function ExpressHttpObject(root_object_val) {
 
         var name_array = this.linkMgrObject().getNameList();
         var name_array_str = JSON.stringify(name_array);
-        var json_str = JSON.stringify({
-                        command: go_request.command,
-                        ajax_id: go_request.ajax_id,
-                        data: name_array_str,
-                    });
-        //res.send(json_str);
         this.debug(true, "getNameList", "(" + link.linkId() + ",0) " + go_request.my_name + "=>server " + name_array_str);
         return name_array_str;
     };
@@ -372,12 +342,6 @@ function ExpressHttpObject(root_object_val) {
                         session_id: session_id_str,
                         extra_data: go_request.data,
                     });
-        var json_str = JSON.stringify({
-                        command: go_request.command,
-                        ajax_id: go_request.ajax_id,
-                        data: data,
-                    });
-        //res.send(json_str);
         this.logit("setupSessionReply", "(" + go_request.link_id + "," + session_val.sessionId() + "," + session_val.hisSession().sessionId() + ") " + go_request.my_name + "=>" + go_request.his_name);
         return data;
     };
@@ -405,17 +369,8 @@ function ExpressHttpObject(root_object_val) {
         }
         this.logit("getSessionData", "res_data=" + res_data);
 
-        var json_str = JSON.stringify({
-                        command: go_request.command,
-                        ajax_id: go_request.ajax_id,
-                        res_data: res_data,
-                    });
-
         this.debug(false, "getSessionData", "ajax_id=" + go_request.ajax_id);
         this.logit("getSessionData", "(" + go_request.link_id + "," + go_request.session_id + ") "  + go_request.his_name + "=>" + go_request.my_name + " {" + res_data + "}");
-        this.logit("getSessionData", json_str);
-        //res.type('application/json');
-        //res.send(json_str);
         return res_data;
     };
 
@@ -458,7 +413,6 @@ function ExpressHttpObject(root_object_val) {
         }
 
         this.debug(true, "putSessionData", "queue_size=" + my_session.receiveQueue().size());
-        //res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
         return null;
     };
 

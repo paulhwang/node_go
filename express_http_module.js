@@ -155,54 +155,57 @@ function ExpressHttpObject(root_object_val) {
             this.debug(false, "processGet", "command=" + go_request.command);
         }
 
-        this.dispatchRequest(res, go_request);
-   };
+        var data = this.dispatchRequest(res, go_request);
+        if (data) {
+            this.sendResponse(res, go_request, data);
+        }
+    };
 
     this.dispatchRequest = function (res, go_request) {
        if (go_request.command === "setup_link") {
             this.setupLink(res, go_request);
-            return;
+            return null;
         }
 
         if (go_request.command === "keep_alive") {
             this.abend("processGet", "keep_alive gorequest=" + req.headers.gorequest);
             this.keepAlive(res, go_request);
-            return;
+            return null;
         }
 
         if (go_request.command === "get_link_data") {
             this.getLinkData(res, go_request);
-            return;
+            return null;
         }
 
         if (go_request.command === "put_link_data") {
             this.abend("processGet", "put_link_data gorequest=" + req.headers.gorequest);
             this.putLinkData(res, go_request);
-            return;
+            return null;
         }
 
         if (go_request.command === "get_name_list") {
             this.getNameList(res, go_request);
-            return;
+            return null;
         }
 
         if (go_request.command === "setup_session") {
             this.setupSession(res, go_request);
-            return;
+            return null;
         }
 
         if (go_request.command === "get_session_data") {
             this.getSessionData(res, go_request);
-            return;
+            return null;
         }
 
         if (go_request.command === "put_session_data") {
             this.putSessionData(res, go_request);
-            return;
+            return null;
         }
     }
 
-    this.sendResponse = function (go_request, data_val) {
+    this.sendResponse = function (res, go_request, data_val) {
         var json_str = JSON.stringify({
                         command: go_request.command,
                         ajax_id: go_request.ajax_id,

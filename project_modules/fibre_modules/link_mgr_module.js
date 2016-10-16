@@ -48,7 +48,7 @@ function LinkMgrObject(fibre_val) {
     };
 
     this.incrementGlobalLinkId = function () {
-        return this.theGlobalLinkId += 1;
+        this.theGlobalLinkId += 1;
     };
 
     this.searchLink = function (my_name_val, link_id_val) {

@@ -46,6 +46,14 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
         this.theMyName = val;
     };
 
+    this.keepAliveTimer = function () {
+        return this.theKeepAliveTimer;
+    };
+
+    this.setKeepAliveTimer = function (val) {
+        this.theKeepAliveTimer = val;
+    };
+
     this.receiveQueue = function () {
         return this.theReceiveQueue;
     };
@@ -61,22 +69,22 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
         this.down_seq = 0;
         this.theReceiveQueue = this.utilObject().mallocQueue();
         this.theReceiveRing = this.utilObject().mallocRing();
-        this.keep_alive_timer = this.resetTimeout();
-};
+        this.theKeepAliveTimer = this.resetTimeout();
+    };
 
     this.resetKeepAliveTimer = function () {
         this.debug(false, "keepAlive", "my_name=" + this.my_name + " link_id=" + this.link_id);
-        this.keep_alive_timer = this.resetTimeout();
+        this.setKeepAliveTimer(this.resetTimeout());
     };
 
     this.resetTimeout = function () {
-        if (this.keep_alive_timer) {
-            clearInterval(this.keep_alive_timer);
+        if (this.keepAliveTimer()) {
+            clearInterval(this.keepAliveTimer());
         }
         this.debug(false, "resetTimeout", "my_name=" + this.my_name + " link_id=" + this.link_id);
         var time_out = setInterval(function (link_val) {
             console.log("resetTimeout(***timeout occurs)", "my_name=" + link_val.myName() + " link_id=" + link_val.linkId());
-            clearInterval(link_val.keep_alive_timer);
+            clearInterval(link_val.keepAliveTimer());
             link_val.linkMgrObject().freeLink(link_val);
         }, 20000, this);
         return time_out;

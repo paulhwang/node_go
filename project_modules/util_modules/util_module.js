@@ -44,20 +44,20 @@ function UtilObject(root_val) {
         return this.theRootObject;
     };
 
-    this.queueModule = function () {
+    this.queueModule1 = function () {
         return this.theQueueModule;
     };
 
-    this.ringModule = function () {
+    this.ringModule1 = function () {
         return this.theRingModule;
     };
 
     this.mallocQueue = function () {
-        return this.queueModule().malloc(this);
+        return this.queueModule1().malloc(this);
     };
 
     this.mallocRing = function () {
-        return this.ringModule().malloc(this);
+        return this.ringModule1().malloc(this);
     };
 
     this.userIndex = function () {

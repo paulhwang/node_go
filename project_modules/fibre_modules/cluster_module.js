@@ -150,7 +150,7 @@ function clusterObject (cluster_mgr_val) {
     this.theSessionArray = [2];
     this.theSessionArrayLength = 0;
     this.theGoContainerObject = this.goObjectMalloc();
-    this.theReceiveQueue = this.utilObject().queueModule().malloc();
-    this.theTransmitQueue = this.utilObject().queueModule().malloc();
+    this.theReceiveQueue = this.utilObject().mallocQueue();
+    this.theTransmitQueue = this.utilObject().mallocQueue();
     this.theNext = null;
 }

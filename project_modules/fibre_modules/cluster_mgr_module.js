@@ -81,6 +81,6 @@ function clusterMgrObject(fibre_val) {
     };
  
     this.theGlobalClusterId = 100;
-    this.theClusterQueue = this.utilObject().queueModule().malloc();
-    this.thePoolQueue = this.utilObject().queueModule().malloc();
+    this.theClusterQueue = this.utilObject().mallocQueue();
+    this.thePoolQueue = this.utilObject().mallocQueue();
 }

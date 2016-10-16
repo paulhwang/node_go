@@ -133,9 +133,9 @@ function ExpressHttpObject(root_object_val) {
         this.ajaxObject().processGet(req, res);
     };
 
-    this.processNotFound = function (res) {
+    this.processNotFound = function (req, res) {
         console.log(req.headers);
-        this.logit("processNotFound", "*****");
+        this.debug(true, "processNotFound", "*****");
         res.type('text/plain');
         res.status(404);
         res.send('Not Found');

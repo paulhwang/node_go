@@ -94,9 +94,9 @@ function SessionObject(session_mgr_val, my_name_val, his_name_val, session_id_va
         this.theHisSession = null;
         this.up_seq = 0;
         this.down_seq = 0;
-        this.theReceiveQueue = this.utilObject().queueModule().malloc();
-        this.theTransmitQueue = this.utilObject().queueModule().malloc();
-        this.theReceiveRing = this.utilObject().ringModule().malloc();
+        this.theReceiveQueue = this.utilObject().mallocQueue();
+        this.theTransmitQueue = this.utilObject().mallocQueue();
+        this.theReceiveRing = this.utilObject().mallocRing();
         this.theClusterObject = cluster_val;
         this.clusterObject().addAdditionalSession(this);
     };

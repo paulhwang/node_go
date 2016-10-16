@@ -59,8 +59,8 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
         this.theMyName = my_name_val;
         this.up_seq = 0;
         this.down_seq = 0;
-        this.theReceiveQueue = this.utilObject().queueModule().malloc();
-        this.theReceiveRing = this.utilObject().ringModule().malloc();
+        this.theReceiveQueue = this.utilObject().mallocQueue();
+        this.theReceiveRing = this.utilObject().mallocRing();
         this.keep_alive_timer = this.resetTimeout();
 };
 

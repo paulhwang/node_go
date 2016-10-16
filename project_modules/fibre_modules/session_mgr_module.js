@@ -120,8 +120,8 @@ function SessionMgrObject(fibre_val) {
         this.utilObject().utilAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.theSessionQueue = this.utilObject().queueModule().malloc();
-    this.thePreSessionQueue = this.utilObject().queueModule().malloc();
-    this.thePoolQueue = this.utilObject().queueModule().malloc();
+    this.theSessionQueue = this.utilObject().mallocQueue();
+    this.thePreSessionQueue = this.utilObject().mallocQueue();
+    this.thePoolQueue = this.utilObject().mallocQueue();
     this.theGlobalSessionId = 1000;
 }

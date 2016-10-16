@@ -93,9 +93,8 @@ function DispatchObject(fibre_val) {
         if (!link) {
             this.abend("setupLink", "null link");
             return null;
-        } else {
-            link.resetKeepAliveTimer();
         }
+        link.resetKeepAliveTimer();
 
         var link_id_str = "" + link.linkId();
         this.logit("setupLink", "name=" + go_request.my_name + " link_id=" + link.linkId());

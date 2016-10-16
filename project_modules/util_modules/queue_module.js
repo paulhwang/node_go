@@ -5,8 +5,8 @@
  */
 
 module.exports = {
-    malloc: function () {
-        return new QueueObject();
+    malloc: function (util_val) {
+        return new QueueObject(util_val);
     },
 
     remove: function (queue_val, func_val, input_val1, input_val2, input_val3) {
@@ -18,10 +18,11 @@ module.exports = {
     },
 };
 
-function QueueObject () {
+function QueueObject (util_val) {
     "use strict";
     this.theUtilModule = require("./util_module.js");
     this.theHolderPoolModule = require("./holder_pool_module.js");
+    this.theUtilObject = util_val;
     this.theHead = null;
     this.theTail = null;
     this.theSize = 0;
@@ -36,6 +37,10 @@ function QueueObject () {
 
     this.holderPoolModule = function () {
         return this.theHolderPoolModule;
+    };
+
+    this.utilObject = function () {
+        return this.theUtilObject;
     };
 
     this.head = function () {

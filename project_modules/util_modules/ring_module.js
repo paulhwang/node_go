@@ -5,15 +5,16 @@
  */
 
 module.exports = {
-    malloc: function () {
-        return new RingObject();
+    malloc: function (util_val) {
+        return new RingObject(util_val);
     },
 };
 
-function RingObject () {
+function RingObject (util_val) {
     "use strict";
     this.theUtilModule = require("./util_module.js");
     this.theHolderPoolModule = require("./holder_pool_module.js");
+    this.theUtilObject = util_val;
 
     this.objectName = function () {
         return "RingObject";
@@ -25,6 +26,10 @@ function RingObject () {
 
     this.holderPoolModule = function () {
         return this.theHolderPoolModule;
+    };
+
+    this.utilObject = function () {
+        return this.theUtilObject;
     };
 
     this.input = function () {

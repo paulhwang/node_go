@@ -52,6 +52,14 @@ function UtilObject(root_val) {
         return this.theRingModule;
     };
 
+    this.mallocQueue = function () {
+        return this.queueModule().malloc(this);
+    };
+
+    this.mallocRing = function () {
+        return this.ringModule().malloc(this);
+    };
+
     this.userIndex = function () {
         return this.theUserIndex;
     };

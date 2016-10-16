@@ -13,6 +13,7 @@ module.exports = {
 function LinkObject(link_mgr_val, my_name_val, link_id_val) {
     "use strict";
     this.theLinkMgrObject  = link_mgr_val;
+    this.theKeepAliveTimer = null;
 
     this.objectName = function () {
         return "LinkObject";

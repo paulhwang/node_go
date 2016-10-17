@@ -230,7 +230,7 @@ function DispatchObject(fibre_val) {
 
         var my_session = this.sessionMgrObject().searchSession(go_request.my_name, go_request.his_name, go_request.session_id);
         if (!my_session) {
-            res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
+            //res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
             this.abend("putSessionData", "null my_session" + " session_id=" + go_request.session_id + " my_name=" + go_request.my_name + " his_name=" + go_request.his_name);
             return null;
         }

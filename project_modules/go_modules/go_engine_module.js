@@ -250,6 +250,7 @@ function GoEngineObject(container_object_val) {
             g_list = this.whiteGroupList();
         } else {
             this.goAbend("insertStoneToGroupList", "color=" + move_val.myColor());
+            return;
         }
 
         var group = g_list.findCandidateGroup(move_val.xX(), move_val.yY());

@@ -163,7 +163,7 @@ function DispatchObject(fibre_val) {
         this.debug(true, "setupSession", "(" + go_request.link_id + "," + session.sessionId() + "," + session.hisSession().sessionId() + ") " + go_request.my_name + "=>" + go_request.his_name + " data=" + go_request.data);
 
         if (go_request.data !== null) {
-            session.clusterObject().processSetupLinkData(go_request.data);
+            session.clusterObject().processSetupTopicData(go_request.data);
         }
 
         var session_id_str = "" + session.hisSession().sessionId();

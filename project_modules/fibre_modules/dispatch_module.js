@@ -144,7 +144,7 @@ function DispatchObject(fibre_val) {
     };
 
     this.setupSession = function (go_request) {
-        var session = this.sessionMgrObject().searchIt(go_request.my_name, go_request.his_name, go_request.link_id);
+        var session = this.sessionMgrObject().searchSession(go_request.my_name, go_request.his_name, go_request.link_id);
         if (!session){
             session = this.sessionMgrObject().searchAndCreate(go_request.my_name, go_request.his_name, 0);
             if (!session) {
@@ -197,7 +197,7 @@ function DispatchObject(fibre_val) {
         }
         link.resetKeepAliveTimer();
 
-        var session = this.sessionMgrObject().searchIt(go_request.my_name, go_request.his_name, go_request.session_id);
+        var session = this.sessionMgrObject().searchSession(go_request.my_name, go_request.his_name, go_request.session_id);
         if (!session) {
             //res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
             this.abend("getSessionData", "null session" + " session_id=" + go_request.session_id);
@@ -228,7 +228,7 @@ function DispatchObject(fibre_val) {
         }
         link.resetKeepAliveTimer();
 
-        var my_session = this.sessionMgrObject().searchIt(go_request.my_name, go_request.his_name, go_request.session_id);
+        var my_session = this.sessionMgrObject().searchSession(go_request.my_name, go_request.his_name, go_request.session_id);
         if (!my_session) {
             res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
             this.abend("putSessionData", "null my_session" + " session_id=" + go_request.session_id + " my_name=" + go_request.my_name + " his_name=" + go_request.his_name);

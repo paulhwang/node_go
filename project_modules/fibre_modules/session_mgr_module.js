@@ -63,7 +63,7 @@ function SessionMgrObject(fibre_val) {
         return this.theGlobalSessionId += 1;
     };
 
-    this.searchIt = function (my_name_val, his_name_val, session_id_val) {
+    this.searchSession = function (my_name_val, his_name_val, session_id_val) {
         return this.sessionQueue().searchIt(function (session_val, my_name_val, his_name_val, session_id_val) {
             return ((my_name_val === session_val.myName()) &&
                     (his_name_val === session_val.hisName()) &&
@@ -72,7 +72,7 @@ function SessionMgrObject(fibre_val) {
     };
 
     this.searchAndCreate = function (my_name_val, his_name_val, session_id_val) {
-        var session = this.searchIt(my_name_val, his_name_val, session_id_val);
+        var session = this.searchSession(my_name_val, his_name_val, session_id_val);
         if (!session) {
             var cluster = this.clusterModuleMalloc();
             session = this.mallocSession(my_name_val, his_name_val, cluster);

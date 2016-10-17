@@ -66,11 +66,13 @@ function GoConfigObject(container_val) {
     this.setMyColor = function (val) {
         if (val === "black") {
             this.theMyColor = GO.BLACK_STONE();
-        } else if (val === "white") {
-            this.theMyColor = GO.WHITE_STONE();
-        } else {
-            this.abend("setMyColor", val);
+            return;
         }
+        if (val === "white") {
+            this.theMyColor = GO.WHITE_STONE();
+            return;
+        }
+        this.abend("setMyColor", val);
     };
 
     this.setMyColor_ = function (val) {

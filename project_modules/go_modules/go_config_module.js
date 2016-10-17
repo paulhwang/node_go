@@ -119,11 +119,11 @@ function GoConfigObject(container_val) {
 
     this.createConfig = function (json_data_val) {
         this.debug(true, "creataConfig", "data=" + json_data_val);
-        var json = JSON.parse(json_data_val);
-        this.setBoardSize(json.board_size);
-        this.setMyColor_(json.color);
-        this.setKomiPoint(json.komi);
-        this.setHandicapPoint(json.handicap);
+        var config_data = JSON.parse(json_data_val);
+        this.setBoardSize(config_data.board_size);
+        this.setMyColor_(config_data.color);
+        this.setKomiPoint(config_data.komi);
+        this.setHandicapPoint(config_data.handicap);
     };
 
     this.createTwoBoardOpponentConfig = function () {

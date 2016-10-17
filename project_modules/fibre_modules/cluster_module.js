@@ -107,9 +107,9 @@ function clusterObject (cluster_mgr_val) {
 
     this.processSetupTopicData = function (json_data_val) {
         this.debug(true, "processSetupTopicData", "data=" + json_data_val);
-        var json = JSON.parse(json_data_val);
-        if (json.command === "config") {
-            this.goContainerObject().configObject().createConfig(json.data);
+        var topic_data = JSON.parse(json_data_val);
+        if (topic_data.command === "config") {
+            this.goContainerObject().configObject().createConfig(topic_data.data);
         }
     };
 

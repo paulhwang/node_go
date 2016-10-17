@@ -60,7 +60,7 @@ function SessionMgrObject(fibre_val) {
     };
 
     this.incrementGlobalSessionId = function () {
-        return this.theGlobalSessionId += 1;
+        this.theGlobalSessionId += 1;
     };
 
     this.searchSession = function (my_name_val, his_name_val, session_id_val) {

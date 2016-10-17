@@ -123,7 +123,7 @@ function DispatchObject(fibre_val) {
             this.abend("getLink", "null link" + "link_id=" + go_request.link_id + " my_name=" + go_request.my_name);
             return null;
         }
-        if (link.link_id === 0) {
+        if (link.linkId() === 0) {
             this.abend("getLink", "link_id = 0");
             return null;
         }
@@ -241,12 +241,12 @@ function DispatchObject(fibre_val) {
             my_session.clusterObject().enqueAndPocessReceiveData(go_request.data);
             my_session.up_seq += 1;
         } else if (go_request.xmt_seq < my_session.up_seq) {
-            if (xmt_seq === 0) {
+            if (go_request.xmt_seq === 0) {
                 my_session.clusterObject().enqueAndPocessReceiveData(go_request.data);
                 my_session.up_seq = 1;
-                this.logit("putSessionData", go_request.data + " post " + xmt_seq + " reset");
+                this.logit("putSessionData", go_request.data + " post " + go_request.xmt_seq + " reset");
             } else {
-                this.logit("putSessionData", "(" + link_id + "," + session_id + ") "  + go_request.my_name + "=>" + go_request.his_name + " {" + go_request.data + "} " + xmt_seq + " dropped");
+                this.logit("putSessionData", "(" + link_id + "," + session_id + ") "  + go_request.my_name + "=>" + go_request.his_name + " {" + go_request.data + "} " + go_request.xmt_seq + " dropped");
             }
         } else {
             this.logit("***abend: putSessionData", go_request.data + " post seq=" + xmt_seq + " dropped");

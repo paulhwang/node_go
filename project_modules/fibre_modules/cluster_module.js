@@ -14,9 +14,9 @@ function clusterObject (cluster_mgr_val) {
     "use strict";
     this.theClusterMgrObject = cluster_mgr_val;
 
-    this.goObjectMalloc = function (cluster_val) {
+    this.goObjectMalloc = function () {
         var go_module = require("./../go_modules/go_module.js")
-        return go_module.malloc(cluster_val);
+        return go_module.malloc(this);
     },
 
     this.objectName = function () {
@@ -149,7 +149,7 @@ function clusterObject (cluster_mgr_val) {
 
     this.theSessionArray = [2];
     this.theSessionArrayLength = 0;
-    this.theGoObject = this.goObjectMalloc(this);
+    this.theGoObject = this.goObjectMalloc();
     this.theReceiveQueue = this.utilObject().mallocQueue();
     this.theTransmitQueue = this.utilObject().mallocQueue();
     this.theNext = null;

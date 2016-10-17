@@ -47,7 +47,7 @@ function GoConfigObject(container_val) {
     };
 
     this.setBoardSize = function (val) {
-        this.theBoardSize = Number(val);
+        this.theBoardSize = val;
     };
 
     this.myColor = function () {
@@ -76,7 +76,7 @@ function GoConfigObject(container_val) {
     };
 
     this.setMyColor_ = function (val) {
-        this.theMyColor = Number(val);
+        this.theMyColor = val;
     };
 
     this.handicapPoint = function () {
@@ -84,7 +84,7 @@ function GoConfigObject(container_val) {
     };
 
     this.setHandicapPoint = function (val) {
-        this.theHandicapPoint = Number(val);
+        this.theHandicapPoint = val;
     };
 
     this.komiPoint = function () {
@@ -92,7 +92,7 @@ function GoConfigObject(container_val) {
     };
 
     this.setKomiPoint = function (val) {
-        this.theKomiPoint = Number(val);
+        this.theKomiPoint = val;
     };
 
     this.realKomiPoint = function () {

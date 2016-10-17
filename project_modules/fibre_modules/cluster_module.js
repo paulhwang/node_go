@@ -27,8 +27,8 @@ function clusterObject (cluster_mgr_val) {
         return this.sessionArray(0);
     };
 
-    this.goContainerObject = function () {
-        return this.theGoContainerObject;
+    this.goObject = function () {
+        return this.theGoObject;
     };
 
     this.clusterMgrObject = function () {
@@ -109,7 +109,7 @@ function clusterObject (cluster_mgr_val) {
         this.debug(true, "processSetupTopicData", "data=" + json_data_val);
         var topic_data = JSON.parse(json_data_val);
         if (topic_data.command === "config") {
-            this.goContainerObject().configObject().createConfig(topic_data.data);
+            this.goObject().configObject().createConfig(topic_data.data);
         }
     };
 
@@ -130,7 +130,7 @@ function clusterObject (cluster_mgr_val) {
     };
 
     this.receiveStringData = function (str_val) {
-        this.goContainerObject().portObject().receiveStringData(str_val);
+        this.goObject().portObject().receiveStringData(str_val);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
@@ -149,7 +149,7 @@ function clusterObject (cluster_mgr_val) {
 
     this.theSessionArray = [2];
     this.theSessionArrayLength = 0;
-    this.theGoContainerObject = this.goObjectMalloc();
+    this.theGoObject = this.goObjectMalloc();
     this.theReceiveQueue = this.utilObject().mallocQueue();
     this.theTransmitQueue = this.utilObject().mallocQueue();
     this.theNext = null;

@@ -22,16 +22,12 @@ function SessionObject(session_mgr_val, my_name_val, his_name_val, session_id_va
         return this.theClusterModule;
     };
 
-    this.SessionMgrObject = function () {
+    this.sessionMgrObject = function () {
         return this.theSessionMgrObject;
     };
 
-    this.FibreObject = function () {
-        return this.SessionMgrObject().FibreObject();
-    };
-
     this.utilObject = function () {
-        return this.SessionMgrObject().utilObject();
+        return this.sessionMgrObject().utilObject();
     };
 
     this.sessionId = function () {
@@ -137,11 +133,11 @@ function SessionObject(session_mgr_val, my_name_val, his_name_val, session_id_va
     };
 
     this.logit = function (str1_val, str2_val) {
-        this.SessionMgrObject().logit(this.sessionId() + " " + this.objectName() + "." + str1_val, str2_val);
+        this.sessionMgrObject().logit(this.sessionId() + " " + this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        this.SessionMgrObject().abend(this.sessionId() + " " + this.objectName() + "." + str1_val, str2_val);
+        this.sessionMgrObject().abend(this.sessionId() + " " + this.objectName() + "." + str1_val, str2_val);
     };
 
     this.resetIt(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val);

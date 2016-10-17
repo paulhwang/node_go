@@ -26,6 +26,10 @@ function SessionObject(session_mgr_val, my_name_val, his_name_val, session_id_va
         return this.theSessionMgrObject;
     };
 
+    this.clusterObject = function () {
+        return this.theClusterObject;
+    };
+
     this.utilObject = function () {
         return this.sessionMgrObject().utilObject();
     };
@@ -72,14 +76,6 @@ function SessionObject(session_mgr_val, my_name_val, his_name_val, session_id_va
 
     this.receiveRing = function () {
         return this.theReceiveRing;
-    };
-
-    this.clusterObject = function () {
-        return this.theClusterObject;
-    };
-
-    this.sessionMgrObject = function () {
-        return this.theSessionMgrObject;
     };
 
     this.resetIt = function (session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val) {

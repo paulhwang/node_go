@@ -16,11 +16,11 @@ function RootObject () {
 
     this.mallocModules = function () {
         var util_module = require("./util_modules/util_module.js");
-        var fibre_module = require("./fibre_modules/fibre_module.js");
+        var farbric_module = require("./farbric_modules/farbric_module.js");
         var port_module = require("./port_modules/port_module.js");
 
         this.theUtilObject = util_module.malloc(this);
-        this.theFibreObject = fibre_module.malloc(this);
+        this.theFarbricObject = farbric_module.malloc(this);
         this.thePortObject = port_module.malloc(this);
     };
 
@@ -36,8 +36,8 @@ function RootObject () {
         return this.theQueueModule;
     };
 
-    this.fibreObject = function () {
-        return this.theFibreObject;
+    this.farbricObject = function () {
+        return this.theFarbricObject;
     };
 
     this.portObject = function () {
@@ -45,15 +45,15 @@ function RootObject () {
     };
 
     this.linkMgrObject = function () {
-        return this.fibreObject().linkMgrObject();
+        return this.farbricObject().linkMgrObject();
     };
 
     this.sessionMgrObject = function () {
-        return this.fibreObject().sessionMgrObject();
+        return this.farbricObject().sessionMgrObject();
     };
 
     this.clusterMgrObject = function () {
-        return this.fibreObject().clusterMgrObject();
+        return this.farbricObject().clusterMgrObject();
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

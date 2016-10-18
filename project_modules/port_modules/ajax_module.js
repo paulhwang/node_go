@@ -30,8 +30,8 @@ function AjaxObject(port_object_val) {
         return this.rootObject().farbricObject();
     };
 
-    this.dispatchObject = function () {
-        return this.farbricObject().dispatchObject();
+    this.switchObject = function () {
+        return this.farbricObject().switchObject();
     };
 
     this.utilObject = function () {
@@ -58,7 +58,7 @@ function AjaxObject(port_object_val) {
             this.debug(false, "processGet", "command=" + go_request.command);
         }
 
-        var data = this.dispatchObject().dispatchRequest(go_request);
+        var data = this.switchObject().dispatchRequest(go_request);
         var json_str = JSON.stringify({
                         command: go_request.command,
                         ajax_id: go_request.ajax_id,

@@ -86,7 +86,7 @@ function DispatchObject(fibre_val) {
         return this.fibreObject().sessionMgrObject();
     };
 
-    this.dispatchRequest = function (go_request) {
+    this.switchRequest = function (go_request) {
         this.debug(false, "dispatchRequest", "command=" + go_request.command);
 
         var func = switch_table[go_request.command];

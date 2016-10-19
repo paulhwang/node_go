@@ -58,7 +58,7 @@ function AjaxObject(port_object_val) {
             this.debug(false, "processGet", "command=" + go_request.command);
         }
 
-        var data = this.switchObject().dispatchRequest(go_request);
+        var data = this.switchObject().switchRequest(go_request);
         var json_str = JSON.stringify({
                         command: go_request.command,
                         ajax_id: go_request.ajax_id,

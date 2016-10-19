@@ -193,47 +193,83 @@ function GoGameObject(container_val, str_val) {
         this.setMaxMove(this.totalMoves());
     };
 
+    this.FORWARD_MOVE = function () {
+        return "FORWARD";
+    };
+
+    this.BACKWARD_MOVE = function () {
+        return "BACKWARD";
+    };
+
+    this.DOUBLE_FORWARD_MOVE = function () {
+        return "DOUBLE_FORWARD";
+    };
+
+    this.DOUBLE_BACKWARD_MOVE = function () {
+        return "DOUBLE_BACKWARD";
+    };
+
+    this.PASS_MOVE = function () {
+        return "PASS";
+    };
+
+    this.RESIGN_MOVE = function () {
+        return "RESIGN";
+    };
+
+    this.BACK_TO_PLAY_MOVE = function () {
+        return "BACK_TO_PLAY";
+    };
+
+    this.CONFIRM_MOVE = function () {
+        return "CONFIRM";
+    };
+
+    this.PLAY_ANOTHER_GAME_MOVE = function () {
+        return "PLAY_ANOTHER_GAME";
+    };
+
     this.receiveSpecialMoveFromOpponent = function (data_val) {
         this.goLog("receiveSpecialMoveFromOpponent", data_val);
-        if (data_val === this.GO().FORWARD_MOVE()) {
+        if (data_val === this.FORWARD_MOVE()) {
             this.processForwardMove();
             this.portObject().thansmitBoardData();
             return;
         }
-        if (data_val === this.GO().DOUBLE_FORWARD_MOVE()) {
+        if (data_val === this.DOUBLE_FORWARD_MOVE()) {
             this.processDoubleForwardMove();
             this.portObject().thansmitBoardData();
             return;
         }
-        if (data_val === this.GO().BACKWARD_MOVE()) {
+        if (data_val === this.BACKWARD_MOVE()) {
             this.processBackwardMove();
             this.portObject().thansmitBoardData();
             return;
         }
-        if (data_val === this.GO().DOUBLE_BACKWARD_MOVE()) {
+        if (data_val === this.DOUBLE_BACKWARD_MOVE()) {
             this.processDoubleBackwardMove();
             this.portObject().thansmitBoardData();
             return;
         }
-        if (data_val === this.GO().PASS_MOVE()) {
+        if (data_val === this.PASS_MOVE()) {
             this.processPassMove();
             this.portObject().thansmitBoardData();
             return;
         }
-        if (data_val === this.GO().RESIGN_MOVE()) {
+        if (data_val === this.RESIGN_MOVE()) {
             this.processResignMove();
             return;
         }
-        if (data_val === this.GO().BACK_TO_PLAY_MOVE()) {
+        if (data_val === this.BACK_TO_PLAY_MOVE()) {
             this.processBackToPlayMove();
             return;
         }
-        if (data_val === this.GO().CONFIRM_MOVE()) {
+        if (data_val === this.CONFIRM_MOVE()) {
             this.processConfirmMove();
             this.portObject().thansmitBoardData();
             return;
         }
-        if (data_val === this.GO().PLAY_ANOTHER_GAME_MOVE()) {
+        if (data_val === this.PLAY_ANOTHER_GAME_MOVE()) {
             this.processPlayAnotherGameMove();
             return;
         }

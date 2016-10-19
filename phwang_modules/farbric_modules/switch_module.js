@@ -10,6 +10,49 @@ module.exports = {
     },
 };
 
+setupLink_ = function (switch_val, go_request) {
+    return switch_val.setupLink(go_request);
+};
+
+getLinkData_ = function (switch_val, go_request) {
+    return switch_val.getLinkData(go_request);
+};
+
+putLinkData_ = function (switch_val, go_request) {
+    return switch_val.put_link_data(go_request);
+};
+
+getNameList_ = function (switch_val, go_request) {
+    return switch_val.getNameList(go_request);
+};
+
+setupSession_ = function (switch_val, go_request) {
+    return switch_val.setupSession(go_request);
+};
+
+getSessionData_ = function (switch_val, go_request) {
+    return switch_val.getSessionData(go_request);
+};
+
+putSessionData_ = function (switch_val, go_request) {
+    return switch_val.putSessionData(go_request);
+};
+
+keepAlive_ = function (switch_val, go_request) {
+    return switch_val.keepAlive_(go_request);
+};
+
+var switch_table = {
+    "setup_link": setupLink_,
+    "get_link_data": getLinkData_,
+    "put_link_data": putLinkData_,
+    "get_name_list": getNameList_,
+    "setup_session": setupSession_,
+    "get_session_data": getSessionData_,
+    "put_session_data": putSessionData_,
+    "keep_alive": keepAlive_,
+};
+
 function DispatchObject(fibre_val) {
     "use strict";
     this.theFibreObject = fibre_val;
@@ -46,12 +89,20 @@ function DispatchObject(fibre_val) {
     this.dispatchRequest = function (go_request) {
         this.debug(false, "dispatchRequest", "command=" + go_request.command);
 
+        var func = switch_table[go_request.command];
+        if (func) {
+            return func(this, go_request);
+        }
+        else {
+            this.abend("dispatchRequest", "bad command=" + go_request.command);
+            return null;
+        }
+
         if (go_request.command === "setup_link") {
             return this.setupLink(go_request);
         }
 
         if (go_request.command === "keep_alive") {
-            this.abend("dispatchRequest", "keep_alive gorequest=");
             return this.keepAlive(go_request);
         }
 
@@ -60,7 +111,6 @@ function DispatchObject(fibre_val) {
         }
 
         if (go_request.command === "put_link_data") {
-            this.abend("dispatchRequest", "put_link_data");
             return this.putLinkData(go_request);
         }
 
@@ -80,7 +130,8 @@ function DispatchObject(fibre_val) {
             return this.putSessionData(go_request);
         }
 
-         this.abend("dispatchRequest", "command=" + go_request.command);
+        this.abend("dispatchRequest", "bad command=" + go_request.command);
+        return null;
     }
 
     this.setupLink = function (go_request) {
@@ -115,6 +166,10 @@ function DispatchObject(fibre_val) {
             this.logit("getLinkData", "link_id=" + go_request.link_id + " my_name="  + go_request.my_name + " data={" + data + "}");
         }
         return data;
+    };
+
+    this.putLinkData = function (go_request) {
+        this.abend("putLinkData", "putLinkData is not implemented");
     };
 
     this.getLink = function (go_request) {
@@ -256,7 +311,8 @@ function DispatchObject(fibre_val) {
         return null;
     };
 
-    this.keepAlive1111111111111111 = function (go_request) {
+    this.keepAlive = function (go_request) {
+        this.abend("keepAlive", "keepAlive is not implemented");
         var my_link_id = go_request.link_id;
         this.debug(false, "keepAlive", "link_id=" + my_link_id + " my_name=" + go_request.my_name);
         var link = this.linkMgrObject().searchLink(go_request.my_name, my_link_id);

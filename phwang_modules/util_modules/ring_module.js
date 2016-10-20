@@ -140,7 +140,7 @@ function RingObject (util_val) {
     };
 
     this.enlargeSize = function () {
-        this.logit("enlargeSize", "size=" + this.size());
+        this.debug(true, "enlargeSize", "size=" + this.size() + "=>" + this.size() * 2);
 
         var i = this.size();
         while (i < this.size() * 2) {

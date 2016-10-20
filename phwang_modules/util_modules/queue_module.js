@@ -43,6 +43,10 @@ function QueueObject (util_val) {
         return this.theUtilObject;
     };
 
+    this.ring = function () {
+        return this.theRing;
+    }
+
     this.head = function () {
         return this.theHead;
     }
@@ -76,6 +80,8 @@ function QueueObject (util_val) {
             this.abend("enQueue", "null data_val");
             return;
         }
+
+        this.ring().enQueue(data_val);
 
         this.abendIt();
 
@@ -211,4 +217,6 @@ function QueueObject (util_val) {
     this.logit = function (str1_val, str2_val) {
         this.utilModule().logit(this.objectName() + "." + str1_val, str2_val);
     };
+
+    this.theRing = this.utilObject().mallocRing();
 }

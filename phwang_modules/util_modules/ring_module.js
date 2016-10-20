@@ -40,7 +40,7 @@ function RingObject (util_val) {
         this.theInput = val;
     }
 
-    this.incrementInput = function (val) {
+    this.incrementInput = function () {
         this.theInput += 1;
     }
 
@@ -52,7 +52,7 @@ function RingObject (util_val) {
         this.theOutput = val;
     }
 
-    this.incrementOutput = function (val) {
+    this.incrementOutput = function () {
         this.theOutput += 1;
     }
 
@@ -80,20 +80,20 @@ function RingObject (util_val) {
         this.theLeft = val;
     }
 
-    this.array = function (index_val) {
-        return this.theArray[index_val];
-    }
-
-    this.setArray = function (index_val, data_val) {
-        this.theArray[index_val] = data_val;
-    }
-
     this.incrementLeft = function () {
         this.theLeft += 1;
     }
 
     this.decrementLeft = function () {
         this.theLeft -= 1;
+    }
+
+    this.array = function (index_val) {
+        return this.theArray[index_val];
+    }
+
+    this.setArray = function (index_val, data_val) {
+        this.theArray[index_val] = data_val;
     }
 
     this.enQueue = function (data_val) {

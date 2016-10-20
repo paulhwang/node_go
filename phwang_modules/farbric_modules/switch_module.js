@@ -100,6 +100,11 @@ function SwitchObject(fibre_val) {
     };
 
     this.switchRequest = function (go_request) {
+        if (!go_request) {
+            this.abend("switchRequest", "null go_request");
+            return null;
+        }
+
         this.debug(false, "dispatchRequest", "command=" + go_request.command);
 
         var func = this.switch_table[go_request.command];
@@ -110,58 +115,9 @@ function SwitchObject(fibre_val) {
             this.abend("dispatchRequest", "bad command=" + go_request.command);
             return null;
         }
-
-        var func = switch_table_[go_request.command];
-        if (func) {
-            return func(this, go_request);
-        }
-        else {
-            this.abend("dispatchRequest", "bad command=" + go_request.command);
-            return null;
-        }
-
-        if (go_request.command === "setup_link") {
-            return this.setupLink(go_request);
-        }
-
-        if (go_request.command === "keep_alive") {
-            return this.keepAlive(go_request);
-        }
-
-        if (go_request.command === "get_link_data") {
-            return this.getLinkData(go_request);
-        }
-
-        if (go_request.command === "put_link_data") {
-            return this.putLinkData(go_request);
-        }
-
-        if (go_request.command === "get_name_list") {
-            return this.getNameList(go_request);
-        }
-
-        if (go_request.command === "setup_session") {
-            return this.setupSession(go_request);
-        }
-
-        if (go_request.command === "get_session_data") {
-            return this.getSessionData(go_request);
-        }
-
-        if (go_request.command === "put_session_data") {
-            return this.putSessionData(go_request);
-        }
-
-        this.abend("dispatchRequest", "bad command=" + go_request.command);
-        return null;
     }
 
     this.setupLink = function (go_request) {
-        if (!go_request) {
-            this.abend("setupLink", "null go_request");
-            return null;
-        }
-
         var link = this.linkMgrObject().searchAndCreate(go_request.my_name, 0);
         if (!link) {
             this.abend("setupLink", "null link");

@@ -130,14 +130,17 @@ function QueueObject (util_val) {
         }
 
         if (data_entry) {
-            //this.logit("deQueue", "data=" + data_entry.data);
+            this.debug(false, "deQueue", "data=" + data_entry.data);
             this.holderPoolModule().free(data_entry);
-        }
-        else {
-            //this.logit("deQueue", "null");
         }
 
         this.abendIt();
+
+        var data1 = this.ring().deQueue();
+        if (data != data1) {
+            this.abend("deQueue", "ring not match");
+        }
+
         return data;
     };
 

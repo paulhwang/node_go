@@ -42,7 +42,7 @@ keepAlive_ = function (switch_val, go_request) {
     return switch_val.keepAlive_(go_request);
 };
 
-var switch_table = {
+var switch_table_ = {
     "setup_link": setupLink_,
     "get_link_data": getLinkData_,
     "put_link_data": putLinkData_,
@@ -89,7 +89,7 @@ function DispatchObject(fibre_val) {
     this.switchRequest = function (go_request) {
         this.debug(false, "dispatchRequest", "command=" + go_request.command);
 
-        var func = switch_table[go_request.command];
+        var func = switch_table_[go_request.command];
         if (func) {
             return func(this, go_request);
         }
@@ -132,6 +132,26 @@ function DispatchObject(fibre_val) {
 
         this.abend("dispatchRequest", "bad command=" + go_request.command);
         return null;
+
+        this.switch_table = {
+            "setup_link": this.setupLink,
+            "get_link_data": this.getLinkData,
+            "put_link_data": this.putLinkData,
+            "get_name_list": this.getNameList,
+            "setup_session": this.setupSession,
+            "get_session_data": this.getSessionData,
+            "put_session_data": this.putSessionData,
+            "keep_alive": this.keepAlive,
+        };
+
+        var func = this.switch_table[go_request.command];
+        if (func) {
+            return func(go_request);
+        }
+        else {
+            this.abend("dispatchRequest", "bad command=" + go_request.command);
+            return null;
+        }
     }
 
     this.setupLink = function (go_request) {

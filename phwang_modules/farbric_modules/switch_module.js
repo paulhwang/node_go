@@ -179,7 +179,7 @@ function SwitchObject(fibre_val) {
     }
 
     this.getSessionObject = function (go_request) {
-        var link = this.getLink(go_request);
+        var link = this.getLinkObject(go_request);
         if (!link) {
             return null;
         }

@@ -10,49 +10,6 @@ module.exports = {
     },
 };
 
-setupLink_ = function (switch_val, go_request) {
-    return switch_val.setupLink(go_request);
-};
-
-getLinkData_ = function (switch_val, go_request) {
-    return switch_val.getLinkData(go_request);
-};
-
-putLinkData_ = function (switch_val, go_request) {
-    return switch_val.put_link_data(go_request);
-};
-
-getNameList_ = function (switch_val, go_request) {
-    return switch_val.getNameList(go_request);
-};
-
-setupSession_ = function (switch_val, go_request) {
-    return switch_val.setupSession(go_request);
-};
-
-getSessionData_ = function (switch_val, go_request) {
-    return switch_val.getSessionData(go_request);
-};
-
-putSessionData_ = function (switch_val, go_request) {
-    return switch_val.putSessionData(go_request);
-};
-
-keepAlive_ = function (switch_val, go_request) {
-    return switch_val.keepAlive_(go_request);
-};
-
-var switch_table_ = {
-    "setup_link": setupLink_,
-    "get_link_data": getLinkData_,
-    "put_link_data": putLinkData_,
-    "get_name_list": getNameList_,
-    "setup_session": setupSession_,
-    "get_session_data": getSessionData_,
-    "put_session_data": putSessionData_,
-    "keep_alive": keepAlive_,
-};
-
 function SwitchObject(fibre_val) {
     "use strict";
     this.theFibreObject = fibre_val;

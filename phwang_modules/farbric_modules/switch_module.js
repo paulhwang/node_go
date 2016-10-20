@@ -86,8 +86,30 @@ function DispatchObject(fibre_val) {
         return this.fibreObject().sessionMgrObject();
     };
 
+    this.initSwitchTable = function () {
+        this.switch_table = {
+            "setup_link": this.setupLink,
+            "get_link_data": this.getLinkData,
+            "put_link_data": this.putLinkData,
+            "get_name_list": this.getNameList,
+            "setup_session": this.setupSession,
+            "get_session_data": this.getSessionData,
+            "put_session_data": this.putSessionData,
+            "keep_alive": this.keepAlive,
+        };
+    };
+
     this.switchRequest = function (go_request) {
         this.debug(false, "dispatchRequest", "command=" + go_request.command);
+
+        var func = this.switch_table[go_request.command];
+        if (func) {
+            return func.bind(this)(go_request);
+        }
+        else {
+            this.abend("dispatchRequest", "bad command=" + go_request.command);
+            return null;
+        }
 
         var func = switch_table_[go_request.command];
         if (func) {
@@ -132,26 +154,6 @@ function DispatchObject(fibre_val) {
 
         this.abend("dispatchRequest", "bad command=" + go_request.command);
         return null;
-
-        this.switch_table = {
-            "setup_link": this.setupLink,
-            "get_link_data": this.getLinkData,
-            "put_link_data": this.putLinkData,
-            "get_name_list": this.getNameList,
-            "setup_session": this.setupSession,
-            "get_session_data": this.getSessionData,
-            "put_session_data": this.putSessionData,
-            "keep_alive": this.keepAlive,
-        };
-
-        var func = this.switch_table[go_request.command];
-        if (func) {
-            return func(go_request);
-        }
-        else {
-            this.abend("dispatchRequest", "bad command=" + go_request.command);
-            return null;
-        }
     }
 
     this.setupLink = function (go_request) {
@@ -358,4 +360,6 @@ function DispatchObject(fibre_val) {
     this.abend = function (str1_val, str2_val) {
         this.utilObject().utilAbend(this.objectName() + "." + str1_val, str2_val);
     };
+
+    this.initSwitchTable();
 }

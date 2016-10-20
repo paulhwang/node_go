@@ -1,12 +1,12 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: dispatch_module.js
+ * File name: switch_module.js
  */
 
 module.exports = {
     malloc: function (fibre_val) {
-        return new DispatchObject(fibre_val);
+        return new SwitchObject(fibre_val);
     },
 };
 
@@ -53,7 +53,7 @@ var switch_table_ = {
     "keep_alive": keepAlive_,
 };
 
-function DispatchObject(fibre_val) {
+function SwitchObject(fibre_val) {
     "use strict";
     this.theFibreObject = fibre_val;
 
@@ -63,7 +63,7 @@ function DispatchObject(fibre_val) {
     };
 
     this.objectName = function () {
-        return "DispatchObject";
+        return "SwitchObject";
     };
 
     this.fibreObject = function () {

@@ -192,7 +192,7 @@ function GoGroupObject(group_list_val) {
                 if (group2.existMatrix(i, j)) {
                     this.goLog("mergeWithOtherGroup", "i=" + i + " j=" + j);
                     if (this.existMatrix(i, j)) {
-                        Go.goAbend("goMergeWithOtherGroup", "already exist");
+                        this.Go().goAbend("goMergeWithOtherGroup", "already exist");
                     }
                     this.setExistMatrix(i, j, group2.existMatrix(i, j));
                     this.incrementStoneCount();

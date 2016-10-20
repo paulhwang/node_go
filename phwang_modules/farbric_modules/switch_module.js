@@ -87,14 +87,14 @@ function SwitchObject(fibre_val) {
         return link_id_str;
     };
 
-    this.getLink = function (go_request) {
+    this.getLinkObject = function (go_request) {
         var link = this.linkMgrObject().searchLink(go_request.my_name, go_request.link_id);
         if (!link) {
-            this.abend("getLink", "null link" + "link_id=" + go_request.link_id + " my_name=" + go_request.my_name);
+            this.abend("getLinkObject", "null link" + "link_id=" + go_request.link_id + " my_name=" + go_request.my_name);
             return null;
         }
         if (link.linkId() === 0) {
-            this.abend("getLink", "link_id = 0");
+            this.abend("getLinkObject", "link_id = 0");
             return null;
         }
         link.resetKeepAliveTimer();
@@ -104,7 +104,7 @@ function SwitchObject(fibre_val) {
     this.getLinkData = function (go_request) {
         this.debug(false, "getLinkData", "link_id=" + go_request.link_id + " my_name=" + go_request.my_name + " ajax_id=" + go_request.ajax_id);
 
-        var link = this.getLink(go_request);
+        var link = this.getLinkObject(go_request);
         if (!link) {
             return null;
         }
@@ -121,7 +121,7 @@ function SwitchObject(fibre_val) {
     };
 
     this.getNameList = function (go_request) {
-        var link = this.getLink(go_request);
+        var link = this.getLinkObject(go_request);
         if (!link) {
             return null;
         }

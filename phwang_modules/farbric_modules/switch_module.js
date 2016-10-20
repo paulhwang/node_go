@@ -219,20 +219,20 @@ function SwitchObject(fibre_val) {
         this.debug(true, "putSessionData ", "ajax_id=" + go_request.ajax_id);
         this.debug(true, "putSessionData ", "(" + go_request.link_id + "," + go_request.session_id + ") "  + go_request.his_name + "=>" + go_request.my_name + " {" + go_request.data + "}");
 
-        var my_session = this.getSessionObject(go_request);
-        if (!my_session) {
+        var session = this.getSessionObject(go_request);
+        if (!session) {
             return null;
         }
 
-        this.debug(true, "putSessionData", "(" + go_request.link_id + "," + go_request.session_id + ") "  + go_request.my_name + "=>" + go_request.his_name + " {" + go_request.data + "} " + go_request.xmt_seq + "=>" + my_session.up_seq);
+        this.debug(true, "putSessionData", "(" + go_request.link_id + "," + go_request.session_id + ") "  + go_request.my_name + "=>" + go_request.his_name + " {" + go_request.data + "} " + go_request.xmt_seq + "=>" + session.up_seq);
 
-        if (go_request.xmt_seq === my_session.up_seq) {
-            my_session.clusterObject().enqueAndPocessReceiveData(go_request.data);
-            my_session.up_seq += 1;
-        } else if (go_request.xmt_seq < my_session.up_seq) {
+        if (go_request.xmt_seq === session.up_seq) {
+            session.clusterObject().enqueAndPocessReceiveData(go_request.data);
+            session.up_seq += 1;
+        } else if (go_request.xmt_seq < session.up_seq) {
             if (go_request.xmt_seq === 0) {
-                my_session.clusterObject().enqueAndPocessReceiveData(go_request.data);
-                my_session.up_seq = 1;
+                session.clusterObject().enqueAndPocessReceiveData(go_request.data);
+                session.up_seq = 1;
                 this.logit("putSessionData", go_request.data + " post " + go_request.xmt_seq + " reset");
             } else {
                 this.logit("putSessionData", "(" + link_id + "," + session_id + ") "  + go_request.my_name + "=>" + go_request.his_name + " {" + go_request.data + "} " + go_request.xmt_seq + " dropped");
@@ -241,7 +241,7 @@ function SwitchObject(fibre_val) {
             this.logit("***abend: putSessionData", go_request.data + " post seq=" + xmt_seq + " dropped");
         }
 
-        this.debug(true, "putSessionData", "queue_size=" + my_session.receiveQueue().size());
+        this.debug(true, "putSessionData", "queue_size=" + session.receiveQueue().size());
         return null;
     };
 

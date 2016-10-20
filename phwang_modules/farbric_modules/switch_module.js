@@ -128,7 +128,7 @@ function SwitchObject(fibre_val) {
 
         var name_array = this.linkMgrObject().getNameList();
         var name_array_str = JSON.stringify(name_array);
-        this.debug(true, "getNameList", "(" + link.linkId() + ",0) " + go_request.my_name + "=>server " + name_array_str);
+        this.debug(false, "getNameList", "(" + link.linkId() + ",0) " + go_request.my_name + "=>server " + name_array_str);
         return name_array_str;
     };
 
@@ -176,10 +176,9 @@ function SwitchObject(fibre_val) {
                     });
         this.logit("setupSessionReply", "(" + go_request.link_id + "," + session_val.sessionId() + "," + session_val.hisSession().sessionId() + ") " + go_request.my_name + "=>" + go_request.his_name);
         return data;
-    };
+    }
 
-    this.getSessionData = function (go_request) {
-        this.debug(false, "getSessionData", "(" + go_request.link_id + "," + go_request.session_id + ") my_name=" + go_request.my_name + "=>" + go_request.his_name);
+    this.getSessionObject = function (go_request) {
         var link = this.getLink(go_request);
         if (!link) {
             return null;
@@ -187,8 +186,18 @@ function SwitchObject(fibre_val) {
 
         var session = this.sessionMgrObject().searchSession(go_request.my_name, go_request.his_name, go_request.session_id);
         if (!session) {
-            //res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
-            this.abend("getSessionData", "null session" + " session_id=" + go_request.session_id);
+            this.abend("getSessionObject", "null session" + " session_id=" + go_request.session_id);
+            return null;
+        }
+
+        return session;
+    };
+
+    this.getSessionData = function (go_request) {
+        this.debug(false, "getSessionData", "(" + go_request.link_id + "," + go_request.session_id + ") my_name=" + go_request.my_name + "=>" + go_request.his_name);
+
+        var session = this.getSessionObject(go_request);
+        if (!session) {
             return null;
         }
 
@@ -210,15 +219,8 @@ function SwitchObject(fibre_val) {
         this.debug(true, "putSessionData ", "ajax_id=" + go_request.ajax_id);
         this.debug(true, "putSessionData ", "(" + go_request.link_id + "," + go_request.session_id + ") "  + go_request.his_name + "=>" + go_request.my_name + " {" + go_request.data + "}");
 
-        var link = this.getLink(go_request);
-        if (!link) {
-            return null;
-        }
-
-        var my_session = this.sessionMgrObject().searchSession(go_request.my_name, go_request.his_name, go_request.session_id);
+        var my_session = this.getSessionObject(go_request);
         if (!my_session) {
-            //res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
-            this.abend("putSessionData", "null my_session" + " session_id=" + go_request.session_id + " my_name=" + go_request.my_name + " his_name=" + go_request.his_name);
             return null;
         }
 

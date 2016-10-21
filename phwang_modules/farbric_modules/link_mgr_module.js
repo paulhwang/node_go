@@ -65,6 +65,7 @@ function LinkMgrObject(fibre_val) {
             link = this.mallocLink(my_name_val);
             this.debug(false, "searchAndCreate", "malloc link: name=" + link.myName() + "=link_id=" + link.link_id);
             this.linkQueue().enQueue(link);
+            this.setNameListChanged();
         }
         return link;
     };
@@ -74,6 +75,16 @@ function LinkMgrObject(fibre_val) {
         this.linkQueue().unQueue(function (link_val, my_name_val, link_id_val) {
             return ((my_name_val === link_val.myName()) && (link_id_val === link_val.linkId()));
         }, link_val.myName(), link_val.linkId());
+        this.setNameListChanged();
+    };
+
+    this.setNameListChanged = function () {
+        var queue_element = this.linkQueue().tail();
+        while (queue_element) {
+            var link = queue_element.data();
+            link.setNameListChanged();
+            queue_element = queue_element.prev();
+        }
     };
 
     this.getNameList = function () {
@@ -121,4 +132,5 @@ function LinkMgrObject(fibre_val) {
     this.theGlobalLinkId = 10;
     this.theLinkQueue = this.utilObject().mallocQueue();
     this.thePoolQueue = this.utilObject().mallocQueue();
+    this.theNameListChanged = false;
 }

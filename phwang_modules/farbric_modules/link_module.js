@@ -63,6 +63,18 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
         return this.theReceiveRing;
     };
 
+    this.nameListChanged = function () {
+        return this.theNameListChanged;
+    };
+
+    this.setNameListChanged = function () {
+        this.theNameListChanged = true;
+    };
+
+    this.clearNameListChanged = function () {
+        this.theNameListChanged = false;
+    };
+
     this.resetIt = function (my_name_val, link_id_val) {
         this.theLinkId = link_id_val;
         this.theMyName = my_name_val;

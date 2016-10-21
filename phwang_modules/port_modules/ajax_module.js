@@ -63,7 +63,6 @@ function AjaxObject(port_object_val) {
                         command: go_request.command,
                         ajax_id: go_request.ajax_id,
                         data: data,
-                        res_data: data,
                     });
         res.type('application/json');
         res.send(json_str);

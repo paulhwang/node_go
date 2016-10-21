@@ -62,14 +62,14 @@ function SwitchObject(fibre_val) {
             return null;
         }
 
-        this.debug(false, "dispatchRequest", "command=" + go_request.command);
+        this.debug(true, "switchRequest", "command=" + go_request.command);
 
         var func = this.switch_table[go_request.command];
         if (func) {
             return func.bind(this)(go_request);
         }
         else {
-            this.abend("dispatchRequest", "bad command=" + go_request.command);
+            this.abend("switchRequest", "bad command=" + go_request.command);
             return null;
         }
     }
@@ -82,9 +82,9 @@ function SwitchObject(fibre_val) {
         }
         link.resetKeepAliveTimer();
 
-        var link_id_str = "" + link.linkId();
-        this.logit("setupLink", "name=" + go_request.my_name + " link_id=" + link.linkId());
-        return link_id_str;
+        var json_data = JSON.stringify({link_id: link.linkId()});
+        this.debug(true, "setupLink", "name=" + go_request.my_name + " link_id=" + link.linkId());
+        return json_data;
     };
 
     this.getLinkObject = function (go_request) {
@@ -113,7 +113,7 @@ function SwitchObject(fibre_val) {
         if (data) {
             this.logit("getLinkData", "link_id=" + go_request.link_id + " my_name="  + go_request.my_name + " data={" + data + "}");
         }
-        return data;
+        return JSON.stringify(data);
     };
 
     this.putLinkData = function (go_request) {
@@ -126,10 +126,9 @@ function SwitchObject(fibre_val) {
             return null;
         }
 
-        var name_array = this.linkMgrObject().getNameList();
-        var name_array_str = JSON.stringify(name_array);
-        this.debug(false, "getNameList", "(" + link.linkId() + ",0) " + go_request.my_name + "=>server " + name_array_str);
-        return name_array_str;
+        var json_data = JSON.stringify(this.linkMgrObject().getNameList());
+        this.debug(false, "getNameList", "(" + link.linkId() + ",0) " + go_request.my_name + "=>server " + json_data);
+        return json_data;
     };
 
     this.setupSession = function (go_request) {

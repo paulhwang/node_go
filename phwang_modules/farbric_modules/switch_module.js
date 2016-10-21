@@ -62,7 +62,7 @@ function SwitchObject(fibre_val) {
             return null;
         }
 
-        this.debug(true, "switchRequest", "command=" + go_request.command);
+        this.debug(false, "switchRequest", "command=" + go_request.command);
 
         var func = this.switch_table[go_request.command];
         if (func) {
@@ -209,7 +209,9 @@ function SwitchObject(fibre_val) {
 
         this.debug(false, "getSessionData", "ajax_id=" + go_request.ajax_id);
         this.logit("getSessionData", "(" + go_request.link_id + "," + go_request.session_id + ") "  + go_request.his_name + "=>" + go_request.my_name + " {" + res_data + "}");
-        return res_data;
+        return JSON.stringify({session_id: session.sessionId(),
+                               res_data: res_data,
+                           });
     };
 
     this.putSessionData = function (go_request) {

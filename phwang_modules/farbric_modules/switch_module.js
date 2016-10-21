@@ -168,13 +168,12 @@ function SwitchObject(fibre_val) {
     }
 
     this.setupSessionReply = function (session_val, go_request) {
-        var session_id_str = "" + session_val.sessionId();
-        var data = JSON.stringify({
-                        session_id: session_id_str,
+        var json_data = JSON.stringify({
+                        session_id: session_val.sessionId(),
                         extra_data: go_request.data,
                     });
         this.logit("setupSessionReply", "(" + go_request.link_id + "," + session_val.sessionId() + "," + session_val.hisSession().sessionId() + ") " + go_request.my_name + "=>" + go_request.his_name);
-        return data;
+        return json_data;
     }
 
     this.getSessionObject = function (go_request) {

@@ -83,6 +83,7 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
         this.theReceiveQueue = this.utilObject().mallocQueue();
         this.theReceiveRing = this.utilObject().mallocRing();
         this.theKeepAliveTimer = this.resetTimeout();
+        this.theNameListChanged = true;
     };
 
     this.resetKeepAliveTimer = function () {

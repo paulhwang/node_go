@@ -81,11 +81,11 @@ function QueueObject (util_val) {
             return;
         }
 
-        var i = 10
-        while (i > 0) {
-            this.ring().enQueue(data_val);
-            i -= 1;
-        }
+        //var i = 10
+        //while (i > 0) {
+            //this.ring().enQueue(data_val);
+        //    i -= 1;
+        //}
 
         this.abendIt();
 
@@ -140,14 +140,14 @@ function QueueObject (util_val) {
 
         this.abendIt();
 
-        var i = 10
-        while (i > 0) {
-            var data1 = this.ring().deQueue();
-            if (data != data1) {
-                this.abend("deQueue", "ring not match");
-            }
-            i -= 1;
-        }
+        //var i = 10
+        //while (i > 0) {
+            //var data1 = this.ring().deQueue();
+            //if (data != data1) {
+            //    this.abend("deQueue", "ring not match");
+            //}
+           // i -= 1;
+        //}
 
         return data;
     };

@@ -64,8 +64,8 @@ function LinkMgrObject(fibre_val) {
         if (!link) {
             link = this.mallocLink(my_name_val);
             this.debug(false, "searchAndCreate", "malloc link: name=" + link.myName() + "=link_id=" + link.link_id);
-            this.linkQueue().enQueue(link);
             this.setNameListChanged();
+            this.linkQueue().enQueue(link);
         }
         return link;
     };

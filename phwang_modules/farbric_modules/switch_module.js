@@ -113,7 +113,10 @@ function SwitchObject(fibre_val) {
         if (data) {
             this.logit("getLinkData", "link_id=" + go_request.link_id + " my_name="  + go_request.my_name + " data={" + data + "}");
         }
-        return JSON.stringify(data);
+        return JSON.stringify({link_id: link.linkId(),
+                               name_list: link.nameListChanged(),
+                               data: data,
+                               });
     };
 
     this.putLinkData = function (go_request) {
@@ -121,13 +124,15 @@ function SwitchObject(fibre_val) {
     };
 
     this.getNameList = function (go_request) {
+        this.debug(true, "getNameList", "start");
         var link = this.getLinkObject(go_request);
         if (!link) {
             return null;
         }
 
+        link.clearNameListChanged();
         var json_data = JSON.stringify(this.linkMgrObject().getNameList());
-        this.debug(false, "getNameList", "(" + link.linkId() + ",0) " + go_request.my_name + "=>server " + json_data);
+        this.debug(true, "getNameList", "(" + link.linkId() + ",0) " + go_request.my_name + "=>server " + json_data);
         return json_data;
     };
 

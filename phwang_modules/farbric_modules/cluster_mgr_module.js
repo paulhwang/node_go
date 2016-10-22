@@ -51,7 +51,7 @@ function clusterMgrObject(fibre_val) {
         return this.theGlobalClusterId += 1;
     };
 
-    this.mallocCluster = function (my_name_val) {
+    this.mallocCluster = function (topic_val) {
         var entry = this.poolQueue().deQueue();
         if (!entry) {
             entry = this.clusterModuleMalloc();

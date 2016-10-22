@@ -39,6 +39,10 @@ function SwitchObject(fibre_val) {
         return this.fibreObject().linkMgrObject();
     };
 
+    this.clusterMgrObject = function () {
+        return this.fibreObject().clusterMgrObject();
+    };
+
     this.sessionMgrObject = function () {
         return this.fibreObject().sessionMgrObject();
     };
@@ -139,6 +143,11 @@ function SwitchObject(fibre_val) {
     this.setupSession = function (go_request) {
         var link = this.getLinkObject(go_request);
         if (!link) {
+            return null;
+        }
+
+        var cluster = this.clusterMgrObject().mallocCluster(go_request.topic);
+        if (!cluster) {
             return null;
         }
 

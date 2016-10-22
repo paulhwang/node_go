@@ -75,16 +75,16 @@ function SwitchObject(fibre_val) {
     }
 
     this.setupLink = function (go_request) {
-        var link = this.linkMgrObject().searchAndCreate(go_request.my_name, 0);
+        var link = this.linkMgrObject().searchAndCreate(go_request.my_name);
         if (!link) {
             this.abend("setupLink", "null link");
             return null;
         }
         link.resetKeepAliveTimer();
 
-        var json_data = JSON.stringify({link_id: link.linkId()});
         this.debug(true, "setupLink", "name=" + go_request.my_name + " link_id=" + link.linkId());
-        return json_data;
+        return JSON.stringify({link_id: link.linkId(),
+                              });
     };
 
     this.getLinkObject = function (go_request) {

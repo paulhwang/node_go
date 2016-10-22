@@ -137,6 +137,11 @@ function SwitchObject(fibre_val) {
     };
 
     this.setupSession = function (go_request) {
+        var link = this.getLinkObject(go_request);
+        if (!link) {
+            return null;
+        }
+
         var session = this.sessionMgrObject().searchSession(go_request.my_name, go_request.his_name, go_request.link_id);
         if (!session){
             session = this.sessionMgrObject().searchAndCreate(go_request.my_name, go_request.his_name, 0);

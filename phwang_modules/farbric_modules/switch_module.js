@@ -5,14 +5,14 @@
  */
 
 module.exports = {
-    malloc: function (fibre_val) {
-        return new SwitchObject(fibre_val);
+    malloc: function (fabric_val) {
+        return new SwitchObject(fabric_val);
     },
 };
 
-function SwitchObject(fibre_val) {
+function SwitchObject(fabric_val) {
     "use strict";
-    this.theFibreObject = fibre_val;
+    this.theFarbricObject = fabric_val;
 
     this.linkModuleMalloc = function (my_name_val, link_id_val) {
         var link_module = require("./link_module.js");
@@ -23,12 +23,12 @@ function SwitchObject(fibre_val) {
         return "SwitchObject";
     };
 
-    this.fibreObject = function () {
-        return this.theFibreObject;
+    this.farbricObject = function () {
+        return this.theFarbricObject;
     };
 
     this.rootObject = function () {
-        return this.fibreObject().rootObject();
+        return this.farbricObject().rootObject();
     };
 
     this.utilObject = function () {
@@ -36,15 +36,15 @@ function SwitchObject(fibre_val) {
     };
 
     this.linkMgrObject = function () {
-        return this.fibreObject().linkMgrObject();
+        return this.farbricObject().linkMgrObject();
     };
 
     this.clusterMgrObject = function () {
-        return this.fibreObject().clusterMgrObject();
+        return this.farbricObject().clusterMgrObject();
     };
 
     this.sessionMgrObject = function () {
-        return this.fibreObject().sessionMgrObject();
+        return this.farbricObject().sessionMgrObject();
     };
 
     this.initSwitchTable = function () {

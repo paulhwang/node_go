@@ -39,10 +39,6 @@ function LinkMgrObject(fibre_val) {
         return this.theLinkQueue;
     };
 
-    this.poolQueue = function () {
-        return this.thePoolQueue;
-    };
-
     this.globalLinkId = function () {
         return this.theGlobalLinkId;
     };
@@ -115,18 +111,12 @@ function LinkMgrObject(fibre_val) {
     };
 
     this.mallocLink = function (my_name_val) {
-        var entry = this.poolQueue().deQueue();
-        if (!entry) {
-            entry = this.linkModuleMalloc(my_name_val, this.globalLinkId());
-        } else {
-            entry.resetIt(my_name_val, this.globalLinkId());
-        }
+        var entry = this.linkModuleMalloc(my_name_val, this.globalLinkId());
         this.incrementGlobalLinkId();
         return entry;
     };
 
     this.freeLink = function (link_val) {
-        this.poolQueue().enQueue(link_val);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
@@ -145,6 +135,5 @@ function LinkMgrObject(fibre_val) {
 
     this.theGlobalLinkId = 10;
     this.theLinkQueue = this.utilObject().mallocQueue();
-    this.thePoolQueue = this.utilObject().mallocQueue();
     this.theNameListChanged = false;
 }

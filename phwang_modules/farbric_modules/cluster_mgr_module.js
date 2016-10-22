@@ -39,10 +39,6 @@ function clusterMgrObject(fibre_val) {
         return this.theClusterQueue;
     };
 
-    this.poolQueue = function () {
-        return this.thePoolQueue;
-    };
-
     this.globalClusterId = function () {
         return this.theGlobalClusterId;
     };
@@ -52,18 +48,12 @@ function clusterMgrObject(fibre_val) {
     };
 
     this.mallocCluster = function (topic_val) {
-        var entry = this.poolQueue().deQueue();
-        if (!entry) {
-            entry = this.clusterModuleMalloc();
-        } else {
-            entry.resetIt();
-        }
+        var entry = this.clusterModuleMalloc();
         this.incrementGlobalClusterId();
         return entry;
     };
 
     this.freeCluster = function (cluster_val) {
-        this.poolQueue().enQueue(cluster_val);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

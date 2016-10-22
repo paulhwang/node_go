@@ -47,10 +47,6 @@ function SessionMgrObject(fibre_val) {
         return this.theSessionQueue;
     };
 
-    this.poolQueue = function () {
-        return this.thePoolQueue;
-    };
-
     this.preSessionQueue = function () {
         return this.thePreSessionQueue;
     };
@@ -92,18 +88,12 @@ function SessionMgrObject(fibre_val) {
     };
 
     this.mallocSession = function (my_name_val, his_name_val, cluster_val) {
-        var entry = this.poolQueue().deQueue();  
-        if (!entry) {
-            entry = this.sessionModuleMalloc(this, my_name_val, his_name_val, this.globalSessionId(), cluster_val);
-        } else {
-            entry.resetIt(my_name_val, his_name_val, this.globalSessionId(), cluster_val);
-        }
+        var entry = this.sessionModuleMalloc(this, my_name_val, his_name_val, this.globalSessionId(), cluster_val);
         this.incrementGlobalSessionId();
         return entry;
     };
 
     this.freeSession = function (session_val) {
-        this.poolQueue().enQueue(link_val);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
@@ -122,6 +112,5 @@ function SessionMgrObject(fibre_val) {
 
     this.theSessionQueue = this.utilObject().mallocQueue();
     this.thePreSessionQueue = this.utilObject().mallocQueue();
-    this.thePoolQueue = this.utilObject().mallocQueue();
     this.theGlobalSessionId = 1000;
 }

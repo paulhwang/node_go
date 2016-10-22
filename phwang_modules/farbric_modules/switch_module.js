@@ -88,7 +88,7 @@ function SwitchObject(fibre_val) {
     };
 
     this.getLinkObject = function (go_request) {
-        var link = this.linkMgrObject().searchLink(go_request.my_name, go_request.link_id);
+        var link = this.linkMgrObject().searchLinkByNameAndLinkId(go_request.my_name, go_request.link_id);
         if (!link) {
             this.abend("getLinkObject", "null link" + "link_id=" + go_request.link_id + " my_name=" + go_request.my_name);
             return null;
@@ -147,7 +147,7 @@ function SwitchObject(fibre_val) {
             }
         }
 
-        var his_link = this.linkMgrObject().searchLink(go_request.his_name, 0);
+        var his_link = this.linkMgrObject().searchLinkByNameAndLinkId(go_request.his_name, 0);
         if (!his_link) {
             res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
             return null;

@@ -51,16 +51,30 @@ function LinkMgrObject(fibre_val) {
         this.theGlobalLinkId += 1;
     };
 
-    this.searchLink = function (my_name_val, link_id_val) {
-        this.debug(false, "searchIt", my_name_val + " " + link_id_val);
+    this.searchLinkByName = function (my_name_val) {
+        this.debug(false, "searchLinkByName", "name=" + my_name_val);
+        return this.linkQueue().searchIt(function (link_val, my_name_val) {
+            return my_name_val === link_val.myName()
+        }, my_name_val);
+    };
+
+    this.searchLinkByLinkId = function (link_id_val) {
+        this.debug(false, "searchLinkByLinkId", "link_id=" + link_id_val);
+        return this.linkQueue().searchIt(function (link_val, link_id_val) {
+            return link_id_val === link_val.linkId()
+        }, link_id_val);
+    };
+
+    this.searchLinkByNameAndLinkId = function (my_name_val, link_id_val) {
+        this.debug(false, "searchLinkByNameAndLinkId", my_name_val + " " + link_id_val);
         return this.linkQueue().searchIt(function (link_val, my_name_val, link_id_val) {
             return ((my_name_val === link_val.myName()) &&
                     ((link_id_val === link_val.linkId()) || (link_id_val === 0)));
         }, my_name_val, link_id_val);
     };
 
-    this.searchAndCreate = function (my_name_val, link_id_val) {
-        var link = this.searchLink(my_name_val, link_id_val);
+    this.searchAndCreate = function (my_name_val) {
+        var link = this.searchLinkByName(my_name_val);
         if (!link) {
             link = this.mallocLink(my_name_val);
             this.debug(false, "searchAndCreate", "malloc link: name=" + link.myName() + "=link_id=" + link.link_id);

@@ -12,7 +12,7 @@ module.exports = {
 
 function SwitchObject(fabric_val) {
     "use strict";
-    this.theFarbricObject = fabric_val;
+    this.theFabricObject = fabric_val;
 
     this.linkModuleMalloc = function (my_name_val, link_id_val) {
         var link_module = require("./link_module.js");
@@ -23,12 +23,12 @@ function SwitchObject(fabric_val) {
         return "SwitchObject";
     };
 
-    this.farbricObject = function () {
-        return this.theFarbricObject;
+    this.fabricObject = function () {
+        return this.theFabricObject;
     };
 
     this.rootObject = function () {
-        return this.farbricObject().rootObject();
+        return this.fabricObject().rootObject();
     };
 
     this.utilObject = function () {
@@ -36,15 +36,15 @@ function SwitchObject(fabric_val) {
     };
 
     this.linkMgrObject = function () {
-        return this.farbricObject().linkMgrObject();
+        return this.fabricObject().linkMgrObject();
     };
 
     this.clusterMgrObject = function () {
-        return this.farbricObject().clusterMgrObject();
+        return this.fabricObject().clusterMgrObject();
     };
 
     this.sessionMgrObject = function () {
-        return this.farbricObject().sessionMgrObject();
+        return this.fabricObject().sessionMgrObject();
     };
 
     this.initSwitchTable = function () {

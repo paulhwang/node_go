@@ -7,7 +7,7 @@
 //var util = require("./util_module.js");
 var root = require("./phwang_modules/phwang_module.js");
 var queue = require("./phwang_modules/util_modules/queue_module.js");
-var link_entry = require("./phwang_modules/farbric_modules/link_module.js");
+var link_entry = require("./phwang_modules/fabric_modules/link_module.js");
 var express = require('express');
 var bodyParser = require('body-parser');
 var state;

@@ -16,11 +16,11 @@ function RootObject () {
 
     this.mallocModules = function () {
         var util_module = require("./util_modules/util_module.js");
-        var farbric_module = require("./fabric_modules/fabric_module.js");
+        var fabric_module = require("./fabric_modules/fabric_module.js");
         var port_module = require("./port_modules/port_module.js");
 
         this.theUtilObject = util_module.malloc(this);
-        this.theFarbricObject = farbric_module.malloc(this);
+        this.theFarbricObject = fabric_module.malloc(this);
         this.thePortObject = port_module.malloc(this);
     };
 

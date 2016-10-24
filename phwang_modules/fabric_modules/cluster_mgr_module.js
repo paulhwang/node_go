@@ -48,9 +48,9 @@ function clusterMgrObject(fabric_val) {
     };
 
     this.mallocCluster = function (topic_val, session_val) {
-        var entry = this.clusterModuleMalloc(topic_val, session_val);
+        var cluster = this.clusterModuleMalloc(topic_val, session_val);
         this.incrementGlobalClusterId();
-        return entry;
+        return cluster;
     };
 
     this.freeCluster = function (cluster_val) {

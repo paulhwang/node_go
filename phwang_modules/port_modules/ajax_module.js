@@ -26,12 +26,12 @@ function AjaxObject(port_object_val) {
         return this.portObject().rootObject();
     };
 
-    this.farbricObject = function () {
-        return this.rootObject().farbricObject();
+    this.fabricObject = function () {
+        return this.rootObject().fabricObject();
     };
 
     this.switchObject = function () {
-        return this.farbricObject().switchObject();
+        return this.fabricObject().switchObject();
     };
 
     this.utilObject = function () {

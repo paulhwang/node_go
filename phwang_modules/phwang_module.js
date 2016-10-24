@@ -20,7 +20,7 @@ function RootObject () {
         var port_module = require("./port_modules/port_module.js");
 
         this.theUtilObject = util_module.malloc(this);
-        this.theFarbricObject = fabric_module.malloc(this);
+        this.theFabricObject = fabric_module.malloc(this);
         this.thePortObject = port_module.malloc(this);
     };
 
@@ -36,8 +36,8 @@ function RootObject () {
         return this.theQueueModule;
     };
 
-    this.farbricObject = function () {
-        return this.theFarbricObject;
+    this.fabricObject = function () {
+        return this.theFabricObject;
     };
 
     this.portObject = function () {

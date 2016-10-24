@@ -36,8 +36,8 @@ function clusterObject (cluster_mgr_val, topic_val, session_val) {
         return this.theClusterMgrObject;
     };
 
-    this.fibreObject = function () {
-        return this.clusterMgrObject().fibreObject();
+    this.fabricObject = function () {
+        return this.clusterMgrObject().fabricObject();
     };
 
     this.utilObject = function () {

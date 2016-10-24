@@ -5,14 +5,14 @@
  */
 
 module.exports = {
-    malloc: function (fibre_val) {
-        return new clusterMgrObject(fibre_val);
+    malloc: function (fabric_val) {
+        return new clusterMgrObject(fabric_val);
     },
 };
 
-function clusterMgrObject(fibre_val) {
+function clusterMgrObject(fabric_val) {
     "use strict";
-    this.theFibreObject = fibre_val;
+    this.theFabricObject = fabric_val;
 
     this.clusterModuleMalloc = function (topic_val, session_val) {
         var cluster_module = require("./cluster_module.js");
@@ -23,12 +23,12 @@ function clusterMgrObject(fibre_val) {
         return "clusterMgrObject";
     };
 
-    this.fibreObject = function () {
-        return this.theFibreObject;
+    this.fabricObject = function () {
+        return this.theFabricObject;
     };
 
     this.rootObject = function () {
-        return this.fibreObject().rootObject();
+        return this.fabricObject().rootObject();
     };
 
     this.utilObject = function () {

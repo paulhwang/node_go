@@ -5,14 +5,14 @@
  */
 
 module.exports = {
-    malloc: function (fibre_val) {
-        return new LinkMgrObject(fibre_val);
+    malloc: function (fabric_val) {
+        return new LinkMgrObject(fabric_val);
     },
 };
 
-function LinkMgrObject(fibre_val) {
+function LinkMgrObject(fabric_val) {
     "use strict";
-    this.theFibreObject = fibre_val;
+    this.theFabricObject = fabric_val;
 
     this.linkModuleMalloc = function (my_name_val, link_id_val) {
         var link_module = require("./link_module.js");
@@ -23,12 +23,12 @@ function LinkMgrObject(fibre_val) {
         return "LinkMgrObject";
     };
 
-    this.fibreObject = function () {
-        return this.theFibreObject;
+    this.fabricObject = function () {
+        return this.theFabricObject;
     };
 
     this.rootObject = function () {
-        return this.fibreObject().rootObject();
+        return this.fabricObject().rootObject();
     };
 
     this.utilObject = function () {

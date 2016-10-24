@@ -20,7 +20,7 @@ function SessionMgrObject(link_val) {
     };
 
     this.clusterModuleMalloc = function () {
-        return this.fibreObject().clusterMgrObject().mallocCluster();
+        return this.fabricObject().clusterMgrObject().mallocCluster();
     };
 
     this.sessionModule = function () {
@@ -39,12 +39,12 @@ function SessionMgrObject(link_val) {
         return this.linkObject().linkMgrObject();
     };
 
-    this.fibreObject = function () {
-        return this.linkMgrObject().fibreObject();
+    this.fabricObject = function () {
+        return this.linkMgrObject().fabricObject();
     };
 
     this.rootObject = function () {
-        return this.fibreObject().rootObject();
+        return this.fabricObject().rootObject();
     };
 
     this.utilObject = function () {

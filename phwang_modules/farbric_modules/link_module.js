@@ -12,8 +12,10 @@ module.exports = {
 
 function LinkObject(link_mgr_val, my_name_val, link_id_val) {
     "use strict";
+    var session_mgr_module = require("./session_mgr_module.js");
     this.theLinkMgrObject  = link_mgr_val;
-    this.theKeepAliveTimer = null;
+    this.theLinkId = link_id_val;
+    this.theMyName = my_name_val;
 
     this.objectName = function () {
         return "LinkObject";
@@ -21,6 +23,10 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
 
     this.linkMgrObject = function () {
         return this.theLinkMgrObject;
+    };
+
+    this.sessionMgrObject = function () {
+        return this.theSessionMgrObject;
     };
 
     this.FibreObject = function () {
@@ -75,17 +81,6 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
         this.theNameListChanged = false;
     };
 
-    this.resetIt = function (my_name_val, link_id_val) {
-        this.theLinkId = link_id_val;
-        this.theMyName = my_name_val;
-        this.up_seq = 0;
-        this.down_seq = 0;
-        this.theReceiveQueue = this.utilObject().mallocQueue();
-        this.theReceiveRing = this.utilObject().mallocRing();
-        this.theKeepAliveTimer = this.resetTimeout();
-        this.theNameListChanged = true;
-    };
-
     this.resetKeepAliveTimer = function () {
         this.debug(false, "keepAlive", "my_name=" + this.my_name + " link_id=" + this.link_id);
         this.setKeepAliveTimer(this.resetTimeout());
@@ -104,6 +99,14 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
         return time_out;
     };
 
+    this.searchSessionBySessionId = function (session_id_val) {
+        return this.sessionMgrObject().searchSessionBySessionId(session_id_val);
+    };
+
+    this.mallocSession = function () {
+        return this.sessionMgrObject().mallocSession();
+    };
+
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
             logit(str1_val, "==" + str2_val);
@@ -118,5 +121,13 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
         this.linkMgrObject().abend(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.resetIt(my_name_val, link_id_val);
+    //this.resetIt(my_name_val, link_id_val);
+    this.theSessionMgrObject = session_mgr_module.malloc(this);
+    this.up_seq = 0;
+    this.down_seq = 0;
+    this.theReceiveQueue = this.utilObject().mallocQueue();
+    this.theReceiveRing = this.utilObject().mallocRing();
+    this.theKeepAliveTimer = this.resetTimeout();
+    this.theNameListChanged = true;
+    this.theKeepAliveTimer = null;
 }

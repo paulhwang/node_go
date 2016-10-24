@@ -5,18 +5,18 @@
  */
 
 module.exports = {
-    malloc: function (fibre_val) {
-        return new SessionMgrObject(fibre_val);
+    malloc: function (link_val) {
+        return new SessionMgrObject(link_val);
     },
 };
 
-function SessionMgrObject(fibre_val) {
+function SessionMgrObject(link_val) {
     "use strict";
-    this.theFibreObject = fibre_val;
+    this.theLinkObject = link_val;
 
-    this.sessionModuleMalloc = function (session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val) {
+    this.sessionModuleMalloc = function (session_mgr_val, session_id_val) {
         var session_module = require("./session_module.js");
-        return session_module.malloc(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val);
+        return session_module.malloc(session_mgr_val, session_id_val);
     };
 
     this.clusterModuleMalloc = function () {
@@ -31,8 +31,16 @@ function SessionMgrObject(fibre_val) {
         return "SessionMgrObject";
     };
 
+    this.linkObject = function () {
+        return this.theLinkObject;
+    };
+
+    this.linkMgrObject = function () {
+        return this.linkObject().linkMgrObject();
+    };
+
     this.fibreObject = function () {
-        return this.theFibreObject;
+        return this.linkMgrObject().fibreObject();
     };
 
     this.rootObject = function () {
@@ -57,6 +65,12 @@ function SessionMgrObject(fibre_val) {
 
     this.incrementGlobalSessionId = function () {
         this.theGlobalSessionId += 1;
+    };
+
+    this.searchSessionBySessionId = function (session_id_val) {
+        return this.sessionQueue().searchIt(function (session_val, session_id_val) {
+            return session_id_val === session_val.sessionId();
+        }, session_id_val);
     };
 
     this.searchSession = function (my_name_val, his_name_val, session_id_val) {
@@ -87,10 +101,11 @@ function SessionMgrObject(fibre_val) {
         return session;
     };
 
-    this.mallocSession = function (my_name_val, his_name_val, cluster_val) {
-        var entry = this.sessionModuleMalloc(this, my_name_val, his_name_val, this.globalSessionId(), cluster_val);
+    this.mallocSession = function () {
+        var session = this.sessionModuleMalloc(this, this.globalSessionId());
         this.incrementGlobalSessionId();
-        return entry;
+        this.sessionQueue().enQueue(session);
+        return session;
     };
 
     this.freeSession = function (session_val) {

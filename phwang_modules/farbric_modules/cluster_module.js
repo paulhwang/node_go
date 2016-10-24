@@ -5,14 +5,15 @@
  */
 
 module.exports = {
-    malloc: function (cluster_mgr_val) {
-        return new clusterObject(cluster_mgr_val);
+    malloc: function (cluster_mgr_val, topic_val, session_val) {
+        return new clusterObject(cluster_mgr_val, topic_val, session_val);
     },
 };
 
-function clusterObject (cluster_mgr_val) {
+function clusterObject (cluster_mgr_val, topic_val, session_val) {
     "use strict";
     this.theClusterMgrObject = cluster_mgr_val;
+    session_val.setClusterObject(this);
 
     this.goObjectMalloc = function () {
         var go_module = require("./../go_modules/go_module.js")
@@ -148,7 +149,9 @@ function clusterObject (cluster_mgr_val) {
     };
 
     this.theSessionArray = [2];
-    this.theSessionArrayLength = 0;
+    this.theSessionArray[0] = session_val;
+    this.theSessionArrayLength = 1;
+
     this.theGoObject = this.goObjectMalloc();
     this.theReceiveQueue = this.utilObject().mallocQueue();
     this.theTransmitQueue = this.utilObject().mallocQueue();

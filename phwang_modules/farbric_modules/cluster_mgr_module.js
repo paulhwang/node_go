@@ -14,9 +14,9 @@ function clusterMgrObject(fibre_val) {
     "use strict";
     this.theFibreObject = fibre_val;
 
-    this.clusterModuleMalloc = function () {
+    this.clusterModuleMalloc = function (topic_val, session_val) {
         var cluster_module = require("./cluster_module.js");
-        return cluster_module.malloc(this);
+        return cluster_module.malloc(this, topic_val, session_val);
     };
 
     this.objectName = function () {
@@ -44,11 +44,11 @@ function clusterMgrObject(fibre_val) {
     };
 
     this.incrementGlobalClusterId = function () {
-        return this.theGlobalClusterId += 1;
+        this.theGlobalClusterId += 1;
     };
 
-    this.mallocCluster = function (topic_val) {
-        var entry = this.clusterModuleMalloc();
+    this.mallocCluster = function (topic_val, session_val) {
+        var entry = this.clusterModuleMalloc(topic_val, session_val);
         this.incrementGlobalClusterId();
         return entry;
     };

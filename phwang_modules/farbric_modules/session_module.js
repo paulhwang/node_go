@@ -5,12 +5,12 @@
  */
 
 module.exports = {
-    malloc: function (session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val) {
-        return new SessionObject(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val);
+    malloc: function (session_mgr_val, session_id_val) {
+        return new SessionObject(session_mgr_val, session_id_val);
     },
 };
 
-function SessionObject(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val) {
+function SessionObject(session_mgr_val, session_id_val) {
     "use strict";
     this.theSessionMgrObject = session_mgr_val;
 
@@ -26,12 +26,16 @@ function SessionObject(session_mgr_val, my_name_val, his_name_val, session_id_va
         return this.theSessionMgrObject;
     };
 
+    this.utilObject = function () {
+        return this.sessionMgrObject().utilObject();
+    };
+
     this.clusterObject = function () {
         return this.theClusterObject;
     };
 
-    this.utilObject = function () {
-        return this.sessionMgrObject().utilObject();
+    this.setClusterObject = function (val) {
+        this.theClusterObject = val;
     };
 
     this.sessionId = function () {
@@ -40,22 +44,6 @@ function SessionObject(session_mgr_val, my_name_val, his_name_val, session_id_va
 
     this.setSessionId = function (val) {
         this.theSessionId = val;
-    };
-
-    this.myName = function () {
-        return this.theMyName;
-    };
-
-    this.setMyName = function (val) {
-        this.theMyName = val;
-    };
-
-    this.hisName = function () {
-        return this.theHisName;
-    };
-
-    this.setHisName = function (val) {
-        this.theHisName = val;
     };
 
     this.hisSession = function () {
@@ -78,19 +66,15 @@ function SessionObject(session_mgr_val, my_name_val, his_name_val, session_id_va
         return this.theReceiveRing;
     };
 
-    this.resetIt = function (session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val) {
+    this.resetIt = function (session_mgr_val, session_id_val) {
         this.theSessionMgrObject = session_mgr_val;
         this.theSessionId = session_id_val;
-        this.theMyName = my_name_val;
-        this.theHisName = his_name_val;
         this.theHisSession = null;
         this.up_seq = 0;
         this.down_seq = 0;
         this.theReceiveQueue = this.utilObject().mallocQueue();
         this.theTransmitQueue = this.utilObject().mallocQueue();
         this.theReceiveRing = this.utilObject().mallocRing();
-        this.theClusterObject = cluster_val;
-        this.clusterObject().addAdditionalSession(this);
     };
 
     this.enqueueTransmitData = function (data_val) {
@@ -136,5 +120,5 @@ function SessionObject(session_mgr_val, my_name_val, his_name_val, session_id_va
         this.sessionMgrObject().abend(this.sessionId() + " " + this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.resetIt(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val);
+    this.resetIt(session_mgr_val, session_id_val);
 }

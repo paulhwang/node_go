@@ -141,24 +141,20 @@ function SwitchObject(fabric_val) {
     };
 
     this.setupSession = function (go_request) {
-        this.debug(true, "setupSession", "start");
         var link = this.getLinkObject(go_request);
         if (!link) {
             return null;
         }
-        this.debug(true, "setupSession", "start1");
 
         var session = link.mallocSession();
         if (!session) {
             return null;
         }
-        this.debug(true, "setupSession", "start2" + session.objectName() + session.sessionId());
 
         var cluster = this.clusterMgrObject().mallocCluster(go_request.topic, session);
         if (!cluster) {
             return null;
         }
-        this.debug(true, "setupSession", "start3");
 
         if (go_request.data !== null) {
             //session.clusterObject().processSetupTopicData(go_request.data);
@@ -198,7 +194,6 @@ function SwitchObject(fabric_val) {
         var res_data = session.dequeueTransmitData();
         if (!res_data) {
             this.debug(false, "getSessionData", "no data");
-            //res.send(this.jsonStingifyData(go_request.command, go_request.ajax_id, null));
             return null;
         }
         this.logit("getSessionData", "res_data=" + res_data);

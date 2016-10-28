@@ -113,6 +113,7 @@ function SwitchObject(fabric_val) {
             return null;
         }
 
+        var pending_sessions = link.getPendingSessions();
         var data = link.receiveQueue().deQueue();
         if (data) {
             this.logit("getLinkData", "link_id=" + go_request.link_id + " my_name="  + go_request.my_name + " data={" + data + "}");
@@ -120,6 +121,7 @@ function SwitchObject(fabric_val) {
         return JSON.stringify({link_id: link.linkId(),
                                name_list: link.nameListChanged(),
                                data: data,
+                               pending_sessions: pending_sessions,
                                });
     };
 

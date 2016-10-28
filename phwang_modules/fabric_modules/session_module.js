@@ -66,6 +66,22 @@ function SessionObject(session_mgr_val, session_id_val) {
         return this.theReceiveRing;
     };
 
+    this.prev = function () {
+        return this.thePrev;
+    };
+
+    this.setPrev = function (val) {
+        this.thePrev = val;
+    };
+
+    this.next = function () {
+        return this.theNext;
+    };
+
+    this.setNext = function (val) {
+        this.theNext = val;
+    };
+
     this.resetIt = function (session_mgr_val, session_id_val) {
         this.theSessionMgrObject = session_mgr_val;
         this.theSessionId = session_id_val;
@@ -75,6 +91,8 @@ function SessionObject(session_mgr_val, session_id_val) {
         this.theReceiveQueue = this.utilObject().mallocQueue();
         this.theTransmitQueue = this.utilObject().mallocQueue();
         this.theReceiveRing = this.utilObject().mallocRing();
+        this.thePrev = null;
+        this.theNext = null;
     };
 
     this.enqueueTransmitData = function (data_val) {

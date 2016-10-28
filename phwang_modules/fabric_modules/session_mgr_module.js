@@ -14,6 +14,13 @@ function SessionMgrObject(link_val) {
     "use strict";
     this.theLinkObject = link_val;
 
+    this.init__ = function () {
+        this.theHead = null;
+        this.theTail = null;
+        this.theSize = 0;
+        this.theGlobalSessionId = 1000;
+    };
+
     this.sessionModuleMalloc = function (session_mgr_val, session_id_val) {
         var session_module = require("./session_module.js");
         return session_module.malloc(session_mgr_val, session_id_val);
@@ -51,14 +58,6 @@ function SessionMgrObject(link_val) {
         return this.rootObject().utilObject();
     };
 
-    this.sessionQueue = function () {
-        return this.theSessionQueue;
-    };
-
-    this.preSessionQueue = function () {
-        return this.thePreSessionQueue;
-    };
-
     this.globalSessionId = function () {
         return this.theGlobalSessionId;
     };
@@ -67,53 +66,139 @@ function SessionMgrObject(link_val) {
         this.theGlobalSessionId += 1;
     };
 
-    this.searchSessionBySessionId = function (session_id_val) {
-        return this.sessionQueue().searchIt(function (session_val, session_id_val) {
-            return session_id_val === session_val.sessionId();
-        }, session_id_val);
-    };
+    this.head = function () {
+        return this.theHead;
+    }
 
-    this.searchSession = function (my_name_val, his_name_val, session_id_val) {
-        return this.sessionQueue().searchIt(function (session_val, my_name_val, his_name_val, session_id_val) {
-            return ((my_name_val === session_val.myName()) &&
-                    (his_name_val === session_val.hisName()) &&
-                    ((session_id_val === session_val.sessionId()) || (session_id_val === 0)));
-        }, my_name_val, his_name_val, session_id_val);
-    };
+    this.setHead = function (val) {
+        this.theHead = val;
+    }
 
-    this.searchAndCreate = function (my_name_val, his_name_val, session_id_val) {
-        var session = this.searchSession(my_name_val, his_name_val, session_id_val);
-        if (!session) {
-            var cluster = this.clusterModuleMalloc();
-            session = this.mallocSession(my_name_val, his_name_val, cluster);
-            this.sessionQueue().enQueue(session);
+    this.tail = function () {
+        return this.theTail;
+    }
 
-            if (my_name_val === his_name_val) {
-                session.setHisName(his_name_val);
-                session.setHisSession(session);
-            } else {
-                var his_session = this.mallocSession(his_name_val, my_name_val, cluster);
-                session.setHisSession(his_session);
-                his_session.setHisSession(session);
-                this.sessionQueue().enQueue(his_session);
-            }
-        }
-        return session;
-    };
+    this.setTail = function (val) {
+        this.theTail = val;
+    }
+
+    this.size = function () {
+        return this.theSize;
+    }
+
+    this.incrementSize = function () {
+        this.theSize += 1;
+    }
+
+    this.decrementSize = function () {
+        this.theSize -= 1;
+    }
 
     this.mallocSession = function () {
         var session = this.sessionModuleMalloc(this, this.globalSessionId());
         this.incrementGlobalSessionId();
-        this.sessionQueue().enQueue(session);
+        this.insertSessionToList(session);
         return session;
     };
 
     this.freeSession = function (session_val) {
+        this.deleteSessionFromList(session_val);
+    };
+
+    this.insertSessionToList = function (session_val) {
+        if (!session_val) {
+            this.abend("enQueue", "null session_val");
+            return;
+        }
+
+        this.abendIt();
+
+        this.incrementSize();
+        if (!this.head()) {
+            session_val.setPrev(null);
+            session_val.setNext(null);
+            this.setHead(session_val);
+            this.setTail(session_val);
+        } else {
+            this.tail().setNext(session_val);
+            session_val.setPrev(this.tail());
+            session_val.setNext(null);
+            this.setTail(session_val);
+        }
+        this.abendIt();
+    };
+
+    this.deleteSessionFromList = function (session_val) {
+        this.abendIt();
+        if (session_val.prev()) {
+            session_val.prev().setNext(session_val.next());
+        } else {
+            this.setHead(session_val.next());
+        }
+        if (session_val.next()) {
+            session_val.next().setPrev(session_val.prev());
+        } else {
+            this.setTail(session_val.prev());
+        }
+        this.decrementSize();
+        this.abendIt();
+    };
+
+    this.searchSessionBySessionId = function (session_id_val) {
+        var session = this.head();
+        while (session) {
+            if (session.sessionId() === session_id_val) {
+                return session;
+            }
+            session = session.next();
+        }
+        return null;
+    };
+
+    this.getPendingSessions = function () {
+        var data = [];
+        var i = 0;
+        var session = this.head();
+        while (session) {
+            if (session.transmitQueue().size() > 0) {
+                data[i] =  session.sessionId();
+                i += 1;
+            }
+            session = session.next();
+        }
+        if (i === 0) {
+            return null;
+        }
+        else {
+            return data;
+        }
+    };
+
+    this.abendIt = function () {
+        var i = 0;
+        var session = this.head();
+        while (session) {
+            session = session.next();
+            i += 1;
+        }
+        if (i !== this.size()) {
+            this.abend("abendIt", "head: size=" + this.size() + " i=" + i);
+        }
+
+        i = 0;
+        session = this.tail();
+        while (session) {
+            session = session.prev();
+            i += 1;
+        }
+        if (i !== this.size()) {
+            this.abend("abendIt", "tail: size=" + this.size() + " i=" + i);
+        }
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
-            logit(str1_val, "==" + str2_val);
+            this.logit(str1_val, "==" + str2_val);
         }
     };
 
@@ -125,7 +210,5 @@ function SessionMgrObject(link_val) {
         this.utilObject().utilAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.theSessionQueue = this.utilObject().mallocQueue();
-    this.thePreSessionQueue = this.utilObject().mallocQueue();
-    this.theGlobalSessionId = 1000;
+    this.init__();
 }

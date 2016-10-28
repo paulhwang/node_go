@@ -107,6 +107,10 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
         return this.sessionMgrObject().mallocSession();
     };
 
+    this.getPendingSessions = function () {
+        return this.sessionMgrObject().getPendingSessions();
+    };
+
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
             logit(str1_val, "==" + str2_val);

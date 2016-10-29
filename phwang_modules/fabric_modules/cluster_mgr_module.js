@@ -14,6 +14,12 @@ function clusterMgrObject(fabric_val) {
     "use strict";
     this.theFabricObject = fabric_val;
 
+    this.init__ = function () {
+        this.theHead = null;
+        this.theTail = null;
+        this.theSize = 0;
+    };
+
     this.clusterModuleMalloc = function (topic_val, session_val) {
         var cluster_module = require("./cluster_module.js");
         return cluster_module.malloc(this, topic_val, session_val);
@@ -46,6 +52,34 @@ function clusterMgrObject(fabric_val) {
     this.incrementGlobalClusterId = function () {
         this.theGlobalClusterId += 1;
     };
+
+    this.head = function () {
+        return this.theHead;
+    }
+
+    this.setHead = function (val) {
+        this.theHead = val;
+    }
+
+    this.tail = function () {
+        return this.theTail;
+    }
+
+    this.setTail = function (val) {
+        this.theTail = val;
+    }
+
+    this.size = function () {
+        return this.theSize;
+    }
+
+    this.incrementSize = function () {
+        this.theSize += 1;
+    }
+
+    this.decrementSize = function () {
+        this.theSize -= 1;
+    }
 
     this.mallocCluster = function (topic_val, session_val) {
         var cluster = this.clusterModuleMalloc(topic_val, session_val);
@@ -134,4 +168,6 @@ function clusterMgrObject(fabric_val) {
     this.theGlobalClusterId = 100;
     this.theClusterQueue = this.utilObject().mallocQueue();
     this.thePoolQueue = this.utilObject().mallocQueue();
+
+    this.init__();
 }

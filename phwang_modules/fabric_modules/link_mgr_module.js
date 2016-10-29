@@ -14,6 +14,12 @@ function LinkMgrObject(fabric_val) {
     "use strict";
     this.theFabricObject = fabric_val;
 
+    this.init__ = function () {
+        this.theHead = null;
+        this.theTail = null;
+        this.theSize = 0;
+    };
+
     this.linkModuleMalloc = function (my_name_val, link_id_val) {
         var link_module = require("./link_module.js");
         return link_module.malloc(this, my_name_val, link_id_val);
@@ -45,6 +51,45 @@ function LinkMgrObject(fabric_val) {
 
     this.incrementGlobalLinkId = function () {
         this.theGlobalLinkId += 1;
+    };
+
+    this.head = function () {
+        return this.theHead;
+    }
+
+    this.setHead = function (val) {
+        this.theHead = val;
+    }
+
+    this.tail = function () {
+        return this.theTail;
+    }
+
+    this.setTail = function (val) {
+        this.theTail = val;
+    }
+
+    this.size = function () {
+        return this.theSize;
+    }
+
+    this.incrementSize = function () {
+        this.theSize += 1;
+    }
+
+    this.decrementSize = function () {
+        this.theSize -= 1;
+    }
+
+    this.mallocLink = function (my_name_val) {
+        var link = this.linkModuleMalloc(my_name_val, this.globalLinkId());
+        this.incrementGlobalLinkId();
+        this.insertLinkToList(link);
+        return link;
+    };
+
+    this.freeLink = function (link_val) {
+        this.deleteLinkFromList(link_val);
     };
 
     this.insertLinkToList = function (link_val) {
@@ -149,15 +194,6 @@ function LinkMgrObject(fabric_val) {
         return name_array;
     };
 
-    this.mallocLink = function (my_name_val) {
-        var entry = this.linkModuleMalloc(my_name_val, this.globalLinkId());
-        this.incrementGlobalLinkId();
-        return entry;
-    };
-
-    this.freeLink = function (link_val) {
-    };
-
     this.abendIt = function () {
         var i = 0;
         var link = this.head();
@@ -197,4 +233,6 @@ function LinkMgrObject(fabric_val) {
     this.theGlobalLinkId = 10;
     this.theLinkQueue = this.utilObject().mallocQueue();
     this.theNameListChanged = false;
+
+    this.init__();
 }

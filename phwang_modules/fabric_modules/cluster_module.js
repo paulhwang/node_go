@@ -12,10 +12,10 @@ module.exports = {
 
 function clusterObject (cluster_mgr_val, topic_val, session_val) {
     "use strict";
-    this.theClusterMgrObject = cluster_mgr_val;
-    session_val.setClusterObject(this);
 
-    this.init__ = function () {
+    this.init__ = function (cluster_mgr_val, topic_val, session_val) {
+        this.theClusterMgrObject = cluster_mgr_val;
+        session_val.setClusterObject(this);
         this.theSessionArray = [2];
         this.theSessionArray[0] = session_val;
         this.theSessionArrayLength = 1;
@@ -176,5 +176,5 @@ function clusterObject (cluster_mgr_val, topic_val, session_val) {
         this.clusterMgrObject().abend(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__();
+    this.init__(cluster_mgr_val, topic_val, session_val);
 }

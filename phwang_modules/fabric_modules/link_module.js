@@ -17,6 +17,19 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
     this.theLinkId = link_id_val;
     this.theMyName = my_name_val;
 
+    this.init__ = function () {
+        this.theSessionMgrObject = session_mgr_module.malloc(this);
+        this.up_seq = 0;
+        this.down_seq = 0;
+        this.theReceiveQueue = this.utilObject().mallocQueue();
+        this.theReceiveRing = this.utilObject().mallocRing();
+        this.theKeepAliveTimer = this.resetTimeout();
+        this.theNameListChanged = true;
+        this.theKeepAliveTimer = null;
+        this.thePrev = null;
+        this.theNext = null;
+    };
+
     this.objectName = function () {
         return "LinkObject";
     };
@@ -67,6 +80,22 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
 
     this.receiveRing = function () {
         return this.theReceiveRing;
+    };
+
+    this.prev = function () {
+        return this.thePrev;
+    };
+
+    this.setPrev = function (val) {
+        this.thePrev = val;
+    };
+
+    this.next = function () {
+        return this.theNext;
+    };
+
+    this.setNext = function (val) {
+        this.theNext = val;
     };
 
     this.nameListChanged = function () {
@@ -125,13 +154,5 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
         this.linkMgrObject().abend(this.objectName() + "." + str1_val, str2_val);
     };
 
-    //this.resetIt(my_name_val, link_id_val);
-    this.theSessionMgrObject = session_mgr_module.malloc(this);
-    this.up_seq = 0;
-    this.down_seq = 0;
-    this.theReceiveQueue = this.utilObject().mallocQueue();
-    this.theReceiveRing = this.utilObject().mallocRing();
-    this.theKeepAliveTimer = this.resetTimeout();
-    this.theNameListChanged = true;
-    this.theKeepAliveTimer = null;
+    this.init__();
 }

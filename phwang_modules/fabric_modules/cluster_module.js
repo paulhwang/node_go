@@ -15,6 +15,18 @@ function clusterObject (cluster_mgr_val, topic_val, session_val) {
     this.theClusterMgrObject = cluster_mgr_val;
     session_val.setClusterObject(this);
 
+    this.init__ = function () {
+        this.theSessionArray = [2];
+        this.theSessionArray[0] = session_val;
+        this.theSessionArrayLength = 1;
+
+        this.theGoObject = this.goObjectMalloc();
+        this.theReceiveQueue = this.utilObject().mallocQueue();
+        this.theTransmitQueue = this.utilObject().mallocQueue();
+        this.theNext = null;
+        this.thePrev = null;
+    };
+
     this.goObjectMalloc = function () {
         var go_module = require("./../go_modules/go_module.js")
         return go_module.malloc(this);
@@ -54,6 +66,22 @@ function clusterObject (cluster_mgr_val, topic_val, session_val) {
 
     this.incrementSessionArrayLength = function () {
         this.theSessionArrayLength += 1;
+    };
+
+    this.prev = function () {
+        return this.thePrev;
+    };
+
+    this.setPrev = function (val) {
+        this.thePrev = val;
+    };
+
+    this.next = function () {
+        return this.theNext;
+    };
+
+    this.setNext = function (val) {
+        this.theNext = val;
     };
 
     this.receiveQueue = function () {
@@ -148,12 +176,5 @@ function clusterObject (cluster_mgr_val, topic_val, session_val) {
         this.clusterMgrObject().abend(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.theSessionArray = [2];
-    this.theSessionArray[0] = session_val;
-    this.theSessionArrayLength = 1;
-
-    this.theGoObject = this.goObjectMalloc();
-    this.theReceiveQueue = this.utilObject().mallocQueue();
-    this.theTransmitQueue = this.utilObject().mallocQueue();
-    this.theNext = null;
+    this.init__();
 }

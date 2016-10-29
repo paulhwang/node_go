@@ -12,9 +12,9 @@ module.exports = {
 
 function SessionMgrObject(link_val) {
     "use strict";
-    this.theLinkObject = link_val;
 
-    this.init__ = function () {
+    this.init__ = function (link_val) {
+        this.theLinkObject = link_val;
         this.theHead = null;
         this.theTail = null;
         this.theSize = 0;
@@ -230,5 +230,5 @@ function SessionMgrObject(link_val) {
         this.utilObject().utilAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__();
+    this.init__(link_val);
 }

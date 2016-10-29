@@ -12,9 +12,9 @@ module.exports = {
 
 function SwitchObject(fabric_val) {
     "use strict";
-    this.theFabricObject = fabric_val;
 
-    this.init__ = function () {
+    this.init__ = function (fabric_val) {
+        this.theFabricObject = fabric_val;
         this.initSwitchTable();
     };
 
@@ -283,5 +283,5 @@ function SwitchObject(fabric_val) {
         this.utilObject().utilAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__();
+    this.init__(fabric_val);
 }

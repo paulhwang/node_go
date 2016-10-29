@@ -14,9 +14,17 @@ function SwitchObject(fabric_val) {
     "use strict";
     this.theFabricObject = fabric_val;
 
+    this.init__ = function () {
+        this.initSwitchTable();
+    };
+
     this.linkModuleMalloc = function (my_name_val, link_id_val) {
         var link_module = require("./link_module.js");
         return link_module.malloc(this, my_name_val, link_id_val);
+    };
+
+    this.defaultLinkUpdateInterval = function () {
+        return 3000;
     };
 
     this.objectName = function () {
@@ -45,6 +53,14 @@ function SwitchObject(fabric_val) {
 
     this.sessionMgrObject = function () {
         return this.fabricObject().sessionMgrObject();
+    };
+
+    this.linkUpdateInterval = function () {
+        return this.theLinkUpdateInterval;
+    };
+
+    this.setLinkUpdateInterval = function (val) {
+        this.theLinkUpdateInterval = val;
     };
 
     this.initSwitchTable = function () {
@@ -85,6 +101,7 @@ function SwitchObject(fabric_val) {
             return null;
         }
         link.resetKeepAliveTimer();
+        this.setLinkUpdateInterval(this.defaultLinkUpdateInterval());
 
         this.debug(true, "setupLink", "name=" + go_request.my_name + " link_id=" + link.linkId());
         return JSON.stringify({link_id: link.linkId(),
@@ -122,6 +139,7 @@ function SwitchObject(fabric_val) {
                                name_list: link.nameListChanged(),
                                data: data,
                                pending_sessions: pending_sessions,
+                               interval: this.linkUpdateInterval(),
                                });
     };
 
@@ -265,5 +283,5 @@ function SwitchObject(fabric_val) {
         this.utilObject().utilAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.initSwitchTable();
+    this.init__();
 }

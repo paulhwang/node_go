@@ -12,12 +12,15 @@ module.exports = {
 
 function clusterMgrObject(fabric_val) {
     "use strict";
-    this.theFabricObject = fabric_val;
 
-    this.init__ = function () {
+    this.init__ = function (fabric_val) {
+        this.theFabricObject = fabric_val;
         this.theHead = null;
         this.theTail = null;
         this.theSize = 0;
+         this.theGlobalClusterId = 100;
+        this.theClusterQueue = this.utilObject().mallocQueue();
+        this.thePoolQueue = this.utilObject().mallocQueue();
     };
 
     this.clusterModuleMalloc = function (topic_val, session_val) {
@@ -184,10 +187,6 @@ function clusterMgrObject(fabric_val) {
     this.abend = function (str1_val, str2_val) {
         this.utilObject().utilAbend(this.objectName() + "." + str1_val, str2_val);
     };
- 
-    this.theGlobalClusterId = 100;
-    this.theClusterQueue = this.utilObject().mallocQueue();
-    this.thePoolQueue = this.utilObject().mallocQueue();
 
-    this.init__();
+    this.init__(fabric_val);
 }

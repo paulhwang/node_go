@@ -121,12 +121,11 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
 
     this.resetTimeout = function () {
         if (this.keepAliveTimer()) {
-            clearInterval(this.keepAliveTimer());
+            clearTimeout(this.keepAliveTimer());
         }
         this.debug(false, "resetTimeout", "my_name=" + this.my_name + " link_id=" + this.link_id);
-        var time_out = setInterval(function (link_val) {
+        var time_out = setTimeout(function (link_val) {
             console.log("resetTimeout(***timeout occurs)", "my_name=" + link_val.myName() + " link_id=" + link_val.linkId());
-            clearInterval(link_val.keepAliveTimer());
             link_val.linkMgrObject().freeLink(link_val);
         }, this.linkTimeoutInterval(), this);
         return time_out;

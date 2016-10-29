@@ -120,6 +120,15 @@ function LinkMgrObject(fabric_val) {
     };
 
     this.deleteLinkFromList = function (link_val) {
+        if (this.size() <= 0) {
+            this.abend("deleteLinkFromList", "size=" + this.size());
+            return;
+        }
+        if (!this.linkExistInTheList(link_val)) {
+            this.abend("deleteLinkFromList", "linkExistInTheList is false");
+            return;
+        }
+
         this.abendIt();
         if (link_val.prev()) {
             link_val.prev().setNext(link_val.next());
@@ -145,6 +154,17 @@ function LinkMgrObject(fabric_val) {
             link = link.next();
         }
         return null;
+    };
+
+    this.linkExistInTheList = function (link_val) {
+        var link = this.head();
+        while (link) {
+            if (link === link_val) {
+                return true;
+            }
+            link = link.next();
+        }
+        return false;
     };
 
     this.setNameListChanged = function () {

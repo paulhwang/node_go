@@ -129,6 +129,15 @@ function SessionMgrObject(link_val) {
     };
 
     this.deleteSessionFromList = function (session_val) {
+        if (this.size() <= 0) {
+            this.abend("deleteSessionFromList", "size=" + this.size());
+            return;
+        }
+        if (!this.sessionExistInTheList(session_val)) {
+            this.abend("deleteSessionFromList", "sessionExistInTheList is false");
+            return;
+        }
+
         this.abendIt();
         if (session_val.prev()) {
             session_val.prev().setNext(session_val.next());
@@ -153,6 +162,17 @@ function SessionMgrObject(link_val) {
             session = session.next();
         }
         return null;
+    };
+
+    this.sessionExistInTheList = function (session_val) {
+        var session = this.head();
+        while (session) {
+            if (session === session_val) {
+                return true;
+            }
+            session = session.next();
+        }
+        return false;
     };
 
     this.getPendingSessions = function () {

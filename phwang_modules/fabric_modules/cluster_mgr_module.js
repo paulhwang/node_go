@@ -114,6 +114,15 @@ function clusterMgrObject(fabric_val) {
     };
 
     this.deleteClusterFromList = function (cluster_val) {
+        if (this.size() <= 0) {
+            this.abend("deleteClusterFromList", "size=" + this.size());
+            return;
+        }
+        if (!this.clusterExistInTheList(cluster_val)) {
+            this.abend("deleteClusterFromList", "clusterExistInTheList is false");
+            return;
+        }
+
         this.abendIt();
         if (cluster_val.prev()) {
             cluster_val.prev().setNext(cluster_val.next());
@@ -127,6 +136,17 @@ function clusterMgrObject(fabric_val) {
         }
         this.decrementSize();
         this.abendIt();
+    };
+
+    this.clusterExistInTheList = function (cluster_val) {
+        var cluster = this.head();
+        while (cluster) {
+            if (cluster === cluster_val) {
+                return true;
+            }
+            cluster = cluster.next();
+        }
+        return false;
     };
 
     this.abendIt = function () {

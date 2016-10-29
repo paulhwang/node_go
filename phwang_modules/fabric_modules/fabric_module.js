@@ -12,16 +12,13 @@ module.exports = {
 
 function FabricObject(root_object_val) {
     "use strict";
-    this.theRootObject = root_object_val;
 
-    this.mallocModules = function () {
+    this.init__ = function (root_object_val) {
+        this.theRootObject = root_object_val;
         var link_mgr_module = require("./link_mgr_module.js");
-        //var session_mgr_module = require("./session_mgr_module.js");
         var cluster_mgr_module = require("./cluster_mgr_module.js");
         var switch_module = require("./switch_module.js");
-
         this.theLinkMgrObject = link_mgr_module.malloc(this);
-        //this.theSessionMgrObject = session_mgr_module.malloc(this);
         this.theClusterMgrObject = cluster_mgr_module.malloc(this);
         this.theSwitchObject = switch_module.malloc(this);
     };
@@ -62,5 +59,5 @@ function FabricObject(root_object_val) {
         return this.utilObject().ringObject();
     };
 
-    this.mallocModules();
+    this.init__(root_object_val);
 }

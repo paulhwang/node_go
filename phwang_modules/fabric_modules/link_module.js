@@ -30,6 +30,10 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
         this.theNext = null;
     };
 
+    this.linkTimeoutInterval = function () {
+        return 30000;
+    };
+
     this.objectName = function () {
         return "LinkObject";
     };
@@ -124,7 +128,7 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
             console.log("resetTimeout(***timeout occurs)", "my_name=" + link_val.myName() + " link_id=" + link_val.linkId());
             clearInterval(link_val.keepAliveTimer());
             link_val.linkMgrObject().freeLink(link_val);
-        }, 20000, this);
+        }, link.linkTimeoutInterval(), this);
         return time_out;
     };
 

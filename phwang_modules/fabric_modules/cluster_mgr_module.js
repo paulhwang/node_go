@@ -56,6 +56,67 @@ function clusterMgrObject(fabric_val) {
     this.freeCluster = function (cluster_val) {
     };
 
+    this.insertClusterToList = function (cluster_val) {
+        if (!cluster_val) {
+            this.abend("insertClusterToList", "null cluster_val");
+            return;
+        }
+
+        this.abendIt();
+
+        this.incrementSize();
+        if (!this.head()) {
+            cluster_val.setPrev(null);
+            cluster_val.setNext(null);
+            this.setHead(cluster_val);
+            this.setTail(cluster_val);
+        } else {
+            this.tail().setNext(cluster_val);
+            cluster_val.setPrev(this.tail());
+            cluster_val.setNext(null);
+            this.setTail(cluster_val);
+        }
+        this.abendIt();
+    };
+
+    this.deleteClusterFromList = function (cluster_val) {
+        this.abendIt();
+        if (cluster_val.prev()) {
+            cluster_val.prev().setNext(cluster_val.next());
+        } else {
+            this.setHead(cluster_val.next());
+        }
+        if (cluster_val.next()) {
+            cluster_val.next().setPrev(cluster_val.prev());
+        } else {
+            this.setTail(cluster_val.prev());
+        }
+        this.decrementSize();
+        this.abendIt();
+    };
+
+    this.abendIt = function () {
+        var i = 0;
+        var cluster = this.head();
+        while (cluster) {
+            cluster = cluster.next();
+            i += 1;
+        }
+        if (i !== this.size()) {
+            this.abend("abendIt", "head: size=" + this.size() + " i=" + i);
+        }
+
+        i = 0;
+        cluster = this.tail();
+        while (cluster) {
+            cluster = cluster.prev();
+            i += 1;
+        }
+        if (i !== this.size()) {
+            this.abend("abendIt", "tail: size=" + this.size() + " i=" + i);
+        }
+    };
+
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
             this.logit(str1_val, "==" + str2_val);

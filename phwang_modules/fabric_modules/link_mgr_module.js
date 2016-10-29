@@ -47,6 +47,45 @@ function LinkMgrObject(fabric_val) {
         this.theGlobalLinkId += 1;
     };
 
+    this.insertLinkToList = function (link_val) {
+        if (!link_val) {
+            this.abend("insertLinkToList", "null link_val");
+            return;
+        }
+
+        this.abendIt();
+
+        this.incrementSize();
+        if (!this.head()) {
+            link_val.setPrev(null);
+            link_val.setNext(null);
+            this.setHead(link_val);
+            this.setTail(link_val);
+        } else {
+            this.tail().setNext(link_val);
+            link_val.setPrev(this.tail());
+            link_val.setNext(null);
+            this.setTail(link_val);
+        }
+        this.abendIt();
+    };
+
+    this.deleteLinkFromList = function (link_val) {
+        this.abendIt();
+        if (link_val.prev()) {
+            link_val.prev().setNext(link_val.next());
+        } else {
+            this.setHead(link_val.next());
+        }
+        if (link_val.next()) {
+            link_val.next().setPrev(link_val.prev());
+        } else {
+            this.setTail(link_val.prev());
+        }
+        this.decrementSize();
+        this.abendIt();
+    };
+
     this.searchLinkByName = function (my_name_val) {
         this.debug(false, "searchLinkByName", "name=" + my_name_val);
         return this.linkQueue().searchIt(function (link_val, my_name_val) {
@@ -117,6 +156,28 @@ function LinkMgrObject(fabric_val) {
     };
 
     this.freeLink = function (link_val) {
+    };
+
+    this.abendIt = function () {
+        var i = 0;
+        var link = this.head();
+        while (link) {
+            link = link.next();
+            i += 1;
+        }
+        if (i !== this.size()) {
+            this.abend("abendIt", "head: size=" + this.size() + " i=" + i);
+        }
+
+        i = 0;
+        link = this.tail();
+        while (link) {
+            link = link.prev();
+            i += 1;
+        }
+        if (i !== this.size()) {
+            this.abend("abendIt", "tail: size=" + this.size() + " i=" + i);
+        }
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

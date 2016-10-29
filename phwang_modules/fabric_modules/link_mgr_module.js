@@ -43,10 +43,6 @@ function LinkMgrObject(fabric_val) {
         return this.rootObject().utilObject();
     };
 
-    this.linkQueue = function () {
-        return this.theLinkQueue;
-    };
-
     this.globalLinkId = function () {
         return this.theGlobalLinkId;
     };
@@ -88,7 +84,6 @@ function LinkMgrObject(fabric_val) {
         this.incrementGlobalLinkId();
         this.insertLinkToList(link);
         this.setNameListChanged();
-        this.linkQueue().enQueue(link);
         return link;
     };
 
@@ -168,23 +163,21 @@ function LinkMgrObject(fabric_val) {
     };
 
     this.setNameListChanged = function () {
-        var queue_element = this.linkQueue().tail();
-        while (queue_element) {
-            var link = queue_element.data();
+        var link = this.head();
+        while (link) {
             link.setNameListChanged();
-            queue_element = queue_element.prev();
+            link = link.next();
         }
     };
 
     this.getNameList = function () {
         var name_array = [];
         var i = 0;
-        var queue_element = this.linkQueue().tail();
-        while (queue_element) {
-            var link = queue_element.data();
+        var link = this.head();
+        while (link) {
             name_array[i] = link.myName();
             i += 1;
-            queue_element = queue_element.prev();
+            link = link.next();
         }
         return name_array;
     };
@@ -224,8 +217,6 @@ function LinkMgrObject(fabric_val) {
     this.abend = function (str1_val, str2_val) {
         this.utilObject().utilAbend(this.objectName() + "." + str1_val, str2_val);
     };
-
-    this.theLinkQueue = this.utilObject().mallocQueue();
 
     this.init__();
 }

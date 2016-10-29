@@ -23,7 +23,7 @@ function clusterObject (cluster_mgr_val, topic_val, session_val) {
         this.theGoObject = this.goObjectMalloc();
         this.theReceiveQueue = this.utilObject().mallocQueue();
         this.theTransmitQueue = this.utilObject().mallocQueue();
-        this.theNext = null;
+        this.theNext1 = null;
         this.thePrev = null;
     };
 

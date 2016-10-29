@@ -95,7 +95,7 @@ function SwitchObject(fabric_val) {
     }
 
     this.setupLink = function (go_request) {
-        var link = this.linkMgrObject().searchAndCreate(go_request.my_name);
+        var link = this.linkMgrObject().mallocLink(go_request.my_name);
         if (!link) {
             this.abend("setupLink", "null link");
             return null;

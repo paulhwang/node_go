@@ -15,9 +15,11 @@ function LinkMgrObject(fabric_val) {
     this.theFabricObject = fabric_val;
 
     this.init__ = function () {
+        this.theGlobalLinkId = 10;
         this.theHead = null;
         this.theTail = null;
         this.theSize = 0;
+        this.theNameListChanged = false;
     };
 
     this.linkModuleMalloc = function (my_name_val, link_id_val) {
@@ -85,6 +87,8 @@ function LinkMgrObject(fabric_val) {
         var link = this.linkModuleMalloc(my_name_val, this.globalLinkId());
         this.incrementGlobalLinkId();
         this.insertLinkToList(link);
+        this.setNameListChanged();
+        this.linkQueue().enQueue(link);
         return link;
     };
 
@@ -131,45 +135,16 @@ function LinkMgrObject(fabric_val) {
         this.abendIt();
     };
 
-    this.searchLinkByName = function (my_name_val) {
-        this.debug(false, "searchLinkByName", "name=" + my_name_val);
-        return this.linkQueue().searchIt(function (link_val, my_name_val) {
-            return my_name_val === link_val.myName()
-        }, my_name_val);
-    };
-
-    this.searchLinkByLinkId = function (link_id_val) {
-        this.debug(false, "searchLinkByLinkId", "link_id=" + link_id_val);
-        return this.linkQueue().searchIt(function (link_val, link_id_val) {
-            return link_id_val === link_val.linkId()
-        }, link_id_val);
-    };
-
     this.searchLinkByNameAndLinkId = function (my_name_val, link_id_val) {
         this.debug(false, "searchLinkByNameAndLinkId", my_name_val + " " + link_id_val);
-        return this.linkQueue().searchIt(function (link_val, my_name_val, link_id_val) {
-            return ((my_name_val === link_val.myName()) &&
-                    ((link_id_val === link_val.linkId()) || (link_id_val === 0)));
-        }, my_name_val, link_id_val);
-    };
-
-    this.searchAndCreate = function (my_name_val) {
-        var link = this.searchLinkByName(my_name_val);
-        if (!link) {
-            link = this.mallocLink(my_name_val);
-            this.debug(false, "searchAndCreate", "malloc link: name=" + link.myName() + "=link_id=" + link.link_id);
-            this.setNameListChanged();
-            this.linkQueue().enQueue(link);
+        var link = this.head();
+        while (link) {
+            if ((link.linkId() === link_id_val) && (link.myName() === my_name_val)) {
+                return link;
+            }
+            link = link.next();
         }
-        return link;
-    };
-
-    this.removeLink = function (link_val) {
-        this.logit("removeLink", "my_name=" + link_val.myName() + " link_id=" + link_val.linkId());
-        this.linkQueue().unQueue(function (link_val, my_name_val, link_id_val) {
-            return ((my_name_val === link_val.myName()) && (link_id_val === link_val.linkId()));
-        }, link_val.myName(), link_val.linkId());
-        this.setNameListChanged();
+        return null;
     };
 
     this.setNameListChanged = function () {
@@ -230,9 +205,7 @@ function LinkMgrObject(fabric_val) {
         this.utilObject().utilAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.theGlobalLinkId = 10;
     this.theLinkQueue = this.utilObject().mallocQueue();
-    this.theNameListChanged = false;
 
     this.init__();
 }

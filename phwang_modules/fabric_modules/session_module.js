@@ -14,6 +14,19 @@ function SessionObject(session_mgr_val, session_id_val) {
     "use strict";
     this.theSessionMgrObject = session_mgr_val;
 
+    this.init__ = function (session_mgr_val, session_id_val) {
+        this.theSessionMgrObject = session_mgr_val;
+        this.theSessionId = session_id_val;
+        this.theHisSession = null;
+        this.up_seq = 0;
+        this.down_seq = 0;
+        this.theReceiveQueue = this.utilObject().mallocQueue();
+        this.theTransmitQueue = this.utilObject().mallocQueue();
+        this.theReceiveRing = this.utilObject().mallocRing();
+        this.thePrev = null;
+        this.theNext = null;
+    };
+
     this.objectName = function () {
         return "SessionObject";
     };
@@ -82,19 +95,6 @@ function SessionObject(session_mgr_val, session_id_val) {
         this.theNext = val;
     };
 
-    this.resetIt = function (session_mgr_val, session_id_val) {
-        this.theSessionMgrObject = session_mgr_val;
-        this.theSessionId = session_id_val;
-        this.theHisSession = null;
-        this.up_seq = 0;
-        this.down_seq = 0;
-        this.theReceiveQueue = this.utilObject().mallocQueue();
-        this.theTransmitQueue = this.utilObject().mallocQueue();
-        this.theReceiveRing = this.utilObject().mallocRing();
-        this.thePrev = null;
-        this.theNext = null;
-    };
-
     this.enqueueTransmitData = function (data_val) {
         this.debug(true, "enqueueTransmitData", data_val);
         this.transmitQueue().enQueue(data_val);
@@ -138,5 +138,5 @@ function SessionObject(session_mgr_val, session_id_val) {
         this.sessionMgrObject().abend(this.sessionId() + " " + this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.resetIt(session_mgr_val, session_id_val);
+    this.init__(session_mgr_val, session_id_val);
 }

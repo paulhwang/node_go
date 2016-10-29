@@ -13,11 +13,11 @@ module.exports = {
 function LinkObject(link_mgr_val, my_name_val, link_id_val) {
     "use strict";
     var session_mgr_module = require("./session_mgr_module.js");
-    this.theLinkMgrObject  = link_mgr_val;
-    this.theLinkId = link_id_val;
-    this.theMyName = my_name_val;
 
-    this.init__ = function () {
+    this.init__ = function (link_mgr_val, my_name_val, link_id_val) {
+        this.theLinkMgrObject  = link_mgr_val;
+        this.theLinkId = link_id_val;
+        this.theMyName = my_name_val;
         this.theSessionMgrObject = session_mgr_module.malloc(this);
         this.up_seq = 0;
         this.down_seq = 0;
@@ -157,5 +157,5 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
         this.linkMgrObject().abend(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__();
+    this.init__(link_mgr_val, my_name_val, link_id_val);
 }

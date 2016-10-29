@@ -12,9 +12,9 @@ module.exports = {
 
 function LinkMgrObject(fabric_val) {
     "use strict";
-    this.theFabricObject = fabric_val;
 
-    this.init__ = function () {
+    this.init__ = function (fabric_val) {
+        this.theFabricObject = fabric_val;
         this.theGlobalLinkId = 10;
         this.theHead = null;
         this.theTail = null;
@@ -218,5 +218,5 @@ function LinkMgrObject(fabric_val) {
         this.utilObject().utilAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__();
+    this.init__(fabric_val);
 }

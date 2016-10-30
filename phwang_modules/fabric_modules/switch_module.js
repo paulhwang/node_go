@@ -253,7 +253,20 @@ function SwitchObject(fabric_val) {
         }
 
         this.debug(true, "putSessionData", "queue_size=" + session.receiveQueue().size());
-        return null;
+        //return null;
+
+        var res_data = session.dequeueTransmitData();
+        if (!res_data) {
+            this.debug(false, "putSessionData", "no data");
+            return null;
+        }
+        this.logit("putSessionData", "res_data=" + res_data);
+
+        this.debug(false, "putSessionData", "ajax_id=" + go_request.ajax_id);
+        this.logit("putSessionData", "(" + go_request.link_id + "," + go_request.session_id + ") "  + go_request.his_name + "=>" + go_request.my_name + " {" + res_data + "}");
+        return JSON.stringify({session_id: session.sessionId(),
+                               res_data: res_data,
+                           });
     };
 
     this.keepAlive = function (go_request) {

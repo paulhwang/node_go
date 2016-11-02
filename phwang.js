@@ -11,4 +11,4 @@ app.post("/django_go/go_ajax/", express_http.post);
 app.get("/django_go/go_ajax/", express_http.get);
 app.use(express_http.not_found);
 app.use(express_http.failure);
-app.listen(8080);
+app.listen(80);

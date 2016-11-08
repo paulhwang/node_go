@@ -93,7 +93,7 @@ function clusterObject (cluster_mgr_val, data_val, session_val) {
 
     this.createTopic = function (data_val) {
         var data = JSON.parse(data_val);
-        if (data.topic === 'go') {
+        if (data.topic === 'GO_GAME') {
             this.theGoObject = this.goObjectMalloc();
         }
     };

@@ -10,21 +10,20 @@ module.exports = {
     },
 };
 
-function clusterObject (cluster_mgr_val, topic_val, session_val) {
+function clusterObject (cluster_mgr_val, data_val, session_val) {
     "use strict";
 
-    this.init__ = function (cluster_mgr_val, topic_val, session_val) {
+    this.init__ = function (cluster_mgr_val, data_val, session_val) {
         this.theClusterMgrObject = cluster_mgr_val;
         session_val.setClusterObject(this);
         this.theSessionArray = [2];
         this.theSessionArray[0] = session_val;
         this.theSessionArrayLength = 1;
-
-        this.theGoObject = this.goObjectMalloc();
         this.theReceiveQueue = this.utilObject().mallocQueue();
         this.theTransmitQueue = this.utilObject().mallocQueue();
         this.theNext = null;
         this.thePrev = null;
+        this.createTopic(data_val);
     };
 
     this.goObjectMalloc = function () {
@@ -90,6 +89,13 @@ function clusterObject (cluster_mgr_val, topic_val, session_val) {
 
     this.transmitQueue = function () {
         return this.theTransmitQueue;
+    };
+
+    this.createTopic = function (data_val) {
+        var data = JSON.parse(data_val);
+        if (data.topic === 'go') {
+            this.theGoObject = this.goObjectMalloc();
+        }
     };
 
     this.addAdditionalSession = function (session_val) {
@@ -176,5 +182,5 @@ function clusterObject (cluster_mgr_val, topic_val, session_val) {
         this.clusterMgrObject().abend(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(cluster_mgr_val, topic_val, session_val);
+    this.init__(cluster_mgr_val, data_val, session_val);
 }

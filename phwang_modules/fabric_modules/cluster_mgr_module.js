@@ -84,8 +84,8 @@ function clusterMgrObject(fabric_val) {
         this.theSize -= 1;
     }
 
-    this.mallocCluster = function (topic_val, session_val) {
-        var cluster = this.clusterModuleMalloc(topic_val, session_val);
+    this.mallocCluster = function (data_val, session_val) {
+        var cluster = this.clusterModuleMalloc(data_val, session_val);
         this.incrementGlobalClusterId();
         return cluster;
     };

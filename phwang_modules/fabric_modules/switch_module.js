@@ -171,7 +171,7 @@ function SwitchObject(fabric_val) {
             return null;
         }
 
-        var cluster = this.clusterMgrObject().mallocCluster(go_request.topic, session);
+        var cluster = this.clusterMgrObject().mallocCluster(go_request.data, session);
         if (!cluster) {
             return null;
         }

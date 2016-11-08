@@ -39,10 +39,6 @@ function clusterObject (cluster_mgr_val, data_val, session_val) {
         return this.sessionArray(0);
     };
 
-    this.goObject = function () {
-        return this.theGoObject;
-    };
-
     this.clusterMgrObject = function () {
         return this.theClusterMgrObject;
     };
@@ -53,6 +49,14 @@ function clusterObject (cluster_mgr_val, data_val, session_val) {
 
     this.utilObject = function () {
         return this.clusterMgrObject().utilObject();
+    };
+
+    this.topicObject = function () {
+        return this.theTopicObject;
+    };
+
+    this.setTopicObject = function (val) {
+        this.theTopicObject = val;
     };
 
     this.sessionArray = function (index_val) {
@@ -94,7 +98,7 @@ function clusterObject (cluster_mgr_val, data_val, session_val) {
     this.createTopic = function (data_val) {
         var data = JSON.parse(data_val);
         if (data.topic === 'GO_GAME') {
-            this.theGoObject = this.goObjectMalloc();
+            this.setTopicObject(this.goObjectMalloc());
         }
     };
 
@@ -144,7 +148,7 @@ function clusterObject (cluster_mgr_val, data_val, session_val) {
         this.debug(true, "processSetupTopicData", "data=" + json_data_val);
         var topic_data = JSON.parse(json_data_val);
         if (topic_data.command === "config") {
-            this.goObject().configObject().createConfig(topic_data.data);
+            this.topicObject().configObject().createConfig(topic_data.data);
         }
     };
 
@@ -165,7 +169,7 @@ function clusterObject (cluster_mgr_val, data_val, session_val) {
     };
 
     this.receiveStringData = function (str_val) {
-        this.goObject().portObject().receiveStringData(str_val);
+        this.topicObject().portObject().receiveStringData(str_val);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

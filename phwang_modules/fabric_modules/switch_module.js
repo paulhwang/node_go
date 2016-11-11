@@ -190,6 +190,7 @@ function SwitchObject(fabric_val) {
         if (!cluster) {
             return null;
         }
+        cluster.addAdditionalSession(his_session);
 
         if (go_request.data !== null) {
             //session.clusterObject().processSetupTopicData(go_request.data);

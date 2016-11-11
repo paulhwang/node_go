@@ -175,7 +175,11 @@ function SessionMgrObject(link_val) {
         return false;
     };
 
-    this.getPendingSessions = function () {
+    this.getPendingSessionSetup = function () {
+        return null;
+    };
+
+    this.getPendingSessionData = function () {
         var data = [];
         var i = 0;
         var session = this.head();

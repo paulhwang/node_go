@@ -130,15 +130,18 @@ function SwitchObject(fabric_val) {
             return null;
         }
 
-        var pending_sessions = link.getPendingSessions();
+        var pending_session_setup = link.getPendingSessionSetup();
+        var pending_session_data = link.getPendingSessionData();
         var data = link.receiveQueue().deQueue();
         if (data) {
             this.logit("getLinkData", "link_id=" + go_request.link_id + " my_name="  + go_request.my_name + " data={" + data + "}");
         }
+
         return JSON.stringify({link_id: link.linkId(),
                                name_list: link.nameListChanged(),
                                data: data,
-                               pending_sessions: pending_sessions,
+                               pending_session_setup: pending_session_setup,
+                               pending_session_data: pending_session_data,
                                interval: this.linkUpdateInterval(),
                                });
     };

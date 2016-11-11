@@ -151,6 +151,18 @@ function LinkMgrObject(fabric_val) {
         return null;
     };
 
+    this.searchLinkByName = function (my_name_val) {
+        this.debug(false, "searchLinkByName", my_name_val);
+        var link = this.head();
+        while (link) {
+            if (link.myName() === my_name_val) {
+                return link;
+            }
+            link = link.next();
+        }
+        return null;
+    };
+
     this.linkExistInTheList = function (link_val) {
         var link = this.head();
         while (link) {

@@ -169,6 +169,18 @@ function SwitchObject(fabric_val) {
             return null;
         }
 
+        var his_session = null;
+        if (go_request.my_name !== go_request.his_name) {
+            var his_link = this.linkMgrObject().searchLinkByName(go_request.his_name);
+            if (!his_link) {
+                return null;
+            }
+            his_session = his_link.mallocSession();
+            if (!his_session) {
+                return null;
+            }
+        }
+
         var session = link.mallocSession();
         if (!session) {
             return null;

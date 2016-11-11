@@ -23,6 +23,7 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
         this.down_seq = 0;
         this.theReceiveQueue = this.utilObject().mallocQueue();
         this.theReceiveRing = this.utilObject().mallocRing();
+        this.thePendingSessionSetupQueue = this.utilObject().mallocQueue();
         this.theNameListChanged = true;
         this.theKeepAliveTimer = null;
         this.thePrev = null;
@@ -85,6 +86,10 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
         return this.theReceiveRing;
     };
 
+    this.pendingSessionSetupQueue = function () {
+        return this.thePendingSessionSetupQueue;
+    };
+
     this.prev = function () {
         return this.thePrev;
     };
@@ -138,12 +143,18 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
         return this.sessionMgrObject().mallocSession();
     };
 
-    this.getPendingSessionSetup = function () {
-        return this.sessionMgrObject().getPendingSessionSetup();
-    };
-
     this.getPendingSessionData = function () {
         return this.sessionMgrObject().getPendingSessionData();
+    };
+
+    this.getPendingSessionSetup = function () {
+        return this.pendingSessionSetupQueue().deQueue();
+    };
+
+    this.setPendingSessionSetup = function (session_val, data_val) {
+        this.pendingSessionSetupQueue().enQueue(JSON.stringify({session_id: session_val.sessionId(),
+                                                                data: data_val
+                                                                }));
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

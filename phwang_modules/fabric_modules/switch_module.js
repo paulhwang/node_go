@@ -105,7 +105,8 @@ function SwitchObject(fabric_val) {
         this.setLinkUpdateInterval(this.defaultLinkUpdateInterval());
 
         this.debug(true, "setupLink", "name=" + go_request.my_name + " link_id=" + link.linkId());
-        return JSON.stringify({link_id: link.linkId(),
+        return JSON.stringify({my_name: link.myName(),
+                               link_id: link.linkId(),
                               });
     };
 

@@ -205,9 +205,10 @@ function SwitchObject(fabric_val) {
         }
 
         var json_data = JSON.stringify({
-                        session_id: session.sessionId(),
-                        extra_data: go_request.data,
-                    });
+                            link_id: session.linkObject().linkId(),
+                            session_id: session.sessionId(),
+                            extra_data: go_request.data,
+                            });
         this.logit("setupSessionReply", "(" + go_request.link_id + ":" + session.sessionId() + ") " + go_request.my_name + "=>" + go_request.his_name);
         return json_data;
     };
@@ -234,8 +235,10 @@ function SwitchObject(fabric_val) {
         if (!session) {
             return null;
         }
-        return JSON.stringify({session_id: session.sessionId(),
-                              });
+        return JSON.stringify({
+                    link_id: session.linkObject().linkId(),
+                    session_id: session.sessionId(),
+                    });
     };
 
     this.getSessionData = function (go_request) {
@@ -255,9 +258,11 @@ function SwitchObject(fabric_val) {
 
         this.debug(false, "getSessionData", "ajax_id=" + go_request.ajax_id);
         this.logit("getSessionData", "(" + go_request.link_id + "," + go_request.session_id + ") "  + go_request.his_name + "=>" + go_request.my_name + " {" + res_data + "}");
-        return JSON.stringify({session_id: session.sessionId(),
-                               res_data: res_data,
-                           });
+        return JSON.stringify({
+                    link_id: session.linkObject().linkId(),
+                    session_id: session.sessionId(),
+                    res_data: res_data,
+                    });
     };
 
     this.putSessionData = function (go_request) {
@@ -299,9 +304,11 @@ function SwitchObject(fabric_val) {
 
         this.debug(false, "putSessionData", "ajax_id=" + go_request.ajax_id);
         this.logit("putSessionData", "(" + go_request.link_id + "," + go_request.session_id + ") "  + go_request.his_name + "=>" + go_request.my_name + " {" + res_data + "}");
-        return JSON.stringify({session_id: session.sessionId(),
-                               res_data: res_data,
-                           });
+        return JSON.stringify({
+                    link_id: session.linkObject().linkId(),
+                    session_id: session.sessionId(),
+                    res_data: res_data,
+                    });
     };
 
     this.keepAlive = function (go_request) {

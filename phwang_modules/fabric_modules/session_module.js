@@ -39,6 +39,10 @@ function SessionObject(session_mgr_val, session_id_val) {
         return this.theSessionMgrObject;
     };
 
+    this.linkObject = function () {
+        return this.sessionMgrObject().linkObject();
+    };
+
     this.utilObject = function () {
         return this.sessionMgrObject().utilObject();
     };

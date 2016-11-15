@@ -165,7 +165,9 @@ function SwitchObject(fabric_val) {
         }
 
         link.clearNameListChanged();
-        var json_data = JSON.stringify(this.linkMgrObject().getNameList());
+        var json_data = JSON.stringify({link_id: link.linkId(),
+                                        name_list: this.linkMgrObject().getNameList(),
+                                        });
         this.debug(true, "getNameList", "(" + link.linkId() + ",0) " + go_request.my_name + "=>server " + json_data);
         return json_data;
     };

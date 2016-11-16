@@ -23,9 +23,9 @@ function clusterMgrObject(fabric_val) {
         this.thePoolQueue = this.utilObject().mallocQueue();
     };
 
-    this.clusterModuleMalloc = function (topic_val, session_val) {
+    this.clusterModuleMalloc = function (topic_data_val, session_val) {
         var cluster_module = require("./cluster_module.js");
-        return cluster_module.malloc(this, topic_val, session_val);
+        return cluster_module.malloc(this, topic_data_val, session_val);
     };
 
     this.objectName = function () {

@@ -5,15 +5,15 @@
  */
 
 module.exports = {
-    malloc: function (cluster_mgr_val, topic_val, session_val) {
-        return new clusterObject(cluster_mgr_val, topic_val, session_val);
+    malloc: function (cluster_mgr_val, topic_data_val, session_val) {
+        return new clusterObject(cluster_mgr_val, topic_data_val, session_val);
     },
 };
 
-function clusterObject (cluster_mgr_val, data_val, session_val) {
+function clusterObject (cluster_mgr_val, topic_data_val, session_val) {
     "use strict";
 
-    this.init__ = function (cluster_mgr_val, data_val, session_val) {
+    this.init__ = function (cluster_mgr_val, topic_data_val, session_val) {
         this.theClusterMgrObject = cluster_mgr_val;
         session_val.setClusterObject(this);
         this.theSessionArray = [2];
@@ -23,7 +23,7 @@ function clusterObject (cluster_mgr_val, data_val, session_val) {
         this.theTransmitQueue = this.utilObject().mallocQueue();
         this.theNext = null;
         this.thePrev = null;
-        this.createTopic(data_val);
+        this.createTopic(topic_data_val);
     };
 
     this.goObjectMalloc = function () {
@@ -95,9 +95,9 @@ function clusterObject (cluster_mgr_val, data_val, session_val) {
         return this.theTransmitQueue;
     };
 
-    this.createTopic = function (data_val) {
-        var data = JSON.parse(data_val);
-        if (data.topic === 'GO_GAME') {
+    this.createTopic = function (topic_data_val) {
+        var topic_data = JSON.parse(topic_data_val);
+        if (topic_data.title === "go") {
             this.setTopicObject(this.goObjectMalloc());
         }
     };
@@ -186,5 +186,5 @@ function clusterObject (cluster_mgr_val, data_val, session_val) {
         this.clusterMgrObject().abend(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(cluster_mgr_val, data_val, session_val);
+    this.init__(cluster_mgr_val, topic_data_val, session_val);
 }

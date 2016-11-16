@@ -61,7 +61,6 @@ function AjaxObject(port_object_val) {
         var data = this.switchObject().switchRequest(req.headers.gorequest);
         var json_str = JSON.stringify({
                         command: go_request.command,
-                        ajax_id: go_request.ajax_id,
                         data: data,
                     });
         res.type('application/json');

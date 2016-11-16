@@ -150,6 +150,18 @@ function LinkMgrObject(fabric_val) {
         }
         return null;
     };
+    
+    this.searchLinkByLinkId = function (link_id_val) {
+        this.debug(false, "searchLinkByLinkId", link_id_val);
+        var link = this.head();
+        while (link) {
+            if (link.linkId() === link_id_val) {
+                return link;
+            }
+            link = link.next();
+        }
+        return null;
+    };
 
     this.searchLinkByName = function (my_name_val) {
         this.debug(false, "searchLinkByName", my_name_val);

@@ -108,24 +108,24 @@ function clusterObject (cluster_mgr_val, data_val, session_val) {
     };
 
     this.enqueueTransmitData = function (data_val) {
-        this.debug(true, "enqueueTransmitData", data_val);
+        this.debug(false, "enqueueTransmitData", data_val);
         this.transmitQueue().enQueue(data_val);
     };
 
     this.dequeueTransmitData = function () {
         var data = this.transmitQueue().deQueue();
-        this.debug(true, "dequeueTransmitData", data);
+        this.debug(false, "dequeueTransmitData", data);
         return data;
     };
 
     this.enqueueReceiveData = function (data_val) {
-        this.debug(true, "enqueueReceiveData", data_val);
+        this.debug(false, "enqueueReceiveData", data_val);
         this.receiveQueue().enQueue(data_val);
     };
 
     this.dequeueReceiveData = function () {
         var data = this.receiveQueue().deQueue();
-        this.debug(true, "dequeueReceiveData", data);
+        this.debug(false, "dequeueReceiveData", data);
         return data;
     };
 
@@ -163,7 +163,7 @@ function clusterObject (cluster_mgr_val, data_val, session_val) {
     };
 
     this.enqueAndPocessReceiveData = function (data_val) {
-        this.debug(true, "enqueAndPocessReceiveData", data_val);
+        this.debug(false, "enqueAndPocessReceiveData", data_val);
         this.enqueueReceiveData(data_val);
         this.processReceiveData();
     };

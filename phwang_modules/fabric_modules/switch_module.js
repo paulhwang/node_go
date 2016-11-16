@@ -77,19 +77,18 @@ function SwitchObject(fabric_val) {
         };
     };
 
-    this.switchRequest = function (go_request) {
-        if (!go_request) {
-            this.abend("switchRequest", "null go_request");
-            return null;
+    this.switchRequest = function (input_val) {
+        var go_request = JSON.parse(input_val);
+        if (go_request.command === "get_link_data") {
+            this.debug(false, "switchRequest", "input_val=" + input_val);
+        } else {
+            this.debug(true, "switchRequest", "input_val=" + input_val);
         }
-
-        this.debug(false, "switchRequest", "command=" + go_request.command);
 
         var func = this.switch_table[go_request.command];
         if (func) {
             return func.bind(this)(go_request);
-        }
-        else {
+        } else {
             this.abend("switchRequest", "bad command=" + go_request.command);
             return null;
         }
@@ -104,10 +103,11 @@ function SwitchObject(fabric_val) {
         link.resetKeepAliveTimer();
         this.setLinkUpdateInterval(this.defaultLinkUpdateInterval());
 
-        this.debug(true, "setupLink", "name=" + go_request.my_name + " link_id=" + link.linkId());
-        return JSON.stringify({my_name: link.myName(),
+        var output = JSON.stringify({my_name: link.myName(),
                                link_id: link.linkId(),
                               });
+        this.debug(true, "setupLink", "output=" + output);
+        return output;
     };
 
     this.getLinkObject = function (go_request) {
@@ -134,23 +134,26 @@ function SwitchObject(fabric_val) {
 
         var pending_session_setup = link.getPendingSessionSetup();
         if (pending_session_setup) {
-            this.debug(false, "getLinkData", "pending_session_setup=" + pending_session_setup);
+            this.debug(true, "getLinkData", "pending_session_setup=" + pending_session_setup);
         }
-
         var pending_session_data = link.getPendingSessionData();
-
+        if (pending_session_data) {
+            this.debug(true, "getLinkData", "pending_session_data=" + pending_session_data);
+        }
         var data = link.receiveQueue().deQueue();
         if (data) {
-            this.logit("getLinkData", "link_id=" + go_request.link_id + " my_name="  + go_request.my_name + " data={" + data + "}");
+            this.debug(true, "getLinkData", "link_id=" + go_request.link_id + " my_name="  + go_request.my_name + " data={" + data + "}");
         }
 
-        return JSON.stringify({link_id: link.linkId(),
+        var output = JSON.stringify({link_id: link.linkId(),
                                name_list: link.nameListChanged(),
                                data: data,
                                pending_session_setup: pending_session_setup,
                                pending_session_data: pending_session_data,
                                interval: this.linkUpdateInterval(),
                                });
+        this.debug(false, "getLinkData", "output=" + output);
+        return output;
     };
 
     this.putLinkData = function (go_request) {
@@ -158,18 +161,17 @@ function SwitchObject(fabric_val) {
     };
 
     this.getNameList = function (go_request) {
-        this.debug(true, "getNameList", "start");
         var link = this.getLinkObject(go_request);
         if (!link) {
             return null;
         }
 
         link.clearNameListChanged();
-        var json_data = JSON.stringify({link_id: link.linkId(),
-                                        name_list: this.linkMgrObject().getNameList(),
-                                        });
-        this.debug(true, "getNameList", "(" + link.linkId() + ",0) " + go_request.my_name + "=>server " + json_data);
-        return json_data;
+        var output = JSON.stringify({link_id: link.linkId(),
+                                     name_list: this.linkMgrObject().getNameList(),
+                                     });
+        this.debug(true, "getNameList", "output=" + output);
+        return output;
     };
 
     this.setupSession = function (go_request) {
@@ -204,24 +206,25 @@ function SwitchObject(fabric_val) {
             //session.clusterObject().processSetupTopicData(go_request.data);
         }
 
-        var json_data = JSON.stringify({
-                            link_id: session.linkObject().linkId(),
+        var output = JSON.stringify({
+                            link_id: link.linkId(),
                             session_id: session.sessionId(),
                             extra_data: go_request.data,
                             });
-        this.logit("setupSessionReply", "(" + go_request.link_id + ":" + session.sessionId() + ") " + go_request.my_name + "=>" + go_request.his_name);
-        return json_data;
+        this.debug(true, "setupSession", "output=" + output);
+        return output;
     };
 
     this.getSessionObject = function (go_request) {
-        var link = this.getLinkObject(go_request);
+        var link = this.linkMgrObject().searchLinkByLinkId(go_request.link_id);
         if (!link) {
+            this.logit("getSessionObject", "link not fount" + " link_id=" + go_request.link_id);
             return null;
         }
 
         var session = link.searchSessionBySessionId(go_request.session_id);
         if (!session) {
-            this.abend("getSessionObject", "null session" + " session_id=" + go_request.session_id);
+            this.logit("getSessionObject", "session not found" + " session_id=" + go_request.session_id);
             return null;
         }
 
@@ -242,8 +245,6 @@ function SwitchObject(fabric_val) {
     };
 
     this.getSessionData = function (go_request) {
-        this.debug(false, "getSessionData", "(" + go_request.link_id + "," + go_request.session_id + ") my_name=" + go_request.my_name + "=>" + go_request.his_name);
-
         var session = this.getSessionObject(go_request);
         if (!session) {
             return null;
@@ -251,31 +252,25 @@ function SwitchObject(fabric_val) {
 
         var res_data = session.dequeueTransmitData();
         if (!res_data) {
-            this.debug(false, "getSessionData", "no data");
+            this.debug(true, "getSessionData", "no data");
             return null;
         }
-        this.logit("getSessionData", "res_data=" + res_data);
+        this.debug(false, "getSessionData", "res_data=" + res_data);
 
-        this.debug(false, "getSessionData", "ajax_id=" + go_request.ajax_id);
-        this.logit("getSessionData", "(" + go_request.link_id + "," + go_request.session_id + ") "  + go_request.his_name + "=>" + go_request.my_name + " {" + res_data + "}");
-        return JSON.stringify({
+        var output = JSON.stringify({
                     link_id: session.linkObject().linkId(),
                     session_id: session.sessionId(),
                     res_data: res_data,
                     });
+        this.debug(true, "getSessionData", "output=" + output);
+        return output;
     };
 
     this.putSessionData = function (go_request) {
-        //console.log(req.headers);
-        this.debug(true, "putSessionData ", "ajax_id=" + go_request.ajax_id);
-        this.debug(true, "putSessionData ", "(" + go_request.link_id + "," + go_request.session_id + ") "  + go_request.his_name + "=>" + go_request.my_name + " {" + go_request.data + "}");
-
         var session = this.getSessionObject(go_request);
         if (!session) {
             return null;
         }
-
-        this.debug(true, "putSessionData", "(" + go_request.link_id + "," + go_request.session_id + ") "  + go_request.my_name + "=>" + go_request.his_name + " {" + go_request.data + "} " + go_request.xmt_seq + "=>" + session.up_seq);
 
         if (go_request.xmt_seq === session.up_seq) {
             session.clusterObject().enqueAndPocessReceiveData(go_request.data);
@@ -292,23 +287,19 @@ function SwitchObject(fabric_val) {
             this.logit("***abend: putSessionData", go_request.data + " post seq=" + xmt_seq + " dropped");
         }
 
-        this.debug(true, "putSessionData", "queue_size=" + session.receiveQueue().size());
-        //return null;
-
         var res_data = session.dequeueTransmitData();
         if (!res_data) {
             this.debug(false, "putSessionData", "no data");
             return null;
         }
-        this.logit("putSessionData", "res_data=" + res_data);
 
-        this.debug(false, "putSessionData", "ajax_id=" + go_request.ajax_id);
-        this.logit("putSessionData", "(" + go_request.link_id + "," + go_request.session_id + ") "  + go_request.his_name + "=>" + go_request.my_name + " {" + res_data + "}");
-        return JSON.stringify({
+        var output = JSON.stringify({
                     link_id: session.linkObject().linkId(),
                     session_id: session.sessionId(),
                     res_data: res_data,
                     });
+        this.debug(true, "getSessionData", "output=" + output);
+        return output;
     };
 
     this.keepAlive = function (go_request) {
@@ -326,7 +317,7 @@ function SwitchObject(fabric_val) {
 
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
-            this.logit(str1_val, "==" + str2_val);
+            this.logit(str1_val, str2_val);
         }
     };
 

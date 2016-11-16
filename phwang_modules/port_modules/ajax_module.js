@@ -44,7 +44,7 @@ function AjaxObject(port_object_val) {
             return;
         }
 
-        this.debug(false, "processGet", "req.headers.gorequest=" + req.headers.gorequest);
+        this.debug(false, "processGet", "gorequest=" + req.headers.gorequest);
 
         var go_request = JSON.parse(req.headers.gorequest);
         if (!go_request) {
@@ -58,7 +58,7 @@ function AjaxObject(port_object_val) {
             this.debug(false, "processGet", "command=" + go_request.command);
         }
 
-        var data = this.switchObject().switchRequest(go_request);
+        var data = this.switchObject().switchRequest(req.headers.gorequest);
         var json_str = JSON.stringify({
                         command: go_request.command,
                         ajax_id: go_request.ajax_id,

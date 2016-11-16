@@ -100,7 +100,7 @@ function SessionObject(session_mgr_val, session_id_val) {
     };
 
     this.enqueueTransmitData = function (data_val) {
-        this.debug(true, "enqueueTransmitData", data_val);
+        this.debug(false, "enqueueTransmitData", data_val);
         this.transmitQueue().enQueue(data_val);
     };
 

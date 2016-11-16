@@ -120,7 +120,7 @@ function GoPortObject(container_val) {
     };
 
     this.receiveStringData = function (str_val) {
-        this.logit("receiveStringData", str_val);
+        this.debug(false, "receiveStringData", str_val);
 
         if (str_val == null) {
             this.abend("receiveStringData", "null input");
@@ -171,12 +171,18 @@ function GoPortObject(container_val) {
         //this.uiObject().drawBoard(this.engineObject());
     };
 
-    this.abend = function (str1_val, str2_val) {
-        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
+    this.debug = function (debug_val, str1_val, str2_val) {
+        if (debug_val) {
+            this.logit(str1_val, "==" + str2_val);
+        }
     };
 
     this.logit = function (str1_val, str2_val) {
         return this.containerObject().goLog(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.abend = function (str1_val, str2_val) {
+        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
     };
 }
 

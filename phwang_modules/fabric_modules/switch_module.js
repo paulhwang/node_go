@@ -113,7 +113,7 @@ function SwitchObject(fabric_val) {
     this.getLinkObject = function (go_request) {
         var link = this.linkMgrObject().searchLinkByNameAndLinkId(go_request.my_name, go_request.link_id);
         if (!link) {
-            this.abend("getLinkObject", "null link" + "link_id=" + go_request.link_id + " my_name=" + go_request.my_name);
+            this.abend("getLinkObject", "null link: link_id=" + go_request.link_id + " my_name=" + go_request.my_name);
             return null;
         }
         if (link.linkId() === 0) {
@@ -132,6 +132,9 @@ function SwitchObject(fabric_val) {
             return null;
         }
 
+        if (link.nameListChanged()) {
+            this.debug(true, "getLinkData", "link.nameListChanged()=" + link.nameListChanged());
+        }
         var pending_session_setup = link.getPendingSessionSetup();
         if (pending_session_setup) {
             this.debug(true, "getLinkData", "pending_session_setup=" + pending_session_setup);
@@ -218,7 +221,7 @@ function SwitchObject(fabric_val) {
     this.getSessionObject = function (go_request) {
         var link = this.linkMgrObject().searchLinkByLinkId(go_request.link_id);
         if (!link) {
-            this.logit("getSessionObject", "link not fount" + " link_id=" + go_request.link_id);
+            this.logit("getSessionObject", "link not found: link_id=" + go_request.link_id);
             return null;
         }
 

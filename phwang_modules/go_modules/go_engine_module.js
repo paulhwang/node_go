@@ -218,12 +218,11 @@ function GoEngineObject(container_object_val) {
     };
 
     this.enterWar = function (move_val) {
-        this.goLog("goEnterWar", "(" + move_val.xX() + "," + move_val.yY() + ") color=" + move_val.myColor() + " turn=" + move_val.turnIndex());
+        this.debug(false, "goEnterWar", "(" + move_val.xX() + "," + move_val.yY() + ") color=" + move_val.myColor() + " turn=" + move_val.turnIndex());
 
         var group = this.insertStoneToGroupList(move_val);
         this.boardObject().addStoneToBoard(move_val.xX(), move_val.yY(), move_val.myColor());
         var dead_count = this.killOtherColorGroups(move_val, group);
-        this.goLog("goEnterWar", "dead_count=" + dead_count);
 
         if (!group.groupHasAir()) {
             this.removeDeadGroup(group);
@@ -639,6 +638,20 @@ function GoEngineObject(container_object_val) {
 
     this.goLog = function (str1_val, str2_val) {
         return this.containerObject().goLog(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.debug = function (debug_val, str1_val, str2_val) {
+        if (debug_val) {
+            this.logit(str1_val, "==" + str2_val);
+        }
+    };
+
+    this.logit = function (str1_val, str2_val) {
+        return this.containerObject().goLog(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.abend = function (str1_val, str2_val) {
+        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.resetEngineObjectData = function () {

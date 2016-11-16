@@ -81,8 +81,22 @@ function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, container_val)
         return this.containerObject().goLog(this.objectName() + "." + str1_val, str2_val);
     };
 
+    this.debug = function (debug_val, str1_val, str2_val) {
+        if (debug_val) {
+            this.logit(str1_val, "==" + str2_val);
+        }
+    };
+
+    this.logit = function (str1_val, str2_val) {
+        return this.containerObject().goLog(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.abend = function (str1_val, str2_val) {
+        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
+    };
+
     this.moveObjectDecode = function (str_val) {
-        this.goLog("GoMoveObject", "input=" + str_val);
+        this.debug(false, "GoMoveObject", "input=" + str_val);
         var index = 0;
         this.theX = (str_val.charAt(index++) - '0') * 10;
         this.theX += (str_val.charAt(index++) - '0');

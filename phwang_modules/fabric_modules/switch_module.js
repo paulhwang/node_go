@@ -188,7 +188,7 @@ function SwitchObject(fabric_val) {
             return null;
         }
 
-        var cluster = this.clusterMgrObject().mallocCluster(go_request.data, session);
+        var cluster = this.clusterMgrObject().mallocCluster(go_request.topic_data, session);
         if (!cluster) {
             return null;
         }
@@ -202,17 +202,17 @@ function SwitchObject(fabric_val) {
             if (!his_session) {
                 return null;
             }
-            his_link.setPendingSessionSetup(his_session, go_request.data);
+            his_link.setPendingSessionSetup(his_session, go_request.topic_data);
         }
 
-        if (go_request.data !== null) {
-            //session.clusterObject().processSetupTopicData(go_request.data);
+        if (go_request.topic_data !== null) {
+            //session.clusterObject().processSetupTopicData(go_request.topic_data);
         }
 
         var output = JSON.stringify({
                             link_id: link.linkId(),
                             session_id: session.sessionId(),
-                            extra_data: go_request.data,
+                            topic_data: go_request.topic_data,
                             });
         this.debug(true, "setupSession", "output=" + output);
         return output;

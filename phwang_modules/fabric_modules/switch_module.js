@@ -113,7 +113,7 @@ function SwitchObject(fabric_val) {
     this.getLinkObject = function (go_request) {
         var link = this.linkMgrObject().searchLinkByNameAndLinkId(go_request.my_name, go_request.link_id);
         if (!link) {
-            this.abend("getLinkObject", "null link: link_id=" + go_request.link_id + " my_name=" + go_request.my_name);
+            this.debug(true, "getLinkObject", "null link: link_id=" + go_request.link_id + " my_name=" + go_request.my_name);
             return null;
         }
         if (link.linkId() === 0) {

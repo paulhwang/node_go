@@ -212,6 +212,7 @@ function SwitchObject(fabric_val) {
         var output = JSON.stringify({
                             link_id: link.linkId(),
                             session_id: session.sessionId(),
+                            his_name: go_request.his_name,
                             topic_data: go_request.topic_data,
                             });
         this.debug(true, "setupSession", "output=" + output);

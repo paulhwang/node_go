@@ -236,16 +236,18 @@ function SwitchObject(fabric_val) {
     };
 
     this.setupSessionReply = function (go_request) {
-        this.debug(true, "setupSessionReply", "(" + go_request.link_id + "," + go_request.session_id + ")");
-
         var session = this.getSessionObject(go_request);
         if (!session) {
             return null;
         }
-        return JSON.stringify({
+        var output = JSON.stringify({
                     link_id: session.linkObject().linkId(),
                     session_id: session.sessionId(),
+                    confirm: "yes",
+                    topic_data: go_request.topic_data,
                     });
+        this.debug(true, "setupSessionReply", "output=" + output);
+        return output;
     };
 
     this.getSessionData = function (go_request) {

@@ -151,9 +151,9 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
         return this.pendingSessionSetupQueue().deQueue();
     };
 
-    this.setPendingSessionSetup = function (session_val, data_val) {
+    this.setPendingSessionSetup = function (session_val, topic_data_val) {
         this.pendingSessionSetupQueue().enQueue(JSON.stringify({session_id: session_val.sessionId(),
-                                                                data: data_val
+                                                                topic_data: topic_data_val
                                                                 }));
     };
 

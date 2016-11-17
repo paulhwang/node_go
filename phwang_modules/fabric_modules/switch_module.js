@@ -245,6 +245,7 @@ function SwitchObject(fabric_val) {
                     session_id: session.sessionId(),
                     confirm: "yes",
                     topic_data: go_request.topic_data,
+                    his_name: "tbd",
                     });
         this.debug(true, "setupSessionReply", "output=" + output);
         return output;

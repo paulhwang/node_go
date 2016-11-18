@@ -135,14 +135,17 @@ function SwitchObject(fabric_val) {
         if (link.nameListChanged()) {
             this.debug(true, "getLinkData", "link.nameListChanged()=" + link.nameListChanged());
         }
+
         var pending_session_setup = link.getPendingSessionSetup();
         if (pending_session_setup) {
             this.debug(true, "getLinkData", "pending_session_setup=" + pending_session_setup);
         }
+
         var pending_session_data = link.getPendingSessionData();
         if (pending_session_data) {
             this.debug(true, "getLinkData", "pending_session_data=" + pending_session_data);
         }
+
         var data = link.receiveQueue().deQueue();
         if (data) {
             this.debug(true, "getLinkData", "link_id=" + go_request.link_id + " my_name="  + go_request.my_name + " data={" + data + "}");
@@ -202,6 +205,7 @@ function SwitchObject(fabric_val) {
             if (!his_session) {
                 return null;
             }
+            cluster.addAdditionalSession(his_session);
             his_link.setPendingSessionSetup(his_session, go_request.topic_data);
         }
 

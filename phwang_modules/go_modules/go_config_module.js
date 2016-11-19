@@ -12,7 +12,12 @@ module.exports = {
 
 function GoConfigObject(container_val) {
     "use strict";
-    this.theContainerObject = container_val;
+
+    this.init__ = function (container_val) {
+        this.theContainerObject = container_val;
+        this.theBoardSize = 19;
+        this.theHandicapPoint = 0;
+    };
 
     this.objectName = function () {
         return "GoConfigObject";
@@ -148,18 +153,17 @@ function GoConfigObject(container_val) {
 
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
-            this.logit(str1_val, "==" + str2_val);
+            this.logit(str1_val, str2_val);
         }
+    };
+
+    this.logit = function (str1_val, str2_val) {
+        return this.containerObject().goLogit(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
         return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.logit = function (str1_val, str2_val) {
-        return this.containerObject().goLog(this.objectName() + "." + str1_val, str2_val);
-    };
-
-    this.theBoardSize = 19;
-    this.theHandicapPoint = 0;
+    this.init__(container_val);
 }

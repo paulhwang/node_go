@@ -24,7 +24,6 @@ function RootObject () {
     "use strict";
 
     this.init__ = function () {
-        this.theUtilObject = require("./util_modules/util_module.js").malloc(this);
         this.theFabricObject = require("./fabric_modules/fabric_module.js").malloc(this);
         this.thePortObject = require("./port_modules/port_module.js").malloc(this);
     };

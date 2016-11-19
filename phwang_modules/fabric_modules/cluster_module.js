@@ -19,8 +19,8 @@ function clusterObject (cluster_mgr_val, topic_data_val, session_val) {
         this.theSessionArray = [2];
         this.theSessionArray[0] = session_val;
         this.theSessionArrayLength = 1;
-        this.theReceiveQueue = this.utilObject().mallocQueue();
-        this.theTransmitQueue = this.utilObject().mallocQueue();
+        this.theReceiveQueue = this.rootObject().mallocQueue();
+        this.theTransmitQueue = this.rootObject().mallocQueue();
         this.theNext = null;
         this.thePrev = null;
         this.createTopic(topic_data_val);
@@ -41,6 +41,10 @@ function clusterObject (cluster_mgr_val, topic_data_val, session_val) {
 
     this.clusterMgrObject = function () {
         return this.theClusterMgrObject;
+    };
+
+    this.rootObject = function () {
+        return this.clusterMgrObject().rootObject();
     };
 
     this.fabricObject = function () {

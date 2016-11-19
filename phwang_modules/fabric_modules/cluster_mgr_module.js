@@ -18,9 +18,9 @@ function clusterMgrObject(fabric_val) {
         this.theHead = null;
         this.theTail = null;
         this.theSize = 0;
-         this.theGlobalClusterId = 100;
-        this.theClusterQueue = this.utilObject().mallocQueue();
-        this.thePoolQueue = this.utilObject().mallocQueue();
+        this.theGlobalClusterId = 100;
+        this.theClusterQueue = this.rootObject().mallocQueue();
+        this.thePoolQueue = this.rootObject().mallocQueue();
     };
 
     this.clusterModuleMalloc = function (topic_data_val, session_val) {

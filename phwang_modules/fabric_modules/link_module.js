@@ -21,9 +21,8 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
         this.theSessionMgrObject = session_mgr_module.malloc(this);
         this.up_seq = 0;
         this.down_seq = 0;
-        this.theReceiveQueue = this.utilObject().mallocQueue();
-        this.theReceiveRing = this.utilObject().mallocRing();
-        this.thePendingSessionSetupQueue = this.utilObject().mallocQueue();
+        this.theReceiveQueue = this.rootObject().mallocQueue();
+        this.thePendingSessionSetupQueue = this.rootObject().mallocQueue();
         this.theNameListChanged = true;
         this.theKeepAliveTimer = null;
         this.thePrev = null;
@@ -40,6 +39,10 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
 
     this.linkMgrObject = function () {
         return this.theLinkMgrObject;
+    };
+
+    this.rootObject = function () {
+        return this.linkMgrObject().rootObject();
     };
 
     this.sessionMgrObject = function () {

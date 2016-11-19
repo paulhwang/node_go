@@ -16,6 +16,7 @@ function SwitchObject(fabric_val) {
     this.init__ = function (fabric_val) {
         this.theFabricObject = fabric_val;
         this.initSwitchTable();
+        this.debug(true, "init__", "");
     };
 
     this.linkModuleMalloc = function (my_name_val, link_id_val) {
@@ -25,6 +26,14 @@ function SwitchObject(fabric_val) {
 
     this.defaultLinkUpdateInterval = function () {
         return 3000;
+    };
+
+    this.debugInput = function () {
+        return false;
+    };
+
+    this.debugOutput = function () {
+        return false;
     };
 
     this.objectName = function () {
@@ -76,9 +85,9 @@ function SwitchObject(fabric_val) {
     this.switchRequest = function (input_val) {
         var go_request = JSON.parse(input_val);
         if (go_request.command === "get_link_data") {
-            this.debug(false, "switchRequest", "input_val=" + input_val);
+            this.debug_(false, this.debugInput(), "switchRequest", "input_val=" + input_val);
         } else {
-            this.debug(true, "switchRequest", "input_val=" + input_val);
+            this.debug_(true, this.debugInput(), "switchRequest", "input_val=" + input_val);
         }
 
         var func = this.switch_table[go_request.command];
@@ -102,7 +111,7 @@ function SwitchObject(fabric_val) {
         var output = JSON.stringify({my_name: link.myName(),
                                link_id: link.linkId(),
                               });
-        this.debug(true, "setupLink", "output=" + output);
+        this.debug_(true, this.debugOutput(), "setupLink", "output=" + output);
         return output;
     };
 
@@ -154,7 +163,7 @@ function SwitchObject(fabric_val) {
                                pending_session_data: pending_session_data,
                                interval: this.linkUpdateInterval(),
                                });
-        this.debug(false, "getLinkData", "output=" + output);
+        this.debug_(false, this.debugOutput(), "getLinkData", "output=" + output);
         return output;
     };
 
@@ -172,7 +181,7 @@ function SwitchObject(fabric_val) {
         var output = JSON.stringify({link_id: link.linkId(),
                                      name_list: this.linkMgrObject().getNameList(),
                                      });
-        this.debug(true, "getNameList", "output=" + output);
+        this.debug_(true, this.debugOutput(), "getNameList", "output=" + output);
         return output;
     };
 
@@ -216,7 +225,7 @@ function SwitchObject(fabric_val) {
                             his_name: go_request.his_name,
                             topic_data: go_request.topic_data,
                             });
-        this.debug(true, "setupSession", "output=" + output);
+        this.debug_(true, this.debugOutput(), "setupSession", "output=" + output);
         return output;
     };
 
@@ -248,7 +257,7 @@ function SwitchObject(fabric_val) {
                     topic_data: go_request.topic_data,
                     his_name: "tbd",
                     });
-        this.debug(true, "setupSessionReply", "output=" + output);
+        this.debug_(true, this.debugOutput(), "setupSessionReply", "output=" + output);
         return output;
     };
 
@@ -270,7 +279,7 @@ function SwitchObject(fabric_val) {
                     session_id: session.sessionId(),
                     res_data: res_data,
                     });
-        this.debug(true, "getSessionData", "output=" + output);
+        this.debug_(true, this.debugOutput(), "getSessionData", "output=" + output);
         return output;
     };
 
@@ -306,7 +315,7 @@ function SwitchObject(fabric_val) {
                     session_id: session.sessionId(),
                     res_data: res_data,
                     });
-        this.debug(true, "getSessionData", "output=" + output);
+        this.debug_(true, this.debugOutput(), "getSessionData", "output=" + output);
         return output;
     };
 
@@ -321,6 +330,12 @@ function SwitchObject(fabric_val) {
             return null;
         }
         return null;
+    };
+
+    this.debug_ = function (debug_val, debug_val_, str1_val, str2_val) {
+        if (debug_val && debug_val_) {
+            this.logit(str1_val, str2_val);
+        }
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

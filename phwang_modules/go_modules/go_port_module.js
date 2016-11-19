@@ -12,8 +12,6 @@ module.exports = {
 
 function GoPortObject(container_val) {
     "use strict";
-    this.theContainerObject = container_val;
-
     this.GO_PROTOCOL_CODE_SIZE = 7;
     this.GO_PROTOCOL_CODE_PROPOSE = "Propose";
     this.GO_PROTOCOL_CODE_ACCEPT = "Accept ";
@@ -22,9 +20,12 @@ function GoPortObject(container_val) {
     this.GO_PROTOCOL_CODE_SPECIAL_MOVE = "Special";
     this.GO_PROTOCOL_CODE_BOARD_DATA = "Board  ";
 
+    this.init__ = function (container_val) {
+        this.theContainerObject = container_val;
+    };
+
     this.mallocMove = function (str_val, x_val, y_val, color_val, turn_val, container_val) {
-        var move_module = require("./go_move_module.js");
-        return move_module.malloc(str_val, x_val, y_val, color_val, turn_val, container_val);
+        return require("./go_move_module.js").malloc(str_val, x_val, y_val, color_val, turn_val, container_val);
     };
 
     this.objectName = function () {
@@ -173,16 +174,18 @@ function GoPortObject(container_val) {
 
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
-            this.logit(str1_val, "==" + str2_val);
+            this.logit(str1_val, str2_val);
         }
     };
 
     this.logit = function (str1_val, str2_val) {
-        return this.containerObject().goLog(this.objectName() + "." + str1_val, str2_val);
+        return this.containerObject().goLogit(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
         return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
     };
+
+    this.init__(container_val);
 }
 

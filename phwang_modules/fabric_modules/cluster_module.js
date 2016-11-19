@@ -174,16 +174,20 @@ function clusterObject (cluster_mgr_val, topic_data_val, session_val) {
 
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
-            this.logit(str1_val, "==" + str2_val);
+            this.logit(str1_val, str2_val);
         }
     };
 
+    this.util_module = function () {
+        return require("../util_modules/util_module.js");
+    };
+
     this.logit = function (str1_val, str2_val) {
-        this.clusterMgrObject().logit(this.objectName() + "." + str1_val, str2_val);
+        this.util_module().LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        this.clusterMgrObject().abend(this.objectName() + "." + str1_val, str2_val);
+        this.util_module().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.init__(cluster_mgr_val, topic_data_val, session_val);

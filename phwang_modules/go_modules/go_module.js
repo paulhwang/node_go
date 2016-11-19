@@ -32,6 +32,7 @@ function GoObject (cluster_object_val) {
         this.thePortObject = port_module.malloc(this);
     };
 
+/*
     this.utilModuleUtilLogit = function (str1_val, str2_val) {
         var util_module = require("./../util_modules/util_module.js");
         return util_module.utilLogit(str1_val, str2_val);
@@ -41,6 +42,7 @@ function GoObject (cluster_object_val) {
         var util_module = require("./../util_modules/util_module.js");
         return util_module.utilAbend(str1_val, str2_val);
     };
+*/
 
     this.objectName = function () {
         return "GoObject";
@@ -64,10 +66,6 @@ function GoObject (cluster_object_val) {
 
     this.containerIndex = function () {
         return this.theContainerIndex;
-    };
-
-    this.utilObject = function () {
-        return this.rootObject().utilObject();
     };
 
     this.boardObject = function () {
@@ -114,36 +112,6 @@ function GoObject (cluster_object_val) {
         this.engineObject().resetEngineObjectData();
     };
 
-    this.abend = function (str1_val, str2_val) {
-        return this.goAbend(this.objectName() + "." + str1_val, str2_val);
-    };
-
-    this.logit = function (str1_val, str2_val) {
-        return this.goLogit(this.objectName() + "." + str1_val, str2_val);
-    };
-
-    this.goLog = function (s1_val, s2_val) {
-        if (this.clusterObject().sessionArrayLength() === 1) {
-            this.utilModuleUtilLogit(this.clusterObject().sessionArray(0).sessionId() + "<=>" +
-                                     this.clusterObject().sessionArray(0).sessionId() + " " + s1_val, s2_val);
-        }
-        else {
-            this.utilModuleUtilLogit(this.clusterObject().sessionArray(0).sessionId() + "<=>" +
-                                     this.clusterObject().sessionArray(1).sessionId() + " " + s1_val, s2_val);
-        }
-    };
-
-    this.goAbend = function (s1_val, s2_val) {
-        if (this.topicObject().sessionArrayLength() === 1) {
-            this.utilModuleUtilAbend(this.topicObject().sessionArray(0).sessionId() + "<=>" +
-                                     this.topicObject().sessionArray(0).sessionId() + " " + s1_val, s2_val);
-        }
-        else {
-            this.utilModuleUtilAbend(this.topicObject().sessionArray(0).sessionId() + "<=>" +
-                                     this.topicObject().sessionArray(1).sessionId() + " " + s1_val, s2_val);
-        }
-    };
-
     this.startGoGame = function () {
         this.gameObject().processTheWholeMoveList();
         this.sessionObject().setupClientReceiveCallback(function (container_val, data_val) {
@@ -187,6 +155,46 @@ function GoObject (cluster_object_val) {
                 addCommentFromInputBox();
             }
         });
+    };
+
+    this.debug = function (debug_val, str1_val, str2_val) {
+        if (debug_val) {
+            this.logit(str1_val, str2_val);
+        }
+    };
+
+    this.util_module = function () {
+        return require("../util_modules/util_module.js");
+    };
+
+    this.logit = function (str1_val, str2_val) {
+        this.util_module().LOG_IT(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.abend = function (str1_val, str2_val) {
+        this.util_module().ABEND(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.goLog = function (s1_val, s2_val) {
+        if (this.clusterObject().sessionArrayLength() === 1) {
+            this.util_module().LOG_IT(this.clusterObject().sessionArray(0).sessionId() + "<=>" +
+                                     this.clusterObject().sessionArray(0).sessionId() + " " + s1_val, s2_val);
+        }
+        else {
+            this.util_module().LOG_IT(this.clusterObject().sessionArray(0).sessionId() + "<=>" +
+                                     this.clusterObject().sessionArray(1).sessionId() + " " + s1_val, s2_val);
+        }
+    };
+
+    this.goAbend = function (s1_val, s2_val) {
+        if (this.topicObject().sessionArrayLength() === 1) {
+            this.util_module().ABEND(this.topicObject().sessionArray(0).sessionId() + "<=>" +
+                                     this.topicObject().sessionArray(0).sessionId() + " " + s1_val, s2_val);
+        }
+        else {
+            this.util_module().ABEND(this.topicObject().sessionArray(0).sessionId() + "<=>" +
+                                     this.topicObject().sessionArray(1).sessionId() + " " + s1_val, s2_val);
+        }
     };
 
     this.mallocObjects();

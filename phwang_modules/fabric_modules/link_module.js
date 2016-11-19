@@ -159,16 +159,20 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
 
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
-            logit(str1_val, "==" + str2_val);
+            this.logit(str1_val, str2_val);
         }
     };
 
+    this.util_module = function () {
+        return require("../util_modules/util_module.js");
+    };
+
     this.logit = function (str1_val, str2_val) {
-        this.linkMgrObject().logit(this.objectName() + "." + str1_val, str2_val);
+        this.util_module().LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        this.linkMgrObject().abend(this.objectName() + "." + str1_val, str2_val);
+        this.util_module().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.init__(link_mgr_val, my_name_val, link_id_val);

@@ -130,16 +130,20 @@ function SessionObject(session_mgr_val, session_id_val) {
 
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
-            this.logit(str1_val, "==" + str2_val);
+            this.logit(str1_val, str2_val);
         }
     };
 
+    this.util_module = function () {
+        return require("../util_modules/util_module.js");
+    };
+
     this.logit = function (str1_val, str2_val) {
-        this.sessionMgrObject().logit(this.sessionId() + " " + this.objectName() + "." + str1_val, str2_val);
+        this.util_module().LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        this.sessionMgrObject().abend(this.sessionId() + " " + this.objectName() + "." + str1_val, str2_val);
+        this.util_module().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.init__(session_mgr_val, session_id_val);

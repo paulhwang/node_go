@@ -47,16 +47,30 @@ function FabricObject(root_object_val) {
         return this.theSwitchObject;
     };
 
-    this.utilObject = function () {
-        return this.utilObject().utilObject();
-    };
-
     this.queueObject = function () {
         return this.utilObject().queueObject();
     };
 
     this.ringObject = function () {
         return this.utilObject().ringObject();
+    };
+
+    this.debug = function (debug_val, str1_val, str2_val) {
+        if (debug_val) {
+            this.logit(str1_val, str2_val);
+        }
+    };
+
+    this.util_module = function () {
+        return require("../util_modules/util_module.js");
+    };
+
+    this.logit = function (str1_val, str2_val) {
+        this.util_module().LOG_IT(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.abend = function (str1_val, str2_val) {
+        this.util_module().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.init__(root_object_val);

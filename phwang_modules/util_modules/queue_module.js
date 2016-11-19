@@ -27,7 +27,7 @@ function QueueObject (util_val) {
         this.theTail = null;
         this.theSize = 0;
         this.theRing = this.utilObject().mallocRing();
-        this.debug(true, "init__", "");
+        this.debug(false, "init__", "");
     };
 
     this.debugMe = function () {

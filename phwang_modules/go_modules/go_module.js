@@ -12,13 +12,10 @@ module.exports = {
 
 function GoObject (cluster_object_val) {
     "use strict";
-    this.theClusterObject = cluster_object_val;
 
-    this.GO = function () {
-       return require("./go_define_module.js");
-    };
+    this.init__ = function (cluster_object_val) {
+        this.theClusterObject = cluster_object_val;
 
-    this.mallocObjects = function () {
         var config_module = require("./go_config_module.js");
         var board_module = require("./go_board_module.js");
         var engine_module = require("./go_engine_module.js");
@@ -30,6 +27,10 @@ function GoObject (cluster_object_val) {
         this.theEngineObject = engine_module.malloc(this);
         this.theGameObject = game_module.malloc(this);
         this.thePortObject = port_module.malloc(this);
+    };
+
+    this.GO = function () {
+       return require("./go_define_module.js");
     };
 
 /*
@@ -197,7 +198,7 @@ function GoObject (cluster_object_val) {
         }
     };
 
-    this.mallocObjects();
+    this.init__(cluster_object_val);
 }
 
 var GO = new GoDefineObject;

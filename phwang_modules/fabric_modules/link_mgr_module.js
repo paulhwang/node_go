@@ -235,11 +235,11 @@ function LinkMgrObject(fabric_val) {
     };
 
     this.logit = function (str1_val, str2_val) {
-        require("../util_modules/util_module.js").LOG_IT(this.objectName() + "." + str1_val, str2_val);
+        this.rootObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        require("../util_modules/util_module.js").ABEND(this.objectName() + "." + str1_val, str2_val);
+        this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.init__(fabric_val);

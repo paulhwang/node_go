@@ -13,8 +13,20 @@ module.exports = {
 function GoGroupObject(group_list_val) {
     "use strict";
 
+    this.init__ = function (group_list_val) {
+        this.theGroupListObject = group_list_val;
+        this.theIndexNumber = this.groupListObject().groupCount();
+        this.theMyColor = this.groupListObject().myColor();
+        this.theHisColor = (this.myColor() === this.GO().EMPTY_STONE())
+            ? this.GO().EMPTY_STONE()
+            : this.GO().getOppositeColor(this.myColor());
+        this.theStoneCount = 0;
+        this.theExistMatrix = this.createMatrix(this.boardSize());
+        this.theDeadMatrix = this.createMatrix(this.boardSize());
+    };
+
     this.objectName = function () {
-    return this.theObjectName;
+        return "GoGroupObject";
     };
 
     this.groupListObject = function () {
@@ -538,15 +550,6 @@ function GoGroupObject(group_list_val) {
         return matrix;
     }
 
-    this.theObjectName = "GoGroupObject";
-    this.theGroupListObject = group_list_val;
-    this.theIndexNumber = this.groupListObject().groupCount();
-    this.theMyColor = this.groupListObject().myColor();
-    this.theHisColor = (this.myColor() === this.GO().EMPTY_STONE())
-        ? this.GO().EMPTY_STONE()
-        : this.GO().getOppositeColor(this.myColor());
-    this.theStoneCount = 0;
-    this.theExistMatrix = this.createMatrix(this.boardSize());
-    this.theDeadMatrix = this.createMatrix(this.boardSize());
+    this.init__(group_list_val);
 }
 

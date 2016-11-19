@@ -10,15 +10,15 @@ module.exports = {
     },
 
     LOG_IT: function (str1_val, str2_val) {
-        LOG_IT(str1_val, str2_val);
+        LOG_IT_(str1_val, str2_val);
     },
 
     ABEND: function (str1_val, str2_val) {
-        LOG_IT(str1_val, str2_val);
+        ABEND_(str1_val, str2_val);
     },
 };
 
-var LOG_IT = function(str1_val, str2_val) {
+var LOG_IT_ = function(str1_val, str2_val) {
     if (str1_val === undefined) {
         str1_val = "UNDEFINED";
     }
@@ -34,7 +34,7 @@ var LOG_IT = function(str1_val, str2_val) {
     console.log(str1_val + "() " + str2_val);
 };
 
-var ABEND = function(str1_val, str2_val) {
+var ABEND_ = function(str1_val, str2_val) {
     if (str1_val === undefined) {
         str1_val = "UNDEFINED";
     }

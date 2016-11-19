@@ -21,6 +21,7 @@ function FabricObject(root_object_val) {
         this.theLinkMgrObject = link_mgr_module.malloc(this);
         this.theClusterMgrObject = cluster_mgr_module.malloc(this);
         this.theSwitchObject = switch_module.malloc(this);
+        this.debug(true, "init__", "");
     };
 
     this.objectName = function () {

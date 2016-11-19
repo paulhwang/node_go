@@ -20,6 +20,7 @@ function LinkMgrObject(fabric_val) {
         this.theTail = null;
         this.theSize = 0;
         this.theNameListChanged = false;
+        this.debug(true, "init__", "");
     };
 
     this.linkModuleMalloc = function (my_name_val, link_id_val) {

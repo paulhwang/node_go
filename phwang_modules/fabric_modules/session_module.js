@@ -24,6 +24,7 @@ function SessionObject(session_mgr_val, session_id_val) {
         this.theTransmitQueue = this.rootObject().mallocQueue();
         this.thePrev = null;
         this.theNext = null;
+        this.debug(true, "init__", "session_id=" + this.linkObject().linkId() + ":" + this.sessionId());
     };
 
     this.objectName = function () {

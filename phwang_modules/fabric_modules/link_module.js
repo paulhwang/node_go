@@ -27,6 +27,7 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
         this.theKeepAliveTimer = null;
         this.thePrev = null;
         this.theNext = null;
+        this.debug(true, "init__", "link_id=" + this.linkId());
     };
 
     this.linkTimeoutInterval = function () {
@@ -167,11 +168,11 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
     };
 
     this.logit = function (str1_val, str2_val) {
-        require("../util_modules/util_module.js").LOG_IT(this.objectName() + "." + str1_val, str2_val);
+        this.rootObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        require("../util_modules/util_module.js").ABEND(this.objectName() + "." + str1_val, str2_val);
+        this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.init__(link_mgr_val, my_name_val, link_id_val);

@@ -19,6 +19,7 @@ function SessionMgrObject(link_val) {
         this.theTail = null;
         this.theSize = 0;
         this.theGlobalSessionId = 1000;
+        this.debug(true, "init__", "");
     };
 
     this.sessionModuleMalloc = function (session_mgr_val, session_id_val) {

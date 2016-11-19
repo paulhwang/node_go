@@ -24,6 +24,7 @@ function clusterObject (cluster_mgr_val, topic_data_val, session_val) {
         this.theNext = null;
         this.thePrev = null;
         this.createTopic(topic_data_val);
+        this.debug(true, "init__", "");
     };
 
     this.goObjectMalloc = function () {

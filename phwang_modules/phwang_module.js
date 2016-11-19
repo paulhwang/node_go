@@ -36,10 +36,6 @@ function RootObject () {
         return require("./util_modules/queue_module.js");
     };
 
-    this.utilObject = function () {
-        return this.theUtilObject;
-    };
-
     this.fabricObject = function () {
         return this.theFabricObject;
     };

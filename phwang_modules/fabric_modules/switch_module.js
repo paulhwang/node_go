@@ -39,10 +39,6 @@ function SwitchObject(fabric_val) {
         return this.fabricObject().rootObject();
     };
 
-    this.utilObject = function () {
-        return this.rootObject().utilObject();
-    };
-
     this.linkMgrObject = function () {
         return this.fabricObject().linkMgrObject();
     };
@@ -333,12 +329,16 @@ function SwitchObject(fabric_val) {
         }
     };
 
+    this.util_module = function () {
+        return require("../util_modules/util_module.js");
+    };
+
     this.logit = function (str1_val, str2_val) {
-        this.utilObject().utilLogit(this.objectName() + "." + str1_val, str2_val);
+        this.util_module().LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        this.utilObject().utilAbend(this.objectName() + "." + str1_val, str2_val);
+        this.util_module().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.init__(fabric_val);

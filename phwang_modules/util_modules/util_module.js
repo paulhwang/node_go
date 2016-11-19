@@ -17,6 +17,14 @@ module.exports = {
         theUtilObject.abend(str1_val, str2_val);
     },
 
+    LOG_IT: function (str1_val, str2_val) {
+        LOG_IT(str1_val, str2_val);
+    },
+
+    ABEND: function (str1_val, str2_val) {
+        LOG_IT(str1_val, str2_val);
+    },
+
     utilLogit: function (str1_val, str2_val) {
         theUtilObject.utilLogit(str1_val, str2_val);
     },
@@ -24,6 +32,39 @@ module.exports = {
     utilAbend: function (str1_val, str2_val) {
         theUtilObject.utilAbend(str1_val, str2_val);
     },
+};
+
+var LOG_IT = function(str1_val, str2_val) {
+    if (str1_val === undefined) {
+        str1_val = "UNDEFINED";
+    }
+    if (str1_val === null) {
+        str1_val = "NULL";
+    }
+    if (str2_val === undefined) {
+        str2_val = "UNDEFINED";
+    }
+    if (str2_val === null) {
+        str2_val = "NULL";
+    }
+    console.log(str1_val + "() " + str2_val);
+};
+
+var ABEND = function(str1_val, str2_val) {
+    if (str1_val === undefined) {
+        str1_val = "UNDEFINED";
+    }
+    if (str1_val === null) {
+        str1_val = "NULL";
+    }
+    if (str2_val === undefined) {
+        str2_val = "UNDEFINED";
+    }
+    if (str2_val === null) {
+        str2_val = "NULL";
+    }
+    console.log("***ABEND*** " + str1_val + "() " + str2_val);
+    this.doCrash();
 };
 
 var theUtilObject = new UtilObject();

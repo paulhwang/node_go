@@ -16,6 +16,7 @@ function GoEngineObject(container_object_val) {
     this.init__ = function (container_object_val) {
         this.theContainerObject = container_object_val;
         this.resetEngineObjectData();
+        this.debug(false, "init__", "");
     };
 
     this.objectName = function () {

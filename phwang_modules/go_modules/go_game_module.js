@@ -16,6 +16,7 @@ function GoGameObject(container_val) {
     this.init__ = function () {
         this.theContainerObject = container_val;
         this.resetGameObjectData();
+        this.debug(false, "init__", "");
     };
 
     this.objectName = function () {

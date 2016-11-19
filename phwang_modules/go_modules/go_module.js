@@ -27,18 +27,6 @@ function GoObject (cluster_object_val) {
        return require("./go_define_module.js");
     };
 
-/*
-    this.utilModuleUtilLogit = function (str1_val, str2_val) {
-        var util_module = require("./../util_modules/util_module.js");
-        return util_module.utilLogit(str1_val, str2_val);
-    };
-
-    this.utilModuleUtilAbend = function (str1_val, str2_val) {
-        var util_module = require("./../util_modules/util_module.js");
-        return util_module.utilAbend(str1_val, str2_val);
-    };
-*/
-
     this.objectName = function () {
         return "GoObject";
     };

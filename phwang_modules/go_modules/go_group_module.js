@@ -23,6 +23,7 @@ function GoGroupObject(group_list_val) {
         this.theStoneCount = 0;
         this.theExistMatrix = this.createMatrix(this.boardSize());
         this.theDeadMatrix = this.createMatrix(this.boardSize());
+        this.debug(true, "init__", "");
     };
 
     this.objectName = function () {

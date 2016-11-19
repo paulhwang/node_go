@@ -26,6 +26,7 @@ function GoGroupListObject(engine_val, index_val, color_val, dead_val, big_stone
         this.theGroupCount = 0;
         this.theIsMarkedDead = false;
         this.theListArray = [];
+        this.debug(false, "init__", "");
     };
 
     this.objectName = function () {

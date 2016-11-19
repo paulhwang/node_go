@@ -22,6 +22,7 @@ function GoPortObject(container_val) {
 
     this.init__ = function (container_val) {
         this.theContainerObject = container_val;
+        this.debug(false, "init__", "");
     };
 
     this.mallocMove = function (str_val, x_val, y_val, color_val, turn_val, container_val) {

@@ -13,8 +13,23 @@ module.exports = {
 function GoGroupListObject(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val) {
     "use strict";
 
+    this.init__ = function (engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val) {
+        this.theEngineObject = engine_val;
+        this.theIndexNumber = index_val;
+        this.theMyColor = color_val;
+        this.theHisColor = (this.myColor() === this.GO().EMPTY_STONE())
+            ? this.GO().EMPTY_STONE()
+            : this.GO().getOppositeColor(this.myColor());
+        this.theIsDead = dead_val;
+        this.theBigStoneColor = big_stone_val;
+        this.theSmallStoneColor = small_stone_val;
+        this.theGroupCount = 0;
+        this.theIsMarkedDead = false;
+        this.theListArray = [];
+    };
+
     this.objectName = function () {
-        return this.theObjectName;
+        return "GoGroupListObject";
     };
 
     this.GO = function () {
@@ -242,25 +257,19 @@ function GoGroupListObject(engine_val, index_val, color_val, dead_val, big_stone
         }
     };
 
-    this.goAbend = function (str1_val, str2_val) {
+    this.debug = function (debug_val, str1_val, str2_val) {
+        if (debug_val) {
+            this.logit(str1_val, str2_val);
+        }
+    };
+
+    this.logit = function (str1_val, str2_val) {
+        return this.containerObject().goLogit(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.abend = function (str1_val, str2_val) {
         return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.goLog = function (str1_val, str2_val) {
-        return this.containerObject().goLog(this.objectName() + "." + str1_val, str2_val);
-    };
-
-    this.theObjectName = "GoGroupListObject";
-    this.theEngineObject = engine_val;
-    this.theIndexNumber = index_val;
-    this.theMyColor = color_val;
-    this.theHisColor = (this.myColor() === this.GO().EMPTY_STONE())
-        ? this.GO().EMPTY_STONE()
-        : this.GO().getOppositeColor(this.myColor());
-    this.theIsDead = dead_val;
-    this.theBigStoneColor = big_stone_val;
-    this.theSmallStoneColor = small_stone_val;
-    this.theGroupCount = 0;
-    this.theIsMarkedDead = false;
-    this.theListArray = [];
+    this.init__(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val);
 }

@@ -30,12 +30,20 @@ function QueueObject (util_val) {
         this.theRing = this.utilObject().mallocRing();
     };
 
+    this.debugMe = function () {
+        return true;
+    };
+
     this.objectName = function () {
         return "QueueObject";
     };
 
     this.holderPoolModule = function () {
         return this.theHolderPoolModule;
+    };
+
+    this.holderEntryModule = function () {
+        return require("./holder_entry_module.js");
     };
 
     this.utilObject = function () {
@@ -88,11 +96,12 @@ function QueueObject (util_val) {
 
         this.abendIt();
 
-        var data_entry = this.holderPoolModule().malloc(data_val);
+        var data_entry = this.holderEntryModule().malloc();
         if (!data_entry) {
             this.abend("enQueue", "null data_entry");
             return;
         }
+        data_entry.setData(data_val);
 
         this.incrementSize();
         if (!this.head()) {
@@ -188,6 +197,10 @@ function QueueObject (util_val) {
     };
 
     this.abendIt = function () {
+        if (!this.debugMe()) {
+            return;
+        }
+
         var i = 0;
         var p = this.head();
         while (p) {

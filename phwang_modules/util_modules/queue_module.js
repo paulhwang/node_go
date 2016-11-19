@@ -132,11 +132,6 @@ function QueueObject (util_val) {
             this.head().setPrev(null);
         }
 
-        if (data_entry) {
-            this.debug(false, "deQueue", "data=" + data_entry.data);
-            this.holderPoolModule().free(data_entry);
-        }
-
         this.abendIt();
 
         //var i = 10

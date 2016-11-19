@@ -97,15 +97,6 @@ function GoDefineObject () {
     this.MARKED_EMPTY_BLACK_STONE = function () {return this.THE_MARKED_EMPTY_BLACK_STONE;};
     this.MARKED_EMPTY_WHITE_STONE = function () {return this.THE_MARKED_EMPTY_WHITE_STONE;};
 
-    this.goLog = function (s1_val, s2_val) {
-        console.log(s1_val + "() " + s2_val);
-    };
-
-    this.goAbend = function (s1_val, s2_val) {
-        console.log("goAbend: " + s1_val + "() " + s2_val);
-        this.doCrash();
-    };
-
     this.getOppositeColor = function (color_val) {
         switch (color_val) {
         case this.BLACK_STONE():
@@ -140,6 +131,20 @@ function GoDefineObject () {
 
     this.isValidCoordinate = function (coordinate_val, board_size_val) {
         return (0 <= coordinate_val) && (coordinate_val < board_size_val);
+    };
+
+    this.debug = function (debug_val, str1_val, str2_val) {
+        if (debug_val) {
+            this.logit(str1_val, str2_val);
+        }
+    };
+
+    this.logit = function (str1_val, str2_val) {
+        return this.containerObject().goLogit(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.abend = function (str1_val, str2_val) {
+        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
     };
 };
 

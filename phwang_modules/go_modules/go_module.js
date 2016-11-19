@@ -15,18 +15,11 @@ function GoObject (cluster_object_val) {
 
     this.init__ = function (cluster_object_val) {
         this.theClusterObject = cluster_object_val;
-
-        var config_module = require("./go_config_module.js");
-        var board_module = require("./go_board_module.js");
-        var engine_module = require("./go_engine_module.js");
-        var game_module = require("./go_game_module.js");
-        var port_module = require("./go_port_module.js");
-
-        this.theConfigObject = config_module.malloc(this);
-        this.theBoardObject = board_module.malloc(this);
-        this.theEngineObject = engine_module.malloc(this);
-        this.theGameObject = game_module.malloc(this);
-        this.thePortObject = port_module.malloc(this);
+        this.theConfigObject = require("./go_config_module.js").malloc(this);
+        this.theBoardObject = require("./go_board_module.js").malloc(this);
+        this.theEngineObject = require("./go_engine_module.js").malloc(this);
+        this.theGameObject = require("./go_game_module.js").malloc(this);
+        this.thePortObject = require("./go_port_module.js").malloc(this);
     };
 
     this.GO = function () {
@@ -164,36 +157,32 @@ function GoObject (cluster_object_val) {
         }
     };
 
-    this.util_module = function () {
-        return require("../util_modules/util_module.js");
-    };
-
     this.logit = function (str1_val, str2_val) {
-        this.util_module().LOG_IT(this.objectName() + "." + str1_val, str2_val);
+        require("../util_modules/util_module.js").LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        this.util_module().ABEND(this.objectName() + "." + str1_val, str2_val);
+        require("../util_modules/util_module.js").ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.goLog = function (s1_val, s2_val) {
+    this.goLogit = function (s1_val, s2_val) {
         if (this.clusterObject().sessionArrayLength() === 1) {
-            this.util_module().LOG_IT(this.clusterObject().sessionArray(0).sessionId() + "<=>" +
+            require("../util_modules/util_module.js").LOG_IT(this.clusterObject().sessionArray(0).sessionId() + "<=>" +
                                      this.clusterObject().sessionArray(0).sessionId() + " " + s1_val, s2_val);
         }
         else {
-            this.util_module().LOG_IT(this.clusterObject().sessionArray(0).sessionId() + "<=>" +
+            require("../util_modules/util_module.js").LOG_IT(this.clusterObject().sessionArray(0).sessionId() + "<=>" +
                                      this.clusterObject().sessionArray(1).sessionId() + " " + s1_val, s2_val);
         }
     };
 
     this.goAbend = function (s1_val, s2_val) {
         if (this.topicObject().sessionArrayLength() === 1) {
-            this.util_module().ABEND(this.topicObject().sessionArray(0).sessionId() + "<=>" +
+            require("../util_modules/util_module.js").ABEND(this.topicObject().sessionArray(0).sessionId() + "<=>" +
                                      this.topicObject().sessionArray(0).sessionId() + " " + s1_val, s2_val);
         }
         else {
-            this.util_module().ABEND(this.topicObject().sessionArray(0).sessionId() + "<=>" +
+            require("../util_modules/util_module.js").ABEND(this.topicObject().sessionArray(0).sessionId() + "<=>" +
                                      this.topicObject().sessionArray(1).sessionId() + " " + s1_val, s2_val);
         }
     };

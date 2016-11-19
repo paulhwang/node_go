@@ -178,16 +178,12 @@ function clusterObject (cluster_mgr_val, topic_data_val, session_val) {
         }
     };
 
-    this.util_module = function () {
-        return require("../util_modules/util_module.js");
-    };
-
     this.logit = function (str1_val, str2_val) {
-        this.util_module().LOG_IT(this.objectName() + "." + str1_val, str2_val);
+        require("../util_modules/util_module.js").LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        this.util_module().ABEND(this.objectName() + "." + str1_val, str2_val);
+        require("../util_modules/util_module.js").ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.init__(cluster_mgr_val, topic_data_val, session_val);

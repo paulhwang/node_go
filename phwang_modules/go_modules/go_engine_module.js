@@ -12,16 +12,10 @@ module.exports = {
 
 function GoEngineObject(container_object_val) {
     "use strict";
-    this.theContainerObject = container_object_val;
 
-    this.mallocGroupList = function (engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val) {
-        var group_list_module = require("./go_group_list_module.js");
-        return group_list_module.malloc(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val);
-    };
-
-    this.mallocGroup = function (group_list_val) {
-        var group_module = require("./go_group_module.js");
-        return group_module.malloc(group_list_val);
+    this.init__ = function (container_object_val) {
+        this.theContainerObject = container_object_val;
+        this.resetEngineObjectData();
     };
 
     this.objectName = function () {
@@ -46,6 +40,14 @@ function GoEngineObject(container_object_val) {
 
     this.gameObject = function () {
         return this.containerObject().gameObject();
+    };
+
+    this.mallocGroupList = function (engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val) {
+        return require("./go_group_list_module.js").malloc(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val);
+    };
+
+    this.mallocGroup = function (group_list_val) {
+        return require("./go_group_module.js").malloc(group_list_val);
     };
 
     this.boardSize = function () {
@@ -632,28 +634,6 @@ function GoEngineObject(container_object_val) {
         */
     };
 
-    this.goAbend = function (str1_val, str2_val) {
-        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
-    };
-
-    this.goLog = function (str1_val, str2_val) {
-        return this.containerObject().goLog(this.objectName() + "." + str1_val, str2_val);
-    };
-
-    this.debug = function (debug_val, str1_val, str2_val) {
-        if (debug_val) {
-            this.logit(str1_val, "==" + str2_val);
-        }
-    };
-
-    this.logit = function (str1_val, str2_val) {
-        return this.containerObject().goLog(this.objectName() + "." + str1_val, str2_val);
-    };
-
-    this.abend = function (str1_val, str2_val) {
-        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
-    };
-
     this.resetEngineObjectData = function () {
         this.theGroupListArray = [7];
         this.theGroupListArray[1] = this.mallocGroupList(this, 1, this.GO().BLACK_STONE(), false, null, null);
@@ -668,5 +648,19 @@ function GoEngineObject(container_object_val) {
         this.theWhiteCaptureStones = 0;
     };
 
-    this.resetEngineObjectData();
+    this.debug = function (debug_val, str1_val, str2_val) {
+        if (debug_val) {
+            this.logit(str1_val, str2_val);
+        }
+    };
+
+    this.logit = function (str1_val, str2_val) {
+        return this.containerObject().goLogit(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.abend = function (str1_val, str2_val) {
+        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.init__(container_object_val);
 }

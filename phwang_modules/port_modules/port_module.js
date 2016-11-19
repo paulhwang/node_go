@@ -12,12 +12,10 @@ module.exports = {
 
 function PortObject(root_object_val) {
     "use strict";
-    this.theRootObject = root_object_val;
 
-    this.mallocModules = function () {
-        var ajax_module = require("./ajax_module.js");
-
-        this.theAjaxObject = ajax_module.malloc(this);
+    this.init__ = function (root_object_val) {
+        this.theRootObject = root_object_val;
+        this.theAjaxObject = require("./ajax_module.js").malloc(this);
     };
 
     this.objectName = function () {
@@ -38,17 +36,13 @@ function PortObject(root_object_val) {
         }
     };
 
-    this.util_module = function () {
-        return require("../util_modules/util_module.js");
-    };
-
     this.logit = function (str1_val, str2_val) {
-        this.util_module().LOG_IT(this.objectName() + "." + str1_val, str2_val);
+        require("../util_modules/util_module.js").LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        this.util_module().ABEND(this.objectName() + "." + str1_val, str2_val);
+        require("../util_modules/util_module.js").ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.mallocModules();
+    this.init__(root_object_val);
 }

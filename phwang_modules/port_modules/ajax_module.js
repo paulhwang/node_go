@@ -12,7 +12,10 @@ module.exports = {
 
 function AjaxObject(port_object_val) {
     "use strict";
-    this.thePortObject = port_object_val;
+
+    this.init__ = function (port_object_val) {
+        this.thePortObject = port_object_val;
+    };
 
     this.objectName = function () {
         return "AjaxObject";
@@ -73,15 +76,13 @@ function AjaxObject(port_object_val) {
         }
     };
 
-    this.util_module = function () {
-        return require("../util_modules/util_module.js");
-    };
-
     this.logit = function (str1_val, str2_val) {
-        this.util_module().LOG_IT(this.objectName() + "." + str1_val, str2_val);
+        require("../util_modules/util_module.js").LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        this.util_module().ABEND(this.objectName() + "." + str1_val, str2_val);
+        require("../util_modules/util_module.js").ABEND(this.objectName() + "." + str1_val, str2_val);
     };
+
+    this.init__(port_object_val);
 }

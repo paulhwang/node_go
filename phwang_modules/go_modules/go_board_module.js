@@ -12,9 +12,18 @@ module.exports = {
 
 function GoBoardObject(container_val) {
     "use strict";
-    this.theContainerObject = container_val;
 
-    this.init__ = function () {
+    this.init__ = function (container_val) {
+        this.theContainerObject = container_val;
+        this.theBoardArray = [19];
+        this.theMarkedBoardArray = [19];
+        var i = 0;
+        while (i < 19) {
+            this.theBoardArray[i] = [19];
+            this.theMarkedBoardArray[i] = [19];
+            i += 1;
+        }
+        this.resetBoardObjectData();
     };
 
     this.objectName = function () {
@@ -176,22 +185,12 @@ function GoBoardObject(container_val) {
     };
 
     this.logit = function (str1_val, str2_val) {
-        return this.containerObject().goLog(this.objectName() + "." + str1_val, str2_val);
+        return this.containerObject().goLogit(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
         return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.theBoardArray = [19];
-    this.theMarkedBoardArray = [19];
-    var i = 0;
-    while (i < 19) {
-        this.theBoardArray[i] = [19];
-        this.theMarkedBoardArray[i] = [19];
-        i += 1;
-    }
-    this.resetBoardObjectData();
-
-    this.init__();
+    this.init__(container_val);
 }

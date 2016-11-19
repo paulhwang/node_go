@@ -158,31 +158,31 @@ function GoObject (cluster_object_val) {
     };
 
     this.logit = function (str1_val, str2_val) {
-        require("../util_modules/util_module.js").LOG_IT(this.objectName() + "." + str1_val, str2_val);
+        this.rootObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        require("../util_modules/util_module.js").ABEND(this.objectName() + "." + str1_val, str2_val);
+        this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.goLogit = function (s1_val, s2_val) {
         if (this.clusterObject().sessionArrayLength() === 1) {
-            require("../util_modules/util_module.js").LOG_IT(this.clusterObject().sessionArray(0).sessionId() + "<=>" +
+            this.rootObject().LOG_IT(this.clusterObject().sessionArray(0).sessionId() + "<=>" +
                                      this.clusterObject().sessionArray(0).sessionId() + " " + s1_val, s2_val);
         }
         else {
-            require("../util_modules/util_module.js").LOG_IT(this.clusterObject().sessionArray(0).sessionId() + "<=>" +
+            this.rootObject().LOG_IT(this.clusterObject().sessionArray(0).sessionId() + "<=>" +
                                      this.clusterObject().sessionArray(1).sessionId() + " " + s1_val, s2_val);
         }
     };
 
     this.goAbend = function (s1_val, s2_val) {
         if (this.topicObject().sessionArrayLength() === 1) {
-            require("../util_modules/util_module.js").ABEND(this.topicObject().sessionArray(0).sessionId() + "<=>" +
+            this.rootObject().ABEND(this.topicObject().sessionArray(0).sessionId() + "<=>" +
                                      this.topicObject().sessionArray(0).sessionId() + " " + s1_val, s2_val);
         }
         else {
-            require("../util_modules/util_module.js").ABEND(this.topicObject().sessionArray(0).sessionId() + "<=>" +
+            this.rootObject().ABEND(this.topicObject().sessionArray(0).sessionId() + "<=>" +
                                      this.topicObject().sessionArray(1).sessionId() + " " + s1_val, s2_val);
         }
     };

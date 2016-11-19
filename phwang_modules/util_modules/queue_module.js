@@ -27,6 +27,7 @@ function QueueObject (util_val) {
         this.theTail = null;
         this.theSize = 0;
         this.theRing = this.utilObject().mallocRing();
+        this.debug(true, "init__", "");
     };
 
     this.debugMe = function () {
@@ -224,11 +225,11 @@ function QueueObject (util_val) {
     };
 
     this.logit = function (str1_val, str2_val) {
-        this.rootObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);
+        require("../phwang_module.js").LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
+        require("../phwang_module.js").ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.init__(util_val);

@@ -19,7 +19,6 @@ var theHolderPoolObject = new HolderPoolObject();
 function HolderPoolObject () {
     "use strict";
     this.theUtilModule = require("./util_module.js");
-    this.theHolderEntryModule = require("./holder_entry_module.js");
     this.theHead = null;
     this.theSize = 0;
 
@@ -32,7 +31,7 @@ function HolderPoolObject () {
     };
 
     this.holderEntryModule = function () {
-        return this.theHolderEntryModule;
+        return require("./holder_entry_module.js");
     };
 
     this.head = function () {

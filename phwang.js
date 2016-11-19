@@ -2,7 +2,6 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var express_http = require('./express_http_module.js');
 var app = express();
-var util = require("./phwang_modules/util_modules/util_module.js");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

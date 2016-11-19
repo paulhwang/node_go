@@ -14,6 +14,17 @@ module.exports = {
 function HolderEntryObject() {
     "use strict";
 
+    this.init__ = function () {
+        this.theData = null;
+        this.thePrev = null;
+        this.theNext = null;
+        this.debug(false, "init__", "");
+    };
+
+    this.objectName = function () {
+        return "HolderEntryObject";
+    };
+
     this.data = function () {
         return this.theData;
     };
@@ -38,7 +49,19 @@ function HolderEntryObject() {
         this.theNext = val;
     };
 
-    this.theData = null;
-    this.thePrev = null;
-    this.theNext = null;
+    this.debug = function (debug_val, str1_val, str2_val) {
+        if (debug_val) {
+            this.logit(str1_val, str2_val);
+        }
+    };
+
+    this.logit = function (str1_val, str2_val) {
+        require("../phwang_module.js").LOG_IT(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.abend = function (str1_val, str2_val) {
+        require("../phwang_module.js").ABEND(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.init__();
 }

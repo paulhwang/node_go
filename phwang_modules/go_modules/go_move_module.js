@@ -61,8 +61,6 @@ function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, container_val)
     };
 
     this.encodeMove = function () {
-        //GO.goLog("GoMoveObject.encodeMove", "");
-
         var buf = "";
         if (this.xX() < 10) {
             buf = buf + 0;
@@ -84,12 +82,12 @@ function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, container_val)
         }
         buf = buf + this.turnIndex();
 
-        //this.goLog("encodeMove", "output=" + buf);
+        //this.debug(true, "encodeMove", "output=" + buf);
         return buf;
     };
 
     this.moveObjectDecode = function (str_val) {
-        this.debug(false, "GoMoveObject", "input=" + str_val);
+        //this.debug(false, "moveObjectDecode", "input=" + str_val);
         var index = 0;
         this.theX = (str_val.charAt(index++) - '0') * 10;
         this.theX += (str_val.charAt(index++) - '0');

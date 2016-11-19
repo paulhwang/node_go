@@ -61,38 +61,46 @@ function RootObject () {
         return this.farbricObject().clusterMgrObject();
     };
 
-this.LOG_IT = function(str1_val, str2_val) {
-    if (str1_val === undefined) {
-        str1_val = "UNDEFINED";
-    }
-    if (str1_val === null) {
-        str1_val = "NULL";
-    }
-    if (str2_val === undefined) {
-        str2_val = "UNDEFINED";
-    }
-    if (str2_val === null) {
-        str2_val = "NULL";
-    }
-    console.log(str1_val + "() " + str2_val);
-};
+    this.mallocQueue = function () {
+        return require("./util_modules/queue_module.js").malloc(this);
+    };
 
-this.ABEND = function(str1_val, str2_val) {
-    if (str1_val === undefined) {
-        str1_val = "UNDEFINED";
-    }
-    if (str1_val === null) {
-        str1_val = "NULL";
-    }
-    if (str2_val === undefined) {
-        str2_val = "UNDEFINED";
-    }
-    if (str2_val === null) {
-        str2_val = "NULL";
-    }
-    console.log("***ABEND*** " + str1_val + "() " + str2_val);
-    this.doCrash();
-};
+    this.mallocRing = function () {
+        return require("./util_modules/ring_module.js").malloc(this);
+    };
+
+    this.LOG_IT = function(str1_val, str2_val) {
+        if (str1_val === undefined) {
+            str1_val = "UNDEFINED";
+        }
+        if (str1_val === null) {
+            str1_val = "NULL";
+        }
+        if (str2_val === undefined) {
+            str2_val = "UNDEFINED";
+        }
+        if (str2_val === null) {
+            str2_val = "NULL";
+        }
+        console.log(str1_val + "() " + str2_val);
+    };
+
+    this.ABEND = function(str1_val, str2_val) {
+        if (str1_val === undefined) {
+            str1_val = "UNDEFINED";
+        }
+        if (str1_val === null) {
+            str1_val = "NULL";
+        }
+        if (str2_val === undefined) {
+            str2_val = "UNDEFINED";
+        }
+        if (str2_val === null) {
+            str2_val = "NULL";
+        }
+        console.log("***ABEND*** " + str1_val + "() " + str2_val);
+        this.doCrash();
+    };
 
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {

@@ -12,28 +12,23 @@ module.exports = {
 
 function RootObject () {
     "use strict";
-    this.theQueueModule = require("./util_modules/queue_module.js");
 
-    this.mallocModules = function () {
-        var util_module = require("./util_modules/util_module.js");
-        var fabric_module = require("./fabric_modules/fabric_module.js");
-        var port_module = require("./port_modules/port_module.js");
-
-        this.theUtilObject = util_module.malloc(this);
-        this.theFabricObject = fabric_module.malloc(this);
-        this.thePortObject = port_module.malloc(this);
+    this.init__ = function () {
+        this.theUtilObject = require("./util_modules/util_module.js").malloc(this);
+        this.theFabricObject = require("./fabric_modules/fabric_module.js").malloc(this);
+        this.thePortObject = require("./port_modules/port_module.js").malloc(this);
     };
 
     this.objectName = function () {
         return "RootObject";
     };
 
-    this.utilObject = function () {
-        return this.theUtilObject;
+    this.queueModule = function () {
+        return require("./util_modules/queue_module.js");
     };
 
-    this.queueModule = function () {
-        return this.theQueueModule;
+    this.utilObject = function () {
+        return this.theUtilObject;
     };
 
     this.fabricObject = function () {
@@ -58,17 +53,17 @@ function RootObject () {
 
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
-            this.logit(str1_val, "==" + str2_val);
+            this.logit(str1_val, str2_val);
         }
     };
 
     this.logit = function (str1_val, str2_val) {
-        this.utilModule().logit(this.objectName() + "." + str1_val, str2_val);
+        require("../util_modules/util_module.js").LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        this.utilModule().abend(this.objectName() + "." + str1_val, str2_val);
+        require("../util_modules/util_module.js").ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.mallocModules();
+    this.init__();
 }

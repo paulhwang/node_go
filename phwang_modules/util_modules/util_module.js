@@ -51,8 +51,6 @@ var ABEND = function(str1_val, str2_val) {
     this.doCrash();
 };
 
-var theUtilObject = new UtilObject();
-
 function UtilObject(root_val) {
     "use strict";
 

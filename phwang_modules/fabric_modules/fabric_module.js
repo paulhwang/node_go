@@ -15,13 +15,10 @@ function FabricObject(root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
-        var link_mgr_module = require("./link_mgr_module.js");
-        var cluster_mgr_module = require("./cluster_mgr_module.js");
-        var switch_module = require("./switch_module.js");
-        this.theLinkMgrObject = link_mgr_module.malloc(this);
-        this.theClusterMgrObject = cluster_mgr_module.malloc(this);
-        this.theSwitchObject = switch_module.malloc(this);
-        this.debug(true, "init__", "");
+        this.theLinkMgrObject = require("./link_mgr_module.js").malloc(this);
+        this.theClusterMgrObject = require("./cluster_mgr_module.js").malloc(this);
+        this.theSwitchObject = require("./switch_module.js").malloc(this);
+        this.debug(false, "init__", "");
     };
 
     this.objectName = function () {

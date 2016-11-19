@@ -21,7 +21,7 @@ function clusterMgrObject(fabric_val) {
         this.theGlobalClusterId = 100;
         this.theClusterQueue = this.rootObject().mallocQueue();
         this.thePoolQueue = this.rootObject().mallocQueue();
-        this.debug(true, "init__", "");
+        this.debug(false, "init__", "");
     };
 
     this.clusterModuleMalloc = function (topic_data_val, session_val) {

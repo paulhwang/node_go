@@ -16,7 +16,7 @@ function SwitchObject(fabric_val) {
     this.init__ = function (fabric_val) {
         this.theFabricObject = fabric_val;
         this.initSwitchTable();
-        this.debug(true, "init__", "");
+        this.debug(false, "init__", "");
     };
 
     this.linkModuleMalloc = function (my_name_val, link_id_val) {

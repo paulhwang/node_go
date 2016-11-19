@@ -20,19 +20,18 @@ module.exports = {
 
 function QueueObject (util_val) {
     "use strict";
-    this.theUtilModule = require("./util_module.js");
-    this.theHolderPoolModule = require("./holder_pool_module.js");
-    this.theUtilObject = util_val;
-    this.theHead = null;
-    this.theTail = null;
-    this.theSize = 0;
+
+    this.init__ = function (util_val) {
+        this.theHolderPoolModule = require("./holder_pool_module.js");
+        this.theUtilObject = util_val;
+        this.theHead = null;
+        this.theTail = null;
+        this.theSize = 0;
+        this.theRing = this.utilObject().mallocRing();
+    };
 
     this.objectName = function () {
         return "QueueObject";
-    };
-
-    this.utilModule = function () {
-        return this.theUtilModule;
     };
 
     this.holderPoolModule = function () {
@@ -217,17 +216,17 @@ function QueueObject (util_val) {
 
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
-            this.logit(str1_val, "==" + str2_val);
+            this.logit(str1_val, str2_val);
         }
     };
 
-    this.abend = function (str1_val, str2_val) {
-        this.utilModule().abend(this.objectName() + "." + str1_val, str2_val);
-    };
-
     this.logit = function (str1_val, str2_val) {
-        this.utilModule().logit(this.objectName() + "." + str1_val, str2_val);
+        require("../util_modules/util_module.js").LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.theRing = this.utilObject().mallocRing();
+    this.abend = function (str1_val, str2_val) {
+        require("../util_modules/util_module.js").ABEND(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.init__(util_val);
 }

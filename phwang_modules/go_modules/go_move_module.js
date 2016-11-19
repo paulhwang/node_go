@@ -13,6 +13,21 @@ module.exports = {
 function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, container_val) {
     "use strict";
 
+    this.init__ = function (str_val, x_val, y_val, color_val, turn_val, container_val) {
+        this.debug(false, "init__", "(" + x_val + "," + y_val + ") color=" + color_val + " turn=" + turn_val);
+        this.theObjectName = "GoMoveObject";
+        this.theContainerObject = container_val;
+
+        if (!str_val) {
+            this.theX = x_val;
+            this.theY = y_val;
+            this.theMyColor = color_val;
+            this.theTurnIndex = turn_val;
+        } else {
+            this.moveObjectDecode(str_val);
+        }
+    };
+
     this.objectName = function () {
         return this.theObjectName;
     };
@@ -87,14 +102,6 @@ function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, container_val)
         }
     };
 
-    this.logit = function (str1_val, str2_val) {
-        return this.containerObject().goLog(this.objectName() + "." + str1_val, str2_val);
-    };
-
-    this.abend = function (str1_val, str2_val) {
-        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
-    };
-
     this.moveObjectDecode = function (str_val) {
         this.debug(false, "GoMoveObject", "input=" + str_val);
         var index = 0;
@@ -108,17 +115,19 @@ function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, container_val)
         this.theTurnIndex += (str_val.charAt(index++) - '0');
    };
 
-   //GO.goLog("GoMoveObject.GoMoveObject", "(" + x_val + "," + y_val + ") color=" + color_val + " turn=" + turn_val);
-    this.theObjectName = "GoMoveObject";
-    this.theContainerObject = container_val;
+    this.debug = function (debug_val, str1_val, str2_val) {
+        if (debug_val) {
+            this.logit(str1_val, str2_val);
+        }
+    };
 
-    if (!str_val) {
-        this.theX = x_val;
-        this.theY = y_val;
-        this.theMyColor = color_val;
-        this.theTurnIndex = turn_val;
-    } else {
-        this.moveObjectDecode(str_val);
-    }
+    this.logit = function (str1_val, str2_val) {
+        return this.containerObject().goLogit(this.objectName() + "." + str1_val, str2_val);
+    };
 
+    this.abend = function (str1_val, str2_val) {
+        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.init__(str_val, x_val, y_val, color_val, turn_val, container_val);
 }

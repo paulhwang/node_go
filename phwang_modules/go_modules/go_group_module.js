@@ -530,14 +530,6 @@ function GoGroupObject(group_list_val) {
         this.goLog("printGroup", s);
     };
 
-    this.goAbend = function (str1_val, str2_val) {
-        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
-    };
-
-    this.goLog = function (str1_val, str2_val) {
-        return this.containerObject().goLog(this.objectName() + "." + str1_val, str2_val);
-    };
-
     this.createMatrix = function (board_size_val) {
         var i;
 
@@ -549,6 +541,20 @@ function GoGroupObject(group_list_val) {
         }
         return matrix;
     }
+
+    this.debug = function (debug_val, str1_val, str2_val) {
+        if (debug_val) {
+            this.logit(str1_val, str2_val);
+        }
+    };
+
+    this.logit = function (str1_val, str2_val) {
+        return this.containerObject().goLogit(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.abend = function (str1_val, str2_val) {
+        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
+    };
 
     this.init__(group_list_val);
 }

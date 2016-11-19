@@ -12,16 +12,19 @@ module.exports = {
 
 function RingObject (util_val) {
     "use strict";
-    this.theUtilModule = require("./util_module.js");
-    this.theHolderPoolModule = require("./holder_pool_module.js");
-    this.theUtilObject = util_val;
+
+    this.init__ = function (util_val) {
+        this.theHolderPoolModule = require("./holder_pool_module.js");
+        this.theUtilObject = util_val;
+        this.theInput = 0;
+        this.theOutput = 0;
+        this.theSize = 2;
+        this.theLeft = this.size();
+        this.theArray = [this.size()];
+    };
 
     this.objectName = function () {
         return "RingObject";
-    };
-
-    this.utilModule = function () {
-        return this.theUtilModule;
     };
 
     this.holderPoolModule = function () {
@@ -175,21 +178,17 @@ function RingObject (util_val) {
 
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
-            this.logit(str1_val, "==" + str2_val);
+            this.logit(str1_val, str2_val);
         }
     };
 
-    this.abend = function (str1_val, str2_val) {
-        this.utilModule().abend(this.objectName() + "." + str1_val, str2_val);
-    };
-
     this.logit = function (str1_val, str2_val) {
-        this.utilModule().logit(this.objectName() + "." + str1_val, str2_val);
+        require("../util_modules/util_module.js").LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.theInput = 0;
-    this.theOutput = 0;
-    this.theSize = 2;
-    this.theLeft = this.size();
-    this.theArray = [this.size()];
+    this.abend = function (str1_val, str2_val) {
+        require("../util_modules/util_module.js").ABEND(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.init__(util_val);
 }

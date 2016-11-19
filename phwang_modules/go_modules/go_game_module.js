@@ -10,9 +10,13 @@ module.exports = {
     },
 };
 
-function GoGameObject(container_val, str_val) {
+function GoGameObject(container_val) {
     "use strict";
-    this.theContainerObject = container_val;
+
+    this.init__ = function () {
+        this.theContainerObject = container_val;
+        this.resetGameObjectData();
+    };
 
     this.objectName = function () {
         return "GoGameObject";
@@ -508,22 +512,6 @@ function GoGameObject(container_val, str_val) {
         return buf;
     };
 
-    this.goAbend = function (str1_val, str2_val) {
-        return this.containerObject().goAbend("GoGameObject." + str1_val, str2_val);
-    };
-
-    this.goLog = function (str1_val, str2_val) {
-        return this.containerObject().goLog("GoGameObject." + str1_val, str2_val);
-    };
-
-    this.abend = function (str1_val, str2_val) {
-        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
-    };
-
-    this.logit = function (str1_val, str2_val) {
-        return this.containerObject().goLog(this.objectName() + "." + str1_val, str2_val);
-    };
-
     this.decodeMoveList = function (str_val) {
         if (!str_val) {
             //this.goAbend("decodeMoveList", "null input");
@@ -594,5 +582,19 @@ function GoGameObject(container_val, str_val) {
         this.theGameIsOver = false;
     };
 
-    this.resetGameObjectData();
+    this.debug = function (debug_val, str1_val, str2_val) {
+        if (debug_val) {
+            this.logit(str1_val, str2_val);
+        }
+    };
+
+    this.logit = function (str1_val, str2_val) {
+        return this.containerObject().goLogit(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.abend = function (str1_val, str2_val) {
+        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.init__(container_val);
 }

@@ -32,10 +32,6 @@ function RootObject () {
         return "RootObject";
     };
 
-    this.queueModule = function () {
-        return require("./util_modules/queue_module.js");
-    };
-
     this.fabricObject = function () {
         return this.theFabricObject;
     };

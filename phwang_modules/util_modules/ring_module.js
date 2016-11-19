@@ -14,7 +14,6 @@ function RingObject (util_val) {
     "use strict";
 
     this.init__ = function (util_val) {
-        this.theHolderPoolModule = require("./holder_pool_module.js");
         this.theUtilObject = util_val;
         this.theInput = 0;
         this.theOutput = 0;
@@ -28,7 +27,7 @@ function RingObject (util_val) {
     };
 
     this.holderPoolModule = function () {
-        return this.theHolderPoolModule;
+        return require("./holder_pool_module.js");
     };
 
     this.utilObject = function () {

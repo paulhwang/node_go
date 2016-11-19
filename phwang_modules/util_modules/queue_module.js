@@ -22,7 +22,6 @@ function QueueObject (util_val) {
     "use strict";
 
     this.init__ = function (util_val) {
-        this.theHolderPoolModule = require("./holder_pool_module.js");
         this.theUtilObject = util_val;
         this.theHead = null;
         this.theTail = null;
@@ -36,10 +35,6 @@ function QueueObject (util_val) {
 
     this.objectName = function () {
         return "QueueObject";
-    };
-
-    this.holderPoolModule = function () {
-        return this.theHolderPoolModule;
     };
 
     this.holderEntryModule = function () {

@@ -16,6 +16,7 @@ function PortObject(root_object_val) {
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
         this.theAjaxObject = require("./ajax_module.js").malloc(this);
+        this.debug(false, "init__", "");
     };
 
     this.objectName = function () {

@@ -15,6 +15,7 @@ function AjaxObject(port_object_val) {
 
     this.init__ = function (port_object_val) {
         this.thePortObject = port_object_val;
+        this.debug(false, "init__", "");
     };
 
     this.objectName = function () {

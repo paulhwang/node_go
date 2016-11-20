@@ -52,7 +52,7 @@ function ExpressHttpObject(root_object_val) {
     };
 
     this.ajaxObject = function () {
-        return this.portObject().ajaxObject();
+        return this.rootObject().ajaxObject();
     };
 
     this.linkMgrObject = function () {

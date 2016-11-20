@@ -59,6 +59,7 @@ function RootObject () {
     this.init__ = function () {
         this.theFabricObject = require("./fabric_modules/fabric_module.js").malloc(this);
         this.thePortObject = require("./port_modules/port_module.js").malloc(this);
+        this.theAjaxObject = require("./port_modules/ajax_module.js").malloc(this);
     };
 
     this.objectName = function () {
@@ -67,6 +68,10 @@ function RootObject () {
 
     this.fabricObject = function () {
         return this.theFabricObject;
+    };
+
+    this.ajaxObject = function () {
+        return this.theAjaxObject;
     };
 
     this.portObject = function () {

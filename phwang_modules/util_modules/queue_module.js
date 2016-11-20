@@ -8,14 +8,6 @@ module.exports = {
     malloc: function (root_object_val) {
         return new QueueObject(root_object_val);
     },
-
-    remove: function (queue_val, func_val, input_val1, input_val2, input_val3) {
-        queue_val.removeElement(func_val, input_val1, input_val2, input_val3);
-    },
-
-    search: function (queue_val, func_val, input_val1, input_val2, input_val3) {
-        return queue_val.searchIt(func_val, input_val1, input_val2, input_val3);
-    },
 };
 
 function QueueObject (root_object_val) {
@@ -26,7 +18,7 @@ function QueueObject (root_object_val) {
         this.theHead = null;
         this.theTail = null;
         this.theSize = 0;
-        //this.theRing = this.utilObject().mallocRing(this.rootObject());
+        //this.theRingObject = this.utilObject().mallocRing(this.rootObject());
         this.debug(true, "init__", "");
     };
 
@@ -46,8 +38,8 @@ function QueueObject (root_object_val) {
         return this.theRootObject;
     };
 
-    this.ring = function () {
-        return this.theRing;
+    this.ringObject = function () {
+        return this.root_object_val;
     }
 
     this.head = function () {

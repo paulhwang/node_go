@@ -5,16 +5,16 @@
  */
 
 module.exports = {
-    malloc: function (util_val) {
-        return new RingObject(util_val);
+    malloc: function (root_object_val) {
+        return new RingObject(root_object_val);
     },
 };
 
-function RingObject (util_val) {
+function RingObject (root_object_val) {
     "use strict";
 
-    this.init__ = function (util_val) {
-        this.theUtilObject = util_val;
+    this.init__ = function (root_object_val) {
+        this.theUtilObject = root_object_val;
         this.theInput = 0;
         this.theOutput = 0;
         this.theSize = 2;
@@ -189,5 +189,5 @@ function RingObject (util_val) {
         this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(util_val);
+    this.init__(root_object_val);
 }

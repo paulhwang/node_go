@@ -11,7 +11,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var state;
 
-var theExpressHttpObject = new ExpressHttpObject(require("./phwang_modules/phwang_module.js").get_root());
+var theExpressHttpObject = new ExpressHttpObject(require("./phwang_modules/root_module.js").get_root());
 
 module.exports = {
     post: function (req, res) {

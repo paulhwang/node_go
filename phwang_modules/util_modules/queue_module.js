@@ -18,11 +18,11 @@ module.exports = {
     },
 };
 
-function QueueObject (util_val) {
+function QueueObject (root_object_val) {
     "use strict";
 
-    this.init__ = function (util_val) {
-        this.theUtilObject = util_val;
+    this.init__ = function (root_object_val) {
+        this.theUtilObject = root_object_val;
         this.theHead = null;
         this.theTail = null;
         this.theSize = 0;
@@ -232,5 +232,5 @@ function QueueObject (util_val) {
         require("../root_module.js").ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(util_val);
+    this.init__(root_object_val);
 }

@@ -14,12 +14,13 @@ function RingObject (root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
-        this.theUtilObject = root_object_val;
+        this.theRootObject = root_object_val;
         this.theInput = 0;
         this.theOutput = 0;
         this.theSize = 2;
         this.theLeft = this.size();
         this.theArray = [this.size()];
+        this.debug(false, "init__", "");
     };
 
     this.objectName = function () {
@@ -30,8 +31,8 @@ function RingObject (root_object_val) {
         return require("./holder_pool_module.js");
     };
 
-    this.utilObject = function () {
-        return this.theUtilObject;
+    this.rootObject = function () {
+        return this.theRootObject;
     };
 
     this.input = function () {

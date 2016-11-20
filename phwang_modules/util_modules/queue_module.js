@@ -18,11 +18,17 @@ function QueueObject (root_object_val) {
         this.theHead = null;
         this.theTail = null;
         this.theSize = 0;
-        //this.theRingObject = this.utilObject().mallocRing(this.rootObject());
+        if (this.debugRing()) {
+            this.theRingObject = this.rootObject().mallocRing();
+        }
         this.debug(true, "init__", "");
     };
 
     this.debugMe = function () {
+        return true;
+    };
+
+    this.debugRing = function () {
         return true;
     };
 

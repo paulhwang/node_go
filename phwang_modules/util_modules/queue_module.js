@@ -22,11 +22,11 @@ function QueueObject (root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
-        this.theUtilObject = root_object_val;
+        this.theRootObject = root_object_val;
         this.theHead = null;
         this.theTail = null;
         this.theSize = 0;
-        this.theRing = this.utilObject().mallocRing();
+        //this.theRing = this.utilObject().mallocRing(this.rootObject());
         this.debug(true, "init__", "");
     };
 
@@ -42,8 +42,8 @@ function QueueObject (root_object_val) {
         return require("./holder_entry_module.js");
     };
 
-    this.utilObject = function () {
-        return this.theUtilObject;
+    this.rootObject = function () {
+        return this.theRootObject;
     };
 
     this.ring = function () {

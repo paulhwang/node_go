@@ -74,15 +74,11 @@ function RootObject () {
     };
 
     this.linkMgrObject = function () {
-        return this.farbricObject().linkMgrObject();
-    };
-
-    this.sessionMgrObject = function () {
-        return this.farbricObject().sessionMgrObject();
+        return this.fabricObject().linkMgrObject();
     };
 
     this.clusterMgrObject = function () {
-        return this.farbricObject().clusterMgrObject();
+        return this.fabricObject().clusterMgrObject();
     };
 
     this.mallocQueue = function () {

@@ -14,7 +14,7 @@ function SwitchObject(root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
-        this.theFabricObject = root_object_val;
+        this.theRootObject = root_object_val;
         this.initSwitchTable();
         this.debug(false, "init__", "");
     };
@@ -40,24 +40,16 @@ function SwitchObject(root_object_val) {
         return "SwitchObject";
     };
 
-    this.fabricObject = function () {
-        return this.theFabricObject;
-    };
-
     this.rootObject = function () {
-        return this.fabricObject().rootObject();
+        return this.theRootObject;
     };
 
     this.linkMgrObject = function () {
-        return this.fabricObject().linkMgrObject();
+        return this.rootObject().linkMgrObject();
     };
 
     this.clusterMgrObject = function () {
-        return this.fabricObject().clusterMgrObject();
-    };
-
-    this.sessionMgrObject = function () {
-        return this.fabricObject().sessionMgrObject();
+        return this.rootObject().clusterMgrObject();
     };
 
     this.linkUpdateInterval = function () {

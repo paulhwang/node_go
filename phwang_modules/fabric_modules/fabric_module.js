@@ -15,7 +15,6 @@ function FabricObject(root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
-        this.theLinkMgrObject = require("./link_mgr_module.js").malloc(this.rootObject());
         this.debug(false, "init__", "");
     };
 
@@ -25,10 +24,6 @@ function FabricObject(root_object_val) {
 
     this.rootObject = function () {
         return this.theRootObject;
-    };
-
-    this.linkMgrObject = function () {
-        return this.theLinkMgrObject;
     };
 
     this.sessionMgrObject = function () {

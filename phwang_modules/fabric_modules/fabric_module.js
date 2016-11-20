@@ -15,7 +15,7 @@ function FabricObject(root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
-        this.theLinkMgrObject = require("./link_mgr_module.js").malloc(this);
+        this.theLinkMgrObject = require("./link_mgr_module.js").malloc(this.rootObject());
         this.theClusterMgrObject = require("./cluster_mgr_module.js").malloc(this);
         this.theSwitchObject = require("./switch_module.js").malloc(this);
         this.debug(false, "init__", "");

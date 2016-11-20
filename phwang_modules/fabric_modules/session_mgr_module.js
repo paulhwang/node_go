@@ -47,12 +47,8 @@ function SessionMgrObject(link_val) {
         return this.linkObject().linkMgrObject();
     };
 
-    this.fabricObject = function () {
-        return this.linkMgrObject().fabricObject();
-    };
-
     this.rootObject = function () {
-        return this.fabricObject().rootObject();
+        return this.linkObject().rootObject();
     };
 
     this.utilObject = function () {

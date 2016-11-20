@@ -14,7 +14,7 @@ function LinkMgrObject(root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
-        this.theFabricObject = root_object_val;
+        this.theRootObject = root_object_val;
         this.theGlobalLinkId = 10;
         this.theHead = null;
         this.theTail = null;
@@ -32,12 +32,8 @@ function LinkMgrObject(root_object_val) {
         return "LinkMgrObject";
     };
 
-    this.fabricObject = function () {
-        return this.theFabricObject;
-    };
-
     this.rootObject = function () {
-        return this.fabricObject().rootObject();
+        return this.theRootObject;
     };
 
     this.utilObject = function () {

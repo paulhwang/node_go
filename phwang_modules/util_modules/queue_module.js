@@ -21,7 +21,7 @@ function QueueObject (root_object_val) {
         if (this.debugRing()) {
             this.theRingObject = this.rootObject().mallocRing();
         }
-        this.debug(true, "init__", "");
+        this.debug(false, "init__", "");
     };
 
     this.debugMe = function () {
@@ -92,7 +92,7 @@ function QueueObject (root_object_val) {
 
         this.abendIt();
 
-        var data_entry = this.holderEntryModule().malloc();
+        var data_entry = new HolderEntryObject(this);
         if (!data_entry) {
             this.abend("enQueue", "null data_entry");
             return;
@@ -239,4 +239,46 @@ function QueueObject (root_object_val) {
     };
 
     this.init__(root_object_val);
+}
+
+function HolderEntryObject(queue_object_val) {
+    "use strict";
+
+    this.init__ = function (queue_object_val) {
+        this.theQueueObject = queue_object_val;
+        this.theData = null;
+        this.thePrev = null;
+        this.theNext = null;
+        //this.debug(true, "init__", "");
+    };
+
+    this.objectName = function () {
+        return "HolderEntryObject";
+    };
+
+    this.data = function () {
+        return this.theData;
+    };
+
+    this.setData = function (val) {
+        this.theData = val;
+    };
+
+    this.prev = function () {
+        return this.thePrev;
+    };
+
+    this.setPrev = function (val) {
+        this.thePrev = val;
+    };
+
+    this.next = function () {
+        return this.theNext;
+    };
+
+    this.setNext = function (val) {
+        this.theNext = val;
+    };
+
+    this.init__(queue_object_val);
 }

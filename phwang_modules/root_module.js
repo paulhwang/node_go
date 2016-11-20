@@ -58,7 +58,7 @@ function RootObject () {
 
     this.init__ = function () {
         this.theFabricObject = require("./fabric_modules/fabric_module.js").malloc(this);
-        this.theAjaxObject = require("./port_modules/ajax_module.js").malloc(this);
+        this.theAjaxObject = require("./fabric_modules/ajax_module.js").malloc(this);
     };
 
     this.objectName = function () {

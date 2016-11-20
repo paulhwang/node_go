@@ -14,7 +14,7 @@ function clusterMgrObject(root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
-        this.theFabricObject = root_object_val;
+        this.theRootObject = root_object_val;
         this.theHead = null;
         this.theTail = null;
         this.theSize = 0;
@@ -33,12 +33,8 @@ function clusterMgrObject(root_object_val) {
         return "clusterMgrObject";
     };
 
-    this.fabricObject = function () {
-        return this.theFabricObject;
-    };
-
     this.rootObject = function () {
-        return this.fabricObject().rootObject();
+        return this.theRootObject;
     };
 
     this.utilObject = function () {

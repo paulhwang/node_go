@@ -5,16 +5,16 @@
  */
 
 module.exports = {
-    malloc: function (fabric_val) {
-        return new LinkMgrObject(fabric_val);
+    malloc: function (root_object_val) {
+        return new LinkMgrObject(root_object_val);
     },
 };
 
-function LinkMgrObject(fabric_val) {
+function LinkMgrObject(root_object_val) {
     "use strict";
 
-    this.init__ = function (fabric_val) {
-        this.theFabricObject = fabric_val;
+    this.init__ = function (root_object_val) {
+        this.theFabricObject = root_object_val;
         this.theGlobalLinkId = 10;
         this.theHead = null;
         this.theTail = null;
@@ -243,5 +243,5 @@ function LinkMgrObject(fabric_val) {
         this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(fabric_val);
+    this.init__(root_object_val);
 }

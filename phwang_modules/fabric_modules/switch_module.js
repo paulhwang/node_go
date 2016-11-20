@@ -5,16 +5,16 @@
  */
 
 module.exports = {
-    malloc: function (fabric_val) {
-        return new SwitchObject(fabric_val);
+    malloc: function (root_object_val) {
+        return new SwitchObject(root_object_val);
     },
 };
 
-function SwitchObject(fabric_val) {
+function SwitchObject(root_object_val) {
     "use strict";
 
-    this.init__ = function (fabric_val) {
-        this.theFabricObject = fabric_val;
+    this.init__ = function (root_object_val) {
+        this.theFabricObject = root_object_val;
         this.initSwitchTable();
         this.debug(false, "init__", "");
     };
@@ -352,5 +352,5 @@ function SwitchObject(fabric_val) {
         this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(fabric_val);
+    this.init__(root_object_val);
 }

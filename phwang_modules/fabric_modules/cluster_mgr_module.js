@@ -5,16 +5,16 @@
  */
 
 module.exports = {
-    malloc: function (fabric_val) {
-        return new clusterMgrObject(fabric_val);
+    malloc: function (root_object_val) {
+        return new clusterMgrObject(root_object_val);
     },
 };
 
-function clusterMgrObject(fabric_val) {
+function clusterMgrObject(root_object_val) {
     "use strict";
 
-    this.init__ = function (fabric_val) {
-        this.theFabricObject = fabric_val;
+    this.init__ = function (root_object_val) {
+        this.theFabricObject = root_object_val;
         this.theHead = null;
         this.theTail = null;
         this.theSize = 0;
@@ -189,5 +189,5 @@ function clusterMgrObject(fabric_val) {
         this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(fabric_val);
+    this.init__(root_object_val);
 }

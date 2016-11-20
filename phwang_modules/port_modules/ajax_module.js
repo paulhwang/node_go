@@ -5,16 +5,16 @@
  */
 
 module.exports = {
-    malloc: function (port_object_val) {
-        return new AjaxObject(port_object_val);
+    malloc: function (root_object_val) {
+        return new AjaxObject(root_object_val);
     },
 };
 
-function AjaxObject(port_object_val) {
+function AjaxObject(root_object_val) {
     "use strict";
 
-    this.init__ = function (port_object_val) {
-        this.thePortObject = port_object_val;
+    this.init__ = function (root_object_val) {
+        this.theRootObject = root_object_val;
         this.debug(false, "init__", "");
     };
 
@@ -22,12 +22,8 @@ function AjaxObject(port_object_val) {
         return "AjaxObject";
     };
 
-    this.portObject = function () {
-        return this.thePortObject;
-    };
-
     this.rootObject = function () {
-        return this.portObject().rootObject();
+        return this.theRootObject;
     };
 
     this.fabricObject = function () {
@@ -85,5 +81,5 @@ function AjaxObject(port_object_val) {
         this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(port_object_val);
+    this.init__(root_object_val);
 }

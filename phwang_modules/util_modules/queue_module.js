@@ -45,7 +45,7 @@ function QueueObject (root_object_val) {
     };
 
     this.ringObject = function () {
-        return this.root_object_val;
+        return this.theRingObject;
     }
 
     this.head = function () {
@@ -82,11 +82,13 @@ function QueueObject (root_object_val) {
             return;
         }
 
-        //var i = 10
-        //while (i > 0) {
-            //this.ring().enQueue(data_val);
-        //    i -= 1;
-        //}
+        if (this.debugRing()) {
+            var i = 10
+            while (i > 0) {
+                this.ringObject().enQueue(data_val);
+                i -= 1;
+            }
+        }
 
         this.abendIt();
 
@@ -137,14 +139,20 @@ function QueueObject (root_object_val) {
 
         this.abendIt();
 
-        //var i = 10
-        //while (i > 0) {
-            //var data1 = this.ring().deQueue();
-            //if (data != data1) {
-            //    this.abend("deQueue", "ring not match");
-            //}
-           // i -= 1;
-        //}
+
+        if (data && this.debugRing()) {
+            var i = 10
+            while (i > 0) {
+                var data1 = this.ringObject().deQueue();
+                if (!data1) {
+                    this.abend("deQueue", "null");
+                }
+                if (data != data1) {
+                    this.abend("deQueue", "ring not match");
+                }
+                i -= 1;
+            }
+        }
 
         return data;
     };

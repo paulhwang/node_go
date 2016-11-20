@@ -26,12 +26,8 @@ function AjaxObject(root_object_val) {
         return this.theRootObject;
     };
 
-    this.fabricObject = function () {
-        return this.rootObject().fabricObject();
-    };
-
     this.switchObject = function () {
-        return this.fabricObject().switchObject();
+        return this.rootObject().switchObject();
     };
 
     this.utilObject = function () {

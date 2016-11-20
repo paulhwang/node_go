@@ -58,7 +58,6 @@ function RootObject () {
 
     this.init__ = function () {
         this.theLinkMgrObject = require("./fabric_modules/link_mgr_module.js").malloc(this);
-        this.theFabricObject = require("./fabric_modules/fabric_module.js").malloc(this);
         this.theClusterMgrObject = require("./fabric_modules/cluster_mgr_module.js").malloc(this);
         this.theSwitchObject = require("./fabric_modules/switch_module.js").malloc(this);
         this.theAjaxObject = require("./fabric_modules/ajax_module.js").malloc(this);
@@ -78,10 +77,6 @@ function RootObject () {
 
     this.switchObject = function () {
         return this.theSwitchObject;
-    };
-
-    this.fabricObject = function () {
-        return this.theFabricObject;
     };
 
     this.ajaxObject = function () {

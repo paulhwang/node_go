@@ -5,8 +5,8 @@
  */
 
 module.exports = {
-    malloc: function (util_val) {
-        return new QueueObject(util_val);
+    malloc: function (root_object_val) {
+        return new QueueObject(root_object_val);
     },
 
     remove: function (queue_val, func_val, input_val1, input_val2, input_val3) {

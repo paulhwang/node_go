@@ -4,7 +4,6 @@
  * File name: express_http_module.js
  */
 
-//var util = require("./util_module.js");
 var express = require('express');
 var bodyParser = require('body-parser');
 var theExpressHttpObject = new ExpressHttpObject(require("./phwang_modules/fabric_modules/root_module.js").get_root());
@@ -29,7 +28,10 @@ module.exports = {
 
 function ExpressHttpObject(root_object_val) {
     "use strict";
-    this.theRootObject = root_object_val;
+
+    this.init__ = function (root_object_val) {
+        this.theRootObject = root_object_val;
+    };
 
     this.objectName = function () {
         return "ExpressHttpObject";
@@ -76,4 +78,6 @@ function ExpressHttpObject(root_object_val) {
     this.logit = function (str1_val, str2_val) {
         this.utilObject().utilLogit(this.objectName() + "." + str1_val, str2_val);
     };
+
+    this.init__(root_object_val);
 }

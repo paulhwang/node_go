@@ -1,7 +1,7 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: queue_module.js
+ * File name: logit_module.js
  */
 
 module.exports = {
@@ -51,36 +51,11 @@ function RootObject () {
     };
 
     this.LOG_IT = function(str1_val, str2_val) {
-        if (str1_val === undefined) {
-            str1_val = "UNDEFINED";
-        }
-        if (str1_val === null) {
-            str1_val = "NULL";
-        }
-        if (str2_val === undefined) {
-            str2_val = "UNDEFINED";
-        }
-        if (str2_val === null) {
-            str2_val = "NULL";
-        }
-        console.log(str1_val + "() " + str2_val);
+        require("../util_modules/logit_module.js").LOG_IT(str1_val, str2_val);
     };
 
     this.ABEND = function(str1_val, str2_val) {
-        if (str1_val === undefined) {
-            str1_val = "UNDEFINED";
-        }
-        if (str1_val === null) {
-            str1_val = "NULL";
-        }
-        if (str2_val === undefined) {
-            str2_val = "UNDEFINED";
-        }
-        if (str2_val === null) {
-            str2_val = "NULL";
-        }
-        console.log("***ABEND*** " + str1_val + "() " + str2_val);
-        this.doCrash();
+        require("../util_modules/logit_module.js").ABEND(str1_val, str2_val);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

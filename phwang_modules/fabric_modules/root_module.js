@@ -7,10 +7,6 @@
 var the_root = new RootObject();
 
 module.exports = {
-    get_root: function () {
-        return the_root;
-    },
-
     post: function (req, res) {
         the_root.processPost(req, res);
     },

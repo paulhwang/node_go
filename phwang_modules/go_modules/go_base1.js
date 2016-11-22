@@ -6,11 +6,11 @@
 
 module.exports = {
     malloc: function (cluster_object_val) {
-        return new GoObject(cluster_object_val);
+        return new GoBaseObject(cluster_object_val);
     },
 };
 
-function GoObject (cluster_object_val) {
+function GoBaseObject (cluster_object_val) {
     "use strict";
 
     this.init__ = function (cluster_object_val) {
@@ -30,7 +30,7 @@ function GoObject (cluster_object_val) {
     };
 
     this.objectName = function () {
-        return "GoObject";
+        return "GoBaseObject";
     };
 
     this.clusterObject = function () {

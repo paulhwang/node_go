@@ -1,7 +1,7 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: link_mgr_module.js
+ * File name: go_base_mgr.js
  */
 
 module.exports = {

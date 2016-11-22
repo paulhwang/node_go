@@ -23,6 +23,7 @@ function clusterObject (cluster_mgr_val, topic_data_val, session_val) {
         this.theTransmitQueue = this.rootObject().mallocQueue();
         this.theNext = null;
         this.thePrev = null;
+        this.theBaseId = 0;
         this.createTopic(topic_data_val);
         this.debug(false, "init__", "topic=" + this.topicObject().objectName());
     };
@@ -92,6 +93,14 @@ function clusterObject (cluster_mgr_val, topic_data_val, session_val) {
         this.theNext = val;
     };
 
+    this.baseId = function () {
+        return this.theBaseId;
+    };
+
+    this.setBaseId = function (val) {
+        this.theBaseId = val;
+    };
+
     this.receiveQueue = function () {
         return this.theReceiveQueue;
     };
@@ -104,7 +113,8 @@ function clusterObject (cluster_mgr_val, topic_data_val, session_val) {
         var topic_data = JSON.parse(topic_data_val);
         if (topic_data.title === "go") {
             this.setTopicObject(this.goObjectMalloc());
-            this.rootObject().mallocBase();
+            this.setBaseId(this.rootObject().mallocBase());
+            this.debug(false, "createTopic", "base_id=" + this.baseId());
         }
     };
 

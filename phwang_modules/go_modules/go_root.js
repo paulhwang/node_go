@@ -8,7 +8,7 @@ var the_go_root_object = new GoRootObject();
 
 module.exports = {
     malloc_base: function () {
-        the_go_root_object.mallocBase();
+        return the_go_root_object.mallocBase();
     },
     receive_data: function () {
         the_go_root_object.receiveData();
@@ -40,7 +40,7 @@ function GoRootObject () {
     };
 
     this.mallocBase = function () {
-        this.goBaseMgrObject().mallocBase();
+        return this.goBaseMgrObject().mallocBase();
     };
 
     this.receiveData = function () {

@@ -26,7 +26,7 @@ function GoPortObject(container_val) {
     };
 
     this.mallocMove = function (str_val, x_val, y_val, color_val, turn_val, container_val) {
-        return require("./go_move_module.js").malloc(str_val, x_val, y_val, color_val, turn_val, container_val);
+        return require("./go_move.js").malloc(str_val, x_val, y_val, color_val, turn_val, container_val);
     };
 
     this.objectName = function () {

@@ -28,7 +28,7 @@ function clusterObject (cluster_mgr_val, topic_data_val, session_val) {
     };
 
     this.goObjectMalloc = function () {
-        var go_module = require("./../go_modules/go_module.js")
+        var go_module = require("./../go_modules/go_base.js")
         return go_module.malloc(this);
     },
 

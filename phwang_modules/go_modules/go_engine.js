@@ -1,7 +1,7 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: go_engine_module.js
+ * File name: go_engine.js
  */
 
 module.exports = {
@@ -44,11 +44,11 @@ function GoEngineObject(container_object_val) {
     };
 
     this.mallocGroupList = function (engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val) {
-        return require("./go_group_list_module.js").malloc(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val);
+        return require("./go_group_list.js").malloc(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val);
     };
 
     this.mallocGroup = function (group_list_val) {
-        return require("./go_group_module.js").malloc(group_list_val);
+        return require("./go_group.js").malloc(group_list_val);
     };
 
     this.boardSize = function () {

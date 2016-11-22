@@ -1,7 +1,7 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: go_module.js
+ * File name: go_base.js
  */
 
 module.exports = {
@@ -15,16 +15,16 @@ function GoObject (cluster_object_val) {
 
     this.init__ = function (cluster_object_val) {
         this.theClusterObject = cluster_object_val;
-        this.theConfigObject = require("./go_config_module.js").malloc(this);
-        this.theBoardObject = require("./go_board_module.js").malloc(this);
-        this.theEngineObject = require("./go_engine_module.js").malloc(this);
-        this.theGameObject = require("./go_game_module.js").malloc(this);
-        this.thePortObject = require("./go_port_module.js").malloc(this);
+        this.theConfigObject = require("./go_config.js").malloc(this);
+        this.theBoardObject = require("./go_board.js").malloc(this);
+        this.theEngineObject = require("./go_engine.js").malloc(this);
+        this.theGameObject = require("./go_game.js").malloc(this);
+        this.thePortObject = require("./go_port.js").malloc(this);
         this.debug(false, "init__", "");
     };
 
     this.GO = function () {
-       return require("./go_define_module.js");
+       return require("./go_define.js");
     };
 
     this.objectName = function () {

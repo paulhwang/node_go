@@ -20,6 +20,7 @@ function RootObject () {
         this.theClusterMgrObject = require("./cluster_mgr_module.js").malloc(this);
         this.theSwitchObject = require("./switch_module.js").malloc(this);
         this.theAjaxObject = require("./ajax_module.js").malloc(this);
+        this.debug(true, "init__", "");
     };
 
     this.objectName = function () {
@@ -50,14 +51,6 @@ function RootObject () {
         return require("../util_modules/ring_module.js").malloc(this);
     };
 
-    this.LOG_IT = function(str1_val, str2_val) {
-        require("../util_modules/logit_module.js").LOG_IT(str1_val, str2_val);
-    };
-
-    this.ABEND = function(str1_val, str2_val) {
-        require("../util_modules/logit_module.js").ABEND(str1_val, str2_val);
-    };
-
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
             this.logit(str1_val, str2_val);
@@ -65,11 +58,19 @@ function RootObject () {
     };
 
     this.logit = function (str1_val, str2_val) {
-        require("../util_modules/util_module.js").LOG_IT(this.objectName() + "." + str1_val, str2_val);
+        this.LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        require("../util_modules/util_module.js").ABEND(this.objectName() + "." + str1_val, str2_val);
+        this.ABEND(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.LOG_IT = function(str1_val, str2_val) {
+        require("../util_modules/logit_module.js").LOG_IT(str1_val, str2_val);
+    };
+
+    this.ABEND = function(str1_val, str2_val) {
+        require("../util_modules/logit_module.js").ABEND(str1_val, str2_val);
     };
 
     this.init__();

@@ -16,10 +16,10 @@ function RootObject () {
     "use strict";
 
     this.init__ = function () {
-        this.theLinkMgrObject = require("./fabric_modules/link_mgr_module.js").malloc(this);
-        this.theClusterMgrObject = require("./fabric_modules/cluster_mgr_module.js").malloc(this);
-        this.theSwitchObject = require("./fabric_modules/switch_module.js").malloc(this);
-        this.theAjaxObject = require("./fabric_modules/ajax_module.js").malloc(this);
+        this.theLinkMgrObject = require("./link_mgr_module.js").malloc(this);
+        this.theClusterMgrObject = require("./cluster_mgr_module.js").malloc(this);
+        this.theSwitchObject = require("./switch_module.js").malloc(this);
+        this.theAjaxObject = require("./ajax_module.js").malloc(this);
     };
 
     this.objectName = function () {
@@ -43,11 +43,11 @@ function RootObject () {
     };
 
     this.mallocQueue = function () {
-        return require("./util_modules/queue_module.js").malloc(this);
+        return require("../util_modules/queue_module.js").malloc(this);
     };
 
     this.mallocRing = function () {
-        return require("./util_modules/ring_module.js").malloc(this);
+        return require("../util_modules/ring_module.js").malloc(this);
     };
 
     this.LOG_IT = function(str1_val, str2_val) {

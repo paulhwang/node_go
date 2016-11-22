@@ -5,12 +5,8 @@
  */
 
 //var util = require("./util_module.js");
-var queue = require("./phwang_modules/util_modules/queue_module.js");
-var link_entry = require("./phwang_modules/fabric_modules/link_module.js");
 var express = require('express');
 var bodyParser = require('body-parser');
-var state;
-
 var theExpressHttpObject = new ExpressHttpObject(require("./phwang_modules/fabric_modules/root_module.js").get_root());
 
 module.exports = {
@@ -47,20 +43,8 @@ function ExpressHttpObject(root_object_val) {
         return this.rootObject().utilObject();
     };
 
-    this.portObject = function () {
-        return this.rootObject().portObject();
-    };
-
     this.ajaxObject = function () {
         return this.rootObject().ajaxObject();
-    };
-
-    this.linkMgrObject = function () {
-        return this.rootObject().linkMgrObject();
-    };
-
-    this.sessionMgrObject = function () {
-        return this.rootObject().sessionMgrObject();
     };
 
     this.processGet = function (req, res) {

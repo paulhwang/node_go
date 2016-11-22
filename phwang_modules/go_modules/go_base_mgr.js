@@ -15,7 +15,7 @@ function GoBaseMgrClass(go_root_object_val) {
 
     this.init__ = function (go_root_object_val) {
         this.theGoRootObject = go_root_object_val;
-        this.theGlobalLinkId = 10;
+        this.theGlobalBaseId = 111;
         this.theHead = null;
         this.theTail = null;
         this.theSize = 0;
@@ -40,12 +40,12 @@ function GoBaseMgrClass(go_root_object_val) {
         return this.goRootObject().utilObject();
     };
 
-    this.globalLinkId = function () {
-        return this.theGlobalLinkId;
+    this.globalBaseId = function () {
+        return this.theGlobalBaseId;
     };
 
-    this.incrementGlobalLinkId = function () {
-        this.theGlobalLinkId += 1;
+    this.incrementGlobalBaseId = function () {
+        this.theGlobalBaseId += 1;
     };
 
     this.head = function () {
@@ -76,12 +76,12 @@ function GoBaseMgrClass(go_root_object_val) {
         this.theSize -= 1;
     }
 
-    this.mallocLink = function (my_name_val) {
-        var link = this.linkModuleMalloc(my_name_val, this.globalLinkId());
-        this.incrementGlobalLinkId();
-        this.insertLinkToList(link);
-        this.setNameListChanged();
-        return link;
+    this.mallocBase = function () {
+        var base = require("../go_modules/go_base1.js").malloc(this);
+        this.incrementGlobalBaseId();
+        this.insertLinkToList(base);
+        this.debug(true, "mallocBase", "base_id=" + base.baseId());
+        return base.baseId();
     };
 
     this.freeLink = function (link_val) {

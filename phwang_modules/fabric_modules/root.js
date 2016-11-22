@@ -63,7 +63,11 @@ function RootObject () {
         return require("../util_modules/ring.js").malloc(this);
     };
 
-    this.processPose = function (req, res) {
+    this.mallocBase = function () {
+        require("../go_modules/go_root.js").malloc_base();
+    };
+
+    this.processPost = function (req, res) {
         this.ajaxObject().processPost(req, res);
     };
 

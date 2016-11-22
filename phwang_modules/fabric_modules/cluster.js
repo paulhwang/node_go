@@ -104,6 +104,7 @@ function clusterObject (cluster_mgr_val, topic_data_val, session_val) {
         var topic_data = JSON.parse(topic_data_val);
         if (topic_data.title === "go") {
             this.setTopicObject(this.goObjectMalloc());
+            this.rootObject().mallocBase();
         }
     };
 

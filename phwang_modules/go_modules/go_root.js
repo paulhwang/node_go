@@ -7,6 +7,9 @@
 var the_go_root_object = new GoRootObject();
 
 module.exports = {
+    malloc_base: function () {
+        the_go_root_object.mallocBase();
+    },
     receive_data: function () {
         the_go_root_object.receiveData();
     },
@@ -34,6 +37,10 @@ function GoRootObject () {
 
     this.mallocRing = function () {
         return require("../util_modules/ring.js").malloc(this);
+    };
+
+    this.mallocBase = function () {
+        this.goBaseMgrObject().mallocBase();
     };
 
     this.receiveData = function () {

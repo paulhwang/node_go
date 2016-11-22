@@ -20,7 +20,7 @@ function GoObject (cluster_object_val) {
         this.theEngineObject = require("./go_engine.js").malloc(this);
         this.theGameObject = require("./go_game.js").malloc(this);
         this.thePortObject = require("./go_port.js").malloc(this);
-        this.debug(false, "init__", "");
+        this.debug(true, "init__", "");
     };
 
     this.GO = function () {

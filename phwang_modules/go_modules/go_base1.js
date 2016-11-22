@@ -5,21 +5,22 @@
  */
 
 module.exports = {
-    malloc: function (cluster_object_val) {
-        return new GoBaseObject(cluster_object_val);
+    malloc: function (base_mgr_object_val) {
+        return new GoBaseObject(base_mgr_object_val);
     },
 };
 
-function GoBaseObject (cluster_object_val) {
+function GoBaseObject (base_mgr_object_val) {
     "use strict";
 
-    this.init__ = function (cluster_object_val) {
-        this.theClusterObject = cluster_object_val;
+    this.init__ = function (base_mgr_object_val) {
+        this.theBaseMgrObject = base_mgr_object_val;
         this.theConfigObject = require("./go_config.js").malloc(this);
         this.theBoardObject = require("./go_board.js").malloc(this);
         this.theEngineObject = require("./go_engine.js").malloc(this);
         this.theGameObject = require("./go_game.js").malloc(this);
         this.thePortObject = require("./go_port.js").malloc(this);
+        this.theBaseId = this.baseMgrObject().globalBaseId();
         this.thePrev = null;
         this.theNext = null;
         this.debug(false, "init__", "");
@@ -33,12 +34,12 @@ function GoBaseObject (cluster_object_val) {
         return "GoBaseObject";
     };
 
-    this.clusterObject = function () {
-        return this.theClusterObject;
+    this.baseMgrObject = function () {
+        return this.theBaseMgrObject;
     };
 
-    this.rootObject = function () {
-        return this.clusterObject().rootObject();
+    this.goRootObject = function () {
+        return this.baseMgrObject().goRootObject();
     };
 
     this.configObject = function () {
@@ -73,8 +74,8 @@ function GoBaseObject (cluster_object_val) {
         return this.thePortObject;
     };
 
-    this.containerObject2 = function () {
-        return this.theConfigObject2;
+    this.baseId = function () {
+        return this.theBaseId;
     };
 
     this.setHisContainerObject = function (container2_val) {
@@ -194,7 +195,7 @@ function GoBaseObject (cluster_object_val) {
         }
     };
 
-    this.init__(cluster_object_val);
+    this.init__(base_mgr_object_val);
 }
 
 var GO = new GoDefineObject;

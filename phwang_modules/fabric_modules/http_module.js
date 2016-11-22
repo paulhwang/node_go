@@ -6,7 +6,7 @@
 
 var express = require('express');
 var bodyParser = require('body-parser');
-var theExpressHttpObject = new ExpressHttpObject(require("./root_module.js").get_root());
+//var theExpressHttpObject = new ExpressHttpObject(require("./root_module.js").get_root());
 
 module.exports = {
     malloc: function (root_object_val) {

@@ -4,16 +4,29 @@
  * File name: logit_module.js
  */
 
+var the_root = new RootObject();
+
 module.exports = {
-    malloc: function () {
-        return new RootObject();
-    },
     get_root: function () {
         return the_root;
     },
-};
 
-var the_root = new RootObject();
+    post: function (req, res) {
+        the_root.processPost(req, res);
+    },
+
+    get: function (req, res) {
+        the_root.processGet(req, res);
+    },
+
+    not_found: function (req, res) {
+        the_root.processNotFound(req, res);
+    },
+    
+    failure: function (req, res) {
+        the_root.processFailure(err, req, res, next);
+    },
+};
 
 function RootObject () {
     "use strict";
@@ -23,7 +36,7 @@ function RootObject () {
         this.theClusterMgrObject = require("./cluster_mgr_module.js").malloc(this);
         this.theSwitchObject = require("./switch_module.js").malloc(this);
         this.theAjaxObject = require("./ajax_module.js").malloc(this);
-        //this.theExpressHttpObject = require("./http_module.js").malloc(this);
+        this.theExpressHttpObject = require("./http_module.js").malloc(this);
         this.debug(true, "init__", "");
     };
 
@@ -57,6 +70,22 @@ function RootObject () {
 
     this.mallocRing = function () {
         return require("../util_modules/ring_module.js").malloc(this);
+    };
+
+    this.processGet = function (req, res) {
+        this.ajaxObject().processGet(req, res);
+    };
+
+    this.processNotFound = function (req, res) {
+        console.log(req.headers);
+        this.debug(true, "processNotFound", "*****");
+        res.type('text/plain');
+        res.status(404);
+        res.send('Not Found');
+    };
+
+    this.processFailure = function (err, req, res, next) {
+        this.logit("processFailure", state);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

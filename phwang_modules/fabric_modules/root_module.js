@@ -5,6 +5,9 @@
  */
 
 module.exports = {
+    malloc: function () {
+        return new RootObject();
+    },
     get_root: function () {
         return the_root;
     },

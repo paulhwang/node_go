@@ -1,6 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var express_http = require('./express_http_module.js');
+var express_http = require('./phwang_modules/fabric_modules/http_module.js');
 var app = express();
 
 app.use(bodyParser.json());

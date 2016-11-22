@@ -67,6 +67,10 @@ function RootObject () {
         return require("../util_modules/ring_module.js").malloc(this);
     };
 
+    this.processPose = function (req, res) {
+        this.ajaxObject().processPost(req, res);
+    };
+
     this.processGet = function (req, res) {
         this.ajaxObject().processGet(req, res);
     };

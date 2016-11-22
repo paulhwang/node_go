@@ -29,11 +29,11 @@ function GoRootObject () {
     };
 
     this.mallocQueue = function () {
-        return require("../util_modules/queue_module.js").malloc(this);
+        return require("../util_modules/queue.js").malloc(this);
     };
 
     this.mallocRing = function () {
-        return require("../util_modules/ring_module.js").malloc(this);
+        return require("../util_modules/ring.js").malloc(this);
     };
 
     this.receiveData = function () {
@@ -54,11 +54,11 @@ function GoRootObject () {
     };
 
     this.LOG_IT = function(str1_val, str2_val) {
-        require("../util_modules/logit_module.js").LOG_IT(str1_val, str2_val);
+        require("../util_modules/logit.js").LOG_IT(str1_val, str2_val);
     };
 
     this.ABEND = function(str1_val, str2_val) {
-        require("../util_modules/logit_module.js").ABEND(str1_val, str2_val);
+        require("../util_modules/logit.js").ABEND(str1_val, str2_val);
     };
 
     this.init__();

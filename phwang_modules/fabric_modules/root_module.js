@@ -1,26 +1,26 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: logit_module.js
+ * File name: root_module.js
  */
-
-var the_root = new RootObject();
+var go_root = require('../go_modules/go_root.js');
+var the_root_object = new RootObject();
 
 module.exports = {
     post: function (req, res) {
-        the_root.processPost(req, res);
+        the_root_object.processPost(req, res);
     },
 
     get: function (req, res) {
-        the_root.processGet(req, res);
+        the_root_object.processGet(req, res);
     },
 
     not_found: function (req, res) {
-        the_root.processNotFound(req, res);
+        the_root_object.processNotFound(req, res);
     },
     
     failure: function (req, res) {
-        the_root.processFailure(err, req, res, next);
+        the_root_object.processFailure(err, req, res, next);
     },
 };
 

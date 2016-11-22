@@ -36,7 +36,6 @@ function RootObject () {
         this.theClusterMgrObject = require("./cluster_mgr_module.js").malloc(this);
         this.theSwitchObject = require("./switch_module.js").malloc(this);
         this.theAjaxObject = require("./ajax_module.js").malloc(this);
-        this.theExpressHttpObject = require("./http_module.js").malloc(this);
         this.debug(true, "init__", "");
     };
 
@@ -58,10 +57,6 @@ function RootObject () {
 
     this.ajaxObject = function () {
         return this.theAjaxObject;
-    };
-
-    this.expressHttpObject = function () {
-        return this.theExpressHttpObject;
     };
 
     this.mallocQueue = function () {

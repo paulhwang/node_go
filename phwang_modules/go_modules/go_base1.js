@@ -20,6 +20,8 @@ function GoObject (cluster_object_val) {
         this.theEngineObject = require("./go_engine.js").malloc(this);
         this.theGameObject = require("./go_game.js").malloc(this);
         this.thePortObject = require("./go_port.js").malloc(this);
+        this.thePrev = null;
+        this.theNext = null;
         this.debug(false, "init__", "");
     };
 
@@ -86,6 +88,22 @@ function GoObject (cluster_object_val) {
     this.setLastGame = function (str_val) {
         window.localStorage.lastGame = str_val;
     }
+
+    this.prev = function () {
+        return this.thePrev;
+    };
+
+    this.setPrev = function (val) {
+        this.thePrev = val;
+    };
+
+    this.next = function () {
+        return this.theNext;
+    };
+
+    this.setNext = function (val) {
+        this.theNext = val;
+    };
 
     this.resetContainerObjectForNewGame = function () {
         this.goLog("resetContainerObjectForNewGame", "");

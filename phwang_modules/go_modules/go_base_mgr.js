@@ -6,11 +6,11 @@
 
 module.exports = {
     malloc: function (go_root_object_val) {
-        return new goMgrObject(go_root_object_val);
+        return new GoBaseMgrClass(go_root_object_val);
     },
 };
 
-function goMgrObject(go_root_object_val) {
+function GoBaseMgrClass(go_root_object_val) {
     "use strict";
 
     this.init__ = function (go_root_object_val) {
@@ -29,7 +29,7 @@ function goMgrObject(go_root_object_val) {
     };
 
     this.objectName = function () {
-        return "goMgrObject";
+        return "GoBaseMgrClass";
     };
 
     this.goRootObject = function () {

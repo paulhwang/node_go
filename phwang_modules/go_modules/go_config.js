@@ -17,7 +17,7 @@ function GoConfigObject(container_val) {
         this.theContainerObject = container_val;
         this.theBoardSize = 19;
         this.theHandicapPoint = 0;
-        this.debug(false, "init__", "");
+        this.debug(true, "init__", "");
     };
 
     this.objectName = function () {

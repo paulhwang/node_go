@@ -15,12 +15,12 @@ function GoBaseObject (base_mgr_object_val) {
 
     this.init__ = function (base_mgr_object_val) {
         this.theBaseMgrObject = base_mgr_object_val;
+        this.theBaseId = this.baseMgrObject().globalBaseId();
         this.theConfigObject = require("./go_config.js").malloc(this);
         this.theBoardObject = require("./go_board.js").malloc(this);
         this.theEngineObject = require("./go_engine.js").malloc(this);
         this.theGameObject = require("./go_game.js").malloc(this);
         this.thePortObject = require("./go_port.js").malloc(this);
-        this.theBaseId = this.baseMgrObject().globalBaseId();
         this.thePrev = null;
         this.theNext = null;
         this.debug(false, "init__", "");
@@ -166,7 +166,7 @@ function GoBaseObject (base_mgr_object_val) {
     };
 
     this.logit = function (str1_val, str2_val) {
-        this.rootObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);
+        this.goLogit(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
@@ -174,25 +174,11 @@ function GoBaseObject (base_mgr_object_val) {
     };
 
     this.goLogit = function (s1_val, s2_val) {
-        if (this.clusterObject().sessionArrayLength() === 1) {
-            this.rootObject().LOG_IT(this.clusterObject().sessionArray(0).sessionId() + "<=>" +
-                                     this.clusterObject().sessionArray(0).sessionId() + " " + s1_val, s2_val);
-        }
-        else {
-            this.rootObject().LOG_IT(this.clusterObject().sessionArray(0).sessionId() + "<=>" +
-                                     this.clusterObject().sessionArray(1).sessionId() + " " + s1_val, s2_val);
-        }
+        this.goRootObject().LOG_IT(this.baseId() + ":" + s1_val, s2_val);
     };
 
     this.goAbend = function (s1_val, s2_val) {
-        if (this.topicObject().sessionArrayLength() === 1) {
-            this.rootObject().ABEND(this.topicObject().sessionArray(0).sessionId() + "<=>" +
-                                     this.topicObject().sessionArray(0).sessionId() + " " + s1_val, s2_val);
-        }
-        else {
-            this.rootObject().ABEND(this.topicObject().sessionArray(0).sessionId() + "<=>" +
-                                     this.topicObject().sessionArray(1).sessionId() + " " + s1_val, s2_val);
-        }
+        this.goRootObject().ABEND(this.baseId() + ":" + s1_val, s2_val);
     };
 
     this.init__(base_mgr_object_val);

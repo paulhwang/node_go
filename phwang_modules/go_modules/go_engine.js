@@ -14,7 +14,7 @@ function GoEngineObject(container_object_val) {
     "use strict";
 
     this.init__ = function (container_object_val) {
-        this.theContainerObject = container_object_val;
+        this.theBaseObject = container_object_val;
         this.resetEngineObjectData();
         this.debug(false, "init__", "");
     };
@@ -28,7 +28,7 @@ function GoEngineObject(container_object_val) {
     };
 
     this.containerObject = function () {
-        return this.theContainerObject;
+        return this.theBaseObject;
     };
 
     this.configObject = function () {

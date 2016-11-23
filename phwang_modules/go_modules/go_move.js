@@ -14,8 +14,7 @@ function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, container_val)
     "use strict";
 
     this.init__ = function (str_val, x_val, y_val, color_val, turn_val, container_val) {
-        this.theObjectName = "GoMoveObject";
-        this.theContainerObject = container_val;
+        this.theBaseObject = container_val;
 
         if (!str_val) {
             this.theX = x_val;
@@ -29,7 +28,7 @@ function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, container_val)
     };
 
     this.objectName = function () {
-        return this.theObjectName;
+        return "GoMoveObject";
     };
 
     this.GO = function () {
@@ -41,7 +40,7 @@ function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, container_val)
     };
 
     this.containerObject = function () {
-        return this.theContainerObject;
+        return this.theBaseObject;
     };
 
     this.xX = function () {

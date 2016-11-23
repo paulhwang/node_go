@@ -21,7 +21,7 @@ function GoPortObject(container_val) {
     this.GO_PROTOCOL_CODE_BOARD_DATA = "Board  ";
 
     this.init__ = function (container_val) {
-        this.theContainerObject = container_val;
+        this.theBaseObject = container_val;
         this.debug(false, "init__", "");
     };
 
@@ -34,7 +34,7 @@ function GoPortObject(container_val) {
     };
 
     this.containerObject = function () {
-        return this.theContainerObject;
+        return this.theBaseObject;
     };
 
     this.rootObject = function () {

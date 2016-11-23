@@ -14,7 +14,7 @@ function GoGameObject(container_val) {
     "use strict";
 
     this.init__ = function () {
-        this.theContainerObject = container_val;
+        this.theBaseObject = container_val;
         this.resetGameObjectData();
         this.debug(false, "init__", "");
     };
@@ -28,7 +28,7 @@ function GoGameObject(container_val) {
     };
 
     this.containerObject = function () {
-        return this.theContainerObject;
+        return this.theBaseObject;
     };
 
     this.boardObject = function () {

@@ -14,7 +14,7 @@ function GoConfigObject(container_val) {
     "use strict";
 
     this.init__ = function (container_val) {
-        this.theContainerObject = container_val;
+        this.theBaseObject = container_val;
         this.theBoardSize = 19;
         this.theHandicapPoint = 0;
         this.debug(true, "init__", "");
@@ -25,7 +25,7 @@ function GoConfigObject(container_val) {
     };
 
     this.containerObject = function () {
-        return this.theContainerObject;
+        return this.theBaseObject;
     };
 
     this.sessionObject = function () {

@@ -5,16 +5,16 @@
  */
 
 module.exports = {
-    malloc: function (container_val) {
-        return new GoGameObject(container_val);
+    malloc: function (port_object_val) {
+        return new GoGameObject(port_object_val);
     },
 };
 
-function GoGameObject(container_val) {
+function GoGameObject(port_object_val) {
     "use strict";
 
     this.init__ = function () {
-        this.theBaseObject = container_val;
+        this.theBaseObject = port_object_val;
         this.resetGameObjectData();
         this.debug(false, "init__", "");
     };
@@ -597,5 +597,5 @@ function GoGameObject(container_val) {
         return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(container_val);
+    this.init__(port_object_val);
 }

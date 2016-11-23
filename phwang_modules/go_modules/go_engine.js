@@ -5,16 +5,16 @@
  */
 
 module.exports = {
-    malloc: function (container_val) {
-        return new GoEngineObject(container_val);
+    malloc: function (port_object_val) {
+        return new GoEngineObject(port_object_val);
     },
 };
 
-function GoEngineObject(container_object_val) {
+function GoEngineObject(port_object_val) {
     "use strict";
 
-    this.init__ = function (container_object_val) {
-        this.theBaseObject = container_object_val;
+    this.init__ = function (port_object_val) {
+        this.theBaseObject = port_object_val;
         this.resetEngineObjectData();
         this.debug(false, "init__", "");
     };
@@ -663,5 +663,5 @@ function GoEngineObject(container_object_val) {
         return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(container_object_val);
+    this.init__(port_object_val);
 }

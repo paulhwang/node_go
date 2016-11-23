@@ -5,16 +5,16 @@
  */
 
 module.exports = {
-    malloc: function (container_val) {
-        return new GoConfigObject(container_val);
+    malloc: function (port_object_val) {
+        return new GoConfigObject(port_object_val);
     },
 };
 
-function GoConfigObject(container_val) {
+function GoConfigObject(port_object_val) {
     "use strict";
 
-    this.init__ = function (container_val) {
-        this.theBaseObject = container_val;
+    this.init__ = function (port_object_val) {
+        this.theBaseObject = port_object_val;
         this.theBoardSize = 19;
         this.theHandicapPoint = 0;
         this.debug(true, "init__", "");
@@ -166,5 +166,5 @@ function GoConfigObject(container_val) {
         return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(container_val);
+    this.init__(port_object_val);
 }

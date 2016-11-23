@@ -5,12 +5,12 @@
  */
 
 module.exports = {
-    malloc: function (container_val) {
-        return new GoPortObject(container_val);
+    malloc: function (port_object_val) {
+        return new GoPortObject(port_object_val);
     },
 };
 
-function GoPortObject(container_val) {
+function GoPortObject(port_object_val) {
     "use strict";
     this.GO_PROTOCOL_CODE_SIZE = 7;
     this.GO_PROTOCOL_CODE_PROPOSE = "Propose";
@@ -20,13 +20,13 @@ function GoPortObject(container_val) {
     this.GO_PROTOCOL_CODE_SPECIAL_MOVE = "Special";
     this.GO_PROTOCOL_CODE_BOARD_DATA = "Board  ";
 
-    this.init__ = function (container_val) {
-        this.theBaseObject = container_val;
+    this.init__ = function (port_object_val) {
+        this.theBaseObject = port_object_val;
         this.debug(false, "init__", "");
     };
 
-    this.mallocMove = function (str_val, x_val, y_val, color_val, turn_val, container_val) {
-        return require("./go_move.js").malloc(str_val, x_val, y_val, color_val, turn_val, container_val);
+    this.mallocMove = function (str_val, x_val, y_val, color_val, turn_val, port_object_val) {
+        return require("./go_move.js").malloc(str_val, x_val, y_val, color_val, turn_val, port_object_val);
     };
 
     this.objectName = function () {
@@ -84,21 +84,6 @@ function GoPortObject(container_val) {
     this.transmitQueue = function () {
         return this.theTransmitQueue;
     };
-
-/*
-    this.transmitMoveData = function (move_val) {
-        //this.goLog("transmitMoveData", "(" + move_val.xX_() + "," + move_val.yY_() + ") color=" +  move_val.myColor_() + " turn=" +  move_val.turnIndex_());
-        var data = this.GO_PROTOCOL_CODE_MOVE_DATA + move_val.encodeMove();
-        //this.goLog("transmitMoveData", "data=" + data);
-        this.transmitStringData(data);
-    };
-
-    this.transmitSpecialMoveData = function (special_val) {
-        //this.goLog("transmitSpecialMoveData", special_val);
-        var data = this.GO_PROTOCOL_CODE_SPECIAL_MOVE + special_val;
-        this.transmitStringData(data);
-    };
-*/
 
     this.thansmitBoardData = function () {
         //this.goLog("transmitBoardData", "data=" + board_val);
@@ -187,6 +172,6 @@ function GoPortObject(container_val) {
         return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(container_val);
+    this.init__(port_object_val);
 }
 

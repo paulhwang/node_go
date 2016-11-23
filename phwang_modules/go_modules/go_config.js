@@ -24,12 +24,12 @@ function GoConfigObject(port_object_val) {
         return "GoConfigObject";
     };
 
-    this.containerObject = function () {
+    this.baseObject = function () {
         return this.theBaseObject;
     };
 
     this.sessionObject = function () {
-        return this.containerObject().sessionObject();
+        return this.baseObject().sessionObject();
     };
 
     this.rootObject = function () {
@@ -37,7 +37,7 @@ function GoConfigObject(port_object_val) {
     };
 
     this.gameObject = function () {
-        return this.containerObject().gameObject();
+        return this.baseObject().gameObject();
     };
 
     this.myName = function () {
@@ -159,11 +159,11 @@ function GoConfigObject(port_object_val) {
     };
 
     this.logit = function (str1_val, str2_val) {
-        return this.containerObject().goLogit(this.objectName() + "." + str1_val, str2_val);
+        return this.baseObject().goLogit(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
+        return this.baseObject().goAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.init__(port_object_val);

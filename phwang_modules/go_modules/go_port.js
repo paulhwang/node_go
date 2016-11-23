@@ -5,12 +5,12 @@
  */
 
 module.exports = {
-    malloc: function (port_object_val) {
-        return new GoPortObject(port_object_val);
+    malloc: function (base_object_val) {
+        return new GoPortObject(base_object_val);
     },
 };
 
-function GoPortObject(port_object_val) {
+function GoPortObject(base_object_val) {
     "use strict";
     this.GO_PROTOCOL_CODE_SIZE = 7;
     this.GO_PROTOCOL_CODE_PROPOSE = "Propose";
@@ -20,25 +20,25 @@ function GoPortObject(port_object_val) {
     this.GO_PROTOCOL_CODE_SPECIAL_MOVE = "Special";
     this.GO_PROTOCOL_CODE_BOARD_DATA = "Board  ";
 
-    this.init__ = function (port_object_val) {
-        this.theBaseObject = port_object_val;
+    this.init__ = function (base_object_val) {
+        this.theBaseObject = base_object_val;
         this.debug(false, "init__", "");
     };
 
-    this.mallocMove = function (str_val, x_val, y_val, color_val, turn_val, port_object_val) {
-        return require("./go_move.js").malloc(str_val, x_val, y_val, color_val, turn_val, port_object_val);
+    this.mallocMove = function (str_val, x_val, y_val, color_val, turn_val, base_object_val) {
+        return require("./go_move.js").malloc(str_val, x_val, y_val, color_val, turn_val, base_object_val);
     };
 
     this.objectName = function () {
         return "GoPortObject";
     };
 
-    this.containerObject = function () {
+    this.baseObject = function () {
         return this.theBaseObject;
     };
 
     this.rootObject = function () {
-        return this.containerObject().rootObject();
+        return this.baseObject().rootObject();
     };
 
     this.utilObject = function () {
@@ -54,27 +54,27 @@ function GoPortObject(port_object_val) {
     };
 
     this.configObject = function () {
-        return this.containerObject().configObject();
+        return this.baseObject().configObject();
     };
 
     this.boardObject = function () {
-        return this.containerObject().boardObject();
+        return this.baseObject().boardObject();
     };
 
     this.gameObject = function () {
-        return this.containerObject().gameObject();
+        return this.baseObject().gameObject();
     };
 
     this.engineObject = function () {
-        return this.containerObject().engineObject();
+        return this.baseObject().engineObject();
     };
 
     this.clusterObject = function () {
-        return this.containerObject().clusterObject();
+        return this.baseObject().clusterObject();
     };
 
     this.GoHandlerObject = function () {
-        return this.containerObject().handlerObject();
+        return this.baseObject().handlerObject();
     };
 
     this.receiveQueue = function () {
@@ -146,7 +146,7 @@ function GoPortObject(port_object_val) {
             this.engineObject().abendEngine();
             this.thansmitBoardData();
         } else {
-            var move = this.mallocMove(str_val, 0, 0, 0, 0, this.containerObject());
+            var move = this.mallocMove(str_val, 0, 0, 0, 0, this.baseObject());
             this.gameObject().addNewMoveAndFight(move);
             this.thansmitBoardData();
         }
@@ -165,13 +165,13 @@ function GoPortObject(port_object_val) {
     };
 
     this.logit = function (str1_val, str2_val) {
-        return this.containerObject().goLogit(this.objectName() + "." + str1_val, str2_val);
+        return this.baseObject().goLogit(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
+        return this.baseObject().goAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(port_object_val);
+    this.init__(base_object_val);
 }
 

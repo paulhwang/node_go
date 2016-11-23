@@ -24,31 +24,31 @@ function GoGameObject(port_object_val) {
     };
 
     this.GO = function () {
-        return this.containerObject().GO();
+        return this.baseObject().GO();
     };
 
-    this.containerObject = function () {
+    this.baseObject = function () {
         return this.theBaseObject;
     };
 
     this.boardObject = function () {
-        return this.containerObject().boardObject();
+        return this.baseObject().boardObject();
     };
 
     this.engineObject = function () {
-        return this.containerObject().engineObject();
+        return this.baseObject().engineObject();
     };
 
     this.uiObject = function () {
-        return this.containerObject().uiObject();
+        return this.baseObject().uiObject();
     };
 
     this.configObject = function () {
-        return this.containerObject().configObject();
+        return this.baseObject().configObject();
     };
 
     this.portObject = function () {
-        return this.containerObject().portObject();
+        return this.baseObject().portObject();
     };
 
     this.maxMove = function () {
@@ -590,11 +590,11 @@ function GoGameObject(port_object_val) {
     };
 
     this.logit = function (str1_val, str2_val) {
-        return this.containerObject().goLogit(this.objectName() + "." + str1_val, str2_val);
+        return this.baseObject().goLogit(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
+        return this.baseObject().goAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.init__(port_object_val);

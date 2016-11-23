@@ -38,12 +38,12 @@ function GoGroupObject(group_list_val) {
         this.theGroupListObject = group_list_val;
     };
 
-    this.containerObject = function () {
-        return this.groupListObject().containerObject();
+    this.baseObject = function () {
+        return this.groupListObject().baseObject();
     };
 
     this.GO = function () {
-        return this.containerObject().GO();
+        return this.baseObject().GO();
     };
 
     this.engineObject = function () {
@@ -51,11 +51,11 @@ function GoGroupObject(group_list_val) {
     };
 
     this.configObject = function () {
-        return this.containerObject().configObject();
+        return this.baseObject().configObject();
     };
 
     this.boardObject = function () {
-        return this.containerObject().boardObject();
+        return this.baseObject().boardObject();
     };
 
     this.boardSize = function () {
@@ -550,11 +550,11 @@ function GoGroupObject(group_list_val) {
     };
 
     this.logit = function (str1_val, str2_val) {
-        return this.containerObject().goLogit(this.objectName() + "." + str1_val, str2_val);
+        return this.baseObject().goLogit(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
+        return this.baseObject().goAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.init__(group_list_val);

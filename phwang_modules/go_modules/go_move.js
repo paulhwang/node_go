@@ -5,16 +5,16 @@
  */
 
 module.exports = {
-    malloc: function (str_val, x_val, y_val, color_val, turn_val, container_val) {
-        return new GoMoveObject(str_val, x_val, y_val, color_val, turn_val, container_val);
+    malloc: function (str_val, x_val, y_val, color_val, turn_val, base_object_val) {
+        return new GoMoveObject(str_val, x_val, y_val, color_val, turn_val, base_object_val);
     },
 };
 
-function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, container_val) {
+function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, base_object_val) {
     "use strict";
 
-    this.init__ = function (str_val, x_val, y_val, color_val, turn_val, container_val) {
-        this.theBaseObject = container_val;
+    this.init__ = function (str_val, x_val, y_val, color_val, turn_val, base_object_val) {
+        this.theBaseObject = base_object_val;
 
         if (!str_val) {
             this.theX = x_val;
@@ -32,14 +32,14 @@ function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, container_val)
     };
 
     this.GO = function () {
-        return this.containerObject().GO();
+        return this.baseObject().GO();
     };
 
     this.containerModule = function () {
         return this.theContainerModule;
     };
 
-    this.containerObject = function () {
+    this.baseObject = function () {
         return this.theBaseObject;
     };
 
@@ -105,12 +105,12 @@ function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, container_val)
     };
 
     this.logit = function (str1_val, str2_val) {
-        return this.containerObject().goLogit(this.objectName() + "." + str1_val, str2_val);
+        return this.baseObject().goLogit(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
+        return this.baseObject().goAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(str_val, x_val, y_val, color_val, turn_val, container_val);
+    this.init__(str_val, x_val, y_val, color_val, turn_val, base_object_val);
 }

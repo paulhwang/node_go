@@ -24,23 +24,23 @@ function GoEngineObject(port_object_val) {
     };
 
     this.GO = function () {
-        return this.containerObject().GO();
+        return this.baseObject().GO();
     };
 
-    this.containerObject = function () {
+    this.baseObject = function () {
         return this.theBaseObject;
     };
 
     this.configObject = function () {
-        return this.containerObject().configObject();
+        return this.baseObject().configObject();
     };
 
     this.boardObject = function () {
-        return this.containerObject().boardObject();
+        return this.baseObject().boardObject();
     };
 
     this.gameObject = function () {
-        return this.containerObject().gameObject();
+        return this.baseObject().gameObject();
     };
 
     this.mallocGroupList = function (engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val) {
@@ -656,11 +656,11 @@ function GoEngineObject(port_object_val) {
     };
 
     this.logit = function (str1_val, str2_val) {
-        return this.containerObject().goLogit(this.objectName() + "." + str1_val, str2_val);
+        return this.baseObject().goLogit(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
+        return this.baseObject().goAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.init__(port_object_val);

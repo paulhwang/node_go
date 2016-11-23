@@ -34,15 +34,15 @@ function GoGroupListObject(engine_val, index_val, color_val, dead_val, big_stone
     };
 
     this.GO = function () {
-        return this.containerObject().GO();
+        return this.baseObject().GO();
     };
 
     this.engineObject = function () {
         return this.theEngineObject;
     };
 
-    this.containerObject = function () {
-        return this.engineObject().containerObject();
+    this.baseObject = function () {
+        return this.engineObject().baseObject();
     };
 
     this.myColor = function () {
@@ -265,11 +265,11 @@ function GoGroupListObject(engine_val, index_val, color_val, dead_val, big_stone
     };
 
     this.logit = function (str1_val, str2_val) {
-        return this.containerObject().goLogit(this.objectName() + "." + str1_val, str2_val);
+        return this.baseObject().goLogit(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        return this.containerObject().goAbend(this.objectName() + "." + str1_val, str2_val);
+        return this.baseObject().goAbend(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.init__(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val);

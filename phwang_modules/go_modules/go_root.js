@@ -10,8 +10,13 @@ module.exports = {
     malloc_base: function () {
         return the_go_root_object.mallocBase();
     },
-    receive_data: function () {
-        the_go_root_object.receiveData();
+
+    receive_data: function (base_id_val) {
+        the_go_root_object.receiveData(base_id_val);
+    },
+
+    transmit_data: function (base_id_val) {
+        return the_go_root_object.transmitData(base_id_val);
     },
 };
 
@@ -43,7 +48,12 @@ function GoRootObject () {
         return this.goBaseMgrObject().mallocBase();
     };
 
-    this.receiveData = function () {
+    this.receiveData = function (base_id_val) {
+        this.goBaseMgrObject().receiveData(base_id_val);
+    };
+
+    this.transmitData = function (base_id_val) {
+        return this.goBaseMgrObject().transmitData(base_id_val);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

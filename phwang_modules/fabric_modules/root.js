@@ -63,8 +63,16 @@ function RootObject () {
         return require("../util_modules/ring.js").malloc(this);
     };
 
-    this.mallocBase = function () {
+    this.topicMallocBase = function () {
         return require("../go_modules/go_root.js").malloc_base();
+    };
+
+    this.topicReceiveData = function (base_id_val) {
+        require("../go_modules/go_root.js").receive_data(base_id_val);
+    };
+
+    this.topicTransmitData = function (base_id_val) {
+        return require("../go_modules/go_root.js").transmit_data(base_id_val);
     };
 
     this.processPost = function (req, res) {

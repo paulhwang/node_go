@@ -23,7 +23,7 @@ function clusterObject (cluster_mgr_val, topic_data_val, session_val) {
         this.theTransmitQueue = this.rootObject().mallocQueue();
         this.theNext = null;
         this.thePrev = null;
-        this.theBaseId = 0;
+        this.theTopicBaseId = 0;
         this.createTopic(topic_data_val);
         this.debug(false, "init__", "topic=" + this.topicObject().objectName());
     };
@@ -93,12 +93,12 @@ function clusterObject (cluster_mgr_val, topic_data_val, session_val) {
         this.theNext = val;
     };
 
-    this.baseId = function () {
-        return this.theBaseId;
+    this.topicBaseId = function () {
+        return this.theTopicBaseId;
     };
 
-    this.setBaseId = function (val) {
-        this.theBaseId = val;
+    this.setTopicBaseId = function (val) {
+        this.theTopicBaseId = val;
     };
 
     this.receiveQueue = function () {
@@ -113,8 +113,8 @@ function clusterObject (cluster_mgr_val, topic_data_val, session_val) {
         var topic_data = JSON.parse(topic_data_val);
         if (topic_data.title === "go") {
             this.setTopicObject(this.goObjectMalloc());
-            this.setBaseId(this.rootObject().mallocBase());
-            this.debug(false, "createTopic", "base_id=" + this.baseId());
+            this.setTopicBaseId(this.rootObject().topicMallocBase());
+            this.debug(false, "createTopic", "base_id=" + this.topicBaseId());
         }
     };
 
@@ -175,6 +175,9 @@ function clusterObject (cluster_mgr_val, topic_data_val, session_val) {
                 return;
             }
             this.receiveStringData(data);
+            this.rootObject().topicReceiveData(this.topicBaseId());
+            var data = this.rootObject().topicTransmitData(this.topicBaseId());
+            this.debug(true, "processReceiveData", "data=" + data);
         }
     };
 
@@ -186,6 +189,7 @@ function clusterObject (cluster_mgr_val, topic_data_val, session_val) {
 
     this.receiveStringData = function (str_val) {
         this.topicObject().portObject().receiveStringData(str_val);
+
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

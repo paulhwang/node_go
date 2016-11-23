@@ -175,9 +175,6 @@ function clusterObject (cluster_mgr_val, topic_data_val, session_val) {
                 return;
             }
             this.receiveStringData(data);
-            this.rootObject().topicReceiveData(this.topicBaseId());
-            var data = this.rootObject().topicTransmitData(this.topicBaseId());
-            this.debug(true, "processReceiveData", "data=" + data);
         }
     };
 
@@ -190,6 +187,9 @@ function clusterObject (cluster_mgr_val, topic_data_val, session_val) {
     this.receiveStringData = function (str_val) {
         this.topicObject().portObject().receiveStringData(str_val);
 
+        this.rootObject().topicReceiveData(this.topicBaseId());
+        var data = this.rootObject().topicTransmitData(this.topicBaseId());
+        this.debug(true, "processReceiveData", "data=" + data);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

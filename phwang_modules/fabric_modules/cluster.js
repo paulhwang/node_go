@@ -174,7 +174,7 @@ function clusterObject (cluster_mgr_val, topic_data_val, session_val) {
             if (!data) {
                 return;
             }
-            this.receiveStringData(data);
+            this.receiveData(data);
         }
     };
 
@@ -184,12 +184,12 @@ function clusterObject (cluster_mgr_val, topic_data_val, session_val) {
         this.processReceiveData();
     };
 
-    this.receiveStringData = function (str_val) {
-        this.topicObject().portObject().receiveStringData(str_val);
+    this.receiveData = function (data_val) {
+        this.topicObject().portObject().receiveStringData(data_val);
 
-        this.rootObject().topicReceiveData(this.topicBaseId());
+        this.rootObject().topicReceiveData(this.topicBaseId(), data_val);
         var data = this.rootObject().topicTransmitData(this.topicBaseId());
-        this.debug(true, "processReceiveData", "data=" + data);
+        this.debug(true, "receiveData", "data=" + data);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

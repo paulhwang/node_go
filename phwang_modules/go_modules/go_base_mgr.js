@@ -84,7 +84,8 @@ function GoBaseMgrClass(go_root_object_val) {
         return base.baseId();
     };
 
-    this.receiveData = function (base_id_val) {
+    this.receiveData = function (base_id_val, data_val) {
+        this.debug(true, "receiveData", "data=" + data_val);
         var base = this.searchBaseByBaseId(base_id_val);
     };
 

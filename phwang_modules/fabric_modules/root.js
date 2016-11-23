@@ -67,8 +67,8 @@ function RootObject () {
         return require("../go_modules/go_root.js").malloc_base();
     };
 
-    this.topicReceiveData = function (base_id_val) {
-        require("../go_modules/go_root.js").receive_data(base_id_val);
+    this.topicReceiveData = function (base_id_val, data_val) {
+        require("../go_modules/go_root.js").receive_data(base_id_val, data_val);
     };
 
     this.topicTransmitData = function (base_id_val) {

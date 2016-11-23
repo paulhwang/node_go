@@ -166,18 +166,18 @@ function GoBaseObject (base_mgr_object_val) {
     };
 
     this.logit = function (str1_val, str2_val) {
-        this.goLogit(this.objectName() + "." + str1_val, str2_val);
+        this.LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
+        this.ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.goLogit = function (s1_val, s2_val) {
+    this.LOG_IT = function (s1_val, s2_val) {
         this.goRootObject().LOG_IT(this.baseId() + ":" + s1_val, s2_val);
     };
 
-    this.goAbend = function (s1_val, s2_val) {
+    this.ABEND = function (s1_val, s2_val) {
         this.goRootObject().ABEND(this.baseId() + ":" + s1_val, s2_val);
     };
 

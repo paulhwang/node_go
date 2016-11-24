@@ -14,7 +14,7 @@ function ListMgrClass() {
     "use strict";
 
     this.init__ = function () {
-        this.theGlobalBaseId = 100;
+        this.theGlobalId = 100;
         this.theHead = null;
         this.theTail = null;
         this.theSize = 0;
@@ -23,14 +23,6 @@ function ListMgrClass() {
 
     this.objectName = function () {
         return "ListMgrClass";
-    };
-
-    this.globalBaseId = function () {
-        return this.theGlobalBaseId;
-    };
-
-    this.incrementGlobalBaseId = function () {
-        this.theGlobalBaseId += 1;
     };
 
     this.head = function () {
@@ -59,6 +51,19 @@ function ListMgrClass() {
 
     this.decrementSize = function () {
         this.theSize -= 1;
+    }
+
+    this.globalId = function () {
+        return this.theGlobalId;
+    };
+
+    this.incrementGlobalId = function () {
+        this.theGlobalId += 1;
+    };
+
+    this.allocId = function () {
+        this.incrementGlobalId();
+        return this.globalId();
     }
 
     this.insertBaseToList = function (link_val) {

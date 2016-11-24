@@ -5,12 +5,12 @@
  */
 
 module.exports = {
-    malloc: function (root_object_val) {
-        return new GoBaseObject(root_object_val);
+    malloc: function (root_object_val, base_id_val) {
+        return new GoBaseObject(root_object_val, base_id_val);
     },
 };
 
-function GoBaseObject (root_object_val) {
+function GoBaseObject (root_object_val, base_id_val) {
     "use strict";
 
     this.init__ = function (root_object_val, base_id_val) {
@@ -177,7 +177,7 @@ function GoBaseObject (root_object_val) {
         this.rootObject().ABEND(this.baseId() + ":" + s1_val, s2_val);
     };
 
-    this.init__(root_object_val);
+    this.init__(root_object_val, base_id_val);
 }
 
 var GO = new GoDefineObject;

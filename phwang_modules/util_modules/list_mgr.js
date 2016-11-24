@@ -5,8 +5,8 @@
  */
 
 module.exports = {
-    malloc_mgr: function () {
-        return new ListMgrClass();
+    malloc_mgr: function (global_id_val) {
+        return new ListMgrClass(global_id_val);
     },
 
     malloc_joint: function (entry_id_val) {
@@ -46,11 +46,11 @@ function ListjointClass(entry_id_val) {
     this.init__(entry_id_val);
 };
 
-function ListMgrClass() {
+function ListMgrClass(global_id_val) {
     "use strict";
 
-    this.init__ = function () {
-        this.theGlobalId = 100;
+    this.init__ = function (global_id_val) {
+        this.theGlobalId = global_id_val;
         this.theHead = null;
         this.theTail = null;
         this.theSize = 0;
@@ -261,5 +261,5 @@ function ListMgrClass() {
         require("../util_modules/logit.js").ABEND(str1_val, str2_val);
     };
 
-    this.init__();
+    this.init__(global_id_val);
 }

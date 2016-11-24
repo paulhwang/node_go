@@ -9,12 +9,12 @@ module.exports = {
         return new ListMgrClass();
     },
 
-    malloc_entry: function (entry_id_val) {
-        return new ListEntryClass(entry_id_val);
+    malloc_join: function (entry_id_val) {
+        return new ListjoinClass(entry_id_val);
     },
 };
 
-function ListEntryClass(entry_id_val) {
+function ListjoinClass(entry_id_val) {
     "use strict";
 
     this.init__ = function (entry_id_val) {

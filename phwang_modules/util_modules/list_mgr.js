@@ -102,9 +102,9 @@ function ListMgrClass() {
         return this.globalId();
     }
 
-    this.insertEntryToList = function (link_val) {
+    this.insertEntry = function (link_val) {
         if (!link_val) {
-            this.abend("insertEntryToList", "null link_val");
+            this.abend("insertEntry", "null link_val");
             return;
         }
 
@@ -125,13 +125,13 @@ function ListMgrClass() {
         this.abendIt();
     };
 
-    this.deleteEntryFromList = function (link_val) {
+    this.deleteEntry = function (link_val) {
         if (this.size() <= 0) {
-            this.abend("deleteEntryFromList", "size=" + this.size());
+            this.abend("deleteEntry", "size=" + this.size());
             return;
         }
         if (!this.linkExistInTheList(link_val)) {
-            this.abend("deleteEntryFromList", "linkExistInTheList is false");
+            this.abend("deleteEntry", "linkExistInTheList is false");
             return;
         }
 
@@ -149,6 +149,18 @@ function ListMgrClass() {
         this.decrementSize();
         this.abendIt();
     };
+    
+    this.searchId = function (base_id_val) {
+        this.debug(false, "searchId", base_id_val);
+        var base = this.head();
+        while (base) {
+            if (base.entryId() === base_id_val) {
+                return base;
+            }
+            base = base.next();
+        }
+        return null;
+    };
 
     this.searchLinkByNameAndLinkId = function (my_name_val, link_id_val) {
         this.debug(false, "searchLinkByNameAndLinkId", my_name_val + " " + link_id_val);
@@ -158,18 +170,6 @@ function ListMgrClass() {
                 return link;
             }
             link = link.next();
-        }
-        return null;
-    };
-    
-    this.searchEntryById = function (base_id_val) {
-        this.debug(false, "searchBaseByBaseId", base_id_val);
-        var base = this.head();
-        while (base) {
-            if (base.entryId() === base_id_val) {
-                return base;
-            }
-            base = base.next();
         }
         return null;
     };

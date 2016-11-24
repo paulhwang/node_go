@@ -6,11 +6,11 @@
 
 module.exports = {
     malloc: function (root_object_val) {
-        return new GoBaseMgrClass(root_object_val);
+        return new ListMgrClass(root_object_val);
     },
 };
 
-function GoBaseMgrClass(root_object_val) {
+function ListMgrClass(root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
@@ -23,21 +23,8 @@ function GoBaseMgrClass(root_object_val) {
         this.debug(true, "init__", "");
     };
 
-    this.linkModuleMalloc = function (my_name_val, link_id_val) {
-        var link_module = require("./link_module.js");
-        return link_module.malloc(this, my_name_val, link_id_val);
-    };
-
     this.objectName = function () {
-        return "GoBaseMgrClass";
-    };
-
-    this.rootObject = function () {
-        return this.theRootObject;
-    };
-
-    this.utilObject = function () {
-        return this.rootObject().utilObject();
+        return "ListMgrClass";
     };
 
     this.globalBaseId = function () {
@@ -103,13 +90,13 @@ function GoBaseMgrClass(root_object_val) {
         this.abendIt();
     };
 
-    this.deleteLinkFromList = function (link_val) {
+    this.deleteBaseFromList = function (link_val) {
         if (this.size() <= 0) {
-            this.abend("deleteLinkFromList", "size=" + this.size());
+            this.abend("deleteBaseFromList", "size=" + this.size());
             return;
         }
         if (!this.linkExistInTheList(link_val)) {
-            this.abend("deleteLinkFromList", "linkExistInTheList is false");
+            this.abend("deleteBaseFromList", "linkExistInTheList is false");
             return;
         }
 
@@ -224,11 +211,19 @@ function GoBaseMgrClass(root_object_val) {
     };
 
     this.logit = function (str1_val, str2_val) {
-        this.rootObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);
+        this.LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
+        this.ABEND(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.LOG_IT = function(str1_val, str2_val) {
+        require("../util_modules/logit.js").LOG_IT(str1_val, str2_val);
+    };
+
+    this.ABEND = function(str1_val, str2_val) {
+        require("../util_modules/logit.js").ABEND(str1_val, str2_val);
     };
 
     this.init__(root_object_val);

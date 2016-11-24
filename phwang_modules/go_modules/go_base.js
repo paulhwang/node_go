@@ -38,10 +38,6 @@ function GoBaseObject (root_object_val) {
         return this.theRootObject;
     };
 
-    this.goRootObject = function () {
-        return this.theRootObject;
-    };
-
     this.configObject = function () {
         return this.theConfigObject;
     };
@@ -174,11 +170,11 @@ function GoBaseObject (root_object_val) {
     };
 
     this.LOG_IT = function (s1_val, s2_val) {
-        this.goRootObject().LOG_IT(this.baseId() + ":" + s1_val, s2_val);
+        this.rootObject().LOG_IT(this.baseId() + ":" + s1_val, s2_val);
     };
 
     this.ABEND = function (s1_val, s2_val) {
-        this.goRootObject().ABEND(this.baseId() + ":" + s1_val, s2_val);
+        this.rootObject().ABEND(this.baseId() + ":" + s1_val, s2_val);
     };
 
     this.init__(root_object_val);

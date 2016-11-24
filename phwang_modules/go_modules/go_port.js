@@ -103,12 +103,20 @@ function GoPortObject(base_object_val) {
     };
 
     this.transmitData = function (data_val) {
+        this.debug(false, "transmitData", this.baseObject().objectName());
         if (this.baseObject().objectName() === "GoBaseObject") {
+            this.debug(false, "transmitData", data_val);
             this.transmitQueue().enQueue(data_val);
             return;
         }
         this.clusterObject().enqueueTransmitData(data_val);
         this.clusterObject().processTransmitData();
+    };
+
+    this.dequeueTransmitData = function () {
+        var data = this.transmitQueue().deQueue();
+        this.debug(true, "dequeueTransmitData", data);
+        return data;
     };
 
     this.receiveStringData = function (str_val) {

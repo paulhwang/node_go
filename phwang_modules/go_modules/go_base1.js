@@ -23,7 +23,7 @@ function GoBaseObject (base_mgr_object_val) {
         this.thePortObject = require("./go_port.js").malloc(this);
         this.thePrev = null;
         this.theNext = null;
-        this.debug(false, "init__", "");
+        this.debug(true, "init__", "");
     };
 
     this.GO = function () {

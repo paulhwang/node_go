@@ -77,7 +77,7 @@ function GoBaseMgrClass(go_root_object_val) {
     }
 
     this.mallocBase = function () {
-        var base = require("../go_modules/go_base1.js").malloc(this);
+        var base = require("../go_modules/go_base.js").malloc(this);
         this.incrementGlobalBaseId();
         this.insertLinkToList(base);
         this.debug(true, "mallocBase", "base_id=" + base.baseId());

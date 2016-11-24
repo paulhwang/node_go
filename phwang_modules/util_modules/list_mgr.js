@@ -9,12 +9,12 @@ module.exports = {
         return new ListMgrClass();
     },
 
-    malloc_join: function (entry_id_val) {
-        return new ListjoinClass(entry_id_val);
+    malloc_joint: function (entry_id_val) {
+        return new ListjointClass(entry_id_val);
     },
 };
 
-function ListjoinClass(entry_id_val) {
+function ListjointClass(entry_id_val) {
     "use strict";
 
     this.init__ = function (entry_id_val) {
@@ -112,14 +112,14 @@ function ListMgrClass() {
 
         this.incrementSize();
         if (!this.head()) {
-            link_val.setPrev(null);
-            link_val.setNext(null);
+            link_val.jointObject().setPrev(null);
+            link_val.jointObject().setNext(null);
             this.setHead(link_val);
             this.setTail(link_val);
         } else {
-            this.tail().setNext(link_val);
-            link_val.setPrev(this.tail());
-            link_val.setNext(null);
+            this.tail().jointObject().setNext(link_val);
+            link_val.jointObject().setPrev(this.tail());
+            link_val.jointObject().setNext(null);
             this.setTail(link_val);
         }
         this.abendIt();
@@ -136,15 +136,15 @@ function ListMgrClass() {
         }
 
         this.abendIt();
-        if (link_val.prev()) {
-            link_val.prev().setNext(link_val.next());
+        if (link_val.jointObject().prev()) {
+            link_val.jointObject().prev().jointObject().setNext(link_val.next());
         } else {
-            this.setHead(link_val.next());
+            this.setHead(link_val.jointObject().next());
         }
-        if (link_val.next()) {
-            link_val.next().setPrev(link_val.prev());
+        if (link_val.jointObject().next()) {
+            link_val.jointObject().next().setPrev(link_val.jointObject().prev());
         } else {
-            this.setTail(link_val.prev());
+            this.setTail(link_val.jointObject().prev());
         }
         this.decrementSize();
         this.abendIt();
@@ -154,7 +154,7 @@ function ListMgrClass() {
         this.debug(false, "searchId", base_id_val);
         var base = this.head();
         while (base) {
-            if (base.entryId() === base_id_val) {
+            if (base.jointObject().entryId() === base_id_val) {
                 return base;
             }
             base = base.next();
@@ -221,7 +221,7 @@ function ListMgrClass() {
         var i = 0;
         var link = this.head();
         while (link) {
-            link = link.next();
+            link = link.jointObject().next();
             i += 1;
         }
         if (i !== this.size()) {
@@ -231,7 +231,7 @@ function ListMgrClass() {
         i = 0;
         link = this.tail();
         while (link) {
-            link = link.prev();
+            link = link.jointObject().prev();
             i += 1;
         }
         if (i !== this.size()) {

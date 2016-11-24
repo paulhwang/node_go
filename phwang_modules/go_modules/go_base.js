@@ -16,14 +16,12 @@ function GoBaseObject (root_object_val, base_id_val) {
     this.init__ = function (root_object_val, base_id_val) {
         this.theRootObject = root_object_val;
         this.theBaseId = base_id_val;
-        this.theJoinObject = this.rootObject().importObject().importListMgr().malloc_join(this.baseId());
+        this.theJointObject = this.rootObject().importObject().importListMgr().malloc_joint(this.baseId());
         this.theConfigObject = this.rootObject().importObject().importConfig().malloc(this);
         this.theBoardObject = this.rootObject().importObject().importBoard().malloc(this);
         this.theEngineObject = this.rootObject().importObject().importEngine().malloc(this);
         this.theGameObject = this.rootObject().importObject().importGame().malloc(this);
         this.thePortObject = this.rootObject().importObject().importPort().malloc(this);
-        this.thePrev = null;
-        this.theNext = null;
         this.debug(true, "init__", "");
     };
 
@@ -39,8 +37,8 @@ function GoBaseObject (root_object_val, base_id_val) {
         return this.theRootObject;
     };
 
-    this.joinObject = function () {
-        return this.theJoinObject;
+    this.jointObject = function () {
+        return this.theJointObject;
     };
 
     this.configObject = function () {
@@ -79,10 +77,6 @@ function GoBaseObject (root_object_val, base_id_val) {
         return this.theBaseId;
     };
 
-    this.entryId = function () {
-        return this.baseId();
-    };
-
     this.setHisContainerObject = function (container2_val) {
         this.theConfigObject2 = container2_val;
     };
@@ -94,22 +88,6 @@ function GoBaseObject (root_object_val, base_id_val) {
     this.setLastGame = function (str_val) {
         window.localStorage.lastGame = str_val;
     }
-
-    this.prev = function () {
-        return this.thePrev;
-    };
-
-    this.setPrev = function (val) {
-        this.thePrev = val;
-    };
-
-    this.next = function () {
-        return this.theNext;
-    };
-
-    this.setNext = function (val) {
-        this.theNext = val;
-    };
 
     this.resetContainerObjectForNewGame = function () {
         this.goLog("resetContainerObjectForNewGame", "");

@@ -1,7 +1,7 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: root_module.js
+ * File name: go_root.js
  */
 
 var the_go_root_object = new GoRootObject();
@@ -24,7 +24,7 @@ function GoRootObject () {
     "use strict";
 
     this.init__ = function () {
-        this.theImportObject = new ImportObject(this);
+        this.theImportObject = require("./go_import.js").malloc(this);
         this.theBaseMgrObject = this.importObject().importListMgr().malloc();
         this.debug(true, "init__", "");
     };
@@ -89,42 +89,4 @@ function GoRootObject () {
     };
 
     this.init__();
-};
-
-function ImportObject (root_object_val) {
-    "use strict";
-
-    this.init__ = function (root_object_val) {
-        this.theRootObject = root_object_val;
-    };
-
-    this.rootObject = function () {
-        return this.theRootObject;
-    };
-
-    this.importListMgr = function () {
-        return require("../util_modules/list_mgr.js");
-    };
-
-    this.importBase = function () {
-        return require("../go_modules/go_base.js");
-    };
-
-    this.importMove = function () {
-        return require("./go_move.js");
-    }
-
-    this.importLogit = function () {
-        return require("../util_modules/logit.js");
-    }
-
-    this.mallocQueue = function () {
-        return require("../util_modules/queue.js").malloc(this.rootObject());
-    };
-
-    this.mallocRing = function () {
-        return require("../util_modules/ring.js").malloc(this.rootObject());
-    };
-
-    this.init__(root_object_val);
 };

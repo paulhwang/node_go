@@ -24,7 +24,7 @@ function GoRootObject () {
     "use strict";
 
     this.init__ = function () {
-        this.theBaseMgrObject = require("./go_base_mgr.js").malloc();
+        this.theBaseMgrObject = require("../util_modules/list_mgr.js").malloc();
         this.debug(true, "init__", "");
     };
 

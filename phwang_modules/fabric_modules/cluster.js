@@ -25,7 +25,7 @@ function clusterObject (cluster_mgr_val, topic_data_val, session_val) {
         this.thePrev = null;
         this.theTopicBaseId = 0;
         this.createTopic(topic_data_val);
-        this.debug(false, "init__", "topic=" + this.topicObject().objectName());
+        this.debug(false, "init__", "topic base_id=" + this.topicBaseId());
     };
 
     this.goObjectMalloc = function () {
@@ -112,7 +112,7 @@ function clusterObject (cluster_mgr_val, topic_data_val, session_val) {
     this.createTopic = function (topic_data_val) {
         var topic_data = JSON.parse(topic_data_val);
         if (topic_data.title === "go") {
-            this.setTopicObject(this.goObjectMalloc());
+            //this.setTopicObject(this.goObjectMalloc());
             this.setTopicBaseId(this.rootObject().topicMallocBase());
             this.debug(false, "createTopic", "base_id=" + this.topicBaseId());
         }

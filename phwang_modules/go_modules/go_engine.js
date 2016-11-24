@@ -31,6 +31,10 @@ function GoEngineObject(base_object_val) {
         return this.theBaseObject;
     };
 
+    this.rootObject = function () {
+        return this.baseObject().rootObject();
+    };
+
     this.configObject = function () {
         return this.baseObject().configObject();
     };
@@ -44,11 +48,11 @@ function GoEngineObject(base_object_val) {
     };
 
     this.mallocGroupList = function (engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val) {
-        return require("./go_group_list.js").malloc(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val);
+        return this.rootObject().importObject().importGroupList().malloc(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val);
     };
 
     this.mallocGroup = function (group_list_val) {
-        return require("./go_group.js").malloc(group_list_val);
+        return this.rootObject().importObject().importGroup().malloc(group_list_val);
     };
 
     this.boardSize = function () {

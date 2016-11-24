@@ -16,11 +16,11 @@ function GoBaseObject (root_object_val, base_id_val) {
     this.init__ = function (root_object_val, base_id_val) {
         this.theRootObject = root_object_val;
         this.theBaseId = base_id_val;
-        this.theConfigObject = require("./go_config.js").malloc(this);
-        this.theBoardObject = require("./go_board.js").malloc(this);
-        this.theEngineObject = require("./go_engine.js").malloc(this);
-        this.theGameObject = require("./go_game.js").malloc(this);
-        this.thePortObject = require("./go_port.js").malloc(this);
+        this.theConfigObject = this.rootObject().importObject().importConfig().malloc(this);
+        this.theBoardObject = this.rootObject().importObject().importBoard().malloc(this);
+        this.theEngineObject = this.rootObject().importObject().importEngine().malloc(this);
+        this.theGameObject = this.rootObject().importObject().importGame().malloc(this);
+        this.thePortObject = this.rootObject().importObject().importPort().malloc(this);
         this.thePrev = null;
         this.theNext = null;
         this.debug(true, "init__", "");

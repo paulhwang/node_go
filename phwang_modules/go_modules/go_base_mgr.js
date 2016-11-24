@@ -14,7 +14,7 @@ function GoBaseMgrClass(root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
-        this.theGoRootObject = root_object_val;
+        this.theRootObject = root_object_val;
         this.theGlobalBaseId = 100;
         this.theHead = null;
         this.theTail = null;
@@ -32,12 +32,12 @@ function GoBaseMgrClass(root_object_val) {
         return "GoBaseMgrClass";
     };
 
-    this.goRootObject = function () {
-        return this.theGoRootObject;
+    this.rootObject = function () {
+        return this.theRootObject;
     };
 
     this.utilObject = function () {
-        return this.goRootObject().utilObject();
+        return this.rootObject().utilObject();
     };
 
     this.globalBaseId = function () {
@@ -250,11 +250,11 @@ function GoBaseMgrClass(root_object_val) {
     };
 
     this.logit = function (str1_val, str2_val) {
-        this.goRootObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);
+        this.rootObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        this.goRootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
+        this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.init__(root_object_val);

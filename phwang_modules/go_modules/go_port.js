@@ -22,6 +22,7 @@ function GoPortObject(base_object_val) {
 
     this.init__ = function (base_object_val) {
         this.theBaseObject = base_object_val;
+        this.theTransmitQueue = this.rootObject().mallocQueue();
         this.debug(false, "init__", "");
     };
 
@@ -102,6 +103,10 @@ function GoPortObject(base_object_val) {
     };
 
     this.transmitData = function (data_val) {
+        if (this.baseObject().objectName() === "GoBaseObject") {
+            this.transmitQueue().enQueue(data_val);
+            return;
+        }
         this.clusterObject().enqueueTransmitData(data_val);
         this.clusterObject().processTransmitData();
     };

@@ -38,6 +38,10 @@ function GoBaseObject (base_mgr_object_val) {
         return this.theBaseMgrObject;
     };
 
+    this.rootObject = function () {
+        return this.baseMgrObject().goRootObject();
+    };
+
     this.goRootObject = function () {
         return this.baseMgrObject().goRootObject();
     };

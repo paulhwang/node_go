@@ -5,17 +5,17 @@
  */
 
 module.exports = {
-    malloc: function (base_mgr_object_val) {
-        return new GoBaseObject(base_mgr_object_val);
+    malloc: function (root_object_val) {
+        return new GoBaseObject(root_object_val);
     },
 };
 
-function GoBaseObject (base_mgr_object_val) {
+function GoBaseObject (root_object_val) {
     "use strict";
 
-    this.init__ = function (base_mgr_object_val) {
-        this.theBaseMgrObject = base_mgr_object_val;
-        this.theBaseId = this.baseMgrObject().globalBaseId();
+    this.init__ = function (root_object_val, base_id_val) {
+        this.theRootObject = root_object_val;
+        this.theBaseId = base_id_val;
         this.theConfigObject = require("./go_config.js").malloc(this);
         this.theBoardObject = require("./go_board.js").malloc(this);
         this.theEngineObject = require("./go_engine.js").malloc(this);
@@ -34,16 +34,12 @@ function GoBaseObject (base_mgr_object_val) {
         return "GoBaseObject";
     };
 
-    this.baseMgrObject = function () {
-        return this.theBaseMgrObject;
-    };
-
     this.rootObject = function () {
-        return this.baseMgrObject().goRootObject();
+        return this.theRootObject;
     };
 
     this.goRootObject = function () {
-        return this.baseMgrObject().goRootObject();
+        return this.theRootObject;
     };
 
     this.configObject = function () {
@@ -185,7 +181,7 @@ function GoBaseObject (base_mgr_object_val) {
         this.goRootObject().ABEND(this.baseId() + ":" + s1_val, s2_val);
     };
 
-    this.init__(base_mgr_object_val);
+    this.init__(root_object_val);
 }
 
 var GO = new GoDefineObject;

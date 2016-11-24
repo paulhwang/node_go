@@ -45,7 +45,7 @@ function GoRootObject () {
     };
 
     this.mallocBase = function () {
-        return this.baseMgrObject().mallocBase();
+        return this.baseMgrObject().mallocBase(this);
     };
 
     this.receiveData = function (base_id_val, data_val) {

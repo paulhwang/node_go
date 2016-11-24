@@ -5,16 +5,16 @@
  */
 
 module.exports = {
-    malloc: function (go_root_object_val) {
-        return new GoBaseMgrClass(go_root_object_val);
+    malloc: function (root_object_val) {
+        return new GoBaseMgrClass(root_object_val);
     },
 };
 
-function GoBaseMgrClass(go_root_object_val) {
+function GoBaseMgrClass(root_object_val) {
     "use strict";
 
-    this.init__ = function (go_root_object_val) {
-        this.theGoRootObject = go_root_object_val;
+    this.init__ = function (root_object_val) {
+        this.theGoRootObject = root_object_val;
         this.theGlobalBaseId = 100;
         this.theHead = null;
         this.theTail = null;
@@ -76,8 +76,8 @@ function GoBaseMgrClass(go_root_object_val) {
         this.theSize -= 1;
     }
 
-    this.mallocBase = function () {
-        var base = require("../go_modules/go_base.js").malloc(this);
+    this.mallocBase = function (root_object_val) {
+        var base = require("../go_modules/go_base.js").malloc(root_object_val, this.globalBaseId());
         this.incrementGlobalBaseId();
         this.insertLinkToList(base);
         this.debug(true, "mallocBase", "base_id=" + base.baseId());
@@ -257,5 +257,5 @@ function GoBaseMgrClass(go_root_object_val) {
         this.goRootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(go_root_object_val);
+    this.init__(root_object_val);
 }

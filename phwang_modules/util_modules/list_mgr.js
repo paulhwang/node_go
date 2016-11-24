@@ -66,9 +66,9 @@ function ListMgrClass() {
         return this.globalId();
     }
 
-    this.insertBaseToList = function (link_val) {
+    this.insertEntryToList = function (link_val) {
         if (!link_val) {
-            this.abend("insertBaseToList", "null link_val");
+            this.abend("insertEntryToList", "null link_val");
             return;
         }
 
@@ -89,13 +89,13 @@ function ListMgrClass() {
         this.abendIt();
     };
 
-    this.deleteBaseFromList = function (link_val) {
+    this.deleteEntryFromList = function (link_val) {
         if (this.size() <= 0) {
-            this.abend("deleteBaseFromList", "size=" + this.size());
+            this.abend("deleteEntryFromList", "size=" + this.size());
             return;
         }
         if (!this.linkExistInTheList(link_val)) {
-            this.abend("deleteBaseFromList", "linkExistInTheList is false");
+            this.abend("deleteEntryFromList", "linkExistInTheList is false");
             return;
         }
 
@@ -126,11 +126,11 @@ function ListMgrClass() {
         return null;
     };
     
-    this.searchBaseByBaseId = function (base_id_val) {
+    this.searchEntryById = function (base_id_val) {
         this.debug(false, "searchBaseByBaseId", base_id_val);
         var base = this.head();
         while (base) {
-            if (base.baseId() === base_id_val) {
+            if (base.entryId() === base_id_val) {
                 return base;
             }
             base = base.next();

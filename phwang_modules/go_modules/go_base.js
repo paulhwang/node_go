@@ -74,6 +74,10 @@ function GoBaseObject (root_object_val, base_id_val) {
         return this.theBaseId;
     };
 
+    this.entryId = function () {
+        return this.baseId();
+    };
+
     this.setHisContainerObject = function (container2_val) {
         this.theConfigObject2 = container2_val;
     };

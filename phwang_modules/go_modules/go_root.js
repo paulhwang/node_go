@@ -24,7 +24,8 @@ function GoRootObject () {
     "use strict";
 
     this.init__ = function () {
-        this.theBaseMgrObject = require("../util_modules/list_mgr.js").malloc();
+        this.theImportObject = new ImportObject(this);
+        this.theBaseMgrObject = this.importObject().importListMgr().malloc();
         this.debug(true, "init__", "");
     };
 
@@ -32,21 +33,17 @@ function GoRootObject () {
         return "GoRootObject";
     };
 
+    this.importObject = function () {
+        return this.theImportObject;
+    };
+
     this.baseMgrObject = function () {
         return this.theBaseMgrObject;
     };
 
-    this.mallocQueue = function () {
-        return require("../util_modules/queue.js").malloc(this);
-    };
-
-    this.mallocRing = function () {
-        return require("../util_modules/ring.js").malloc(this);
-    };
-
     this.mallocBase = function () {
         var base_id = this.baseMgrObject().allocId();
-        var base = require("../go_modules/go_base.js").malloc(this, base_id);
+        var base = this.importObject().importBase().malloc(this, base_id);
         this.baseMgrObject().insertEntryToList(base);
         this.debug(true, "mallocBase", "base_id=" + base_id);
         return base_id;
@@ -84,12 +81,50 @@ function GoRootObject () {
     };
 
     this.LOG_IT = function(str1_val, str2_val) {
-        require("../util_modules/logit.js").LOG_IT(str1_val, str2_val);
+        this.importObject().importLogit().LOG_IT(str1_val, str2_val);
     };
 
     this.ABEND = function(str1_val, str2_val) {
-        require("../util_modules/logit.js").ABEND(str1_val, str2_val);
+         this.importObject().importLogit().ABEND(str1_val, str2_val);
     };
 
     this.init__();
+};
+
+function ImportObject (root_object_val) {
+    "use strict";
+
+    this.init__ = function (root_object_val) {
+        this.theRootObject = root_object_val;
+    };
+
+    this.rootObject = function () {
+        return this.theRootObject;
+    };
+
+    this.importListMgr = function () {
+        return require("../util_modules/list_mgr.js");
+    };
+
+    this.importBase = function () {
+        return require("../go_modules/go_base.js");
+    };
+
+    this.importMove = function () {
+        return require("./go_move.js");
+    }
+
+    this.importLogit = function () {
+        return require("../util_modules/logit.js");
+    }
+
+    this.mallocQueue = function () {
+        return require("../util_modules/queue.js").malloc(this.rootObject());
+    };
+
+    this.mallocRing = function () {
+        return require("../util_modules/ring.js").malloc(this.rootObject());
+    };
+
+    this.init__(root_object_val);
 };

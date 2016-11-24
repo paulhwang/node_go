@@ -22,12 +22,12 @@ function GoPortObject(base_object_val) {
 
     this.init__ = function (base_object_val) {
         this.theBaseObject = base_object_val;
-        this.theTransmitQueue = this.rootObject().mallocQueue();
+        this.theTransmitQueue = this.rootObject().importObject().mallocQueue();
         this.debug(false, "init__", "");
     };
 
     this.mallocMove = function (str_val, x_val, y_val, color_val, turn_val, base_object_val) {
-        return require("./go_move.js").malloc(str_val, x_val, y_val, color_val, turn_val, base_object_val);
+        return this.rootObject().importObject().importMove().malloc(str_val, x_val, y_val, color_val, turn_val, base_object_val);
     };
 
     this.objectName = function () {

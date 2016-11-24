@@ -18,10 +18,11 @@ function QueueObject (root_object_val) {
         this.theHead = null;
         this.theTail = null;
         this.theSize = 0;
+        this.debug(true, "init__", this.rootObject().objectName());
         if (this.debugRing()) {
-            this.theRingObject = this.rootObject().mallocRing();
+            this.theRingObject = this.rootObject().importObject().mallocRing();
         }
-        this.debug(false, "init__", "");
+        this.debug(true, "init__", "");
     };
 
     this.debugMe = function () {
@@ -29,7 +30,7 @@ function QueueObject (root_object_val) {
     };
 
     this.debugRing = function () {
-        return true;
+        return false;
     };
 
     this.objectName = function () {

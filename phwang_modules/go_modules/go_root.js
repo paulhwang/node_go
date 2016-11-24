@@ -49,7 +49,12 @@ function GoRootObject () {
     };
 
     this.receiveData = function (base_id_val, data_val) {
-        this.baseMgrObject().receiveData(base_id_val, data_val);
+        this.debug(false, "receiveData", "data=" + data_val);
+        var base = this.baseMgrObject().searchBaseByBaseId(base_id_val);
+        if (!base) {
+            return;
+        }
+        base.portObject().receiveStringData(data_val);
     };
 
     this.transmitData = function (base_id_val) {

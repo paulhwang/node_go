@@ -1,25 +1,23 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: go_base_mgr.js
+ * File name: list_mgr.js
  */
 
 module.exports = {
-    malloc: function (root_object_val) {
-        return new ListMgrClass(root_object_val);
+    malloc: function () {
+        return new ListMgrClass();
     },
 };
 
-function ListMgrClass(root_object_val) {
+function ListMgrClass() {
     "use strict";
 
-    this.init__ = function (root_object_val) {
-        this.theRootObject = root_object_val;
+    this.init__ = function () {
         this.theGlobalBaseId = 100;
         this.theHead = null;
         this.theTail = null;
         this.theSize = 0;
-        this.theNameListChanged = false;
         this.debug(true, "init__", "");
     };
 
@@ -62,10 +60,6 @@ function ListMgrClass(root_object_val) {
     this.decrementSize = function () {
         this.theSize -= 1;
     }
-
-    this.freeLink = function (link_val) {
-        this.deleteLinkFromList(link_val);
-    };
 
     this.insertBaseToList = function (link_val) {
         if (!link_val) {
@@ -226,5 +220,5 @@ function ListMgrClass(root_object_val) {
         require("../util_modules/logit.js").ABEND(str1_val, str2_val);
     };
 
-    this.init__(root_object_val);
+    this.init__();
 }

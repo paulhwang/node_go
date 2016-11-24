@@ -45,7 +45,11 @@ function GoRootObject () {
     };
 
     this.mallocBase = function () {
-        return this.baseMgrObject().mallocBase(this);
+        var base = require("../go_modules/go_base.js").malloc(this, this.baseMgrObject().globalBaseId());
+        this.baseMgrObject().incrementGlobalBaseId();
+        this.baseMgrObject().insertBaseToList(base);
+        this.debug(true, "mallocBase", "base_id=" + base.baseId());
+        return base.baseId();
     };
 
     this.receiveData = function (base_id_val, data_val) {
@@ -58,7 +62,11 @@ function GoRootObject () {
     };
 
     this.transmitData = function (base_id_val) {
-        return this.baseMgrObject().transmitData(base_id_val);
+        var base = this.baseMgrObject().searchBaseByBaseId(base_id_val);
+        if (!base) {
+            return null;
+        }
+        return base.portObject().dequeueTransmitData();
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

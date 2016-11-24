@@ -76,29 +76,13 @@ function GoBaseMgrClass(root_object_val) {
         this.theSize -= 1;
     }
 
-    this.mallocBase = function (root_object_val) {
-        var base = require("../go_modules/go_base.js").malloc(root_object_val, this.globalBaseId());
-        this.incrementGlobalBaseId();
-        this.insertLinkToList(base);
-        this.debug(true, "mallocBase", "base_id=" + base.baseId());
-        return base.baseId();
-    };
-
-    this.transmitData = function (base_id_val) {
-        var base = this.searchBaseByBaseId(base_id_val);
-        if (!base) {
-            return null;
-        }
-        return base.portObject().dequeueTransmitData();
-    };
-
     this.freeLink = function (link_val) {
         this.deleteLinkFromList(link_val);
     };
 
-    this.insertLinkToList = function (link_val) {
+    this.insertBaseToList = function (link_val) {
         if (!link_val) {
-            this.abend("insertLinkToList", "null link_val");
+            this.abend("insertBaseToList", "null link_val");
             return;
         }
 

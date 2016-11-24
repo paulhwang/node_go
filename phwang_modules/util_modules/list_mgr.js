@@ -5,9 +5,45 @@
  */
 
 module.exports = {
-    malloc: function () {
+    malloc_mgr: function () {
         return new ListMgrClass();
     },
+
+    malloc_entry: function (entry_id_val) {
+        return new ListEntryClass(entry_id_val);
+    },
+};
+
+function ListEntryClass(entry_id_val) {
+    "use strict";
+
+    this.init__ = function (entry_id_val) {
+        this.theEntryId = entry_id_val;
+        this.thePrev = null;
+        this.theNext = null;
+    };
+
+    this.entryId = function () {
+        return this.theEntryId;
+    };
+
+    this.prev = function () {
+        return this.thePrev;
+    };
+
+    this.setPrev = function (val) {
+        this.thePrev = val;
+    };
+
+    this.next = function () {
+        return this.theNext;
+    };
+
+    this.setNext = function (val) {
+        this.theNext = val;
+    };
+
+    this.init__(entry_id_val);
 };
 
 function ListMgrClass() {

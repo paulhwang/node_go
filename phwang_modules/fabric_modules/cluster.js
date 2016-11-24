@@ -112,7 +112,6 @@ function clusterObject (cluster_mgr_val, topic_data_val, session_val) {
     this.createTopic = function (topic_data_val) {
         var topic_data = JSON.parse(topic_data_val);
         if (topic_data.title === "go") {
-            //this.setTopicObject(this.goObjectMalloc());
             this.setTopicBaseId(this.rootObject().topicMallocBase());
             this.debug(false, "createTopic", "base_id=" + this.topicBaseId());
         }
@@ -145,22 +144,6 @@ function clusterObject (cluster_mgr_val, topic_data_val, session_val) {
         return data;
     };
 
-    this.processTransmitData1 = function () {
-        return;
-        while (true) {
-            var data = this.dequeueTransmitData();
-            if (!data) {
-                return;
-            }
-
-            var i = 0;
-            while (i < this.sessionArrayLength()) {
-                this.sessionArray(i).enqueueTransmitData(data);
-                i += 1;
-            }
-        }
-    };
-
     this.processSetupTopicData = function (json_data_val) {
         this.debug(true, "processSetupTopicData", "data=" + json_data_val);
         var topic_data = JSON.parse(json_data_val);
@@ -186,11 +169,9 @@ function clusterObject (cluster_mgr_val, topic_data_val, session_val) {
     };
 
     this.receiveData = function (data_val) {
-        //this.topicObject().portObject().receiveStringData(data_val);
-
         this.rootObject().topicReceiveData(this.topicBaseId(), data_val);
         var data = this.rootObject().topicTransmitData(this.topicBaseId());
-        this.debug(true, "receiveData", "data=" + data);
+        this.debug(false, "receiveData", "data=" + data);
         var i = 0;
         while (i < this.sessionArrayLength()) {
             this.sessionArray(i).enqueueTransmitData(data);

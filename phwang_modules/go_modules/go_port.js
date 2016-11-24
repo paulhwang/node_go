@@ -87,9 +87,8 @@ function GoPortObject(base_object_val) {
     };
 
     this.thansmitBoardData = function () {
-        //this.goLog("transmitBoardData", "data=" + board_val);
         var board_data = this.GO_PROTOCOL_CODE_BOARD_DATA + this.boardObject().encodeBoard();
-        var json_data = JSON.stringify({
+        var data = JSON.stringify({
                         board_data: board_data,
                         next_color: this.gameObject().nextColor(),
                         last_dead_stone: this.engineObject().lastDeadStone(),
@@ -99,23 +98,13 @@ function GoPortObject(base_object_val) {
                         white_score: this.engineObject().whiteScoreString(),
                         final_score: this.engineObject().finalScoreString(),
                     });
-        this.transmitData(json_data);
-    };
-
-    this.transmitData = function (data_val) {
-        this.debug(false, "transmitData", this.baseObject().objectName());
-        if (this.baseObject().objectName() === "GoBaseObject") {
-            this.debug(false, "transmitData", data_val);
-            this.transmitQueue().enQueue(data_val);
-            return;
-        }
-        this.clusterObject().enqueueTransmitData(data_val);
-        this.clusterObject().processTransmitData();
+        this.debug(false, "transmitData", data);
+        this.transmitQueue().enQueue(data);
     };
 
     this.dequeueTransmitData = function () {
         var data = this.transmitQueue().deQueue();
-        this.debug(true, "dequeueTransmitData", data);
+        this.debug(false, "dequeueTransmitData", data);
         return data;
     };
 

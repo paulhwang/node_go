@@ -26,10 +26,6 @@ function SessionMgrObject(link_val) {
         return this.fabricObject().clusterMgrObject().mallocCluster();
     };
 
-    this.sessionModule = function () {
-        return require("./session_entry_module.js");
-    };
-
     this.objectName = function () {
         return "SessionMgrObject";
     };

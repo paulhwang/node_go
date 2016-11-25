@@ -21,8 +21,8 @@ function SessionObject(session_mgr_val, session_id_val) {
         this.theHisSession = null;
         this.up_seq = 0;
         this.down_seq = 0;
-        this.theReceiveQueue = this.rootObject().mallocQueue();
-        this.theTransmitQueue = this.rootObject().mallocQueue();
+        this.theReceiveQueue = this.rootObject().importObject().mallocQueue();
+        this.theTransmitQueue = this.rootObject().importObject().mallocQueue();
         this.thePrev = null;
         this.theNext = null;
         this.debug(true, "init__", "session=" + this.sessionName());

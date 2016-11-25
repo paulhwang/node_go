@@ -21,8 +21,8 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
         this.theSessionMgrObject = session_mgr_module.malloc(this);
         this.up_seq = 0;
         this.down_seq = 0;
-        this.theReceiveQueue = this.rootObject().mallocQueue();
-        this.thePendingSessionSetupQueue = this.rootObject().mallocQueue();
+        this.theReceiveQueue = this.rootObject().importObject().mallocQueue();
+        this.thePendingSessionSetupQueue = this.rootObject().importObject().mallocQueue();
         this.theNameListChanged = true;
         this.theKeepAliveTimer = null;
         this.thePrev = null;

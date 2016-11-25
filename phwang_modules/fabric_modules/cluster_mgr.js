@@ -19,8 +19,8 @@ function clusterMgrObject(root_object_val) {
         this.theTail = null;
         this.theSize = 0;
         this.theGlobalClusterId = 100;
-        this.theClusterQueue = this.rootObject().mallocQueue();
-        this.thePoolQueue = this.rootObject().mallocQueue();
+        this.theClusterQueue = this.rootObject().importObject().mallocQueue();
+        this.thePoolQueue = this.rootObject().importObject().mallocQueue();
         this.debug(false, "init__", "");
     };
 

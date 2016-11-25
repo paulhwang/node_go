@@ -59,14 +59,6 @@ function RootObject () {
         return this.theAjaxObject;
     };
 
-    this.mallocQueue = function () {
-        return require("../util_modules/queue.js").malloc(this);
-    };
-
-    this.mallocRing = function () {
-        return require("../util_modules/ring.js").malloc(this);
-    };
-
     this.topicMallocBase = function () {
         return require("../go_modules/go_root.js").malloc_base();
     };

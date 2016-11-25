@@ -42,6 +42,10 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
         return this.theRootObject;
     };
 
+    this.jointObject = function () {
+        return this.theJointObject;
+    };
+
     this.sessionMgrObject = function () {
         return this.theSessionMgrObject;
     };

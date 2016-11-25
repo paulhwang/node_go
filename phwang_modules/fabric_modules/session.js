@@ -35,6 +35,10 @@ function SessionObject(link_object_val, session_id_val) {
         return this.theLinkObject;
     };
 
+    this.jointObject = function () {
+        return this.theJointObject;
+    };
+
     this.rootObject = function () {
         return this.linkObject().rootObject();
     };

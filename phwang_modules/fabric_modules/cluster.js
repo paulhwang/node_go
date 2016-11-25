@@ -38,12 +38,16 @@ function clusterObject (root_object_val, topic_data_val, session_val) {
         return "clusterObject";
     };
 
-    this.sessionObject = function () {
-        return this.sessionArray(0);
-    };
-
     this.rootObject = function () {
         return this.theRootObject;
+    };
+
+    this.jointObject = function () {
+        return this.theJointObject;
+    };
+
+    this.sessionObject = function () {
+        return this.sessionArray(0);
     };
 
     this.utilObject = function () {

@@ -9,6 +9,12 @@ module.exports = {
         return new ListMgrClass(host_object_val, global_id_val);
     },
 
+    malloc_mgr_: function (host_object_val, global_id_val, name_val) {
+        var list_mgr = new ListMgrClass(host_object_val, global_id_val);
+        list_mgr.setName(name_val);
+        return list_mgr;
+    },
+
     malloc_joint: function (entry_id_val) {
         return new ListjointClass(entry_id_val);
     },
@@ -90,6 +96,14 @@ function ListMgrClass(host_object_val, global_id_val) {
     this.allocId = function () {
         this.incrementGlobalId();
         return this.globalId();
+    }
+
+    this.name = function () {
+        return this.theName;
+    }
+
+    this.setName = function (val) {
+        this.theName = val;
     }
 
     this.insertEntry = function (link_val) {

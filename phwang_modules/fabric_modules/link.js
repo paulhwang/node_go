@@ -19,6 +19,7 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
         this.theLinkId = link_id_val;
         this.theMyName = my_name_val;
         this.theSessionMgrObject = this.rootObject().importObject().importSessionMgr().malloc(this);
+        this.theGlobalSessionId = 1000;
         this.up_seq = 0;
         this.down_seq = 0;
         this.theReceiveQueue = this.rootObject().importObject().mallocQueue();
@@ -68,6 +69,14 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
 
     this.setMyName = function (val) {
         this.theMyName = val;
+    };
+
+    this.globalSessionId = function () {
+        return this.theGlobalSessionId;
+    };
+
+    this.incrementGlobalSessionId = function () {
+        this.theGlobalSessionId += 1;
     };
 
     this.keepAliveTimer = function () {
@@ -140,8 +149,8 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
     };
 
     this.mallocSession = function () {
-        var session = this.rootObject().importObject().importSession().malloc(this, this.sessionMgrObject().globalSessionId());
-        this.sessionMgrObject().incrementGlobalSessionId();
+        var session = this.rootObject().importObject().importSession().malloc(this, this.globalSessionId());
+        this.incrementGlobalSessionId();
         this.sessionMgrObject().insertSessionToList(session);
         return session;
     };

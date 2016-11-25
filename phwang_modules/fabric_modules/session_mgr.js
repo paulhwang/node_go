@@ -18,7 +18,6 @@ function SessionMgrObject(link_val) {
         this.theHead = null;
         this.theTail = null;
         this.theSize = 0;
-        this.theGlobalSessionId = 1000;
         this.debug(false, "init__", "");
     };
 
@@ -40,14 +39,6 @@ function SessionMgrObject(link_val) {
 
     this.utilObject = function () {
         return this.rootObject().utilObject();
-    };
-
-    this.globalSessionId = function () {
-        return this.theGlobalSessionId;
-    };
-
-    this.incrementGlobalSessionId = function () {
-        this.theGlobalSessionId += 1;
     };
 
     this.head = function () {
@@ -77,6 +68,13 @@ function SessionMgrObject(link_val) {
     this.decrementSize = function () {
         this.theSize -= 1;
     }
+
+    this.mallocSession________ = function () {
+        var session = this.rootObject().importObject().importSession().malloc(this.linkObject(), this.globalSessionId());
+        this.incrementGlobalSessionId();
+        this.insertSessionToList(session);
+        return session;
+    };
 
     this.freeSession = function (session_val) {
         this.deleteSessionFromList(session_val);

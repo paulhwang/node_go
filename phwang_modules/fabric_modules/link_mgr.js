@@ -23,10 +23,6 @@ function LinkMgrObject(root_object_val) {
         this.debug(false, "init__", "");
     };
 
-    this.linkModuleMalloc = function (my_name_val, link_id_val) {
-        return this.rootObject().importObject().importLink().malloc(this, my_name_val, link_id_val);
-    };
-
     this.objectName = function () {
         return "LinkMgrObject";
     };
@@ -76,7 +72,7 @@ function LinkMgrObject(root_object_val) {
     }
 
     this.mallocLink = function (my_name_val) {
-        var link = this.rootObject().importObject().importLink().malloc(this, my_name_val, this.globalLinkId());
+        var link = this.rootObject().importObject().importLink().malloc(this.rootObject(), my_name_val, this.globalLinkId());
         this.incrementGlobalLinkId();
         this.insertLinkToList(link);
         this.setNameListChanged();

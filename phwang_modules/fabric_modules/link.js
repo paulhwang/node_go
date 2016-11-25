@@ -5,16 +5,16 @@
  */
 
 module.exports = {
-    malloc: function (link_mgr_val, my_name_val, link_id_val) {
-        return new LinkObject(link_mgr_val, my_name_val, link_id_val);
+    malloc: function (root_object_val, my_name_val, link_id_val) {
+        return new LinkObject(root_object_val, my_name_val, link_id_val);
     },
 };
 
-function LinkObject(link_mgr_val, my_name_val, link_id_val) {
+function LinkObject(root_object_val, my_name_val, link_id_val) {
     "use strict";
 
-    this.init__ = function (link_mgr_val, my_name_val, link_id_val) {
-        this.theLinkMgrObject  = link_mgr_val;
+    this.init__ = function (root_object_val, my_name_val, link_id_val) {
+        this.theRootObject  = root_object_val;
         this.theLinkId = link_id_val;
         this.theMyName = my_name_val;
         this.theSessionMgrObject = this.rootObject().importObject().importSessionMgr().malloc(this);
@@ -37,20 +37,12 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
         return "LinkObject";
     };
 
-    this.linkMgrObject = function () {
-        return this.theLinkMgrObject;
-    };
-
     this.rootObject = function () {
-        return this.linkMgrObject().rootObject();
+        return this.theRootObject;
     };
 
     this.sessionMgrObject = function () {
         return this.theSessionMgrObject;
-    };
-
-    this.FibreObject = function () {
-        return this.linkMgrObject().FibreObject();
     };
 
     this.utilObject = function () {
@@ -174,5 +166,5 @@ function LinkObject(link_mgr_val, my_name_val, link_id_val) {
         this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(link_mgr_val, my_name_val, link_id_val);
+    this.init__(root_object_val, my_name_val, link_id_val);
 }

@@ -23,9 +23,8 @@ function LinkMgrObject(root_object_val) {
         this.debug(false, "init__", "");
     };
 
-    this.linkModuleMallo1c = function (my_name_val, link_id_val) {
-        var link_module = require("./link.js");
-        return link_module.malloc(this, my_name_val, link_id_val);
+    this.linkModuleMalloc = function (my_name_val, link_id_val) {
+        return this.rootObject().importObject().importLink().malloc(this, my_name_val, link_id_val);
     };
 
     this.objectName = function () {

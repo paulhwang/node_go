@@ -22,11 +22,6 @@ function SessionMgrObject(link_val) {
         this.debug(false, "init__", "");
     };
 
-    this.sessionModuleMalloc = function (session_mgr_val, session_id_val) {
-        var session_module = require("./session.js");
-        return session_module.malloc(session_mgr_val, session_id_val);
-    };
-
     this.clusterModuleMalloc = function () {
         return this.fabricObject().clusterMgrObject().mallocCluster();
     };
@@ -92,7 +87,7 @@ function SessionMgrObject(link_val) {
     }
 
     this.mallocSession = function () {
-        var session = this.sessionModuleMalloc(this, this.globalSessionId());
+        var session = this.rootObject().importObject().importSession().malloc(this, this.globalSessionId());
         this.incrementGlobalSessionId();
         this.insertSessionToList(session);
         return session;

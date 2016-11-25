@@ -24,11 +24,6 @@ function clusterMgrObject(root_object_val) {
         this.debug(false, "init__", "");
     };
 
-    this.clusterModuleMalloc = function (topic_data_val, session_val) {
-        var cluster_module = require("./cluster.js");
-        return this.rootObject().importObject().importCluster().malloc(this, topic_data_val, session_val);
-    };
-
     this.objectName = function () {
         return "clusterMgrObject";
     };
@@ -82,7 +77,7 @@ function clusterMgrObject(root_object_val) {
     }
 
     this.mallocCluster = function (data_val, session_val) {
-        var cluster = this.clusterModuleMalloc(data_val, session_val);
+        var cluster = this.rootObject().importObject().importCluster().malloc(this, data_val, session_val);
         this.incrementGlobalClusterId();
         return cluster;
     };

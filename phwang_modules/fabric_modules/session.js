@@ -5,17 +5,17 @@
  */
 
 module.exports = {
-    malloc: function (session_mgr_val, session_id_val) {
-        return new SessionObject(session_mgr_val, session_id_val);
+    malloc: function (link_object_val, session_id_val) {
+        return new SessionObject(link_object_val, session_id_val);
     },
 };
 
-function SessionObject(session_mgr_val, session_id_val) {
+function SessionObject(link_object_val, session_id_val) {
     "use strict";
-    this.theSessionMgrObject = session_mgr_val;
+    this.theSessionMgrObject = link_object_val;
 
-    this.init__ = function (session_mgr_val, session_id_val) {
-        this.theSessionMgrObject = session_mgr_val;
+    this.init__ = function (link_object_val, session_id_val) {
+        this.theLinkObject = link_object_val;
         //this.theJointObject = this.rootObject().importObject().importListMgr().malloc_joint(session_id_val);
         this.theSessionId = session_id_val;
         this.theHisSession = null;
@@ -32,24 +32,16 @@ function SessionObject(session_mgr_val, session_id_val) {
         return "SessionObject";
     };
 
-    this.clusterModule = function () {
-        return this.theClusterModule;
-    };
-
-    this.sessionMgrObject = function () {
-        return this.theSessionMgrObject;
+    this.linkObject = function () {
+        return this.theLinkObject;
     };
 
     this.rootObject = function () {
-        return this.sessionMgrObject().rootObject();
-    };
-
-    this.linkObject = function () {
-        return this.sessionMgrObject().linkObject();
+        return this.linkObject().rootObject();
     };
 
     this.utilObject = function () {
-        return this.sessionMgrObject().utilObject();
+        return this.linkObject().utilObject();
     };
 
     this.clusterObject = function () {
@@ -143,5 +135,5 @@ function SessionObject(session_mgr_val, session_id_val) {
         this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(session_mgr_val, session_id_val);
+    this.init__(link_object_val, session_id_val);
 }

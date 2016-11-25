@@ -22,10 +22,6 @@ function SessionMgrObject(link_val) {
         this.debug(false, "init__", "");
     };
 
-    this.clusterModuleMalloc = function () {
-        return this.fabricObject().clusterMgrObject().mallocCluster();
-    };
-
     this.objectName = function () {
         return "SessionMgrObject";
     };
@@ -83,7 +79,7 @@ function SessionMgrObject(link_val) {
     }
 
     this.mallocSession = function () {
-        var session = this.rootObject().importObject().importSession().malloc(this, this.globalSessionId());
+        var session = this.rootObject().importObject().importSession().malloc(this.linkObject(), this.globalSessionId());
         this.incrementGlobalSessionId();
         this.insertSessionToList(session);
         return session;

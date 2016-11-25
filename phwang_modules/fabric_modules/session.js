@@ -16,6 +16,7 @@ function SessionObject(session_mgr_val, session_id_val) {
 
     this.init__ = function (session_mgr_val, session_id_val) {
         this.theSessionMgrObject = session_mgr_val;
+        //this.theJointObject = this.rootObject().importObject().importListMgr().malloc_joint(session_id_val);
         this.theSessionId = session_id_val;
         this.theHisSession = null;
         this.up_seq = 0;

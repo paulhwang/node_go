@@ -235,7 +235,7 @@ function GoGameObject(base_object_val) {
     };
 
     this.receiveSpecialMoveFromOpponent = function (data_val) {
-        this.goLog("receiveSpecialMoveFromOpponent", data_val);
+        this.debug(true, "receiveSpecialMoveFromOpponent", data_val);
         if (data_val === this.FORWARD_MOVE()) {
             this.processForwardMove();
             this.portObject().thansmitBoardData();
@@ -281,7 +281,7 @@ function GoGameObject(base_object_val) {
     };
 
     this.processDoubleBackwardMove = function () {
-        //goDebug("goProcessBackwardMoveFromUi", "");
+        //this.debug(true, "goProcessBackwardMoveFromUi", "");
         this.clearPassReceived();
         if (this.totalMoves() <= this.configObject().handicapPoint()) {
             return;
@@ -291,7 +291,7 @@ function GoGameObject(base_object_val) {
     };
 
     this.processBackwardMove = function () {
-        this.goLog("processBackwardMove", "");
+        this.debug(true, "processBackwardMove", "");
         this.clearPassReceived();
         if (this.totalMoves() <= this.configObject().handicapPoint()) {
             return;
@@ -303,7 +303,7 @@ function GoGameObject(base_object_val) {
     this.processForwardMove = function () {
         this.clearPassReceived();
         if (this.totalMoves() > this.maxMove()) {
-            this.goAbend("processForwardMove", "totalMoves=" + this.totalMoves_() + " maxMove=" + this.naxMove_());
+            this.abend("processForwardMove", "totalMoves=" + this.totalMoves_() + " maxMove=" + this.naxMove_());
             return;
         }
         if (this.totalMoves() === this.maxMove()) {
@@ -316,7 +316,7 @@ function GoGameObject(base_object_val) {
     this.processDoubleForwardMove = function () {
         this.clearPassReceived();
         if (this.totalMoves() > this.maxMove()) {
-            this.goAbend("processDoubleForwardMove", "totalMoves=" + this.totalMoves() + " maxMove=" + this.maxMove_());
+            this.abend("processDoubleForwardMove", "totalMoves=" + this.totalMoves() + " maxMove=" + this.maxMove_());
             return;
         }
         if (this.totalMoves() === this.maxMove()) {
@@ -327,7 +327,7 @@ function GoGameObject(base_object_val) {
     };
 
     this.processPassMove = function () {
-        this.goLog(".processPassMove", "");
+        this.debug(true, ".processPassMove", "");
 
         if (!this.passReceived()) {
             this.setPassReceived();
@@ -339,19 +339,19 @@ function GoGameObject(base_object_val) {
 
         this.engineObject().resetMarkedGroupLists();
         this.displayResult();
-        this.goLog("processPassMove", "game is over");
+        this.debug(true, "processPassMove", "game is over");
         this.engineObject().computeScore();
         this.engineObject().printScore();
         this.engineObject().abendEngine();
     };
 
     this.displayResult = function () {
-        this.goLog("displayResult", "Black: "
+        this.debug(true, "displayResult", "Black: "
                 + this.engineObject().blackScore() + " ("
                 + this.engineObject().blackCaptureStones() + " + "
                 + this.engineObject().blackLandScore() + " + "
                 + this.engineObject().whiteDeadGroupList().totalStoneCount() + "*2)");
-        this.goLog("displayResult", "White: "
+        this.debug(true, "displayResult", "White: "
                 + this.engineObject().whiteScore() + " ("
                 + this.engineObject().whiteCaptureStones() + " + "
                 + this.engineObject().whiteLandScore() + " + "
@@ -366,7 +366,7 @@ function GoGameObject(base_object_val) {
     };
 
     this.processConfirmMove = function () {
-        this.goLog("processConfirmMove", "");
+        this.debug(true, "processConfirmMove", "");
         if (!this.gameIsOver()) {
             return;
         }
@@ -384,7 +384,7 @@ function GoGameObject(base_object_val) {
     };
 
     this.processResignMove = function () {
-        this.goLog("processResignMove", "");
+        this.debug(true, "processResignMove", "");
         this.containerObject().resetContainerObjectForNewGame();
         this.engineObject().abendEngine();
     };
@@ -397,7 +397,7 @@ function GoGameObject(base_object_val) {
     };
 
     this.processPlayAnotherGameMove = function () {
-        this.goLog("processPlayAnotherGameMove", "");
+        this.debug(true, "processPlayAnotherGameMove", "");
         this.containerObject().resetContainerObjectForNewGame();
         this.engineObject().abendEngine();
     };
@@ -410,7 +410,7 @@ function GoGameObject(base_object_val) {
     };
 
     this.processBackToPlayMove = function () {
-        this.goLog("processBackToPlayMove", "");
+        this.debug(true, "processBackToPlayMove", "");
         if (this.gameIsOver()) {
             this.resetBothPasses();
             this.engineObject().abendEngine();
@@ -422,7 +422,7 @@ function GoGameObject(base_object_val) {
         this.engineObject().resetEngineObjectData();
         this.resetGameObjectPartialData();
 
-        this.goLog("processTheWholeMoveLst", "totalMoves=" + this.totalMoves());
+        this.debug(true, "processTheWholeMoveLst", "totalMoves=" + this.totalMoves());
         var move;
         var i = 0;
         while (i < this.totalMoves()) {
@@ -438,7 +438,7 @@ function GoGameObject(base_object_val) {
             return true;
         }
 
-        //this.goLog("isMyTurn", "nextColor=" + this.nextColor_() + ", myColor=" + this.configObject().myColor_());
+        //this.debug(true, "isMyTurn", "nextColor=" + this.nextColor_() + ", myColor=" + this.configObject().myColor_());
         if (this.nextColor() === this.configObject().myColor()) {
             return true;
         } else {
@@ -504,7 +504,7 @@ function GoGameObject(base_object_val) {
             buf = buf + this.movesArray(turn1).yY();
 
             if (turn1 !== this.movesArray(turn1).turnIndex()) {
-                this.goAbend("encodeMoveList", "turn=" + turn1 + " " + this.movesArray(turn1).turnIndex());
+                this.abend("encodeMoveList", "turn=" + turn1 + " " + this.movesArray(turn1).turnIndex());
             }
             turn1 += 1;
         }
@@ -523,7 +523,7 @@ function GoGameObject(base_object_val) {
         var total_moves1;
         var max_moves1;
 
-        this.GO().goLog("GoGameObject.decodeMoveList", str_val);
+        this.GO().debug(true, "GoGameObject.decodeMoveList", str_val);
 
         //this.configObject().myColor__(str_val.charAt(index++) - '0');
         this.configObject().setBoardSize(((str_val.charAt(index++) - '0') * 10) + (str_val.charAt(index++) - '0'));
@@ -552,17 +552,17 @@ function GoGameObject(base_object_val) {
             turn1 += 1;
         }
         if (index !== str_val.length) {
-            this.goAbend("decodeMoveList", "index");
+            this.abend("decodeMoveList", "index");
         }
 
         if (max_moves1 !== this.maxMove()) {
-            this.goAbend("decodeMoveList", "max_moves " + max_moves1 + " " + this.maxMove_());
+            this.abend("decodeMoveList", "max_moves " + max_moves1 + " " + this.maxMove_());
         }
 
         this.setTotalMoves(total_moves1);
 
         if (str_val !== this.encodeMoveList(true)) {
-            this.goAbend("decodeMoveList", "not equal");
+            this.abend("decodeMoveList", "not equal");
         }
     };
 

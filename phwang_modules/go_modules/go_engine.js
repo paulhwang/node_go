@@ -241,7 +241,7 @@ function GoEngineObject(base_object_val) {
             } else if (move_val.myColor() === this.GO().WHITE_STONE()) {
                this.addWhiteCaptureStones(dead_count);
             } else {
-                this.goAbend("enterWar", "color=" + move_val.myColor());
+                this.abend("enterWar", "color=" + move_val.myColor());
             }
         }
         this.abendEngine();
@@ -255,7 +255,7 @@ function GoEngineObject(base_object_val) {
         } else if (move_val.myColor() === this.GO().WHITE_STONE()) {
             g_list = this.whiteGroupList();
         } else {
-            this.goAbend("insertStoneToGroupList", "color=" + move_val.myColor());
+            this.abend("insertStoneToGroupList", "color=" + move_val.myColor());
             return;
         }
 
@@ -285,7 +285,7 @@ function GoEngineObject(base_object_val) {
             g_list.removeGroupFromGroupList(group2);
         }
         if (dummy_count > 3) {
-            this.goAbend("insertStoneToGroupList", "dummy_count");
+            this.abend("insertStoneToGroupList", "dummy_count");
         }
         return group;
     };
@@ -313,7 +313,7 @@ function GoEngineObject(base_object_val) {
 
         his_group = this.getGroupByCoordinate(x, y, group.hisColor());
         if (!his_group) {
-            this.goAbend("killOtherColorGroup", "x=" + x + " y=" + y);
+            this.abend("killOtherColorGroup", "x=" + x + " y=" + y);
             return 0;
         }
 
@@ -344,13 +344,13 @@ function GoEngineObject(base_object_val) {
         this.setLastDeadStone(group_val.maxX(), group_val.maxY());
 
         if (group_val.maxX() !== group_val.minX()) {
-            this.goAbend("markLastDeadInfo", "x: " + group_val.maxX() + "!=" + group_val.minX() + " count=" + group_val.stoneCount());
+            this.abend("markLastDeadInfo", "x: " + group_val.maxX() + "!=" + group_val.minX() + " count=" + group_val.stoneCount());
         }
         if (group_val.maxY() !== group_val.minY()) {
-            this.goAbend("markLastDeadInfo", "y: " + group_val.maxY() + "!=" + group_val.minY() + " count=" + group_val.stoneCount());
+            this.abend("markLastDeadInfo", "y: " + group_val.maxY() + "!=" + group_val.minY() + " count=" + group_val.stoneCount());
         }
         if (!group_val.existMatrix(group_val.maxX(), group_val.maxY())) {
-            this.goAbend("markLastDeadInfo", "exist_matrix");
+            this.abend("markLastDeadInfo", "exist_matrix");
         }
     };
 
@@ -412,32 +412,32 @@ function GoEngineObject(base_object_val) {
 
         var group = this.getMarkGroupByCoordinate(x_val, y_val);
         if (!group) {
-            this.goAbend("markDeadGroup", "not found");
+            this.abend("markDeadGroup", "not found");
             return;
         }
 
         if (group.groupListObject() === this.blackGroupList()) {
-            this.goLog("GoEngineObject.markDeadGroup", "black");
+            this.debug(true, "GoEngineObject.markDeadGroup", "black");
             this.blackGroupList().removeGroupFromGroupList(group);
             this.blackDeadGroupList().insertGroupToGroupList(group);
             group.changeMarkInGroup(true);
         } else if (group.groupListObject() === this.whiteGroupList()) {
-            this.goLog("GoEngineObject.markDeadGroup", "white");
+            this.debug(true, "GoEngineObject.markDeadGroup", "white");
             this.whiteGroupList().removeGroupFromGroupList(group);
             this.whiteDeadGroupList().insertGroupToGroupList(group);
             group.changeMarkInGroup(true);
         } else if (group.groupListObject() === this.blackDeadGroupList()) {
-            this.goLog("GoEngineObject.markDeadGroup", "dead black");
+            this.debug(true, "GoEngineObject.markDeadGroup", "dead black");
             this.blackDeadGroupList().removeGroupFromGroupList(group);
             this.blackGroupList().insertGroupToGroupList(group);
             group.changeMarkInGroup(false);
         } else if (group.groupListObject() === this.whiteDeadGroupList()) {
-            this.goLog("GoEngineObject.markDeadGroup", "dead white");
+            this.debug(true, "GoEngineObject.markDeadGroup", "dead white");
             this.whiteDeadGroupList().removeGroupFromGroupList(group);
             this.blackGroupList().insertGroupToGroupList(group);
             group.changeMarkInGroup(false);
         } else {
-            this.goAbend("markDeadGroup", "not found 2");
+            this.abend("markDeadGroup", "not found 2");
             return;
         }
 
@@ -464,7 +464,7 @@ function GoEngineObject(base_object_val) {
     };
 
     this.getMarkGroupByCoordinate = function (x_val, y_val) {
-        this.goLog("getMarkGroupByCoordinate", "");
+        this.debug(true, "getMarkGroupByCoordinate", "");
         var i;
 
         var g_list;
@@ -472,7 +472,7 @@ function GoEngineObject(base_object_val) {
         i = 0;
         while (i < g_list.groupCount()) {
             if (g_list.listArray(i).existMatrix(x_val, y_val)) {
-                this.goLog("getMarkGroupByCoordinate", "black");
+                this.debug(true, "getMarkGroupByCoordinate", "black");
                 return g_list.listArray(i);
             }
             i += 1;
@@ -482,7 +482,7 @@ function GoEngineObject(base_object_val) {
         i = 0;
         while (i < g_list.groupCount()) {
             if (g_list.listArray(i).existMatrix(x_val, y_val)) {
-                this.goLog("getMarkGroupByCoordinate", "white");
+                this.debug(true, "getMarkGroupByCoordinate", "white");
                 return g_list.listArray(i);
             }
             i += 1;
@@ -492,7 +492,7 @@ function GoEngineObject(base_object_val) {
         i = 0;
         while (i < g_list.groupCount()) {
             if (g_list.listArray(i).existMatrix(x_val, y_val)) {
-                this.goLog("getMarkGroupByCoordinate", "dead_black");
+                this.debug(true, "getMarkGroupByCoordinate", "dead_black");
                 return g_list.listArray(i);
             }
             i += 1;
@@ -502,13 +502,13 @@ function GoEngineObject(base_object_val) {
         i = 0;
         while (i < g_list.groupCount()) {
             if (g_list.listArray(i).existMatrix(x_val, y_val)) {
-                this.goLog("getMarkGroupByCoordinate", "dead_white");
+                this.debug(true, "getMarkGroupByCoordinate", "dead_white");
                 return g_list.listArray(i);
             }
             i += 1;
         }
 
-        this.goAbend("getMarkGroupByCoordinate", "not found");
+        this.abend("getMarkGroupByCoordinate", "not found");
         return null;
     };
 
@@ -560,7 +560,7 @@ function GoEngineObject(base_object_val) {
                         this.emptyGroupList().insertStoneToEmptyGroupList(i, j, false);
                     }
                     else {
-                        this.goAbend("setupEmptyGroups", "already exist");
+                        this.abend("setupEmptyGroups", "already exist");
                     }
                 }
             /*
@@ -600,8 +600,8 @@ function GoEngineObject(base_object_val) {
     this.printScore = function () {
         var score1;
 
-        this.goLog("printScore", this.blackScoreString());
-        this.goLog("printScore", this.whiteScoreString());
+        this.debug(true, "printScore", this.blackScoreString());
+        this.debug(true, "printScore", this.whiteScoreString());
     /*
     if (this.black_score - this.white_score >= this.configObject().komiPoint_() + 1) {
       score1 = this.black_score - this.white_score - theGame_().komi_() - 1;
@@ -625,7 +625,7 @@ function GoEngineObject(base_object_val) {
         //this.goLog("abendEngine", this.gameObject().gameIsOver());
         if (this.gameObject().gameIsOver()) {
             if (this.boardSize() * this.boardSize() !== stones_count) {
-                this.goAbend("abendEngine", "stones_count=" + stones_count);
+                this.abend("abendEngine", "stones_count=" + stones_count);
             }
         }
         /*

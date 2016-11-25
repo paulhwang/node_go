@@ -3,7 +3,6 @@
  * Written by Paul Hwang
  * File name: root_module.js
  */
-var go_root = require('../go_modules/go_root.js');
 var the_root_object = new RootObject();
 
 module.exports = {
@@ -29,10 +28,10 @@ function RootObject () {
 
     this.init__ = function () {
         this.theImportObject = require("./imports.js").malloc(this);
-        this.theLinkMgrObject = require("./link_mgr.js").malloc(this);
-        this.theClusterMgrObject = require("./cluster_mgr.js").malloc(this);
-        this.theSwitchObject = require("./switch.js").malloc(this);
-        this.theAjaxObject = require("./ajax.js").malloc(this);
+        this.theLinkMgrObject = this.importObject().importLinkMgr().malloc(this);
+        this.theClusterMgrObject = this.importObject().importClusterMgr().malloc(this);
+        this.theSwitchObject = this.importObject().importSwitch().malloc(this);
+        this.theAjaxObject = this.importObject().importAjax().malloc(this);
         this.debug(true, "init__", "");
     };
 

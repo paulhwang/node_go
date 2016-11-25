@@ -21,40 +21,20 @@ function ImportObject (root_object_val) {
         return this.theRootObject;
     };
 
-    this.importBase = function () {
-        return require("./go_base.js");
+    this.importSwitch = function () {
+        return require("./switch.js");
     };
 
-    this.importConfig = function () {
-        return require("./go_config.js");
+    this.importAjax = function () {
+        return require("./ajax.js");
     };
 
-    this.importMove = function () {
-        return require("./go_move.js");
+    this.importLinkMgr = function () {
+        return require("./link_mgr.js");
     }
 
-    this.importBoard = function () {
-        return require("./go_board.js");
-    }
-
-    this.importGame = function () {
-        return require("./go_game.js");
-    }
-
-    this.importPort = function () {
-        return require("./go_port.js");
-    }
-
-    this.importEngine = function () {
-        return require("./go_engine.js");
-    }
-
-    this.importGroup = function () {
-        return require("./go_group.js");
-    }
-
-    this.importGroupList = function () {
-        return require("./go_group_list.js");
+    this.importClusterMgr = function () {
+        return require("./cluster_mgr.js");
     }
 
     this.importListMgr = function () {

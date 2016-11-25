@@ -22,8 +22,6 @@ function SessionObject(link_object_val, session_id_val) {
         this.down_seq = 0;
         this.theReceiveQueue = this.rootObject().importObject().mallocQueue();
         this.theTransmitQueue = this.rootObject().importObject().mallocQueue();
-        this.thePrev = null;
-        this.theNext = null;
         this.debug(true, "init__", "session=" + this.sessionName());
     };
 
@@ -77,22 +75,6 @@ function SessionObject(link_object_val, session_id_val) {
 
     this.receiveRing = function () {
         return this.theReceiveRing;
-    };
-
-    this.prev = function () {
-        return this.thePrev;
-    };
-
-    this.setPrev = function (val) {
-        this.thePrev = val;
-    };
-
-    this.next = function () {
-        return this.theNext;
-    };
-
-    this.setNext = function (val) {
-        this.theNext = val;
     };
 
     this.enqueueTransmitData = function (data_val) {

@@ -20,14 +20,14 @@ module.exports = {
         return list_mgr_val.head();
     },
 
-    next: function (joint_val) {
-        if (joint_val === null) {
+    next: function (host_object_val) {
+        if (host_object_val === null) {
             return null;
         }
-        if (joint_val.next() === null) {
+        if (host_object_val.jointObject().next() === null) {
             return null;
         }
-        return joint_val.next().hostObject();
+        return host_object_val.jointObject().next().hostObject();
     },
 };
 
@@ -140,26 +140,26 @@ function ListMgrClass(host_object_val, global_id_val) {
         this.abendIt();
     };
     
-    this.searchId = function (base_id_val) {
-        this.debug(false, "searchId", base_id_val);
-        var base = this.head();
-        while (base) {
-            if (base.jointObject().entryId() === base_id_val) {
-                return base;
+    this.searchId = function (id_val) {
+        this.debug(false, "searchId", id_val);
+        var entry = this.head();
+        while (entry) {
+            if (entry.jointObject().entryId() === id_val) {
+                return entry;
             }
-            base = base.next();
+            entry = entry.jointObject().next();
         }
         return null;
     };
 
-    this.searchLinkByNameAndLinkId = function (my_name_val, link_id_val) {
-        this.debug(false, "searchLinkByNameAndLinkId", my_name_val + " " + link_id_val);
+    this.searchIdName = function (my_name_val, id_val) {
+        this.debug(false, "searchIdName", my_name_val + " " + id_val);
         var link = this.head();
         while (link) {
             if ((link.linkId() === link_id_val) && (link.myName() === my_name_val)) {
                 return link;
             }
-            link = link.next();
+            link = link.jointObject().next();
         }
         return null;
     };

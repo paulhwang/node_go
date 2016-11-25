@@ -18,7 +18,7 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
         this.theJointObject = this.rootObject().importObject().importListMgr().malloc_joint(link_id_val);
         this.theLinkId = link_id_val;
         this.theMyName = my_name_val;
-        this.theSessionMgrObject = this.rootObject().importObject().importSessionMgr().malloc(this);
+        this.theSessionMgrObject = this.rootObject().importObject().importListMgr().malloc_mgr(this, 10);
         this.theGlobalSessionId = 1000;
         this.up_seq = 0;
         this.down_seq = 0;
@@ -145,26 +145,26 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
     };
 
     this.searchSessionBySessionId = function (session_id_val) {
-        return this.sessionMgrObject().searchSessionBySessionId(session_id_val);
+        return this.sessionMgrObject().searchId(session_id_val);
     };
 
     this.mallocSession = function () {
         var session = this.rootObject().importObject().importSession().malloc(this, this.globalSessionId());
         this.incrementGlobalSessionId();
-        this.sessionMgrObject().insertSessionToList(session);
+        this.sessionMgrObject().insertEntry(session);
         return session;
     };
 
     this.getPendingSessionData = function () {
         var data = [];
         var i = 0;
-        var session = this.sessionMgrObject().head();
+        var session = this.rootObject().importObject().importListMgr().head(this.sessionMgrObject());
         while (session) {
             if (session.transmitQueue().size() > 0) {
                 data[i] =  session.sessionId();
                 i += 1;
             }
-            session = session.next();
+            session = this.rootObject().importObject().importListMgr().next(session);
         }
         if (i === 0) {
             return null;

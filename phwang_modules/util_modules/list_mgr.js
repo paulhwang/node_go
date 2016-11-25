@@ -5,12 +5,29 @@
  */
 
 module.exports = {
-    malloc_mgr: function (global_id_val) {
-        return new ListMgrClass(global_id_val);
+    malloc_mgr: function (host_object_val, global_id_val) {
+        return new ListMgrClass(host_object_val, global_id_val);
     },
 
     malloc_joint: function (entry_id_val) {
         return new ListjointClass(entry_id_val);
+    },
+
+    head: function (list_mgr_val) {
+        if (list_mgr_val === null) {
+            return null;
+        }
+        return list_mgr_val.head();
+    },
+
+    next: function (joint_val) {
+        if (joint_val === null) {
+            return null;
+        }
+        if (joint_val.next() === null) {
+            return null;
+        }
+        return joint_val.next().hostObject();
     },
 };
 
@@ -46,10 +63,11 @@ function ListjointClass(entry_id_val) {
     this.init__(entry_id_val);
 };
 
-function ListMgrClass(global_id_val) {
+function ListMgrClass(host_object_val, global_id_val) {
     "use strict";
 
-    this.init__ = function (global_id_val) {
+    this.init__ = function (host_object_val, global_id_val) {
+        this.theHostObject = host_object_val;
         this.theGlobalId = global_id_val;
         this.theHead = null;
         this.theTail = null;
@@ -59,6 +77,10 @@ function ListMgrClass(global_id_val) {
 
     this.objectName = function () {
         return "ListMgrClass";
+    };
+
+    this.hostObject = function () {
+        return this.theHostObject;
     };
 
     this.head = function () {
@@ -261,5 +283,5 @@ function ListMgrClass(global_id_val) {
         require("../util_modules/logit.js").ABEND(str1_val, str2_val);
     };
 
-    this.init__(global_id_val);
+    this.init__(host_object_val, global_id_val);
 }

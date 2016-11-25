@@ -115,11 +115,11 @@ function RootObject () {
     };
 
     this.LOG_IT = function(str1_val, str2_val) {
-        require("../util_modules/logit.js").LOG_IT(str1_val, str2_val);
+        this.importObject().importLogit().LOG_IT(str1_val, str2_val);
     };
 
     this.ABEND = function(str1_val, str2_val) {
-        require("../util_modules/logit.js").ABEND(str1_val, str2_val);
+        this.importObject().importLogit().ABEND(str1_val, str2_val);
     };
 
     this.init__();

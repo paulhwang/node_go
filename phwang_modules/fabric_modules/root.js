@@ -28,7 +28,7 @@ function RootObject () {
     "use strict";
 
     this.init__ = function () {
-        this.theImportObject = require("./import.js").malloc(this);
+        this.theImportObject = require("./imports.js").malloc(this);
         this.theLinkMgrObject = require("./link_mgr.js").malloc(this);
         this.theClusterMgrObject = require("./cluster_mgr.js").malloc(this);
         this.theSwitchObject = require("./switch.js").malloc(this);

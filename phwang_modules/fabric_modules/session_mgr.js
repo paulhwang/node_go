@@ -78,13 +78,6 @@ function SessionMgrObject(link_val) {
         this.theSize -= 1;
     }
 
-    this.mallocSession = function () {
-        var session = this.rootObject().importObject().importSession().malloc(this.linkObject(), this.globalSessionId());
-        this.incrementGlobalSessionId();
-        this.insertSessionToList(session);
-        return session;
-    };
-
     this.freeSession = function (session_val) {
         this.deleteSessionFromList(session_val);
     };
@@ -157,25 +150,6 @@ function SessionMgrObject(link_val) {
             session = session.next();
         }
         return false;
-    };
-
-    this.getPendingSessionData = function () {
-        var data = [];
-        var i = 0;
-        var session = this.head();
-        while (session) {
-            if (session.transmitQueue().size() > 0) {
-                data[i] =  session.sessionId();
-                i += 1;
-            }
-            session = session.next();
-        }
-        if (i === 0) {
-            return null;
-        }
-        else {
-            return data;
-        }
     };
 
     this.abendIt = function () {

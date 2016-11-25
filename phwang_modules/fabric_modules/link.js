@@ -140,11 +140,29 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
     };
 
     this.mallocSession = function () {
-        return this.sessionMgrObject().mallocSession();
+        var session = this.rootObject().importObject().importSession().malloc(this, this.sessionMgrObject().globalSessionId());
+        this.sessionMgrObject().incrementGlobalSessionId();
+        this.sessionMgrObject().insertSessionToList(session);
+        return session;
     };
 
     this.getPendingSessionData = function () {
-        return this.sessionMgrObject().getPendingSessionData();
+        var data = [];
+        var i = 0;
+        var session = this.sessionMgrObject().head();
+        while (session) {
+            if (session.transmitQueue().size() > 0) {
+                data[i] =  session.sessionId();
+                i += 1;
+            }
+            session = session.next();
+        }
+        if (i === 0) {
+            return null;
+        }
+        else {
+            return data;
+        }
     };
 
     this.getPendingSessionSetup = function () {

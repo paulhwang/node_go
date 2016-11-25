@@ -12,7 +12,6 @@ module.exports = {
 
 function SessionObject(link_object_val, session_id_val) {
     "use strict";
-    this.theSessionMgrObject = link_object_val;
 
     this.init__ = function (link_object_val, session_id_val) {
         this.theLinkObject = link_object_val;

@@ -265,11 +265,11 @@ function GoGroupListObject(engine_val, index_val, color_val, dead_val, big_stone
     };
 
     this.logit = function (str1_val, str2_val) {
-        return this.baseObject().LOG_IT(this.objectName() + "." + str1_val + "() ", str2_val);
+        return this.baseObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        return this.baseObject().ABEND(this.objectName() + "." + str1_val + "() ", str2_val);
+        return this.baseObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.init__(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val);

@@ -15,14 +15,13 @@ function GoBaseObject (root_object_val, base_id_val) {
 
     this.init__ = function (root_object_val, base_id_val) {
         this.theRootObject = root_object_val;
-        this.theBaseId = base_id_val;
-        this.theJointObject = this.rootObject().importObject().importListMgr().malloc_joint(this.baseId());
+        this.theJointObject = this.rootObject().importObject().importListMgr().malloc_joint(base_id_val);
         this.theConfigObject = this.rootObject().importObject().importConfig().malloc(this);
         this.theBoardObject = this.rootObject().importObject().importBoard().malloc(this);
         this.theEngineObject = this.rootObject().importObject().importEngine().malloc(this);
         this.theGameObject = this.rootObject().importObject().importGame().malloc(this);
         this.thePortObject = this.rootObject().importObject().importPort().malloc(this);
-        this.debug(true, "init__", "");
+        this.debug(true, "init__", "base_id=" + this.baseId());
     };
 
     this.GO = function () {
@@ -74,7 +73,7 @@ function GoBaseObject (root_object_val, base_id_val) {
     };
 
     this.baseId = function () {
-        return this.theBaseId;
+        return this.jointObject().entryId();
     };
 
     this.setHisContainerObject = function (container2_val) {

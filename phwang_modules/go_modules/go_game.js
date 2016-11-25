@@ -590,11 +590,11 @@ function GoGameObject(base_object_val) {
     };
 
     this.logit = function (str1_val, str2_val) {
-        return this.baseObject().LOG_IT(this.objectName() + "." + str1_val + "() ", str2_val);
+        return this.baseObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.abend = function (str1_val, str2_val) {
-        return this.baseObject().ABEND(this.objectName() + "." + str1_val + "() ", str2_val);
+        return this.baseObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
     this.init__(base_object_val);

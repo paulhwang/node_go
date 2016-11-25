@@ -42,10 +42,9 @@ function GoRootObject () {
     };
 
     this.mallocBase = function () {
-        var base_id = this.baseMgrObject().allocId();
-        var base = this.importObject().importBase().malloc(this, base_id);
+        var base = this.importObject().importBase().malloc(this, this.baseMgrObject().allocId());
         this.baseMgrObject().insertEntry(base);
-        this.debug(false, "mallocBase", "base_id=" + base.baseId());
+        this.debug(false, "mallocBase", "baseId=" + base.baseId());
         return base.baseId();
     };
 

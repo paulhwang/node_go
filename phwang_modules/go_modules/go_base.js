@@ -21,7 +21,7 @@ function GoBaseObject (root_object_val, base_id_val) {
         this.theEngineObject = this.rootObject().importObject().importEngine().malloc(this);
         this.theGameObject = this.rootObject().importObject().importGame().malloc(this);
         this.thePortObject = this.rootObject().importObject().importPort().malloc(this);
-        this.debug(true, "init__", "base_id=" + this.baseId());
+        this.debug(true, "init__", "baseId=" + this.baseId());
     };
 
     this.GO = function () {

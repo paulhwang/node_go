@@ -31,38 +31,6 @@ module.exports = {
     },
 };
 
-function ListjointClass(entry_id_val) {
-    "use strict";
-
-    this.init__ = function (entry_id_val) {
-        this.theEntryId = entry_id_val;
-        this.thePrev = null;
-        this.theNext = null;
-    };
-
-    this.entryId = function () {
-        return this.theEntryId;
-    };
-
-    this.prev = function () {
-        return this.thePrev;
-    };
-
-    this.setPrev = function (val) {
-        this.thePrev = val;
-    };
-
-    this.next = function () {
-        return this.theNext;
-    };
-
-    this.setNext = function (val) {
-        this.theNext = val;
-    };
-
-    this.init__(entry_id_val);
-};
-
 function ListMgrClass(host_object_val, global_id_val) {
     "use strict";
 
@@ -285,3 +253,35 @@ function ListMgrClass(host_object_val, global_id_val) {
 
     this.init__(host_object_val, global_id_val);
 }
+
+function ListjointClass(entry_id_val) {
+    "use strict";
+
+    this.init__ = function (entry_id_val) {
+        this.theEntryId = entry_id_val;
+        this.thePrev = null;
+        this.theNext = null;
+    };
+
+    this.entryId = function () {
+        return this.theEntryId;
+    };
+
+    this.prev = function () {
+        return this.thePrev;
+    };
+
+    this.setPrev = function (val) {
+        this.thePrev = val;
+    };
+
+    this.next = function () {
+        return this.theNext;
+    };
+
+    this.setNext = function (val) {
+        this.theNext = val;
+    };
+
+    this.init__(entry_id_val);
+};

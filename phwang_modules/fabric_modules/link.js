@@ -15,6 +15,7 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
 
     this.init__ = function (root_object_val, my_name_val, link_id_val) {
         this.theRootObject  = root_object_val;
+        this.theJointObject = this.rootObject().importObject().importListMgr().malloc_joint(link_id_val);
         this.theLinkId = link_id_val;
         this.theMyName = my_name_val;
         this.theSessionMgrObject = this.rootObject().importObject().importSessionMgr().malloc(this);

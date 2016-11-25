@@ -5,16 +5,16 @@
  */
 
 module.exports = {
-    malloc: function (cluster_mgr_val, topic_data_val, session_val) {
-        return new clusterObject(cluster_mgr_val, topic_data_val, session_val);
+    malloc: function (root_object_val, topic_data_val, session_val) {
+        return new clusterObject(root_object_val, topic_data_val, session_val);
     },
 };
 
-function clusterObject (cluster_mgr_val, topic_data_val, session_val) {
+function clusterObject (root_object_val, topic_data_val, session_val) {
     "use strict";
 
-    this.init__ = function (cluster_mgr_val, topic_data_val, session_val) {
-        this.theClusterMgrObject = cluster_mgr_val;
+    this.init__ = function (root_object_val, topic_data_val, session_val) {
+        this.theRootObject = root_object_val;
         session_val.setClusterObject(this);
         this.theSessionArray = [2];
         this.theSessionArray[0] = session_val;
@@ -41,20 +41,12 @@ function clusterObject (cluster_mgr_val, topic_data_val, session_val) {
         return this.sessionArray(0);
     };
 
-    this.clusterMgrObject = function () {
-        return this.theClusterMgrObject;
-    };
-
     this.rootObject = function () {
-        return this.clusterMgrObject().rootObject();
-    };
-
-    this.fabricObject = function () {
-        return this.clusterMgrObject().fabricObject();
+        return this.theRootObject;
     };
 
     this.utilObject = function () {
-        return this.clusterMgrObject().utilObject();
+        return this.rootObject().utilObject();
     };
 
     this.topicObject = function () {
@@ -193,5 +185,5 @@ function clusterObject (cluster_mgr_val, topic_data_val, session_val) {
         this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(cluster_mgr_val, topic_data_val, session_val);
+    this.init__(root_object_val, topic_data_val, session_val);
 }

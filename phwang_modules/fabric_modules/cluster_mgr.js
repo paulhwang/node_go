@@ -26,7 +26,7 @@ function clusterMgrObject(root_object_val) {
 
     this.clusterModuleMalloc = function (topic_data_val, session_val) {
         var cluster_module = require("./cluster.js");
-        return cluster_module.malloc(this, topic_data_val, session_val);
+        return this.rootObject().importObject().importCluster().malloc(this, topic_data_val, session_val);
     };
 
     this.objectName = function () {

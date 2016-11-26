@@ -87,7 +87,7 @@ function SwitchObject(root_object_val) {
     }
 
     this.setupLink = function (go_request) {
-        var link = this.linkMgrObject().mallocLink(go_request.my_name);
+        var link = this.mallocLink(go_request.my_name);
         if (!link) {
             this.abend("setupLink", "null link");
             return null;
@@ -100,6 +100,14 @@ function SwitchObject(root_object_val) {
                               });
         this.debug_(true, this.debugOutput(), "setupLink", "output=" + output);
         return output;
+    };
+
+    this.mallocLink = function (my_name_val) {
+        var link = this.rootObject().importObject().importLink().malloc(this.rootObject(), my_name_val, this.linkMgrObject().globalLinkId());
+        this.linkMgrObject().incrementGlobalLinkId();
+        this.linkMgrObject().insertLinkToList(link);
+        this.linkMgrObject().setNameListChanged();
+        return link;
     };
 
     this.getLinkObject = function (go_request) {

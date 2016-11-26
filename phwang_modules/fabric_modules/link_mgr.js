@@ -71,7 +71,7 @@ function LinkMgrObject(root_object_val) {
         this.theSize -= 1;
     }
 
-    this.mallocLink = function (my_name_val) {
+    this.mallocLink___ = function (my_name_val) {
         var link = this.rootObject().importObject().importLink().malloc(this.rootObject(), my_name_val, this.globalLinkId());
         this.incrementGlobalLinkId();
         this.insertLinkToList(link);

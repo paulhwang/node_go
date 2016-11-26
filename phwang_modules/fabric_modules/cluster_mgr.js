@@ -18,7 +18,6 @@ function clusterMgrObject(root_object_val) {
         this.theHead = null;
         this.theTail = null;
         this.theSize = 0;
-        this.theGlobalClusterId = 100;
         this.theClusterQueue = this.rootObject().importObject().mallocQueue();
         this.thePoolQueue = this.rootObject().importObject().mallocQueue();
         this.debug(false, "init__", "");
@@ -38,14 +37,6 @@ function clusterMgrObject(root_object_val) {
 
     this.clusterQueue = function () {
         return this.theClusterQueue;
-    };
-
-    this.globalClusterId = function () {
-        return this.theGlobalClusterId;
-    };
-
-    this.incrementGlobalClusterId = function () {
-        this.theGlobalClusterId += 1;
     };
 
     this.head = function () {
@@ -75,15 +66,6 @@ function clusterMgrObject(root_object_val) {
     this.decrementSize = function () {
         this.theSize -= 1;
     }
-
-    this.mallocCluster = function (data_val, session_val) {
-        var cluster = this.rootObject().importObject().importCluster().malloc(this.rootObject(), data_val, session_val);
-        this.incrementGlobalClusterId();
-        return cluster;
-    };
-
-    this.freeCluster = function (cluster_val) {
-    };
 
     this.insertClusterToList = function (cluster_val) {
         if (!cluster_val) {

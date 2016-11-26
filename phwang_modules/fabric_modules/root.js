@@ -53,6 +53,10 @@ function RootObject () {
         return this.theLinkMgrObject;
     };
 
+    this.clusterBaseObject = function () {
+        return this.theClusterBaseObject;
+    };
+
     this.clusterMgrObject = function () {
         return this.theClusterMgrObject;
     };

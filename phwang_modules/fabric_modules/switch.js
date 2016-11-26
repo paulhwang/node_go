@@ -47,6 +47,10 @@ function SwitchObject(root_object_val) {
         return this.rootObject().linkMgrObject();
     };
 
+    this.clusterBaseObject = function () {
+        return this.rootObject().clusterBaseObject();
+    };
+
     this.clusterMgrObject = function () {
         return this.rootObject().clusterMgrObject();
     };
@@ -187,7 +191,7 @@ function SwitchObject(root_object_val) {
             return null;
         }
 
-        var cluster = this.clusterMgrObject().mallocCluster(go_request.topic_data, session);
+        var cluster = this.clusterBaseObject().mallocCluster(go_request.topic_data, session);
         if (!cluster) {
             return null;
         }

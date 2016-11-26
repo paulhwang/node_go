@@ -41,10 +41,6 @@ function ImportObject (root_object_val) {
         return require("./session.js");
     }
 
-    this.importClusterMgr = function () {
-        return require("./cluster_mgr.js");
-    }
-
     this.importClusterBase = function () {
         return require("./cluster_base.js");
     }

@@ -56,18 +56,6 @@ function BaseObject(root_object_val) {
         this.deleteLinkFromList(link_val);
     };
 
-    this.searchLinkByName = function (my_name_val) {
-        this.debug(false, "searchLinkByName", my_name_val);
-        var link = this.head();
-        while (link) {
-            if (link.myName() === my_name_val) {
-                return link;
-            }
-            link = link.next();
-        }
-        return null;
-    };
-
     this.setNameListChanged = function () {
         var link = this.linkMgrObject().head();
         while (link) {

@@ -15,7 +15,6 @@ function LinkMgrObject(root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
-        this.theGlobalLinkId = 10;
         this.theHead = null;
         this.theTail = null;
         this.theSize = 0;
@@ -33,14 +32,6 @@ function LinkMgrObject(root_object_val) {
 
     this.utilObject = function () {
         return this.rootObject().utilObject();
-    };
-
-    this.globalLinkId = function () {
-        return this.theGlobalLinkId;
-    };
-
-    this.incrementGlobalLinkId = function () {
-        this.theGlobalLinkId += 1;
     };
 
     this.head = function () {

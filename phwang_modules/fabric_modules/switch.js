@@ -107,8 +107,8 @@ function SwitchObject(root_object_val) {
     };
 
     this.mallocLink = function (my_name_val) {
-        var link = this.rootObject().importObject().importLink().malloc(this.rootObject(), my_name_val, this.linkMgrObject().globalLinkId());
-        this.linkMgrObject().incrementGlobalLinkId();
+        var link = this.rootObject().importObject().importLink().malloc(this.rootObject(), my_name_val, this.baseObject().globalLinkId());
+        this.baseObject().incrementGlobalLinkId();
         this.linkMgrObject().insertLinkToList(link);
         this.linkMgrObject().setNameListChanged();
         return link;

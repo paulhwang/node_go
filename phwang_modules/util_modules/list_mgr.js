@@ -93,17 +93,17 @@ function ListMgrClass(host_object_val, global_id_val) {
         this.theGlobalId += 1;
     };
 
-    this.allocId = function () {
-        this.incrementGlobalId();
-        return this.globalId();
-    }
-
     this.name = function () {
         return this.theName;
     }
 
     this.setName = function (val) {
         this.theName = val;
+    }
+
+    this.allocId = function () {
+        this.incrementGlobalId();
+        return this.globalId();
     }
 
     this.insertEntry = function (link_val) {

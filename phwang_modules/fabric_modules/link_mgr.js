@@ -18,7 +18,6 @@ function LinkMgrObject(root_object_val) {
         this.theHead = null;
         this.theTail = null;
         this.theSize = 0;
-        this.theNameListChanged = false;
         this.debug(false, "init__", "");
     };
 
@@ -167,26 +166,6 @@ function LinkMgrObject(root_object_val) {
             link = link.next();
         }
         return false;
-    };
-
-    this.setNameListChanged = function () {
-        var link = this.head();
-        while (link) {
-            link.setNameListChanged();
-            link = link.next();
-        }
-    };
-
-    this.getNameList = function () {
-        var name_array = [];
-        var i = 0;
-        var link = this.head();
-        while (link) {
-            name_array[i] = link.myName();
-            i += 1;
-            link = link.next();
-        }
-        return name_array;
     };
 
     this.abendIt = function () {

@@ -170,7 +170,7 @@ function SwitchObject(root_object_val) {
 
         link.clearNameListChanged();
         var output = JSON.stringify({link_id: link.linkId(),
-                                     name_list: this.linkMgrObject().getNameList(),
+                                     name_list: this.baseObject().getNameList(),
                                      });
         this.debug_(true, this.debugOutput(), "getNameList", "output=" + output);
         return output;

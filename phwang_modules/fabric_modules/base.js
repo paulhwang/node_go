@@ -48,7 +48,7 @@ function BaseObject(root_object_val) {
         var link = this.rootObject().importObject().importLink().malloc(this.rootObject(), my_name_val, this.globalLinkId());
         this.incrementGlobalLinkId();
         this.linkMgrObject().insertLinkToList(link);
-        this.linkMgrObject().setNameListChanged();
+        this.setNameListChanged();
         return link;
     };
 
@@ -69,7 +69,7 @@ function BaseObject(root_object_val) {
     };
 
     this.setNameListChanged = function () {
-        var link = this.head();
+        var link = this.linkMgrObject().head();
         while (link) {
             link.setNameListChanged();
             link = link.next();
@@ -79,7 +79,7 @@ function BaseObject(root_object_val) {
     this.getNameList = function () {
         var name_array = [];
         var i = 0;
-        var link = this.head();
+        var link = this.linkMgrObject().head();
         while (link) {
             name_array[i] = link.myName();
             i += 1;

@@ -37,16 +37,16 @@ function ImportObject (root_object_val) {
         return require("./link.js");
     }
 
-    this.importSessionMgr = function () {
-        return require("./session_mgr.js");
-    }
-
     this.importSession = function () {
         return require("./session.js");
     }
 
     this.importClusterMgr = function () {
         return require("./cluster_mgr.js");
+    }
+
+    this.importClusterBase = function () {
+        return require("./cluster_base.js");
     }
 
     this.importCluster = function () {

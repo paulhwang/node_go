@@ -21,6 +21,10 @@ function ImportObject (root_object_val) {
         return this.theRootObject;
     };
 
+    this.importBase = function () {
+        return require("./base.js");
+    }
+
     this.importSwitch = function () {
         return require("./switch.js");
     };

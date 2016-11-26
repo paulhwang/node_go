@@ -28,6 +28,10 @@ function BaseObject(root_object_val) {
         return this.theRootObject;
     };
 
+    this.linkMgrObject = function () {
+        return this.rootObject().linkMgrObject();
+    };
+
     this.utilObject = function () {
         return this.rootObject().utilObject();
     };
@@ -40,11 +44,11 @@ function BaseObject(root_object_val) {
         this.theGlobalLinkId += 1;
     };
 
-    this.mallocLink___ = function (my_name_val) {
+    this.mallocLink = function (my_name_val) {
         var link = this.rootObject().importObject().importLink().malloc(this.rootObject(), my_name_val, this.globalLinkId());
         this.incrementGlobalLinkId();
-        this.insertLinkToList(link);
-        this.setNameListChanged();
+        this.linkMgrObject().insertLinkToList(link);
+        this.linkMgrObject().setNameListChanged();
         return link;
     };
 

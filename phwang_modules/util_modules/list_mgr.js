@@ -153,10 +153,10 @@ function ListMgrClass(host_object_val, global_id_val) {
     };
 
     this.searchIdName = function (id_val, name_val) {
-        this.debug(true, "searchIdName", "id=" + id_val + " name=" + name_val);
+        this.debug(false, "searchIdName", "id=" + id_val + " name=" + name_val);
         var entry = this.head();
         while (entry) {
-            this.debug(true, "searchIdName", "entryId=" + entry.jointObject().entryId() + " entryName=" + entry.jointObject().entryName());
+            this.debug(false, "searchIdName", "entryId=" + entry.jointObject().entryId() + " entryName=" + entry.jointObject().entryName());
             if ((entry.jointObject().entryId() === id_val) && (entry.jointObject().entryName() === name_val)) {
                 return entry;
             }

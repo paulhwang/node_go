@@ -15,8 +15,8 @@ module.exports = {
         return list_mgr;
     },
 
-    malloc_joint: function (entry_id_val) {
-        return new ListjointClass(entry_id_val);
+    malloc_joint: function (entry_id_val, entry_name_val) {
+        return new ListjointClass(entry_id_val, entry_name_val);
     },
 
     head: function (list_mgr_val) {
@@ -155,7 +155,7 @@ function ListMgrClass(host_object_val, global_id_val) {
     };
     
     this.searchId = function (id_val) {
-        this.debug(false, "searchId", id_val);
+        this.debug(false, "searchId", "id=" + id_val);
         var entry = this.head();
         while (entry) {
             if (entry.jointObject().entryId() === id_val) {
@@ -166,14 +166,15 @@ function ListMgrClass(host_object_val, global_id_val) {
         return null;
     };
 
-    this.searchIdName = function (my_name_val, id_val) {
-        this.debug(false, "searchIdName", my_name_val + " " + id_val);
-        var link = this.head();
-        while (link) {
-            if ((link.linkId() === link_id_val) && (link.myName() === my_name_val)) {
-                return link;
+    this.searchIdName = function (id_val, name_val) {
+        this.debug(true, "searchIdName", "id=" + id_val + " name=" + name_val);
+        var entry = this.head();
+        while (entry) {
+            this.debug(true, "searchIdName", "entryId=" + entry.jointObject().entryId() + " entryName=" + entry.jointObject().entryName());
+            if ((entry.jointObject().entryId() === id_val) && (entry.jointObject().entryName() === name_val)) {
+                return entry;
             }
-            link = link.jointObject().next();
+            entry = entry.jointObject().next();
         }
         return null;
     };
@@ -268,17 +269,22 @@ function ListMgrClass(host_object_val, global_id_val) {
     this.init__(host_object_val, global_id_val);
 }
 
-function ListjointClass(entry_id_val) {
+function ListjointClass(entry_id_val, entry_name_val) {
     "use strict";
 
-    this.init__ = function (entry_id_val) {
+    this.init__ = function (entry_id_val, entry_name_val) {
         this.theEntryId = entry_id_val;
+        this.theEntryName = entry_name_val;
         this.thePrev = null;
         this.theNext = null;
     };
 
     this.entryId = function () {
         return this.theEntryId;
+    };
+
+    this.entryName = function () {
+        return this.theEntryName;
     };
 
     this.prev = function () {
@@ -297,5 +303,5 @@ function ListjointClass(entry_id_val) {
         this.theNext = val;
     };
 
-    this.init__(entry_id_val);
+    this.init__(entry_id_val, entry_name_val);
 };

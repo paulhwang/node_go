@@ -33,10 +33,6 @@ function ImportObject (root_object_val) {
         return require("./ajax.js");
     };
 
-    this.importLinkMgr = function () {
-        return require("./link_mgr.js");
-    }
-
     this.importLink = function () {
         return require("./link.js");
     }

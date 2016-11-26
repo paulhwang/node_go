@@ -17,7 +17,7 @@ function LinkObject(root_object_val, my_name_val, link_id_val) {
         this.theRootObject  = root_object_val;
         this.theLinkId = link_id_val;
         this.theMyName = my_name_val;
-        this.theJointObject = this.importListMgr().malloc_joint(link_id_val);
+        this.theJointObject = this.importListMgr().malloc_joint(link_id_val, my_name_val);
         this.theSessionMgrObject = this.importListMgr().malloc_mgr(this, 10);
         this.theGlobalSessionId = 1000;
         this.up_seq = 0;

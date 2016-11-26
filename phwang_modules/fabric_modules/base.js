@@ -47,7 +47,7 @@ function BaseObject(root_object_val) {
     this.mallocLink = function (my_name_val) {
         var link = this.rootObject().importObject().importLink().malloc(this.rootObject(), my_name_val, this.globalLinkId());
         this.incrementGlobalLinkId();
-        this.linkMgrObject().insertLinkToList(link);
+        this.linkMgrObject().insertEntry(link);
         this.setNameListChanged();
         return link;
     };

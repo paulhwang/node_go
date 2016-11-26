@@ -39,6 +39,10 @@ function SwitchObject(root_object_val) {
         return this.theRootObject;
     };
 
+    this.baseObject = function () {
+        return this.rootObject().baseObject();
+    };
+
     this.linkMgrObject = function () {
         return this.rootObject().linkMgrObject();
     };

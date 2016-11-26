@@ -44,6 +44,10 @@ function RootObject () {
         return this.theImportObject;
     };
 
+    this.baseObject = function () {
+        return this.theBaseObject;
+    };
+
     this.linkMgrObject = function () {
         return this.theLinkMgrObject;
     };

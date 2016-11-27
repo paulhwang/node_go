@@ -26,8 +26,16 @@ function ClusterDlinkClass(root_object_val) {
         return this.theRootObject;
     };
 
+    this.clusterBaseObject = function () {
+        return this.rootObject().clusterBaseObject();
+    };
+
     this.utilObject = function () {
         return this.rootObject().utilObject();
+    };
+
+    this.mallocCluster = function (data_val, session_val) {
+        return this.clusterBaseObject().mallocCluster(data_val, session_val);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

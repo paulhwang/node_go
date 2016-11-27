@@ -39,6 +39,14 @@ function GoRootClass () {
         return this.theImportObject;
     };
 
+    this.ulinkObject = function () {
+        return this.theUlinkObject;
+    };
+
+    this.dlinkObject = function () {
+        return this.theDlinkObject;
+    };
+
     this.baseMgrObject = function () {
         return this.theBaseMgrObject;
     };

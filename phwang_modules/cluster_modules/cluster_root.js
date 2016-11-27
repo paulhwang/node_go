@@ -1,7 +1,7 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: root_module.js
+ * File name: cluster_root.js
  */
 
 var the_cluster_root_object = new ClusterRootClass();
@@ -51,6 +51,14 @@ function ClusterRootClass () {
 
     this.importObject = function () {
         return this.theImportObject;
+    };
+
+    this.ulinkObject = function () {
+        return this.theUlinkObject;
+    };
+
+    this.dlinkObject = function () {
+        return this.theDlinkObject;
     };
 
     this.baseObject = function () {

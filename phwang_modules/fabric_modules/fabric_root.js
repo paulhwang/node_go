@@ -46,6 +46,14 @@ function FabricRootClass () {
         return this.theImportObject;
     };
 
+    this.ulinkObject = function () {
+        return this.theUlinkObject;
+    };
+
+    this.dlinkObject = function () {
+        return this.theDlinkObject;
+    };
+
     this.baseObject = function () {
         return this.theBaseObject;
     };

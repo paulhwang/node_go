@@ -82,18 +82,6 @@ function FabricRootClass () {
         return this.theAjaxObject;
     };
 
-    this.topicMallocBase = function () {
-        return require("../cluster_modules/cluster_root.js").malloc_base();
-    };
-
-    this.topicReceiveData = function (base_id_val, data_val) {
-        require("../cluster_modules/cluster_root.js").receive_data(base_id_val, data_val);
-    };
-
-    this.topicTransmitData = function (base_id_val) {
-        return require("../cluster_modules/cluster_root.js").transmit_data(base_id_val);
-    };
-
     this.processPost = function (req, res) {
         this.ajaxObject().processPost(req, res);
     };

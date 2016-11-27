@@ -30,6 +30,18 @@ function ClusterUlinkClass(root_object_val) {
         return this.rootObject().utilObject();
     };
 
+    this.topicMallocBase = function () {
+        return require("../cluster_modules/cluster_root.js").malloc_base();
+    };
+
+    this.topicReceiveData = function (base_id_val, data_val) {
+        require("../cluster_modules/cluster_root.js").receive_data(base_id_val, data_val);
+    };
+
+    this.topicTransmitData = function (base_id_val) {
+        return require("../cluster_modules/cluster_root.js").transmit_data(base_id_val);
+    };
+
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
             this.logit(str1_val, str2_val);

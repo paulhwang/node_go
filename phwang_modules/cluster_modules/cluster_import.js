@@ -14,15 +14,11 @@ function ClusterImportClass (root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
-        this.theClusterRootObject = root_object_val;
-    };
-
-    this.clusterRootObject = function () {
-        return this.theClusterRootObject;
+        this.theRootObject = root_object_val;
     };
 
     this.rootObject = function () {
-        return this.clusterRootObject().rootObject();
+        return this.theRootObject;
     };
 
     this.importClusterBase = function () {

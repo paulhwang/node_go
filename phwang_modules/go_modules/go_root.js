@@ -8,15 +8,15 @@ var the_go_root_object = new GoRootClass();
 
 module.exports = {
     malloc_base: function () {
-        return the_go_root_object.mallocBase();
+        return the_go_root_object.dlinkObject().mallocBase();
     },
 
     receive_data: function (base_id_val, data_val) {
-        the_go_root_object.receiveData(base_id_val, data_val);
+        the_go_root_object.dlinkObject().receiveData(base_id_val, data_val);
     },
 
     transmit_data: function (base_id_val) {
-        return the_go_root_object.transmitData(base_id_val);
+        return the_go_root_object.dlinkObject().transmitData(base_id_val);
     },
 };
 
@@ -49,30 +49,6 @@ function GoRootClass () {
 
     this.baseMgrObject = function () {
         return this.theBaseMgrObject;
-    };
-
-    this.mallocBase = function () {
-        var base = this.importObject().importBase().malloc(this, this.baseMgrObject().allocId());
-        this.baseMgrObject().insertEntry(base);
-        this.debug(false, "mallocBase", "baseId=" + base.baseId());
-        return base.baseId();
-    };
-
-    this.receiveData = function (base_id_val, data_val) {
-        this.debug(false, "receiveData", "data=" + data_val);
-        var base = this.baseMgrObject().searchId(base_id_val);
-        if (!base) {
-            return;
-        }
-        base.portObject().receiveStringData(data_val);
-    };
-
-    this.transmitData = function (base_id_val) {
-        var base = this.baseMgrObject().searchId(base_id_val);
-        if (!base) {
-            return null;
-        }
-        return base.portObject().dequeueTransmitData();
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

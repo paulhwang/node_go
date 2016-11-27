@@ -73,15 +73,15 @@ function RootObject () {
     };
 
     this.topicMallocBase = function () {
-        return require("../go_modules/go_root.js").malloc_base();
+        return this.clusterRootObject().topicMallocBase();
     };
 
     this.topicReceiveData = function (base_id_val, data_val) {
-        require("../go_modules/go_root.js").receive_data(base_id_val, data_val);
+        this.clusterRootObject().topicReceiveData(base_id_val, data_val);
     };
 
     this.topicTransmitData = function (base_id_val) {
-        return require("../go_modules/go_root.js").transmit_data(base_id_val);
+        return this.clusterRootObject().topicTransmitData(base_id_val);
     };
 
     this.processPost = function (req, res) {

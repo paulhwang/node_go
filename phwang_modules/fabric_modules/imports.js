@@ -42,11 +42,11 @@ function ImportObject (root_object_val) {
     }
 
     this.importClusterBase = function () {
-        return require("./cluster_base.js");
+        return require("../cluster_modules/cluster_base.js");
     }
 
     this.importCluster = function () {
-        return require("./cluster.js");
+        return require("../cluster_modules/cluster.js");
     }
 
     this.importListMgr = function () {

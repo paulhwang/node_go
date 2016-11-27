@@ -3,47 +3,38 @@
  * Written by Paul Hwang
  * File name: root_module.js
  */
-var the_root_object = new RootObject();
 
 module.exports = {
-    post: function (req, res) {
-        the_root_object.processPost(req, res);
-    },
-
-    get: function (req, res) {
-        the_root_object.processGet(req, res);
-    },
-
-    not_found: function (req, res) {
-        the_root_object.processNotFound(req, res);
-    },
-    
-    failure: function (req, res) {
-        the_root_object.processFailure(err, req, res, next);
+    malloc: function (root_object_val) {
+        return new ClusterRootClass(root_object_val);
     },
 };
 
-function RootObject () {
+function ClusterRootClass (root_object_val) {
     "use strict";
 
-    this.init__ = function () {
-        this.theImportObject = require("./imports.js").malloc(this);
-        this.theBaseObject = this.importObject().importBase().malloc(this);
-        this.theLinkMgrObject = this.importObject().importListMgr().malloc_mgr(this, 0);
-        this.theClusterBaseObject = this.importObject().importClusterBase().malloc(this);
-        this.theClusterMgrObject = this.importObject().importListMgr().malloc_mgr(this, 0);
-        this.theSwitchObject = this.importObject().importSwitch().malloc(this);
-        this.theAjaxObject = this.importObject().importAjax().malloc(this);
-        this.theClusterRootObject = require("../cluster_modules/cluster_root.js").malloc(this);
+    this.init__ = function (root_object_val) {
+        this.theRootObject = root_object_val;
+        //this.theImportObject = require("./imports.js").malloc(this);
+        //this.theBaseObject = this.importObject().importBase().malloc(this);
+        //this.theLinkMgrObject = this.importObject().importListMgr().malloc_mgr(this, 0);
+        //this.theClusterBaseObject = this.importObject().importClusterBase().malloc(this);
+        //this.theClusterMgrObject = this.importObject().importListMgr().malloc_mgr(this, 0);
+        //this.theSwitchObject = this.importObject().importSwitch().malloc(this);
+        //this.theAjaxObject = this.importObject().importAjax().malloc(this);
         this.debug(true, "init__", "");
     };
 
     this.objectName = function () {
-        return "RootObject";
+        return "ClusterRootClass";
+    };
+
+    this.rootObject = function () {
+        return this.theRootObject;
     };
 
     this.importObject = function () {
-        return this.theImportObject;
+        return this.rootObject().importObject();
     };
 
     this.baseObject = function () {
@@ -124,5 +115,5 @@ function RootObject () {
         this.importObject().importLogit().ABEND(str1_val, str2_val);
     };
 
-    this.init__();
+    this.init__(root_object_val);
 };

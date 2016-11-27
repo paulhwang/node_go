@@ -30,6 +30,14 @@ function FabricUlinkClass(root_object_val) {
         return this.rootObject().utilObject();
     };
 
+    this.clusterBaseObject = function () {
+        return this.rootObject().clusterBaseObject();
+    };
+
+    this.mallocCluster = function (data_val, session_val) {
+        return this.clusterBaseObject().mallocCluster(data_val, session_val);
+    };
+
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
             this.logit(str1_val, str2_val);

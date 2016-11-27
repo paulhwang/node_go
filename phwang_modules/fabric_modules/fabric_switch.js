@@ -43,12 +43,12 @@ function FabricSwitchClass(root_object_val) {
         return this.rootObject().baseObject();
     };
 
-    this.linkMgrObject = function () {
-        return this.rootObject().linkMgrObject();
+    this.ulinkObject = function () {
+        return this.rootObject().ulinkObject();
     };
 
-    this.clusterBaseObject = function () {
-        return this.rootObject().clusterBaseObject();
+    this.linkMgrObject = function () {
+        return this.rootObject().linkMgrObject();
     };
 
     this.clusterMgrObject = function () {
@@ -191,7 +191,7 @@ function FabricSwitchClass(root_object_val) {
             return null;
         }
 
-        var cluster = this.clusterBaseObject().mallocCluster(go_request.topic_data, session);
+        var cluster = this.ulinkObject().mallocCluster(go_request.topic_data, session);
         if (!cluster) {
             return null;
         }

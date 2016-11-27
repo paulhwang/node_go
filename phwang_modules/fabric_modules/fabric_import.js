@@ -22,7 +22,7 @@ function ImportObject (root_object_val) {
     };
 
     this.importBase = function () {
-        return require("./base.js");
+        return require("./fabric_base.js");
     }
 
     this.importUlink = function () {
@@ -34,19 +34,19 @@ function ImportObject (root_object_val) {
     }
 
     this.importSwitch = function () {
-        return require("./switch.js");
+        return require("./fabric_switch.js");
     };
 
     this.importAjax = function () {
-        return require("./ajax.js");
+        return require("./fabric_ajax.js");
     };
 
     this.importLink = function () {
-        return require("./link.js");
+        return require("./fabric_link.js");
     }
 
     this.importSession = function () {
-        return require("./session.js");
+        return require("./fabric_session.js");
     }
 
     this.importListMgr = function () {

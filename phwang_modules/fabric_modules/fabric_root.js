@@ -27,7 +27,7 @@ function RootObject () {
     "use strict";
 
     this.init__ = function () {
-        this.theImportObject = require("./imports.js").malloc(this);
+        this.theImportObject = require("./fabric_import.js").malloc(this);
         this.theUlinkObject = this.importObject().importUlink().malloc(this);
         this.theDlinkObject = this.importObject().importDlink().malloc(this);
         this.theBaseObject = this.importObject().importBase().malloc(this);

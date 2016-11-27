@@ -25,6 +25,18 @@ function ClusterImportClass (root_object_val) {
         return this.clusterRootObject().rootObject();
     };
 
+    this.importClusterBase = function () {
+        return require("../cluster_modules/cluster_base.js");
+    }
+
+    this.importCluster = function () {
+        return require("../cluster_modules/cluster.js");
+    }
+
+    this.importListMgr = function () {
+        return require("../util_modules/list_mgr.js");
+    };
+
     this.importLogit = function () {
         return require("../util_modules/logit.js");
     }

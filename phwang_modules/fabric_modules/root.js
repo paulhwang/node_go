@@ -30,8 +30,6 @@ function RootObject () {
         this.theImportObject = require("./imports.js").malloc(this);
         this.theBaseObject = this.importObject().importBase().malloc(this);
         this.theLinkMgrObject = this.importObject().importListMgr().malloc_mgr(this, 0);
-        this.theClusterBaseObject = this.importObject().importClusterBase().malloc(this);
-        this.theClusterMgrObject = this.importObject().importListMgr().malloc_mgr(this, 0);
         this.theSwitchObject = this.importObject().importSwitch().malloc(this);
         this.theAjaxObject = this.importObject().importAjax().malloc(this);
         this.theClusterRootObject = require("../cluster_modules/cluster_root.js").malloc(this);
@@ -54,12 +52,16 @@ function RootObject () {
         return this.theLinkMgrObject;
     };
 
+    this.clusterRootObject = function () {
+        return this.theClusterRootObject;
+    };
+
     this.clusterBaseObject = function () {
-        return this.theClusterBaseObject;
+        return this.clusterRootObject().clusterBaseObject();
     };
 
     this.clusterMgrObject = function () {
-        return this.theClusterMgrObject;
+        return this.clusterRootObject().clusterMgrObject();
     };
 
     this.switchObject = function () {

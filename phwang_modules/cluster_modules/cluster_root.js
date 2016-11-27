@@ -4,11 +4,12 @@
  * File name: root_module.js
  */
 
-//var the_cluster_root_object = new ClusterRootClass();
+var the_cluster_root_object = new ClusterRootClass();
 
 module.exports = {
     malloc: function (root_object_val) {
-        return new ClusterRootClass(root_object_val);
+        the_cluster_root_object.setRootObject(root_object_val);
+        return the_cluster_root_object;
     },
 
     malloc_base: function () {
@@ -24,11 +25,10 @@ module.exports = {
     },
 };
 
-function ClusterRootClass (root_object_val) {
+function ClusterRootClass () {
     "use strict";
 
-    this.init__ = function (root_object_val) {
-        this.theRootObject = root_object_val;
+    this.init__ = function () {
         this.theImportObject = require("./cluster_import.js").malloc(this);
         this.theClusterBaseObject = this.importObject().importClusterBase().malloc(this);
         this.theClusterMgrObject = this.importObject().importListMgr().malloc_mgr(this, 0);
@@ -37,6 +37,10 @@ function ClusterRootClass (root_object_val) {
 
     this.objectName = function () {
         return "ClusterRootClass";
+    };
+
+    this.setRootObject = function (val) {
+        return this.theRootObject = val;
     };
 
     this.rootObject = function () {
@@ -93,5 +97,5 @@ function ClusterRootClass (root_object_val) {
         this.importObject().importLogit().ABEND(str1_val, str2_val);
     };
 
-    this.init__(root_object_val);
+    this.init__();
 };

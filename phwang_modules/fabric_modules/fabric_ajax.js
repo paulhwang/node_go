@@ -1,16 +1,16 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: fibre_module.js
+ * File name: fibre_ajax.js
  */
 
 module.exports = {
     malloc: function (root_object_val) {
-        return new AjaxObject(root_object_val);
+        return new FabricAjaxClass(root_object_val);
     },
 };
 
-function AjaxObject(root_object_val) {
+function FabricAjaxClass(root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
@@ -19,7 +19,7 @@ function AjaxObject(root_object_val) {
     };
 
     this.objectName = function () {
-        return "AjaxObject";
+        return "FabricAjaxClass";
     };
 
     this.rootObject = function () {

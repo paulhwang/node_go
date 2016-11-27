@@ -6,11 +6,11 @@
 
 module.exports = {
     malloc: function (root_object_val) {
-        return new SwitchObject(root_object_val);
+        return new FabricSwitchClass(root_object_val);
     },
 };
 
-function SwitchObject(root_object_val) {
+function FabricSwitchClass(root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
@@ -32,7 +32,7 @@ function SwitchObject(root_object_val) {
     };
 
     this.objectName = function () {
-        return "SwitchObject";
+        return "FabricSwitchClass";
     };
 
     this.rootObject = function () {

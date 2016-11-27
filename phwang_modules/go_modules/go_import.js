@@ -6,15 +6,19 @@
 
 module.exports = {
     malloc: function (root_object_val) {
-        return new ImportObject(root_object_val);
+        return new GoImportClass(root_object_val);
     },
 };
 
-function ImportObject (root_object_val) {
+function GoImportClass (root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
+    };
+
+    this.objectName = function () {
+        return "GoImportClass";
     };
 
     this.rootObject = function () {

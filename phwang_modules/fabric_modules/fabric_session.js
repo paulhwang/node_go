@@ -6,11 +6,11 @@
 
 module.exports = {
     malloc: function (link_object_val, session_id_val) {
-        return new SessionObject(link_object_val, session_id_val);
+        return new FabricSessionClass(link_object_val, session_id_val);
     },
 };
 
-function SessionObject(link_object_val, session_id_val) {
+function FabricSessionClass(link_object_val, session_id_val) {
     "use strict";
 
     this.init__ = function (link_object_val, session_id_val) {
@@ -26,7 +26,7 @@ function SessionObject(link_object_val, session_id_val) {
     };
 
     this.objectName = function () {
-        return "SessionObject";
+        return "FabricSessionClass";
     };
 
     this.linkObject = function () {

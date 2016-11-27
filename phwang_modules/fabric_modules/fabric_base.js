@@ -1,16 +1,16 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: base.js
+ * File name: fabric_base.js
  */
 
 module.exports = {
     malloc: function (root_object_val) {
-        return new BaseObject(root_object_val);
+        return new FabricBaseClass(root_object_val);
     },
 };
 
-function BaseObject(root_object_val) {
+function FabricBaseClass(root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
@@ -21,7 +21,7 @@ function BaseObject(root_object_val) {
     };
 
     this.objectName = function () {
-        return "BaseObject";
+        return "FabricBaseClass";
     };
 
     this.rootObject = function () {

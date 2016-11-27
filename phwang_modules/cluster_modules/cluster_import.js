@@ -17,6 +17,10 @@ function ClusterImportClass (root_object_val) {
         this.theRootObject = root_object_val;
     };
 
+    this.objectName = function () {
+        return "ClusterImportClass";
+    };
+
     this.rootObject = function () {
         return this.theRootObject;
     };

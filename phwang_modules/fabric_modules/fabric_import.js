@@ -6,15 +6,19 @@
 
 module.exports = {
     malloc: function (root_object_val) {
-        return new ImportObject(root_object_val);
+        return new FabricImportClass(root_object_val);
     },
 };
 
-function ImportObject (root_object_val) {
+function FabricImportClass (root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
+    };
+
+    this.objectName = function () {
+        return "FabricImportClass";
     };
 
     this.rootObject = function () {

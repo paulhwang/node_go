@@ -3,7 +3,7 @@
  * Written by Paul Hwang
  * File name: root_module.js
  */
-var the_root_object = new RootObject();
+var the_root_object = new FabricRootClass();
 
 module.exports = {
     post: function (req, res) {
@@ -23,7 +23,7 @@ module.exports = {
     },
 };
 
-function RootObject () {
+function FabricRootClass () {
     "use strict";
 
     this.init__ = function () {
@@ -39,7 +39,7 @@ function RootObject () {
     };
 
     this.objectName = function () {
-        return "RootObject";
+        return "FabricRootClass";
     };
 
     this.importObject = function () {

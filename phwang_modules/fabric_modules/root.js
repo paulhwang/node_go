@@ -28,6 +28,8 @@ function RootObject () {
 
     this.init__ = function () {
         this.theImportObject = require("./imports.js").malloc(this);
+        this.theUlinkObject = this.importObject().importUlink().malloc(this);
+        this.theDlinkObject = this.importObject().importDlink().malloc(this);
         this.theBaseObject = this.importObject().importBase().malloc(this);
         this.theLinkMgrObject = this.importObject().importListMgr().malloc_mgr(this, 0);
         this.theSwitchObject = this.importObject().importSwitch().malloc(this);

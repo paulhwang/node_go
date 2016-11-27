@@ -25,6 +25,14 @@ function ImportObject (root_object_val) {
         return require("./base.js");
     }
 
+    this.importUlink = function () {
+        return require("./fabric_ulink.js");
+    }
+
+    this.importDlink = function () {
+        return require("./fabric_dlink.js");
+    }
+
     this.importSwitch = function () {
         return require("./switch.js");
     };

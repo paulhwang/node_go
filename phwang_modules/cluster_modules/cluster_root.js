@@ -18,8 +18,8 @@ function ClusterRootClass (root_object_val) {
         //this.theImportObject = require("./imports.js").malloc(this);
         //this.theBaseObject = this.importObject().importBase().malloc(this);
         //this.theLinkMgrObject = this.importObject().importListMgr().malloc_mgr(this, 0);
-        //this.theClusterBaseObject = this.importObject().importClusterBase().malloc(this);
-        //this.theClusterMgrObject = this.importObject().importListMgr().malloc_mgr(this, 0);
+        this.theClusterBaseObject = this.importObject().importClusterBase().malloc(this);
+        this.theClusterMgrObject = this.importObject().importListMgr().malloc_mgr(this, 0);
         //this.theSwitchObject = this.importObject().importSwitch().malloc(this);
         //this.theAjaxObject = this.importObject().importAjax().malloc(this);
         this.debug(true, "init__", "");

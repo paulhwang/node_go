@@ -6,11 +6,11 @@
 
 module.exports = {
     malloc: function (root_object_val) {
-        return new RingObject(root_object_val);
+        return new RingClass(root_object_val);
     },
 };
 
-function RingObject (root_object_val) {
+function RingClass (root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
@@ -24,7 +24,7 @@ function RingObject (root_object_val) {
     };
 
     this.objectName = function () {
-        return "RingObject";
+        return "RingClass";
     };
 
     this.holderPoolModule = function () {

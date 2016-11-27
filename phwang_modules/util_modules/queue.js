@@ -6,11 +6,11 @@
 
 module.exports = {
     malloc: function (root_object_val) {
-        return new QueueObject(root_object_val);
+        return new QueueClass(root_object_val);
     },
 };
 
-function QueueObject (root_object_val) {
+function QueueClass (root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
@@ -34,7 +34,7 @@ function QueueObject (root_object_val) {
     };
 
     this.objectName = function () {
-        return "QueueObject";
+        return "QueueClass";
     };
 
     this.holderEntryModule = function () {

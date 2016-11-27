@@ -6,11 +6,11 @@
 
 module.exports = {
     malloc: function (base_object_val) {
-        return new GoGameObject(base_object_val);
+        return new GoGameClass(base_object_val);
     },
 };
 
-function GoGameObject(base_object_val) {
+function GoGameClass(base_object_val) {
     "use strict";
 
     this.init__ = function () {
@@ -20,7 +20,7 @@ function GoGameObject(base_object_val) {
     };
 
     this.objectName = function () {
-        return "GoGameObject";
+        return "GoGameClass";
     };
 
     this.GO = function () {

@@ -6,11 +6,11 @@
 
 module.exports = {
     malloc: function (engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val) {
-        return new GoGroupListObject(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val);
+        return new GoGroupListClass(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val);
     },
 };
 
-function GoGroupListObject(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val) {
+function GoGroupListClass(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val) {
     "use strict";
 
     this.init__ = function (engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val) {
@@ -30,7 +30,7 @@ function GoGroupListObject(engine_val, index_val, color_val, dead_val, big_stone
     };
 
     this.objectName = function () {
-        return "GoGroupListObject";
+        return "GoGroupListClass";
     };
 
     this.GO = function () {

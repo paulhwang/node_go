@@ -6,11 +6,11 @@
 
 module.exports = {
     malloc: function (root_object_val) {
-        return new clusterBaseObject(root_object_val);
+        return new clusterBaseClass(root_object_val);
     },
 };
 
-function clusterBaseObject(root_object_val) {
+function clusterBaseClass(root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
@@ -22,7 +22,7 @@ function clusterBaseObject(root_object_val) {
     };
 
     this.objectName = function () {
-        return "clusterBaseObject";
+        return "clusterBaseClass";
     };
 
     this.rootObject = function () {

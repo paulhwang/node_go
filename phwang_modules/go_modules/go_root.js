@@ -4,7 +4,7 @@
  * File name: go_root.js
  */
 
-var the_go_root_object = new GoRootObject();
+var the_go_root_object = new GoRootClass();
 
 module.exports = {
     malloc_base: function () {
@@ -20,7 +20,7 @@ module.exports = {
     },
 };
 
-function GoRootObject () {
+function GoRootClass () {
     "use strict";
 
     this.init__ = function () {
@@ -32,7 +32,7 @@ function GoRootObject () {
     };
 
     this.objectName = function () {
-        return "GoRootObject";
+        return "GoRootClass";
     };
 
     this.importObject = function () {

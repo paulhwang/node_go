@@ -6,11 +6,11 @@
 
 module.exports = {
     malloc: function (str_val, x_val, y_val, color_val, turn_val, base_object_val) {
-        return new GoMoveObject(str_val, x_val, y_val, color_val, turn_val, base_object_val);
+        return new GoMoveClass(str_val, x_val, y_val, color_val, turn_val, base_object_val);
     },
 };
 
-function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, base_object_val) {
+function GoMoveClass(str_val, x_val, y_val, color_val, turn_val, base_object_val) {
     "use strict";
 
     this.init__ = function (str_val, x_val, y_val, color_val, turn_val, base_object_val) {
@@ -28,7 +28,7 @@ function GoMoveObject(str_val, x_val, y_val, color_val, turn_val, base_object_va
     };
 
     this.objectName = function () {
-        return "GoMoveObject";
+        return "GoMoveClass";
     };
 
     this.GO = function () {

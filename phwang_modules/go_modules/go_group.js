@@ -6,11 +6,11 @@
 
 module.exports = {
     malloc: function (group_list_val) {
-        return new GoGroupObject(group_list_val);
+        return new GoGroupClass(group_list_val);
     },
 };
 
-function GoGroupObject(group_list_val) {
+function GoGroupClass(group_list_val) {
     "use strict";
 
     this.init__ = function (group_list_val) {
@@ -27,7 +27,7 @@ function GoGroupObject(group_list_val) {
     };
 
     this.objectName = function () {
-        return "GoGroupObject";
+        return "GoGroupClass";
     };
 
     this.groupListObject = function () {

@@ -6,11 +6,11 @@
 
 module.exports = {
     malloc: function (container_val) {
-        return new GoBoardObject(container_val);
+        return new GoBoardClass(container_val);
     },
 };
 
-function GoBoardObject(container_val) {
+function GoBoardClass(container_val) {
     "use strict";
 
     this.init__ = function (container_val) {
@@ -28,7 +28,7 @@ function GoBoardObject(container_val) {
     };
 
     this.objectName = function () {
-        return "GoBoardObject";
+        return "GoBoardClass";
     };
 
     this.containerObject = function () {

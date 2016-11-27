@@ -6,11 +6,11 @@
 
 module.exports = {
     malloc: function (base_object_val) {
-        return new GoPortObject(base_object_val);
+        return new GoPortClass(base_object_val);
     },
 };
 
-function GoPortObject(base_object_val) {
+function GoPortClass(base_object_val) {
     "use strict";
     this.GO_PROTOCOL_CODE_SIZE = 7;
     this.GO_PROTOCOL_CODE_PROPOSE = "Propose";
@@ -31,7 +31,7 @@ function GoPortObject(base_object_val) {
     };
 
     this.objectName = function () {
-        return "GoPortObject";
+        return "GoPortClass";
     };
 
     this.baseObject = function () {

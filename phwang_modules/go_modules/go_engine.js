@@ -6,11 +6,11 @@
 
 module.exports = {
     malloc: function (base_object_val) {
-        return new GoEngineObject(base_object_val);
+        return new GoEngineClass(base_object_val);
     },
 };
 
-function GoEngineObject(base_object_val) {
+function GoEngineClass(base_object_val) {
     "use strict";
 
     this.init__ = function (base_object_val) {
@@ -20,7 +20,7 @@ function GoEngineObject(base_object_val) {
     };
 
     this.objectName = function () {
-        return "GoEngineObject";
+        return "GoEngineClass";
     };
 
     this.GO = function () {

@@ -73,15 +73,15 @@ function RootObject () {
     };
 
     this.topicMallocBase = function () {
-        return this.clusterRootObject().topicMallocBase();
+        return require("../cluster_modules/cluster_root.js").malloc_base();
     };
 
     this.topicReceiveData = function (base_id_val, data_val) {
-        this.clusterRootObject().topicReceiveData(base_id_val, data_val);
+        require("../cluster_modules/cluster_root.js").receive_data(base_id_val, data_val);
     };
 
     this.topicTransmitData = function (base_id_val) {
-        return this.clusterRootObject().topicTransmitData(base_id_val);
+        return require("../cluster_modules/cluster_root.js").transmit_data(base_id_val);
     };
 
     this.processPost = function (req, res) {

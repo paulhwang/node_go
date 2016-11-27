@@ -25,6 +25,14 @@ function ClusterImportClass (root_object_val) {
         return require("../cluster_modules/cluster_base.js");
     }
 
+    this.importUlink = function () {
+        return require("./cluster_ulink.js");
+    }
+
+    this.importDlink = function () {
+        return require("./cluster_dlink.js");
+    }
+
     this.importCluster = function () {
         return require("../cluster_modules/cluster.js");
     }

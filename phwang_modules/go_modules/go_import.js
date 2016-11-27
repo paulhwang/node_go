@@ -25,6 +25,14 @@ function ImportObject (root_object_val) {
         return require("./go_base.js");
     };
 
+    this.importUlink = function () {
+        return require("./go_ulink.js");
+    }
+
+    this.importDlink = function () {
+        return require("./go_dlink.js");
+    }
+
     this.importConfig = function () {
         return require("./go_config.js");
     };

@@ -35,7 +35,7 @@ function FabricClusterMgrClass(root_object_val) {
     };
 
     this.mallocCluster = function (data_val, session_val) {
-        return this.clusterRootObject().groupMgrObject().mallocGroup(data_val, session_val);
+        return require("../matrix_modules/matrix_group_mgr.js").malloc_group(data_val, session_val);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

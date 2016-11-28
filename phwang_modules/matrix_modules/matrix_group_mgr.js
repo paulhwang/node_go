@@ -11,6 +11,10 @@ module.exports = {
         the_matrix_group_mgr_object = new MatrixGroupMgrClass(root_object_val);
         return the_matrix_group_mgr_object;
     },
+
+    malloc_group: function (data_val, session_val) {
+        return the_matrix_group_mgr_object.mallocGroup(data_val, session_val);
+    },
 };
 
 function MatrixGroupMgrClass(root_object_val) {

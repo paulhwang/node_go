@@ -46,7 +46,7 @@ function clusterBaseClass(root_object_val) {
     };
 
     this.mallocCluster = function (data_val, session_val) {
-        var cluster = this.rootObject().importObject().importCluster().malloc(this.rootObject(), data_val, session_val);
+        var cluster = this.rootObject().importObject().importGroup().malloc(this.rootObject(), data_val, session_val);
         this.incrementGlobalClusterId();
         return cluster;
     };

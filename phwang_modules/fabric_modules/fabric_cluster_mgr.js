@@ -37,8 +37,8 @@ function FabricClusterMgrClass(root_object_val) {
         return this.rootObject().utilObject();
     };
 
-    this.clusterRootObject = function () {
-        return this.rootObject().clusterRootObject();
+    this.importObject = function () {
+        return this.rootObject().importObject();
     };
 
     this.mallocCluster = function (data_val, session_val) {

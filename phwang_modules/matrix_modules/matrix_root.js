@@ -1,7 +1,7 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: cluster_root.js
+ * File name: matrix_root.js
  */
 
 var the_matrix_root_object = new MatrixRootClass();
@@ -33,7 +33,7 @@ function MatrixRootClass () {
         this.theTopicMgrObject = this.importObject().importTopicMgr().malloc(this);
         this.theGroupMgrObject = this.importObject().importGroupMgr().malloc(this);
         this.theClusterBaseObject = this.importObject().importClusterBase().malloc(this);
-        this.theClusterMgrObject = this.importObject().importListMgr().malloc_mgr(this, 0);
+        this.theGroupListObject = this.importObject().importListMgr().malloc_mgr(this, 0);
         this.debug(true, "init__", "");
     };
 

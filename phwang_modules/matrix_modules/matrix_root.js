@@ -31,7 +31,7 @@ function ClusterRootClass () {
     this.init__ = function () {
         this.theImportObject = require("./matrix_import.js").malloc(this);
         this.theUlinkObject = this.importObject().importTopicMgr().malloc(this);
-        this.theDlinkObject = this.importObject().importRoomMgr().malloc(this);
+        this.theDlinkObject = this.importObject().importGroupMgr().malloc(this);
         this.theClusterBaseObject = this.importObject().importClusterBase().malloc(this);
         this.theClusterMgrObject = this.importObject().importListMgr().malloc_mgr(this, 0);
         this.debug(true, "init__", "");

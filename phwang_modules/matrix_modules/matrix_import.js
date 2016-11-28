@@ -33,12 +33,12 @@ function ClusterImportClass (root_object_val) {
         return require("./matrix_topic_mgr.js");
     }
 
-    this.importRoomMgr = function () {
-        return require("./matrix_room_mgr.js");
+    this.importGroupMgr = function () {
+        return require("./matrix_group_mgr.js");
     }
 
     this.importGroup = function () {
-        return require("./matrix_room.js");
+        return require("./matrix_group.js");
     }
 
     this.importListMgr = function () {

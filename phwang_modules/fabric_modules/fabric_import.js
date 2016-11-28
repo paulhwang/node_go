@@ -34,7 +34,7 @@ function FabricImportClass (root_object_val) {
     }
 
     this.importDlink = function () {
-        return require("./fabric_dlink.js");
+        return require("./fabric_link_mgr.js");
     }
 
     this.importSwitch = function () {

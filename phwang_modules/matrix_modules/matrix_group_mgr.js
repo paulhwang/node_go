@@ -1,16 +1,16 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: cluster_dlink.js
+ * File name: matrix_group_mgr.js
  */
 
 module.exports = {
     malloc: function (root_object_val) {
-        return new ClusterDlinkClass(root_object_val);
+        return new MatrixGroupMgrClass(root_object_val);
     },
 };
 
-function ClusterDlinkClass(root_object_val) {
+function MatrixGroupMgrClass(root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
@@ -20,7 +20,7 @@ function ClusterDlinkClass(root_object_val) {
     };
 
     this.objectName = function () {
-        return "ClusterDlinkClass";
+        return "MatrixGroupMgrClass";
     };
 
     this.rootObject = function () {

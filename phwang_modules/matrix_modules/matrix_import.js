@@ -1,16 +1,16 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: import.js
+ * File name: matrix_import.js
  */
 
 module.exports = {
     malloc: function (root_object_val) {
-        return new ClusterImportClass(root_object_val);
+        return new MatrixImportClass(root_object_val);
     },
 };
 
-function ClusterImportClass (root_object_val) {
+function MatrixImportClass (root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
@@ -18,7 +18,7 @@ function ClusterImportClass (root_object_val) {
     };
 
     this.objectName = function () {
-        return "ClusterImportClass";
+        return "MatrixImportClass";
     };
 
     this.rootObject = function () {

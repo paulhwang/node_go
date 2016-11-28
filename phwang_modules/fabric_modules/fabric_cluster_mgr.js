@@ -1,16 +1,16 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: fabric_ulink.js
+ * File name: fabric_cluster_mgr.js
  */
 
 module.exports = {
     malloc: function (root_object_val) {
-        return new FabricUlinkClass(root_object_val);
+        return new FabricClusterMgrClass(root_object_val);
     },
 };
 
-function FabricUlinkClass(root_object_val) {
+function FabricClusterMgrClass(root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
@@ -19,7 +19,7 @@ function FabricUlinkClass(root_object_val) {
     };
 
     this.objectName = function () {
-        return "FabricUlinkClass";
+        return "FabricClusterMgrClass";
     };
 
     this.rootObject = function () {

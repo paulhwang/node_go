@@ -6,11 +6,11 @@
 
 module.exports = {
     malloc: function (root_object_val) {
-        return new FabricDlinkClass(root_object_val);
+        return new FabricLinkMgrClass(root_object_val);
     },
 };
 
-function FabricDlinkClass(root_object_val) {
+function FabricLinkMgrClass(root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
@@ -19,7 +19,7 @@ function FabricDlinkClass(root_object_val) {
     };
 
     this.objectName = function () {
-        return "FabricDlinkClass";
+        return "FabricLinkMgrClass";
     };
 
     this.rootObject = function () {

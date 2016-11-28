@@ -43,8 +43,8 @@ function FabricSwitchClass(root_object_val) {
         return this.rootObject().baseObject();
     };
 
-    this.ulinkObject = function () {
-        return this.rootObject().ulinkObject();
+    this.clusterMgrObject = function () {
+        return this.rootObject().clusterMgrObject();
     };
 
     this.linkListObject = function () {
@@ -191,7 +191,7 @@ function FabricSwitchClass(root_object_val) {
             return null;
         }
 
-        var cluster = this.ulinkObject().mallocCluster(go_request.topic_data, session);
+        var cluster = this.clusterMgrObject().mallocCluster(go_request.topic_data, session);
         if (!cluster) {
             return null;
         }

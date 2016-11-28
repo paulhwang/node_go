@@ -46,8 +46,8 @@ function clusterObject (root_object_val, topic_data_val, session_val) {
         return this.theJointObject;
     };
 
-    this.ulinkObject = function () {
-        return this.rootObject().ulinkObject();
+    this.topicMgrObject = function () {
+        return this.rootObject().topicMgrObject();
     };
 
     this.sessionObject = function () {
@@ -113,7 +113,7 @@ function clusterObject (root_object_val, topic_data_val, session_val) {
     this.createTopic = function (topic_data_val) {
         var topic_data = JSON.parse(topic_data_val);
         if (topic_data.title === "go") {
-            this.setTopicBaseId(this.ulinkObject().topicMallocBase());
+            this.setTopicBaseId(this.topicMgrObject().topicMallocBase());
             this.debug(false, "createTopic", "base_id=" + this.topicBaseId());
         }
     };
@@ -170,8 +170,8 @@ function clusterObject (root_object_val, topic_data_val, session_val) {
     };
 
     this.receiveData = function (data_val) {
-        this.ulinkObject().topicReceiveData(this.topicBaseId(), data_val);
-        var data = this.ulinkObject().topicTransmitData(this.topicBaseId());
+        this.topicMgrObject().topicReceiveData(this.topicBaseId(), data_val);
+        var data = this.topicMgrObject().topicTransmitData(this.topicBaseId());
         this.debug(false, "receiveData", "data=" + data);
         var i = 0;
         while (i < this.sessionArrayLength()) {

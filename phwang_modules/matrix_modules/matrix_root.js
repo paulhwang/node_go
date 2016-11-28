@@ -53,7 +53,7 @@ function ClusterRootClass () {
         return this.theImportObject;
     };
 
-    this.ulinkObject = function () {
+    this.topicMgrObject = function () {
         return this.theTopicMgrObject;
     };
 

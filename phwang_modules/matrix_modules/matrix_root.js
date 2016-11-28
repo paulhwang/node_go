@@ -7,10 +7,6 @@
 var the_matrix_root_object = new MatrixRootClass();
 
 module.exports = {
-    get_the_matrix_root_object: function (root_object_val) {
-        the_matrix_root_object.setRootObject(root_object_val);
-        return the_matrix_root_object;
-    },
 };
 
 function MatrixRootClass () {

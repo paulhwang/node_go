@@ -39,8 +39,8 @@ function FabricSwitchClass(root_object_val) {
         return this.theRootObject;
     };
 
-    this.baseObject = function () {
-        return this.rootObject().baseObject();
+    this.linkMgrObject = function () {
+        return this.rootObject().linkMgrObject();
     };
 
     this.clusterMgrObject = function () {
@@ -95,7 +95,7 @@ function FabricSwitchClass(root_object_val) {
     }
 
     this.setupLink = function (go_request) {
-        var link = this.baseObject().mallocLink(go_request.my_name);
+        var link = this.linkMgrObject().mallocLink(go_request.my_name);
         if (!link) {
             this.abend("setupLink", "null link");
             return null;
@@ -174,7 +174,7 @@ function FabricSwitchClass(root_object_val) {
 
         link.clearNameListChanged();
         var output = JSON.stringify({link_id: link.linkId(),
-                                     name_list: this.baseObject().getNameList(),
+                                     name_list: this.linkMgrObject().getNameList(),
                                      });
         this.debug_(true, this.debugOutput(), "getNameList", "output=" + output);
         return output;

@@ -18,8 +18,6 @@ function MatrixGroupObject (root_object_val, topic_data_val, cluster_val) {
         this.theClusterObject = cluster_val;
         this.theJointObject = this.rootObject().importObject().importListMgr().malloc_joint(999);
         this.theTransmitQueue = this.rootObject().importObject().mallocQueue();
-        this.theNext = null;
-        this.thePrev = null;
         this.theTopicBaseId = 0;
         this.createTopic(topic_data_val);
         this.debug(false, "init__", "topic base_id=" + this.topicBaseId());
@@ -64,22 +62,6 @@ function MatrixGroupObject (root_object_val, topic_data_val, cluster_val) {
 
     this.setTopicObject = function (val) {
         this.theTopicObject = val;
-    };
-
-    this.prev = function () {
-        return this.thePrev;
-    };
-
-    this.setPrev = function (val) {
-        this.thePrev = val;
-    };
-
-    this.next = function () {
-        return this.theNext;
-    };
-
-    this.setNext = function (val) {
-        this.theNext = val;
     };
 
     this.topicBaseId = function () {

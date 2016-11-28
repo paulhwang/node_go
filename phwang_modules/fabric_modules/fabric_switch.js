@@ -16,7 +16,7 @@ function FabricSwitchClass(root_object_val) {
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
         this.initSwitchTable();
-        this.debug(false, "init__", "");
+        this.debug(true, "init__", "");
     };
 
     this.defaultLinkUpdateInterval = function () {

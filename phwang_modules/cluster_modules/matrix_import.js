@@ -38,7 +38,7 @@ function ClusterImportClass (root_object_val) {
     }
 
     this.importCluster = function () {
-        return require("../cluster_modules/cluster.js");
+        return require("../cluster_modules/matrix_room.js");
     }
 
     this.importListMgr = function () {

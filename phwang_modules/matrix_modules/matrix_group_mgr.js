@@ -34,7 +34,7 @@ function ClusterDlinkClass(root_object_val) {
         return this.rootObject().utilObject();
     };
 
-    this.mallocCluster = function (data_val, session_val) {
+    this.mallocGroup = function (data_val, session_val) {
         return this.clusterBaseObject().mallocGroup(data_val, session_val);
     };
 

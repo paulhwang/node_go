@@ -39,7 +39,7 @@ function FabricUlinkClass(root_object_val) {
     };
 
     this.mallocCluster = function (data_val, session_val) {
-        return this.clusterRootObject().groupMgrObject().mallocCluster(data_val, session_val);
+        return this.clusterRootObject().groupMgrObject().mallocGroup(data_val, session_val);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

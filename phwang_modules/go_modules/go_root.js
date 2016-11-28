@@ -8,15 +8,15 @@ var the_go_root_object = new GoRootClass();
 
 module.exports = {
     malloc_base: function () {
-        return the_go_root_object.dlinkObject().mallocBase();
+        return the_go_root_object.baseMgrObject().mallocBase();
     },
 
     receive_data: function (base_id_val, data_val) {
-        the_go_root_object.dlinkObject().receiveData(base_id_val, data_val);
+        the_go_root_object.baseMgrObject().receiveData(base_id_val, data_val);
     },
 
     transmit_data: function (base_id_val) {
-        return the_go_root_object.dlinkObject().transmitData(base_id_val);
+        return the_go_root_object.baseMgrObject().transmitData(base_id_val);
     },
 };
 
@@ -25,7 +25,7 @@ function GoRootClass () {
 
     this.init__ = function () {
         this.theImportObject = require("./go_import.js").malloc(this);
-        this.theDlinkObject = this.importObject().importBaseMgr().malloc(this);
+        this.theBaseMgrObject = this.importObject().importBaseMgr().malloc(this);
         this.theBaseListObject = this.importObject().importListMgr().malloc_mgr(this, 100);
         this.debug(true, "init__", "");
     };
@@ -38,8 +38,8 @@ function GoRootClass () {
         return this.theImportObject;
     };
 
-    this.dlinkObject = function () {
-        return this.theDlinkObject;
+    this.baseMgrObject = function () {
+        return this.theBaseMgrObject;
     };
 
     this.baseListObject = function () {

@@ -61,7 +61,7 @@ function MatrixGroupMgrClass(root_object_val) {
 
     this.mallocGroup = function (data_val, cluster_val) {
         var group = this.rootObject().importObject().importGroup().malloc(this.rootObject(), data_val, cluster_val);
-        //this.groupListObject().insertEntry(group);
+        this.groupListObject().insertEntry(group);
         this.incrementGlobalGroupId();
         return group;
     };

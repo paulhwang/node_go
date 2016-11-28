@@ -25,10 +25,6 @@ function FabricImportClass (root_object_val) {
         return this.theRootObject;
     };
 
-    this.importBase = function () {
-        return require("./fabric_base.js");
-    }
-
     this.importClusterMgr = function () {
         return require("./fabric_cluster_mgr.js");
     }

@@ -34,7 +34,7 @@ function ClusterImportClass (root_object_val) {
     }
 
     this.importDlink = function () {
-        return require("./cluster_dlink.js");
+        return require("./matrix_room_mgr.js");
     }
 
     this.importCluster = function () {

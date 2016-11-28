@@ -16,6 +16,7 @@ function FabricClusterClass(root_object_val) {
     this.init__ = function (root_object_val) {
         this.theRootObject  = root_object_val;
         this.theJointObject = this.importListMgr().malloc_joint(0, "tbd");
+        this.theReceiveQueue = this.rootObject().importObject().mallocQueue();
         this.debug(true, "init__", "");
     };
 
@@ -34,6 +35,15 @@ function FabricClusterClass(root_object_val) {
     this.importObject = function () {
         return this.rootObject().importObject();
     };
+
+    this.groupObject = function () {
+        return this.theGroupObject;
+    };
+
+    this.setGroupObject = function (val) {
+        this.theGroupObject = val;
+    };
+
 
     this.importListMgr = function () {
         return this.importObject().importListMgr();

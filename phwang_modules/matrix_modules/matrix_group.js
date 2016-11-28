@@ -20,7 +20,6 @@ function MatrixGroupObject (root_object_val, topic_data_val, session_val) {
         this.theSessionArray = [2];
         this.theSessionArray[0] = session_val;
         this.theSessionArrayLength = 1;
-        this.theReceiveQueue = this.rootObject().importObject().mallocQueue();
         this.theTransmitQueue = this.rootObject().importObject().mallocQueue();
         this.theNext = null;
         this.thePrev = null;
@@ -102,10 +101,6 @@ function MatrixGroupObject (root_object_val, topic_data_val, session_val) {
         this.theTopicBaseId = val;
     };
 
-    this.receiveQueue = function () {
-        return this.theReceiveQueue;
-    };
-
     this.transmitQueue = function () {
         return this.theTransmitQueue;
     };
@@ -134,39 +129,12 @@ function MatrixGroupObject (root_object_val, topic_data_val, session_val) {
         return data;
     };
 
-    this.enqueueReceiveData = function (data_val) {
-        this.debug(false, "enqueueReceiveData", data_val);
-        this.receiveQueue().enQueue(data_val);
-    };
-
-    this.dequeueReceiveData = function () {
-        var data = this.receiveQueue().deQueue();
-        this.debug(false, "dequeueReceiveData", data);
-        return data;
-    };
-
     this.processSetupTopicData = function (json_data_val) {
         this.debug(true, "processSetupTopicData", "data=" + json_data_val);
         var topic_data = JSON.parse(json_data_val);
         if (topic_data.command === "config") {
             this.topicObject().configObject().createConfig(topic_data.data);
         }
-    };
-
-    this.processReceiveData = function () {
-        while (true) {
-            var data = this.dequeueReceiveData();
-            if (!data) {
-                return;
-            }
-            this.receiveData(data);
-        }
-    };
-
-    this.enqueAndPocessReceiveData = function (data_val) {
-        this.debug(false, "enqueAndPocessReceiveData", data_val);
-        this.enqueueReceiveData(data_val);
-        this.processReceiveData();
     };
 
     this.receiveData = function (data_val) {

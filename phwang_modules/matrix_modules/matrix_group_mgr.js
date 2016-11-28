@@ -15,6 +15,10 @@ module.exports = {
     malloc_group: function (data_val, session_val) {
         return the_matrix_group_mgr_object.mallocGroup(data_val, session_val);
     },
+
+    receive_data: function (group_object_val, data_val) {
+        the_matrix_group_mgr_object.receiveData(group_object_val, data_val);
+    },
 };
 
 function MatrixGroupMgrClass(root_object_val) {
@@ -54,6 +58,10 @@ function MatrixGroupMgrClass(root_object_val) {
         var group = this.rootObject().importObject().importGroup().malloc(this.rootObject(), data_val, session_val);
         this.incrementGlobalGroupId();
         return group;
+    };
+
+    this.receiveData = function (group_object_val, data_val) {
+        group_object_val.receiveData(data_val);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

@@ -102,7 +102,7 @@ function FabricClusterClass(root_object_val, topic_data_val, session_val) {
     };
 
     this.receiveData = function (data_val) {
-        this.groupObject().receiveData(data_val);
+        require("../matrix_modules/matrix_group_mgr.js").receive_data(this.groupObject(), data_val);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

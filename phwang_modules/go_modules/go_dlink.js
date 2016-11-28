@@ -30,8 +30,8 @@ function GoDlinkClass(root_object_val) {
         return this.rootObject().importObject();
     };
 
-    this.baseMgrObject = function () {
-        return this.rootObject().baseMgrObject();
+    this.baseListObject = function () {
+        return this.rootObject().baseListObject();
     };
 
     this.utilObject = function () {
@@ -39,15 +39,15 @@ function GoDlinkClass(root_object_val) {
     };
 
     this.mallocBase = function () {
-        var base = this.importObject().importBase().malloc(this.rootObject(), this.baseMgrObject().allocId());
-        this.baseMgrObject().insertEntry(base);
+        var base = this.importObject().importBase().malloc(this.rootObject(), this.baseListObject().allocId());
+        this.baseListObject().insertEntry(base);
         this.debug(false, "mallocBase", "baseId=" + base.baseId());
         return base.baseId();
     };
 
     this.receiveData = function (base_id_val, data_val) {
         this.debug(false, "receiveData", "data=" + data_val);
-        var base = this.baseMgrObject().searchId(base_id_val);
+        var base = this.baseListObject().searchId(base_id_val);
         if (!base) {
             return;
         }
@@ -55,7 +55,7 @@ function GoDlinkClass(root_object_val) {
     };
 
     this.transmitData = function (base_id_val) {
-        var base = this.baseMgrObject().searchId(base_id_val);
+        var base = this.baseListObject().searchId(base_id_val);
         if (!base) {
             return null;
         }

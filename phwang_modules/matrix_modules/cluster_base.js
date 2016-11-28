@@ -15,8 +15,6 @@ function clusterBaseClass(root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
-        this.theClusterQueue = this.rootObject().importObject().mallocQueue();
-        this.thePoolQueue = this.rootObject().importObject().mallocQueue();
         this.debug(false, "init__", "");
     };
 
@@ -30,13 +28,6 @@ function clusterBaseClass(root_object_val) {
 
     this.utilObject = function () {
         return this.rootObject().utilObject();
-    };
-
-    this.clusterQueue = function () {
-        return this.theClusterQueue;
-    };
-
-    this.freeCluster = function (cluster_val) {
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

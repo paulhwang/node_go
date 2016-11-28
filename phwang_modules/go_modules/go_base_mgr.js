@@ -30,6 +30,7 @@ function GoBaseMgrClass(root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
+        this.theBaseListObject = this.importObject().importListMgr().malloc_mgr(this, 100);
         this.debug(true, "init__", "");
     };
 
@@ -41,12 +42,12 @@ function GoBaseMgrClass(root_object_val) {
         return this.theRootObject;
     };
 
-    this.importObject = function () {
-        return this.rootObject().importObject();
+    this.baseListObject = function () {
+        return this.theBaseListObject;
     };
 
-    this.baseListObject = function () {
-        return this.rootObject().baseListObject();
+    this.importObject = function () {
+        return this.rootObject().importObject();
     };
 
     this.utilObject = function () {

@@ -12,10 +12,6 @@ module.exports = {
         return the_go_base_mgr_object;
     },
 
-    get_the_go_base_mgr_object: function () {
-        return the_go_base_mgr_object;
-    },
-
     malloc_base: function () {
         return the_go_base_mgr_object.mallocBase();
     },

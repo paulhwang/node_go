@@ -31,15 +31,15 @@ function MatrixTopicMgrClass(root_object_val) {
     };
 
     this.topicMallocBase = function () {
-        return require("../go_modules/go_root.js").malloc_base();
+        return require("../go_modules/go_base_mgr.js").malloc_base();
     };
 
     this.topicReceiveData = function (base_id_val, data_val) {
-        require("../go_modules/go_root.js").receive_data(base_id_val, data_val);
+        require("../go_modules/go_base_mgr.js").receive_data(base_id_val, data_val);
     };
 
     this.topicTransmitData = function (base_id_val) {
-        return require("../go_modules/go_root.js").transmit_data(base_id_val);
+        return require("../go_modules/go_base_mgr.js").transmit_data(base_id_val);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

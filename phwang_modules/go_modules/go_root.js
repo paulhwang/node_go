@@ -7,17 +7,6 @@
 var the_go_root_object = new GoRootClass();
 
 module.exports = {
-    malloc_base: function () {
-        return the_go_root_object.baseMgrObject().mallocBase();
-    },
-
-    receive_data: function (base_id_val, data_val) {
-        the_go_root_object.baseMgrObject().receiveData(base_id_val, data_val);
-    },
-
-    transmit_data: function (base_id_val) {
-        return the_go_root_object.baseMgrObject().transmitData(base_id_val);
-    },
 };
 
 function GoRootClass () {

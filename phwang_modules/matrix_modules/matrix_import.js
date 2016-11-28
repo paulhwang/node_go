@@ -33,7 +33,7 @@ function ClusterImportClass (root_object_val) {
         return require("./matrix_topic_mgr.js");
     }
 
-    this.importDlink = function () {
+    this.importRoomMgr = function () {
         return require("./matrix_room_mgr.js");
     }
 

@@ -5,16 +5,17 @@
  */
 
 module.exports = {
-    malloc: function (root_object_val) {
-        return new FabricClusterClass(root_object_val);
+    malloc: function (root_object_val, topic_data_val, session_val) {
+        return new FabricClusterClass(root_object_val, topic_data_val, session_val);
     },
 };
 
-function FabricClusterClass(root_object_val) {
+function FabricClusterClass(root_object_val, topic_data_val, session_val) {
     "use strict";
 
-    this.init__ = function (root_object_val) {
+    this.init__ = function (root_object_val, topic_data_val, session_val) {
         this.theRootObject  = root_object_val;
+        session_val.setClusterObject(this);
         this.theJointObject = this.importListMgr().malloc_joint(0, "tbd");
         this.theReceiveQueue = this.rootObject().importObject().mallocQueue();
         this.debug(true, "init__", "");
@@ -63,5 +64,5 @@ function FabricClusterClass(root_object_val) {
         this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(root_object_val);
+    this.init__(root_object_val, topic_data_val, session_val);
 }

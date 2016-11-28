@@ -16,7 +16,7 @@ function MatrixGroupObject (root_object_val, topic_data_val, session_val) {
     this.init__ = function (root_object_val, topic_data_val, session_val) {
         this.theRootObject = root_object_val;
         this.theJointObject = this.rootObject().importObject().importListMgr().malloc_joint(999);
-        session_val.setClusterObject(this);
+        //session_val.setClusterObject(this);
         this.theSessionArray = [2];
         this.theSessionArray[0] = session_val;
         this.theSessionArrayLength = 1;

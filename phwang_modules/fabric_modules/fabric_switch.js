@@ -285,7 +285,7 @@ function FabricSwitchClass(root_object_val) {
         }
 
         if (go_request.xmt_seq === session.up_seq) {
-            session.clusterObject().enqueAndPocessReceiveData(go_request.data);
+            session.clusterObject().groupObject().enqueAndPocessReceiveData(go_request.data);
             session.up_seq += 1;
         } else if (go_request.xmt_seq < session.up_seq) {
             if (go_request.xmt_seq === 0) {

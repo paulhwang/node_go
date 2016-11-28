@@ -5,21 +5,18 @@
  */
 
 module.exports = {
-    malloc: function (root_object_val, topic_data_val, session_val) {
-        return new MatrixGroupObject(root_object_val, topic_data_val, session_val);
+    malloc: function (root_object_val, topic_data_val, cluster_val) {
+        return new MatrixGroupObject(root_object_val, topic_data_val, cluster_val);
     },
 };
 
-function MatrixGroupObject (root_object_val, topic_data_val, session_val) {
+function MatrixGroupObject (root_object_val, topic_data_val, cluster_val) {
     "use strict";
 
-    this.init__ = function (root_object_val, topic_data_val, session_val) {
+    this.init__ = function (root_object_val, topic_data_val, cluster_val) {
         this.theRootObject = root_object_val;
+        this.theClusterObject = cluster_val;
         this.theJointObject = this.rootObject().importObject().importListMgr().malloc_joint(999);
-        //session_val.setClusterObject(this);
-        this.theSessionArray = [2];
-        this.theSessionArray[0] = session_val;
-        this.theSessionArrayLength = 1;
         this.theTransmitQueue = this.rootObject().importObject().mallocQueue();
         this.theNext = null;
         this.thePrev = null;
@@ -39,6 +36,10 @@ function MatrixGroupObject (root_object_val, topic_data_val, session_val) {
 
     this.rootObject = function () {
         return this.theRootObject;
+    };
+
+    this.clusterObject = function () {
+        return this.theClusterObject;
     };
 
     this.jointObject = function () {
@@ -63,18 +64,6 @@ function MatrixGroupObject (root_object_val, topic_data_val, session_val) {
 
     this.setTopicObject = function (val) {
         this.theTopicObject = val;
-    };
-
-    this.sessionArray = function (index_val) {
-        return this.theSessionArray[index_val];
-    };
-
-    this.sessionArrayLength = function () {
-        return this.theSessionArrayLength;
-    };
-
-    this.incrementSessionArrayLength = function () {
-        this.theSessionArrayLength += 1;
     };
 
     this.prev = function () {
@@ -140,12 +129,7 @@ function MatrixGroupObject (root_object_val, topic_data_val, session_val) {
     this.receiveData = function (data_val) {
         this.topicMgrObject().topicReceiveData(this.topicBaseId(), data_val);
         var data = this.topicMgrObject().topicTransmitData(this.topicBaseId());
-        this.debug(false, "receiveData", "data=" + data);
-        var i = 0;
-        while (i < this.sessionArrayLength()) {
-            this.sessionArray(i).enqueueTransmitData(data);
-            i += 1;
-        }
+        require("../fabric_modules/fabric_cluster_mgr.js").receive_data(this.clusterObject(), data);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
@@ -162,5 +146,5 @@ function MatrixGroupObject (root_object_val, topic_data_val, session_val) {
         this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(root_object_val, topic_data_val, session_val);
+    this.init__(root_object_val, topic_data_val, cluster_val);
 }

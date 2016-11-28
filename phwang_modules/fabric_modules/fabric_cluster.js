@@ -1,42 +1,42 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: fabric_cluster_mgr.js
+ * File name: fabric_cluster.js
  */
 
 module.exports = {
     malloc: function (root_object_val) {
-        return new FabricClusterMgrClass(root_object_val);
+        return new FabricClusterClass(root_object_val);
     },
 };
 
-function FabricClusterMgrClass(root_object_val) {
+function FabricClusterClass(root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
-        this.theRootObject = root_object_val;
+        this.theRootObject  = root_object_val;
+        this.theJointObject = this.importListMgr().malloc_joint(0, "tbd");
         this.debug(true, "init__", "");
     };
 
     this.objectName = function () {
-        return "FabricClusterMgrClass";
+        return "FabricClusterClass";
     };
 
     this.rootObject = function () {
         return this.theRootObject;
     };
 
-    this.utilObject = function () {
-        return this.rootObject().utilObject();
+    this.jointObject = function () {
+        return this.theJointObject;
     };
 
-    this.clusterRootObject = function () {
-        return this.rootObject().clusterRootObject();
+    this.importObject = function () {
+        return this.rootObject().importObject();
     };
 
-    this.mallocCluster = function (data_val, session_val) {
-        var cluster = require("./fabric_cluster.js").malloc(this.rootObject());
-        return require("../matrix_modules/matrix_group_mgr.js").malloc_group(data_val, session_val);
+    this.importListMgr = function () {
+        return this.importObject().importListMgr();
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
@@ -55,4 +55,3 @@ function FabricClusterMgrClass(root_object_val) {
 
     this.init__(root_object_val);
 }
-

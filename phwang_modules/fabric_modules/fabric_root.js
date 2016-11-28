@@ -31,7 +31,8 @@ function FabricRootClass () {
         this.theUlinkObject = this.importObject().importUlink().malloc(this);
         this.theDlinkObject = this.importObject().importDlink().malloc(this);
         this.theBaseObject = this.importObject().importBase().malloc(this);
-        this.theLinkMgrObject = this.importObject().importListMgr().malloc_mgr(this, 0);
+        this.theLinkListObject = this.importObject().importListMgr().malloc_mgr(this, 0);
+        this.theClusterListObject = this.importObject().importListMgr().malloc_mgr(this, 0);
         this.theSwitchObject = this.importObject().importSwitch().malloc(this);
         this.theAjaxObject = this.importObject().importAjax().malloc(this);
         this.theClusterRootObject = require("../cluster_modules/cluster_root.js").malloc(this);
@@ -58,8 +59,12 @@ function FabricRootClass () {
         return this.theBaseObject;
     };
 
-    this.linkMgrObject = function () {
-        return this.theLinkMgrObject;
+    this.linkListObject = function () {
+        return this.theLinkListObject;
+    };
+
+    this.ClusterListObject = function () {
+        return this.theClusterListObject;
     };
 
     this.clusterRootObject = function () {

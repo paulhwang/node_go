@@ -47,8 +47,8 @@ function FabricSwitchClass(root_object_val) {
         return this.rootObject().ulinkObject();
     };
 
-    this.linkMgrObject = function () {
-        return this.rootObject().linkMgrObject();
+    this.linkListObject = function () {
+        return this.rootObject().linkListObject();
     };
 
     this.clusterMgrObject = function () {
@@ -111,7 +111,7 @@ function FabricSwitchClass(root_object_val) {
     };
 
     this.getLinkObject = function (go_request) {
-        var link = this.linkMgrObject().searchIdName(go_request.link_id, go_request.my_name);
+        var link = this.linkListObject().searchIdName(go_request.link_id, go_request.my_name);
         if (!link) {
             this.debug(true, "getLinkObject", "null link: link_id=" + go_request.link_id + " my_name=" + go_request.my_name);
             return null;
@@ -225,7 +225,7 @@ function FabricSwitchClass(root_object_val) {
     };
 
     this.getSessionObject = function (go_request) {
-        var link = this.linkMgrObject().searchId(go_request.link_id);
+        var link = this.linkListObject().searchId(go_request.link_id);
         if (!link) {
             this.logit("getSessionObject", "link not found: link_id=" + go_request.link_id);
             return null;

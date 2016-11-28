@@ -29,7 +29,7 @@ function FabricBaseClass(root_object_val) {
     };
 
     this.linkMgrObject = function () {
-        return this.rootObject().linkMgrObject();
+        return this.rootObject().linkListObject();
     };
 
     this.utilObject = function () {

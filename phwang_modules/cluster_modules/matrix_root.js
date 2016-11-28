@@ -29,7 +29,7 @@ function ClusterRootClass () {
     "use strict";
 
     this.init__ = function () {
-        this.theImportObject = require("./cluster_import.js").malloc(this);
+        this.theImportObject = require("./matrix_import.js").malloc(this);
         this.theUlinkObject = this.importObject().importUlink().malloc(this);
         this.theDlinkObject = this.importObject().importDlink().malloc(this);
         this.theClusterBaseObject = this.importObject().importClusterBase().malloc(this);

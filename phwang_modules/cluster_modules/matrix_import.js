@@ -30,7 +30,7 @@ function ClusterImportClass (root_object_val) {
     }
 
     this.importUlink = function () {
-        return require("./cluster_ulink.js");
+        return require("./matrix_topic_mgr.js");
     }
 
     this.importDlink = function () {

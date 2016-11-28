@@ -33,7 +33,7 @@ function FabricImportClass (root_object_val) {
         return require("./fabric_ulink.js");
     }
 
-    this.importDlink = function () {
+    this.importLinkMgr = function () {
         return require("./fabric_link_mgr.js");
     }
 

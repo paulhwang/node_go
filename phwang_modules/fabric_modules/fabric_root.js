@@ -29,7 +29,7 @@ function FabricRootClass () {
     this.init__ = function () {
         this.theImportObject = require("./fabric_import.js").malloc(this);
         this.theUlinkObject = this.importObject().importUlink().malloc(this);
-        this.theDlinkObject = this.importObject().importDlink().malloc(this);
+        this.theDlinkObject = this.importObject().importLinkMgr().malloc(this);
         this.theBaseObject = this.importObject().importBase().malloc(this);
         this.theLinkListObject = this.importObject().importListMgr().malloc_mgr(this, 0);
         this.theClusterListObject = this.importObject().importListMgr().malloc_mgr(this, 0);

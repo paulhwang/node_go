@@ -47,6 +47,10 @@ function FabricClusterMgrClass(root_object_val) {
         return cluster;
     };
 
+    this.receiveData = function (cluster_object_val, data_val) {
+        cluster_object_val.receiveData(data_val);
+    };
+
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
             this.logit(str1_val, str2_val);

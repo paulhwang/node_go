@@ -35,7 +35,7 @@ function FabricRootClass () {
         this.theClusterListObject = this.importObject().importListMgr().malloc_mgr(this, 0);
         this.theSwitchObject = this.importObject().importSwitch().malloc(this);
         this.theAjaxObject = this.importObject().importAjax().malloc(this);
-        this.theClusterRootObject = require("../cluster_modules/matrix_root.js").malloc(this);
+        this.theClusterRootObject = require("../matrix_modules/matrix_root.js").malloc(this);
         this.debug(true, "init__", "");
     };
 

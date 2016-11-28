@@ -53,6 +53,10 @@ function FabricClusterClass(root_object_val, topic_data_val, session_val) {
         return this.importObject().importListMgr();
     };
 
+    this.receiveQueue = function () {
+        return this.theReceiveQueue;
+    };
+
     this.sessionArray = function (index_val) {
         return this.theSessionArray[index_val];
     };
@@ -68,6 +72,37 @@ function FabricClusterClass(root_object_val, topic_data_val, session_val) {
     this.addAdditionalSession = function (session_val) {
         this.theSessionArray[this.sessionArrayLength()] = session_val;
         this.incrementSessionArrayLength();
+    };
+
+    this.enqueueReceiveData = function (data_val) {
+        this.debug(false, "enqueueReceiveData", data_val);
+        this.receiveQueue().enQueue(data_val);
+    };
+
+    this.dequeueReceiveData = function () {
+        var data = this.receiveQueue().deQueue();
+        this.debug(false, "dequeueReceiveData", data);
+        return data;
+    };
+
+    this.processReceiveData = function () {
+        while (true) {
+            var data = this.dequeueReceiveData();
+            if (!data) {
+                return;
+            }
+            this.receiveData(data);
+        }
+    };
+
+    this.enqueAndPocessReceiveData = function (data_val) {
+        this.debug(false, "enqueAndPocessReceiveData", data_val);
+        this.enqueueReceiveData(data_val);
+        this.processReceiveData();
+    };
+
+    this.receiveData = function (data_val) {
+        this.groupObject().receiveData(data_val);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

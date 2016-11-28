@@ -22,6 +22,7 @@ function FabricClusterMgrClass(root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
+        this.theClusterListObject = this.importObject().importListMgr().malloc_mgr(this, 0);
         this.debug(true, "init__", "");
     };
 
@@ -31,6 +32,10 @@ function FabricClusterMgrClass(root_object_val) {
 
     this.rootObject = function () {
         return this.theRootObject;
+    };
+
+    this.ClusterListObject = function () {
+        return this.theClusterListObject;
     };
 
     this.utilObject = function () {

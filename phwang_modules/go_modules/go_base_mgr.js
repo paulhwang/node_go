@@ -6,11 +6,11 @@
 
 module.exports = {
     malloc: function (root_object_val) {
-        return new GoDlinkClass(root_object_val);
+        return new GoBaseMgrClass(root_object_val);
     },
 };
 
-function GoDlinkClass(root_object_val) {
+function GoBaseMgrClass(root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
@@ -19,7 +19,7 @@ function GoDlinkClass(root_object_val) {
     };
 
     this.objectName = function () {
-        return "GoDlinkClass";
+        return "GoBaseMgrClass";
     };
 
     this.rootObject = function () {

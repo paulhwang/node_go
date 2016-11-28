@@ -20,7 +20,7 @@ function FabricClusterClass(root_object_val, topic_data_val, session_val) {
         this.theSessionArray[0] = session_val;
         this.theSessionArrayLength = 1;
         this.theJointObject = this.importListMgr().malloc_joint(0, "tbd");
-        this.theReceiveQueue = this.rootObject().importObject().mallocQueue();
+        this.theTransmitQueue = this.rootObject().importObject().mallocQueue();
         this.debug(true, "init__", "");
     };
 
@@ -53,8 +53,8 @@ function FabricClusterClass(root_object_val, topic_data_val, session_val) {
         return this.importObject().importListMgr();
     };
 
-    this.receiveQueue = function () {
-        return this.theReceiveQueue;
+    this.transmitQueue = function () {
+        return this.theTransmitQueue;
     };
 
     this.sessionArray = function (index_val) {
@@ -74,35 +74,17 @@ function FabricClusterClass(root_object_val, topic_data_val, session_val) {
         this.incrementSessionArrayLength();
     };
 
-    this.enqueueReceiveData = function (data_val) {
-        this.debug(false, "enqueueReceiveData", data_val);
-        this.receiveQueue().enQueue(data_val);
-    };
 
-    this.dequeueReceiveData = function () {
-        var data = this.receiveQueue().deQueue();
-        this.debug(false, "dequeueReceiveData", data);
-        return data;
-    };
-
-    this.processReceiveData = function () {
+    this.TransmitData = function (data_val) {
+        this.debug(false, "TransmitData", data_val);
+        this.transmitQueue().enQueue(data_val);
         while (true) {
-            var data = this.dequeueReceiveData();
+            var data = this.transmitQueue().deQueue();
             if (!data) {
                 return;
             }
-            this.receiveData(data);
+            require("../matrix_modules/matrix_group_mgr.js").receive_data(this.groupObject(), data);
         }
-    };
-
-    this.enqueAndPocessReceiveData = function (data_val) {
-        this.debug(false, "enqueAndPocessReceiveData", data_val);
-        this.enqueueReceiveData(data_val);
-        this.processReceiveData();
-    };
-
-    this.receiveData = function (data_val) {
-        require("../matrix_modules/matrix_group_mgr.js").receive_data(this.groupObject(), data_val);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

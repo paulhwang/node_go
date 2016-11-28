@@ -285,11 +285,11 @@ function FabricSwitchClass(root_object_val) {
         }
 
         if (go_request.xmt_seq === session.up_seq) {
-            session.clusterObject().enqueAndPocessReceiveData(go_request.data);
+            session.clusterObject().TransmitData(go_request.data);
             session.up_seq += 1;
         } else if (go_request.xmt_seq < session.up_seq) {
             if (go_request.xmt_seq === 0) {
-                session.clusterObject().enqueAndPocessReceiveData(go_request.data);
+                session.clusterObject().TransmitData(go_request.data);
                 session.up_seq = 1;
                 this.logit("putSessionData", go_request.data + " post " + go_request.xmt_seq + " reset");
             } else {

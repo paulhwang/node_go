@@ -32,7 +32,6 @@ function MatrixRootClass () {
         this.theImportObject = require("./matrix_import.js").malloc(this);
         this.theTopicMgrObject = this.importObject().importTopicMgr().malloc(this);
         this.theGroupMgrObject = this.importObject().importGroupMgr().malloc(this);
-        this.theClusterBaseObject = this.importObject().importClusterBase().malloc(this);
         this.theGroupListObject = this.importObject().importListMgr().malloc_mgr(this, 0);
         this.debug(true, "init__", "");
     };
@@ -59,18 +58,6 @@ function MatrixRootClass () {
 
     this.groupMgrObject = function () {
         return this.theGroupMgrObject;
-    };
-
-    this.baseObject = function () {
-        return this.theBaseObject;
-    };
-
-    this.clusterBaseObject = function () {
-        return this.theClusterBaseObject;
-    };
-
-    this.clusterMgrObject = function () {
-        return this.theClusterMgrObject;
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

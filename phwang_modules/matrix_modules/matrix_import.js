@@ -25,10 +25,6 @@ function ClusterImportClass (root_object_val) {
         return this.theRootObject;
     };
 
-    this.importClusterBase = function () {
-        return require("./cluster_base.js");
-    }
-
     this.importTopicMgr = function () {
         return require("./matrix_topic_mgr.js");
     }

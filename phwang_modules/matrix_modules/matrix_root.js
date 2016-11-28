@@ -11,18 +11,6 @@ module.exports = {
         the_matrix_root_object.setRootObject(root_object_val);
         return the_matrix_root_object;
     },
-
-    malloc_base: function () {
-        return the_matrix_root_object.mallocBase();
-    },
-
-    receive_data: function (base_id_val, data_val) {
-        the_matrix_root_object.receiveData(base_id_val, data_val);
-    },
-
-    transmit_data: function (base_id_val) {
-        return the_matrix_root_object.transmitData(base_id_val);
-    },
 };
 
 function MatrixRootClass () {

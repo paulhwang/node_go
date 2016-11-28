@@ -25,8 +25,7 @@ function GoRootClass () {
 
     this.init__ = function () {
         this.theImportObject = require("./go_import.js").malloc(this);
-        this.theUlinkObject = this.importObject().importUlink().malloc(this);
-        this.theDlinkObject = this.importObject().importDlink().malloc(this);
+        this.theDlinkObject = this.importObject().importBaseMgr().malloc(this);
         this.theBaseListObject = this.importObject().importListMgr().malloc_mgr(this, 100);
         this.debug(true, "init__", "");
     };
@@ -37,10 +36,6 @@ function GoRootClass () {
 
     this.importObject = function () {
         return this.theImportObject;
-    };
-
-    this.ulinkObject = function () {
-        return this.theUlinkObject;
     };
 
     this.dlinkObject = function () {

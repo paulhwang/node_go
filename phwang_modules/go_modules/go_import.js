@@ -33,8 +33,8 @@ function GoImportClass (root_object_val) {
         return require("./go_ulink.js");
     }
 
-    this.importDlink = function () {
-        return require("./go_dlink.js");
+    this.importBaseMgr = function () {
+        return require("./go_base_mgr.js");
     }
 
     this.importConfig = function () {

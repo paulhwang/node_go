@@ -1,7 +1,7 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: import.js
+ * File name: fabric_import.js
  */
 
 module.exports = {
@@ -29,8 +29,8 @@ function FabricImportClass (root_object_val) {
         return require("./fabric_base.js");
     }
 
-    this.importUlink = function () {
-        return require("./fabric_ulink.js");
+    this.importClusterMgr = function () {
+        return require("./fabric_cluster_mgr.js");
     }
 
     this.importLinkMgr = function () {

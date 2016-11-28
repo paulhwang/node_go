@@ -57,7 +57,7 @@ function ClusterRootClass () {
         return this.theTopicMgrObject;
     };
 
-    this.dlinkObject = function () {
+    this.groupMgrObject = function () {
         return this.theGroupMgrObject;
     };
 

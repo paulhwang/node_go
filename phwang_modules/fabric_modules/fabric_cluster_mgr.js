@@ -4,9 +4,16 @@
  * File name: fabric_cluster_mgr.js
  */
 
+var the_fabric_cluster_mgr_object = null;
+
 module.exports = {
     malloc: function (root_object_val) {
-        return new FabricClusterMgrClass(root_object_val);
+        the_fabric_cluster_mgr_object = new FabricClusterMgrClass(root_object_val);
+        return the_fabric_cluster_mgr_object;
+    },
+
+    receive_data: function (cluster_object_val, data_val) {
+        the_fabric_cluster_mgr_object.receiveData(cluster_object_val, data_val);
     },
 };
 

@@ -87,6 +87,15 @@ function FabricClusterClass(root_object_val, topic_data_val, session_val) {
         }
     };
 
+    this.receiveData = function (data_val) {
+        this.debug(false, "receiveData", "data_val=" + data_val);
+        var i = 0;
+        while (i < this.sessionArrayLength()) {
+            this.sessionArray(i).enqueueTransmitData(data_val);
+            i += 1;
+        }
+    };
+
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
             this.logit(str1_val, str2_val);

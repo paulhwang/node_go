@@ -15,7 +15,6 @@ function clusterBaseClass(root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
-        this.theGlobalGroupId = 100;
         this.theClusterQueue = this.rootObject().importObject().mallocQueue();
         this.thePoolQueue = this.rootObject().importObject().mallocQueue();
         this.debug(false, "init__", "");
@@ -35,20 +34,6 @@ function clusterBaseClass(root_object_val) {
 
     this.clusterQueue = function () {
         return this.theClusterQueue;
-    };
-
-    this.globalGroupId = function () {
-        return this.theGlobalGroupId;
-    };
-
-    this.incrementGlobalGroupId = function () {
-        this.theGlobalGroupId += 1;
-    };
-
-    this.mallocGroup = function (data_val, session_val) {
-        var group = this.rootObject().importObject().importGroup().malloc(this.rootObject(), data_val, session_val);
-        this.incrementGlobalGroupId();
-        return group;
     };
 
     this.freeCluster = function (cluster_val) {

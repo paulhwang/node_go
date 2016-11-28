@@ -30,9 +30,10 @@ function MatrixRootClass () {
 
     this.init__ = function () {
         this.theImportObject = require("./matrix_import.js").malloc(this);
+        this.theTopicListObject = this.importObject().importListMgr().malloc_mgr(this, 0);
+        this.theGroupListObject = this.importObject().importListMgr().malloc_mgr(this, 0);
         this.theTopicMgrObject = this.importObject().importTopicMgr().malloc(this);
         this.theGroupMgrObject = this.importObject().importGroupMgr().malloc(this);
-        this.theGroupListObject = this.importObject().importListMgr().malloc_mgr(this, 0);
         this.debug(true, "init__", "");
     };
 

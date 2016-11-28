@@ -1,16 +1,16 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: cluster_ulink.js
+ * File name: matrix_topic_mgr.js
  */
 
 module.exports = {
     malloc: function (root_object_val) {
-        return new ClusterUlinkClass(root_object_val);
+        return new MatrixTopicMgrClass(root_object_val);
     },
 };
 
-function ClusterUlinkClass(root_object_val) {
+function MatrixTopicMgrClass(root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
@@ -19,7 +19,7 @@ function ClusterUlinkClass(root_object_val) {
     };
 
     this.objectName = function () {
-        return "ClusterUlinkClass";
+        return "MatrixTopicMgrClass";
     };
 
     this.rootObject = function () {

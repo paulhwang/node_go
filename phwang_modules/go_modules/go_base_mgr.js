@@ -4,9 +4,28 @@
  * File name: go_dlink.js
  */
 
+var the_go_base_mgr_object = null;
+
 module.exports = {
     malloc: function (root_object_val) {
-        return new GoBaseMgrClass(root_object_val);
+        the_go_base_mgr_object = new GoBaseMgrClass(root_object_val);
+        return the_go_base_mgr_object;
+    },
+
+    get_the_go_base_mgr_object: function () {
+        return the_go_base_mgr_object;
+    },
+
+    malloc_base: function () {
+        return the_go_base_mgr_object.mallocBase();
+    },
+
+    receive_data: function (base_id_val, data_val) {
+        the_go_base_mgr_object.receiveData(base_id_val, data_val);
+    },
+
+    transmit_data: function (base_id_val) {
+        return the_go_base_mgr_object.transmitData(base_id_val);
     },
 };
 

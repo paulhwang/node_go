@@ -1,16 +1,16 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: go_cluster_module.js
+ * File name: matrix_group.js
  */
 
 module.exports = {
     malloc: function (root_object_val, topic_data_val, session_val) {
-        return new clusterObject(root_object_val, topic_data_val, session_val);
+        return new MatrixGroupObject(root_object_val, topic_data_val, session_val);
     },
 };
 
-function clusterObject (root_object_val, topic_data_val, session_val) {
+function MatrixGroupObject (root_object_val, topic_data_val, session_val) {
     "use strict";
 
     this.init__ = function (root_object_val, topic_data_val, session_val) {
@@ -35,7 +35,7 @@ function clusterObject (root_object_val, topic_data_val, session_val) {
     },
 
     this.objectName = function () {
-        return "clusterObject";
+        return "MatrixGroupObject";
     };
 
     this.rootObject = function () {

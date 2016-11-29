@@ -37,6 +37,7 @@ function FabricAjaxClass(root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
+        this.theSwitchObject = this.importObject().importSwitch().malloc(this.rootObject());
         this.debug(true, "init__", "");
     };
 
@@ -49,7 +50,11 @@ function FabricAjaxClass(root_object_val) {
     };
 
     this.switchObject = function () {
-        return this.rootObject().switchObject();
+        return this.theSwitchObject;
+    };
+
+    this.importObject = function () {
+        return this.rootObject().importObject();
     };
 
     this.utilObject = function () {

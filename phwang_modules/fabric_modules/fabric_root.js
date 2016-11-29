@@ -23,7 +23,6 @@ function FabricRootClass () {
         this.theImportObject = require("./fabric_import.js").malloc(this);
         this.theClusterMgrObject = this.importObject().importClusterMgr().malloc(this);
         this.theLinkMgrObject = this.importObject().importLinkMgr().malloc(this);
-        this.theSwitchObject = this.importObject().importSwitch().malloc(this);
         this.theAjaxObject = this.importObject().importAjax().malloc(this);
         this.debug(true, "init__", "");
     };
@@ -42,9 +41,6 @@ function FabricRootClass () {
 
     this.linkMgrObject = function () {
         return this.theLinkMgrObject;
-    };
-    this.switchObject = function () {
-        return this.theSwitchObject;
     };
 
     this.ajaxObject = function () {

@@ -3,9 +3,14 @@
  * Written by Paul Hwang
  * File name: fabric_root.js
  */
-var the_root_object = new FabricRootClass();
+
+var the_fabric_root_object = null;
 
 module.exports = {
+    malloc: function () {
+        the_fabric_root_object = new FabricRootClass();
+        return the_fabric_root_object;
+    },
 };
 
 function FabricRootClass () {

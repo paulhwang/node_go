@@ -4,9 +4,13 @@
  * File name: matrix_root.js
  */
 
-var the_matrix_root_object = new MatrixRootClass();
+var the_matrix_root_object = null;
 
 module.exports = {
+    malloc: function () {
+        the_matrix_root_object = new MatrixRootClass();
+        return the_matrix_root_object;
+    },
 };
 
 function MatrixRootClass () {

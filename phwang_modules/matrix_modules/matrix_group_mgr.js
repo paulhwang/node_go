@@ -27,7 +27,6 @@ function MatrixGroupMgrClass(root_object_val) {
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
         this.theGroupListObject = this.importObject().importListMgr().malloc_mgr(this, 200);
-        this.theGlobalGroupId = 100;
         this.debug(true, "init__", "");
     };
 
@@ -51,18 +50,9 @@ function MatrixGroupMgrClass(root_object_val) {
         return this.rootObject().utilObject();
     };
 
-    this.globalGroupId = function () {
-        return this.theGlobalGroupId;
-    };
-
-    this.incrementGlobalGroupId = function () {
-        this.theGlobalGroupId += 1;
-    };
-
     this.mallocGroup = function (data_val, cluster_val) {
         var group = this.importObject().importGroup().malloc(this.rootObject(), this.groupListObject().allocId(), data_val, cluster_val);
         this.groupListObject().insertEntry(group);
-        this.incrementGlobalGroupId();
         return group;
     };
 

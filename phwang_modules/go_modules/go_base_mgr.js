@@ -57,7 +57,6 @@ function GoBaseMgrClass(root_object_val) {
     this.mallocBase = function () {
         var base = this.importObject().importBase().malloc(this.rootObject(), this.baseListObject().allocId());
         this.baseListObject().insertEntry(base);
-        this.debug(false, "mallocBase", "baseId=" + base.baseId());
         return base.baseId();
     };
 

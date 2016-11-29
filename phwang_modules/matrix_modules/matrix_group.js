@@ -5,18 +5,18 @@
  */
 
 module.exports = {
-    malloc: function (root_object_val, group_id_val, topic_data_val, cluster_val) {
-        return new MatrixGroupObject(root_object_val, group_id_val, topic_data_val, cluster_val);
+    malloc: function (root_object_val, group_id_val, topic_data_val, cluster_id_val) {
+        return new MatrixGroupObject(root_object_val, group_id_val, topic_data_val, cluster_id_val);
     },
 };
 
-function MatrixGroupObject (root_object_val, group_id_val, topic_data_val, cluster_val) {
+function MatrixGroupObject (root_object_val, group_id_val, topic_data_val, cluster_id_val) {
     "use strict";
 
-    this.init__ = function (root_object_val, group_id_val, topic_data_val, cluster_val) {
+    this.init__ = function (root_object_val, group_id_val, topic_data_val, cluster_id_val) {
         this.theRootObject = root_object_val;
         this.theJointObject = this.importListMgr().malloc_joint(group_id_val);
-        this.theClusterObject = cluster_val;
+        this.theClusterId = cluster_id_val;
         this.theTransmitQueue = this.importObject().mallocQueue();
         this.theTopicBaseId = 0;
         this.createTopic(topic_data_val);
@@ -36,8 +36,8 @@ function MatrixGroupObject (root_object_val, group_id_val, topic_data_val, clust
         return this.theRootObject;
     };
 
-    this.clusterObject = function () {
-        return this.theClusterObject;
+    this.clusterId = function () {
+        return this.theClusterId;
     };
 
     this.importObject = function () {
@@ -123,7 +123,7 @@ function MatrixGroupObject (root_object_val, group_id_val, topic_data_val, clust
     this.receiveData = function (data_val) {
         this.topicMgrObject().topicReceiveData(this.topicBaseId(), data_val);
         var data = this.topicMgrObject().topicTransmitData(this.topicBaseId());
-        require("../fabric_modules/fabric_cluster_mgr.js").receive_data(this.clusterObject(), data);
+        require("../fabric_modules/fabric_cluster_mgr.js").receive_data(this.clusterId(), data);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
@@ -140,5 +140,5 @@ function MatrixGroupObject (root_object_val, group_id_val, topic_data_val, clust
         this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(root_object_val, group_id_val, topic_data_val, cluster_val);
+    this.init__(root_object_val, group_id_val, topic_data_val, cluster_id_val);
 }

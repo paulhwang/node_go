@@ -12,8 +12,8 @@ module.exports = {
         return the_fabric_cluster_mgr_object;
     },
 
-    receive_data: function (cluster_object_val, data_val) {
-        the_fabric_cluster_mgr_object.receiveData(cluster_object_val, data_val);
+    receive_data: function (cluster_id_val, data_val) {
+        the_fabric_cluster_mgr_object.receiveData(cluster_id_val, data_val);
     },
 };
 
@@ -49,12 +49,16 @@ function FabricClusterMgrClass(root_object_val) {
     this.mallocCluster = function (data_val, session_val) {
         var cluster = this.importObject().importCluster().malloc(this.rootObject(),this.clusterListObject().allocId(), data_val, session_val);
         this.clusterListObject().insertEntry(cluster);
-        cluster.setGroupId(require("../matrix_modules/matrix_group_mgr.js").malloc_group(data_val, cluster));
+        cluster.setGroupId(require("../matrix_modules/matrix_group_mgr.js").malloc_group(data_val, cluster.clusterId()));
         return cluster;
     };
 
-    this.receiveData = function (cluster_object_val, data_val) {
-        cluster_object_val.receiveData(data_val);
+    this.receiveData = function (cluster_id_val, data_val) {
+        var cluster = this.clusterListObject().searchId(cluster_id_val);
+        if (!cluster) {
+            return;
+        }
+        cluster.receiveData(data_val);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

@@ -8,6 +8,9 @@ var the_matrix_root_object = null;
 
 module.exports = {
     malloc: function () {
+        if (the_matrix_root_object) {
+            return;
+        }
         the_matrix_root_object = new MatrixRootClass();
         return the_matrix_root_object;
     },

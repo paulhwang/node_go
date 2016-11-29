@@ -8,6 +8,9 @@ var the_fabric_root_object = null;
 
 module.exports = {
     malloc: function () {
+        if (the_fabric_root_object) {
+            return;
+        }
         the_fabric_root_object = new FabricRootClass();
         return the_fabric_root_object;
     },

@@ -9,6 +9,9 @@ var the_go_root_object = new GoRootClass();
 
 module.exports = {
     malloc: function () {
+        if (the_go_root_object) {
+            return;
+        }
         the_go_root_object = new GoRootClass();
         return the_go_root_object;
     },

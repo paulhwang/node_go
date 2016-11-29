@@ -53,11 +53,15 @@ function MatrixGroupMgrClass(root_object_val) {
     this.mallocGroup = function (data_val, cluster_val) {
         var group = this.importObject().importGroup().malloc(this.rootObject(), this.groupListObject().allocId(), data_val, cluster_val);
         this.groupListObject().insertEntry(group);
-        return group;
+        return group.groupId();
     };
 
-    this.receiveData = function (group_object_val, data_val) {
-        group_object_val.receiveData(data_val);
+    this.receiveData = function (group_id_val, data_val) {
+        var group = this.groupListObject().searchId(group_id_val);
+        if (!group) {
+            return;
+        }
+        group.receiveData(data_val);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

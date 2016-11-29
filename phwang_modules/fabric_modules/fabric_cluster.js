@@ -17,6 +17,7 @@ function FabricClusterClass(root_object_val, cluster_id_val, topic_data_val, ses
         this.theRootObject  = root_object_val;
         this.theJointObject = this.importListMgr().malloc_joint(cluster_id_val);
         session_val.setClusterObject(this);
+        this.theGroupId = 0;
         this.theSessionArray = [2];
         this.theSessionArray[0] = session_val;
         this.theSessionArrayLength = 1;
@@ -44,12 +45,12 @@ function FabricClusterClass(root_object_val, cluster_id_val, topic_data_val, ses
         return this.importObject().importListMgr();
     };
 
-    this.groupObject = function () {
-        return this.theGroupObject;
+    this.groupId = function () {
+        return this.theGroupId;
     };
 
-    this.setGroupObject = function (val) {
-        this.theGroupObject = val;
+    this.setGroupId = function (val) {
+        this.theGroupId = val;
     };
 
     this.transmitQueue = function () {
@@ -86,7 +87,7 @@ function FabricClusterClass(root_object_val, cluster_id_val, topic_data_val, ses
             if (!data) {
                 return;
             }
-            require("../matrix_modules/matrix_group_mgr.js").receive_data(this.groupObject(), data);
+            require("../matrix_modules/matrix_group_mgr.js").receive_data(this.groupId(), data);
         }
     };
 

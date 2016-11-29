@@ -26,7 +26,7 @@ function MatrixGroupMgrClass(root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
-        this.theGroupListObject = this.importObject().importListMgr().malloc_mgr(this, 0);
+        this.theGroupListObject = this.importObject().importListMgr().malloc_mgr(this, 200);
         this.theGlobalGroupId = 100;
         this.debug(true, "init__", "");
     };

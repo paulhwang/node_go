@@ -15,6 +15,7 @@ function MatrixTopicMgrClass(root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
+        this.theTopicListObject = this.importObject().importListMgr().malloc_mgr(this, 100);
         this.debug(true, "init__", "");
     };
 
@@ -24,6 +25,14 @@ function MatrixTopicMgrClass(root_object_val) {
 
     this.rootObject = function () {
         return this.theRootObject;
+    };
+
+    this.topicListObject = function () {
+        return this.theTopicListObject;
+    };
+
+    this.importObject = function () {
+        return this.rootObject().importObject();
     };
 
     this.utilObject = function () {

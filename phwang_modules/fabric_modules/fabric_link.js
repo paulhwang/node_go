@@ -19,7 +19,6 @@ function FabricLinkClass(root_object_val, my_name_val, link_id_val) {
         this.theMyName = my_name_val;
         this.theJointObject = this.importListMgr().malloc_joint(link_id_val, my_name_val);
         this.theSessionListObject = this.importListMgr().malloc_mgr(this, 10000);
-        this.theGlobalSessionId = 1000;
         this.up_seq = 0;
         this.down_seq = 0;
         this.theReceiveQueue = this.importObject().mallocQueue();
@@ -77,14 +76,6 @@ function FabricLinkClass(root_object_val, my_name_val, link_id_val) {
 
     this.setMyName = function (val) {
         this.theMyName = val;
-    };
-
-    this.globalSessionId = function () {
-        return this.theGlobalSessionId;
-    };
-
-    this.incrementGlobalSessionId = function () {
-        this.theGlobalSessionId += 1;
     };
 
     this.keepAliveTimer = function () {
@@ -157,8 +148,7 @@ function FabricLinkClass(root_object_val, my_name_val, link_id_val) {
     };
 
     this.mallocSession = function () {
-        var session = this.importObject().importSession().malloc(this, this.globalSessionId());
-        this.incrementGlobalSessionId();
+        var session = this.importObject().importSession().malloc(this, this.sessionListObject().allocId());
         this.sessionListObject().insertEntry(session);
         return session;
     };

@@ -15,12 +15,12 @@ function GoBaseClass (root_object_val, base_id_val) {
 
     this.init__ = function (root_object_val, base_id_val) {
         this.theRootObject = root_object_val;
-        this.theJointObject = this.rootObject().importObject().importListMgr().malloc_joint(base_id_val);
-        this.theConfigObject = this.rootObject().importObject().importConfig().malloc(this);
-        this.theBoardObject = this.rootObject().importObject().importBoard().malloc(this);
-        this.theEngineObject = this.rootObject().importObject().importEngine().malloc(this);
-        this.theGameObject = this.rootObject().importObject().importGame().malloc(this);
-        this.thePortObject = this.rootObject().importObject().importPort().malloc(this);
+        this.theJointObject = this.importListMgr().malloc_joint(base_id_val);
+        this.theConfigObject = this.importObject().importConfig().malloc(this);
+        this.theBoardObject = this.importObject().importBoard().malloc(this);
+        this.theEngineObject = this.importObject().importEngine().malloc(this);
+        this.theGameObject = this.importObject().importGame().malloc(this);
+        this.thePortObject = this.importObject().importPort().malloc(this);
         this.debug(true, "init__", "baseId=" + this.baseId());
     };
 
@@ -38,6 +38,14 @@ function GoBaseClass (root_object_val, base_id_val) {
 
     this.jointObject = function () {
         return this.theJointObject;
+    };
+
+    this.importObject = function () {
+        return this.rootObject().importObject();
+    };
+
+    this.importListMgr = function () {
+        return this.importObject().importListMgr();
     };
 
     this.configObject = function () {

@@ -20,7 +20,7 @@ function FabricClusterClass(root_object_val, topic_data_val, session_val) {
         this.theSessionArray = [2];
         this.theSessionArray[0] = session_val;
         this.theSessionArrayLength = 1;
-        this.theTransmitQueue = this.rootObject().importObject().mallocQueue();
+        this.theTransmitQueue = this.importObject().mallocQueue();
         this.debug(true, "init__", "clusterId=" + this.clusterId());
     };
 
@@ -40,17 +40,16 @@ function FabricClusterClass(root_object_val, topic_data_val, session_val) {
         return this.rootObject().importObject();
     };
 
+    this.importListMgr = function () {
+        return this.importObject().importListMgr();
+    };
+
     this.groupObject = function () {
         return this.theGroupObject;
     };
 
     this.setGroupObject = function (val) {
         this.theGroupObject = val;
-    };
-
-
-    this.importListMgr = function () {
-        return this.importObject().importListMgr();
     };
 
     this.transmitQueue = function () {

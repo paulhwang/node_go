@@ -15,7 +15,7 @@ function MatrixTopicObject (root_object_val, topic_id_val) {
 
     this.init__ = function (root_object_val, topic_id_val) {
         this.theRootObject = root_object_val;
-        this.theJointObject = this.rootObject().importObject().importListMgr().malloc_joint(999);
+        this.theJointObject = this.importListMgr().malloc_joint(topic_id_val);
         this.debug(true, "init__", "topicId=" + this.topicId());
     };
 
@@ -33,6 +33,14 @@ function MatrixTopicObject (root_object_val, topic_id_val) {
 
     this.jointObject = function () {
         return this.theJointObject;
+    };
+
+    this.importObject = function () {
+        return this.rootObject().importObject();
+    };
+
+    this.importListMgr = function () {
+        return this.importObject().importListMgr();
     };
 
     this.topicMgrObject = function () {

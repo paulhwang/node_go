@@ -4,7 +4,7 @@
  * File name: go_root.js
  */
 
-var the_go_root_object = new GoRootClass();
+var the_go_root_object = null;
 
 
 module.exports = {

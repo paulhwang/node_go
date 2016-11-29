@@ -37,7 +37,7 @@ function FabricAjaxClass(root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
-        this.theSwitchObject = this.importObject().importSwitch().malloc(this.rootObject());
+        this.theAjaxParserObject = this.importObject().importAjaxParser().malloc(this.rootObject());
         this.debug(true, "init__", "");
     };
 
@@ -49,8 +49,8 @@ function FabricAjaxClass(root_object_val) {
         return this.theRootObject;
     };
 
-    this.switchObject = function () {
-        return this.theSwitchObject;
+    this.ajaxParserObject = function () {
+        return this.theAjaxParserObject;
     };
 
     this.importObject = function () {
@@ -81,7 +81,7 @@ function FabricAjaxClass(root_object_val) {
             this.debug(false, "processGet", "command=" + go_request.command);
         }
 
-        var data = this.switchObject().switchRequest(req.headers.gorequest);
+        var data = this.ajaxParserObject().switchRequest(req.headers.gorequest);
         var json_str = JSON.stringify({
                         command: go_request.command,
                         data: data,

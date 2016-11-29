@@ -37,8 +37,8 @@ function FabricImportClass (root_object_val) {
         return require("./fabric_link_mgr.js");
     }
 
-    this.importSwitch = function () {
-        return require("./fabric_switch.js");
+    this.importAjaxParser = function () {
+        return require("./fabric_ajax_parser.js");
     };
 
     this.importAjax = function () {

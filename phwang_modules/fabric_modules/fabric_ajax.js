@@ -81,7 +81,7 @@ function FabricAjaxClass(root_object_val) {
             this.debug(false, "processGet", "command=" + go_request.command);
         }
 
-        var data = this.ajaxParserObject().switchRequest(req.headers.gorequest);
+        var data = this.ajaxParserObject().parseRequest(req.headers.gorequest);
         var json_str = JSON.stringify({
                         command: go_request.command,
                         data: data,

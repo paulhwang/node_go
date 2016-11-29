@@ -6,11 +6,11 @@
 
 module.exports = {
     malloc: function (root_object_val) {
-        return new FabricSwitchClass(root_object_val);
+        return new FabricAjaxParserClass(root_object_val);
     },
 };
 
-function FabricSwitchClass(root_object_val) {
+function FabricAjaxParserClass(root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
@@ -32,7 +32,7 @@ function FabricSwitchClass(root_object_val) {
     };
 
     this.objectName = function () {
-        return "FabricSwitchClass";
+        return "FabricAjaxParserClass";
     };
 
     this.rootObject = function () {
@@ -77,7 +77,7 @@ function FabricSwitchClass(root_object_val) {
         };
     };
 
-    this.switchRequest = function (input_val) {
+    this.parseRequest = function (input_val) {
         var go_request = JSON.parse(input_val);
         if (go_request.command === "get_link_data") {
             this.debug_(false, this.debugInput(), "switchRequest", "input_val=" + input_val);

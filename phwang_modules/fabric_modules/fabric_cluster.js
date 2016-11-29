@@ -15,11 +15,11 @@ function FabricClusterClass(root_object_val, topic_data_val, session_val) {
 
     this.init__ = function (root_object_val, topic_data_val, session_val) {
         this.theRootObject  = root_object_val;
+        this.theJointObject = this.importListMgr().malloc_joint(0, "tbd");
         session_val.setClusterObject(this);
         this.theSessionArray = [2];
         this.theSessionArray[0] = session_val;
         this.theSessionArrayLength = 1;
-        this.theJointObject = this.importListMgr().malloc_joint(0, "tbd");
         this.theTransmitQueue = this.rootObject().importObject().mallocQueue();
         this.debug(true, "init__", "");
     };

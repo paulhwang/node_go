@@ -15,8 +15,8 @@ function MatrixGroupObject (root_object_val, topic_data_val, cluster_val) {
 
     this.init__ = function (root_object_val, topic_data_val, cluster_val) {
         this.theRootObject = root_object_val;
-        this.theClusterObject = cluster_val;
         this.theJointObject = this.rootObject().importObject().importListMgr().malloc_joint(999);
+        this.theClusterObject = cluster_val;
         this.theTransmitQueue = this.rootObject().importObject().mallocQueue();
         this.theTopicBaseId = 0;
         this.createTopic(topic_data_val);

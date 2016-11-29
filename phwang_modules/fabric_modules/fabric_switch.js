@@ -48,7 +48,7 @@ function FabricSwitchClass(root_object_val) {
     };
 
     this.linkListObject = function () {
-        return this.rootObject().linkListObject();
+        return this.linkMgrObject().linkListObject();
     };
 
     this.clusterMgrObject = function () {

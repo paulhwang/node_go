@@ -17,6 +17,7 @@ function MatrixTopicMgrClass(root_object_val) {
         this.theRootObject = root_object_val;
         this.theTopicListObject = this.importObject().importListMgr().malloc_mgr(this, 100);
         this.debug(true, "init__", "");
+        this.mallocTopic();
     };
 
     this.objectName = function () {
@@ -49,6 +50,13 @@ function MatrixTopicMgrClass(root_object_val) {
 
     this.topicTransmitData = function (base_id_val) {
         return require("../go_modules/go_base_mgr.js").transmit_data(base_id_val);
+    };
+
+    this.mallocTopic = function () {
+        var topic = this.importObject().importTopic().malloc(this.rootObject(), this.topicListObject().allocId());
+        this.topicListObject().insertEntry(topic);
+        this.debug(false, "mallocTopic", "topicId=" + topic.topicId());
+        return topic.topicId();
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

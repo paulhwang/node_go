@@ -51,10 +51,6 @@ function FabricRootClass () {
         return this.theLinkMgrObject;
     };
 
-    this.baseObject = function () {
-        return this.theBaseObject;
-    };
-
     this.switchObject = function () {
         return this.theSwitchObject;
     };

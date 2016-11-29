@@ -23,14 +23,6 @@ function MatrixRootClass () {
         return "MatrixRootClass";
     };
 
-    this.setRootObject = function (val) {
-        return this.theRootObject = val;
-    };
-
-    this.rootObject = function () {
-        return this.theRootObject;
-    };
-
     this.importObject = function () {
         return this.theImportObject;
     };

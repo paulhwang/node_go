@@ -6,21 +6,6 @@
 var the_root_object = new FabricRootClass();
 
 module.exports = {
-    post: function (req, res) {
-        the_root_object.processPost(req, res);
-    },
-
-    get: function (req, res) {
-        the_root_object.processGet(req, res);
-    },
-
-    not_found: function (req, res) {
-        the_root_object.processNotFound(req, res);
-    },
-    
-    failure: function (req, res) {
-        the_root_object.processFailure(err, req, res, next);
-    },
 };
 
 function FabricRootClass () {
@@ -50,33 +35,12 @@ function FabricRootClass () {
     this.linkMgrObject = function () {
         return this.theLinkMgrObject;
     };
-
     this.switchObject = function () {
         return this.theSwitchObject;
     };
 
     this.ajaxObject = function () {
         return this.theAjaxObject;
-    };
-
-    this.processPost = function (req, res) {
-        this.ajaxObject().processPost(req, res);
-    };
-
-    this.processGet = function (req, res) {
-        this.ajaxObject().processGet(req, res);
-    };
-
-    this.processNotFound = function (req, res) {
-        console.log(req.headers);
-        this.debug(true, "processNotFound", "*****");
-        res.type('text/plain');
-        res.status(404);
-        res.send('Not Found');
-    };
-
-    this.processFailure = function (err, req, res, next) {
-        this.logit("processFailure", state);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

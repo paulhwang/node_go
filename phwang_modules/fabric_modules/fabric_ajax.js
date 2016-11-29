@@ -4,9 +4,28 @@
  * File name: fibre_ajax.js
  */
 
+var the_fabric_ajax_object = null;
+
 module.exports = {
     malloc: function (root_object_val) {
-        return new FabricAjaxClass(root_object_val);
+        the_fabric_ajax_object = new FabricAjaxClass(root_object_val);
+        return the_fabric_ajax_object;
+    },
+
+    post: function (req, res) {
+        the_fabric_ajax_object.processPost(req, res);
+    },
+
+    get: function (req, res) {
+        the_fabric_ajax_object.processGet(req, res);
+    },
+
+    not_found: function (req, res) {
+        the_fabric_ajax_object.processNotFound(req, res);
+    },
+
+    failure: function (req, res) {
+        the_fabric_ajax_object.processFailure(err, req, res, next);
     },
 };
 
@@ -61,6 +80,22 @@ function FabricAjaxClass(root_object_val) {
                     });
         res.type('application/json');
         res.send(json_str);
+    };
+
+    this.processPost = function (req, res) {
+        this.abend("processPost", "not implemented yet");
+    };
+
+    this.processNotFound = function (req, res) {
+        console.log(req.headers);
+        this.debug(true, "processNotFound", "*****");
+        res.type('text/plain');
+        res.status(404);
+        res.send('Not Found');
+    };
+
+    this.processFailure = function (err, req, res, next) {
+        this.logit("processFailure", state);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

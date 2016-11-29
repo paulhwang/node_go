@@ -18,7 +18,7 @@ function FabricLinkClass(root_object_val, my_name_val, link_id_val) {
         this.theLinkId = link_id_val;
         this.theMyName = my_name_val;
         this.theJointObject = this.importListMgr().malloc_joint(link_id_val, my_name_val);
-        this.theSessionMgrObject = this.importListMgr().malloc_mgr(this, 10);
+        this.theSessionListObject = this.importListMgr().malloc_mgr(this, 10000);
         this.theGlobalSessionId = 1000;
         this.up_seq = 0;
         this.down_seq = 0;
@@ -55,12 +55,12 @@ function FabricLinkClass(root_object_val, my_name_val, link_id_val) {
         return this.importObject().importListMgr();
     };
 
-    this.sessionMgrObject = function () {
-        return this.theSessionMgrObject;
+    this.sessionListObject = function () {
+        return this.theSessionListObject;
     };
 
     this.utilObject = function () {
-        return this.linkMgrObject().utilObject();
+        return this.rootObject().utilObject();
     };
 
     this.linkId = function () {
@@ -153,20 +153,20 @@ function FabricLinkClass(root_object_val, my_name_val, link_id_val) {
     };
 
     this.searchSessionBySessionId = function (session_id_val) {
-        return this.sessionMgrObject().searchId(session_id_val);
+        return this.sessionListObject().searchId(session_id_val);
     };
 
     this.mallocSession = function () {
         var session = this.importObject().importSession().malloc(this, this.globalSessionId());
         this.incrementGlobalSessionId();
-        this.sessionMgrObject().insertEntry(session);
+        this.sessionListObject().insertEntry(session);
         return session;
     };
 
     this.getPendingSessionData = function () {
         var data = [];
         var i = 0;
-        var session = this.importListMgr().head(this.sessionMgrObject());
+        var session = this.importListMgr().head(this.sessionListObject());
         while (session) {
             if (session.transmitQueue().size() > 0) {
                 data[i] =  session.sessionId();

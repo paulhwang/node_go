@@ -5,17 +5,17 @@
  */
 
 module.exports = {
-    malloc: function (root_object_val, topic_data_val, cluster_val) {
-        return new MatrixGroupObject(root_object_val, topic_data_val, cluster_val);
+    malloc: function (root_object_val, group_id_val, topic_data_val, cluster_val) {
+        return new MatrixGroupObject(root_object_val, group_id_val, topic_data_val, cluster_val);
     },
 };
 
-function MatrixGroupObject (root_object_val, topic_data_val, cluster_val) {
+function MatrixGroupObject (root_object_val, group_id_val, topic_data_val, cluster_val) {
     "use strict";
 
-    this.init__ = function (root_object_val, topic_data_val, cluster_val) {
+    this.init__ = function (root_object_val, group_id_val, topic_data_val, cluster_val) {
         this.theRootObject = root_object_val;
-        this.theJointObject = this.importListMgr().malloc_joint(999);
+        this.theJointObject = this.importListMgr().malloc_joint(group_id_val);
         this.theClusterObject = cluster_val;
         this.theTransmitQueue = this.importObject().mallocQueue();
         this.theTopicBaseId = 0;
@@ -140,5 +140,5 @@ function MatrixGroupObject (root_object_val, topic_data_val, cluster_val) {
         this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(root_object_val, topic_data_val, cluster_val);
+    this.init__(root_object_val, group_id_val, topic_data_val, cluster_val);
 }

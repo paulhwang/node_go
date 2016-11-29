@@ -29,6 +29,10 @@ function FabricImportClass (root_object_val) {
         return require("./fabric_cluster_mgr.js");
     }
 
+    this.importCluster = function () {
+        return require("./fabric_cluster.js");
+    }
+
     this.importLinkMgr = function () {
         return require("./fabric_link_mgr.js");
     }

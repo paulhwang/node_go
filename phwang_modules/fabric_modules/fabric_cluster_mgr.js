@@ -47,7 +47,7 @@ function FabricClusterMgrClass(root_object_val) {
     };
 
     this.mallocCluster = function (data_val, session_val) {
-        var cluster = require("./fabric_cluster.js").malloc(this.rootObject(), data_val, session_val);
+        var cluster = this.importObject().importCluster().malloc(this.rootObject(),this.clusterListObject().allocId(), data_val, session_val);
         this.clusterListObject().insertEntry(cluster);
         cluster.setGroupObject(require("../matrix_modules/matrix_group_mgr.js").malloc_group(data_val, cluster));
         return cluster;

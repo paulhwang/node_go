@@ -4,9 +4,15 @@
  * File name: matrix_topic_mgr.js
  */
 
+var the_matrix_topic_mgr_object = null;
+
 module.exports = {
     malloc: function (root_object_val) {
-        return new MatrixTopicMgrClass(root_object_val);
+        if (the_matrix_topic_mgr_object) {
+            return;
+        }
+        the_matrix_topic_mgr_object = new MatrixTopicMgrClass(root_object_val);
+        return the_matrix_topic_mgr_object;
     },
 };
 

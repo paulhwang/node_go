@@ -8,6 +8,9 @@ var the_fabric_ajax_object = null;
 
 module.exports = {
     malloc: function (root_object_val) {
+        if (the_fabric_ajax_object) {
+            return;
+        }
         the_fabric_ajax_object = new FabricAjaxClass(root_object_val);
         return the_fabric_ajax_object;
     },

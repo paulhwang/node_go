@@ -8,6 +8,9 @@ var the_matrix_group_mgr_object = null;
 
 module.exports = {
     malloc: function (root_object_val) {
+        if (the_matrix_group_mgr_object) {
+            return;
+        }
         the_matrix_group_mgr_object = new MatrixGroupMgrClass(root_object_val);
         return the_matrix_group_mgr_object;
     },

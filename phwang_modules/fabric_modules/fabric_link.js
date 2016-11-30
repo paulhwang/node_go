@@ -148,7 +148,7 @@ function FabricLinkClass(root_object_val, my_name_val, link_id_val) {
                 data[i] =  session.sessionId();
                 i += 1;
             }
-            session = this.importListMgr().next(session);
+            session = session.jointObject().next_();
         }
         if (i === 0) {
             return null;

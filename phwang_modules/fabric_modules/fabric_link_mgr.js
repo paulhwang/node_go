@@ -76,7 +76,7 @@ function FabricLinkMgrClass(root_object_val) {
         var link = this.linkListObject().head();
         while (link) {
             link.setNameListChanged();
-            link = this.importListMgr().next(link);
+            link = link.jointObject().next_();
         }
     };
 
@@ -87,7 +87,7 @@ function FabricLinkMgrClass(root_object_val) {
         while (link) {
             name_array[i] = link.myName();
             i += 1;
-            link = this.importListMgr().next(link);
+            link = link.jointObject().next_();
         }
         return name_array;
     };

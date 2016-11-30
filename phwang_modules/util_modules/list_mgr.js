@@ -19,16 +19,6 @@ module.exports = {
         }
         return list_mgr_val.head();
     },
-
-    next: function (host_object_val) {
-        if (host_object_val === null) {
-            return null;
-        }
-        if (host_object_val.jointObject().next_() === null) {
-            return null;
-        }
-        return host_object_val.jointObject().next_();
-    },
 };
 
 function ListMgrClass(host_object_val, global_id_val) {

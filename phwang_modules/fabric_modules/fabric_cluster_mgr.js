@@ -8,10 +8,9 @@ var the_fabric_cluster_mgr_object = null;
 
 module.exports = {
     malloc: function (root_object_val) {
-        if (the_fabric_cluster_mgr_object) {
-            return;
+        if (!the_fabric_cluster_mgr_object) {
+            the_fabric_cluster_mgr_object = new FabricClusterMgrClass(root_object_val);
         }
-        the_fabric_cluster_mgr_object = new FabricClusterMgrClass(root_object_val);
         return the_fabric_cluster_mgr_object;
     },
 

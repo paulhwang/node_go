@@ -8,10 +8,9 @@ var the_fabric_ajax_parser_object = null;
 
 module.exports = {
     malloc: function (root_object_val) {
-        if (the_fabric_ajax_parser_object) {
-            return;
+        if (!the_fabric_ajax_parser_object) {
+            the_fabric_ajax_parser_object = new FabricAjaxParserClass(root_object_val);
         }
-        the_fabric_ajax_parser_object = new FabricAjaxParserClass(root_object_val);
         return the_fabric_ajax_parser_object;
     },
 };

@@ -8,10 +8,9 @@ var the_go_base_mgr_object = null;
 
 module.exports = {
     malloc: function (root_object_val) {
-        if (the_go_base_mgr_object) {
-            return;
+        if (!the_go_base_mgr_object) {
+            the_go_base_mgr_object = new GoBaseMgrClass(root_object_val);
         }
-        the_go_base_mgr_object = new GoBaseMgrClass(root_object_val);
         return the_go_base_mgr_object;
     },
 

@@ -98,8 +98,26 @@ function ListMgrClass(host_object_val, global_id_val) {
         this.abendIt();
     };
 
-    this.deQueue = function (entry_val) {
+    this.deQueue = function () {
+        this.abendIt();
+        var entry = this.head();
+
+        if (this.head()) {
+            if (this.head() === this.tail()) {
+                this.decrementSize();
+                this.setHead(null);
+                this.setTail(null);
+            } else {
+                this.decrementSize();
+                this.setHead(this.head().jointObject().next());
+                this.head().jointObject().setPrev(null);
+            }
+        }
+
+        this.abendIt();
+        return entry;
     };
+
 
     this.unQueue = function (entry_val) {
         if (this.size() <= 0) {

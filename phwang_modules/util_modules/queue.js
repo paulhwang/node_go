@@ -15,6 +15,7 @@ function QueueClass (root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
+        this.theListObject = require("./list_mgr.js").malloc_mgr(this, 0);
         this.theHead = null;
         this.theTail = null;
         this.theSize = 0;
@@ -48,6 +49,10 @@ function QueueClass (root_object_val) {
     this.ringObject = function () {
         return this.theRingObject;
     }
+
+    this.listObject = function () {
+        return this.theListObject;
+    };
 
     this.head = function () {
         return this.theHead;
@@ -93,12 +98,14 @@ function QueueClass (root_object_val) {
 
         this.abendIt();
 
-        var data_entry = new HolderEntryObject(this);
+        var data_entry = new HolderEntryClass(this, this.listObject().allocId());
         if (!data_entry) {
             this.abend("enQueue", "null data_entry");
             return;
         }
         data_entry.setData(data_val);
+        this.listObject().enQueue(data_entry);
+        return;
 
         this.incrementSize();
         if (!this.head()) {
@@ -118,6 +125,13 @@ function QueueClass (root_object_val) {
     this.deQueue = function () {
         var data_entry;
         var data;
+
+        data_entry = this.listObject().deQueue();
+        if (!data_entry) {
+            this.debug(false, "deQueue", "empty: " + this.rootObject().objectName());
+            return null;
+        }
+        return data_entry.data();
 
         this.abendIt();
 
@@ -242,19 +256,32 @@ function QueueClass (root_object_val) {
     this.init__(root_object_val);
 }
 
-function HolderEntryObject(queue_object_val) {
+function HolderEntryClass(queue_object_val, holder_id_val) {
     "use strict";
 
-    this.init__ = function (queue_object_val) {
+    this.init__ = function (queue_object_val, holder_id_val) {
         this.theQueueObject = queue_object_val;
+        this.theJointObject = require("./list_mgr.js").malloc_joint(holder_id_val);
         this.theData = null;
         this.thePrev = null;
         this.theNext = null;
-        //this.debug(true, "init__", "");
+        this.debug(true, "init__", "holderId=" + this.queueObject().rootObject().objectName() + ":" + this.holderId());
     };
 
     this.objectName = function () {
-        return "HolderEntryObject";
+        return "HolderEntryClass";
+    };
+
+    this.queueObject = function () {
+        return this.theQueueObject;
+    };
+
+    this.rootObject = function () {
+        return this.queueObject().rootObject();
+    };
+
+    this.jointObject = function () {
+        return this.theJointObject;
     };
 
     this.data = function () {
@@ -263,6 +290,10 @@ function HolderEntryObject(queue_object_val) {
 
     this.setData = function (val) {
         this.theData = val;
+    };
+
+    this.holderId = function () {
+        return this.jointObject().entryId();
     };
 
     this.prev = function () {
@@ -281,5 +312,19 @@ function HolderEntryObject(queue_object_val) {
         this.theNext = val;
     };
 
-    this.init__(queue_object_val);
+    this.debug = function (debug_val, str1_val, str2_val) {
+        if (debug_val) {
+            this.logit(str1_val, str2_val);
+        }
+    };
+
+    this.logit = function (str1_val, str2_val) {
+        this.rootObject().LOG_IT(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.abend = function (str1_val, str2_val) {
+        this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
+    };
+
+    this.init__(queue_object_val, holder_id_val);
 }

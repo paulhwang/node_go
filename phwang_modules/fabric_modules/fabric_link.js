@@ -153,7 +153,7 @@ function FabricLinkClass(root_object_val, my_name_val, link_id_val) {
 
     this.mallocSession = function () {
         var session = this.importObject().importSession().malloc(this, this.sessionListObject().allocId());
-        this.sessionListObject().insertEntry(session);
+        this.sessionListObject().enQueue(session);
         return session;
     };
 

@@ -54,7 +54,7 @@ function MatrixGroupMgrClass(root_object_val) {
 
     this.mallocGroup = function (data_val, cluster_id_val) {
         var group = this.importObject().importGroup().malloc(this.rootObject(), this.groupListObject().allocId(), data_val, cluster_id_val);
-        this.groupListObject().insertEntry(group);
+        this.groupListObject().enQueue(group);
         return group.groupId();
     };
 

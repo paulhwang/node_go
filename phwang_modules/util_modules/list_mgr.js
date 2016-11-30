@@ -92,9 +92,9 @@ function ListMgrClass(host_object_val, global_id_val) {
         return this.globalId();
     }
 
-    this.insertEntry = function (link_val) {
+    this.enQueue = function (link_val) {
         if (!link_val) {
-            this.abend("insertEntry", "null link_val");
+            this.abend("enQueue", "null link_val");
             return;
         }
 
@@ -115,13 +115,16 @@ function ListMgrClass(host_object_val, global_id_val) {
         this.abendIt();
     };
 
-    this.deleteEntry = function (link_val) {
+    this.deQueue = function (link_val) {
+    };
+
+    this.unQueue = function (link_val) {
         if (this.size() <= 0) {
-            this.abend("deleteEntry", "size=" + this.size());
+            this.abend("unQueue", "size=" + this.size());
             return;
         }
         if (!this.linkExistInTheList(link_val)) {
-            this.abend("deleteEntry", "linkExistInTheList is false");
+            this.abend("unQueue", "linkExistInTheList is false");
             return;
         }
 

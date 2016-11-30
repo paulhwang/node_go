@@ -59,7 +59,7 @@ function MatrixTopicMgrClass(root_object_val) {
 
     this.mallocTopic = function () {
         var topic = this.importObject().importTopic().malloc(this.rootObject(), this.topicListObject().allocId());
-        this.topicListObject().insertEntry(topic);
+        this.topicListObject().enQueue(topic);
         this.debug(false, "mallocTopic", "topicId=" + topic.topicId());
         return topic.topicId();
     };

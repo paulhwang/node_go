@@ -24,10 +24,10 @@ module.exports = {
         if (host_object_val === null) {
             return null;
         }
-        if (host_object_val.jointObject().next() === null) {
+        if (host_object_val.jointObject().next_() === null) {
             return null;
         }
-        return host_object_val.jointObject().next().hostObject();
+        return host_object_val.jointObject().next_().hostObject();
     },
 };
 
@@ -102,14 +102,14 @@ function ListMgrClass(host_object_val, global_id_val) {
 
         this.incrementSize();
         if (!this.head()) {
-            link_val.jointObject().setPrev(null);
-            link_val.jointObject().setNext(null);
+            link_val.jointObject().setPrev_(null);
+            link_val.jointObject().setNext_(null);
             this.setHead(link_val);
             this.setTail(link_val);
         } else {
-            this.tail().jointObject().setNext(link_val);
-            link_val.jointObject().setPrev(this.tail());
-            link_val.jointObject().setNext(null);
+            this.tail().jointObject().setNext_(link_val);
+            link_val.jointObject().setPrev_(this.tail());
+            link_val.jointObject().setNext_(null);
             this.setTail(link_val);
         }
         this.abendIt();
@@ -126,15 +126,15 @@ function ListMgrClass(host_object_val, global_id_val) {
         }
 
         this.abendIt();
-        if (link_val.jointObject().prev()) {
-            link_val.jointObject().prev().jointObject().setNext(link_val.next());
+        if (link_val.jointObject().prev_()) {
+            link_val.jointObject().prev_().jointObject().setNext_(link_val.next_());
         } else {
-            this.setHead(link_val.jointObject().next());
+            this.setHead(link_val.jointObject().next_());
         }
-        if (link_val.jointObject().next()) {
-            link_val.jointObject().next().setPrev(link_val.jointObject().prev());
+        if (link_val.jointObject().next_()) {
+            link_val.jointObject().next_().setPrev_(link_val.jointObject().prev_());
         } else {
-            this.setTail(link_val.jointObject().prev());
+            this.setTail(link_val.jointObject().prev_());
         }
         this.decrementSize();
         this.abendIt();
@@ -147,7 +147,7 @@ function ListMgrClass(host_object_val, global_id_val) {
             if (entry.jointObject().entryId() === id_val) {
                 return entry;
             }
-            entry = entry.jointObject().next();
+            entry = entry.jointObject().next_();
         }
         return null;
     };
@@ -160,59 +160,16 @@ function ListMgrClass(host_object_val, global_id_val) {
             if ((entry.jointObject().entryId() === id_val) && (entry.jointObject().entryName() === name_val)) {
                 return entry;
             }
-            entry = entry.jointObject().next();
+            entry = entry.jointObject().next_();
         }
         return null;
-    };
-
-    this.searchLinkByName = function (my_name_val) {
-        this.debug(false, "searchLinkByName", my_name_val);
-        var link = this.head();
-        while (link) {
-            if (link.myName() === my_name_val) {
-                return link;
-            }
-            link = link.next();
-        }
-        return null;
-    };
-
-    this.linkExistInTheList = function (link_val) {
-        var link = this.head();
-        while (link) {
-            if (link === link_val) {
-                return true;
-            }
-            link = link.next();
-        }
-        return false;
-    };
-
-    this.setNameListChanged = function () {
-        var link = this.head();
-        while (link) {
-            link.setNameListChanged();
-            link = link.next();
-        }
-    };
-
-    this.getNameList = function () {
-        var name_array = [];
-        var i = 0;
-        var link = this.head();
-        while (link) {
-            name_array[i] = link.myName();
-            i += 1;
-            link = link.next();
-        }
-        return name_array;
     };
 
     this.abendIt = function () {
         var i = 0;
         var link = this.head();
         while (link) {
-            link = link.jointObject().next();
+            link = link.jointObject().next_();
             i += 1;
         }
         if (i !== this.size()) {
@@ -222,7 +179,7 @@ function ListMgrClass(host_object_val, global_id_val) {
         i = 0;
         link = this.tail();
         while (link) {
-            link = link.jointObject().prev();
+            link = link.jointObject().prev_();
             i += 1;
         }
         if (i !== this.size()) {
@@ -261,8 +218,8 @@ function ListjointClass(entry_id_val, entry_name_val) {
     this.init__ = function (entry_id_val, entry_name_val) {
         this.theEntryId = entry_id_val;
         this.theEntryName = entry_name_val;
-        this.thePrev = null;
-        this.theNext = null;
+        this.thePrev_ = null;
+        this.theNext_ = null;
     };
 
     this.entryId = function () {
@@ -273,20 +230,20 @@ function ListjointClass(entry_id_val, entry_name_val) {
         return this.theEntryName;
     };
 
-    this.prev = function () {
-        return this.thePrev;
+    this.prev_ = function () {
+        return this.thePrev_;
     };
 
-    this.setPrev = function (val) {
-        this.thePrev = val;
+    this.setPrev_ = function (val) {
+        this.thePrev_ = val;
     };
 
-    this.next = function () {
-        return this.theNext;
+    this.next_ = function () {
+        return this.theNext_;
     };
 
-    this.setNext = function (val) {
-        this.theNext = val;
+    this.setNext_ = function (val) {
+        this.theNext_ = val;
     };
 
     this.init__(entry_id_val, entry_name_val);

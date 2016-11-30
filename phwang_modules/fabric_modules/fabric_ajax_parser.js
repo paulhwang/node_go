@@ -192,15 +192,16 @@ function FabricAjaxParserClass(root_object_val) {
             return null;
         }
 
+        var cluster = this.clusterMgrObject().mallocCluster(go_request.topic_data);
+        if (!cluster) {
+            return null;
+        }
+
         var session = link.mallocSession();
         if (!session) {
             return null;
         }
 
-        var cluster = this.clusterMgrObject().mallocCluster(go_request.topic_data);
-        if (!cluster) {
-            return null;
-        }
         cluster.addSession(session);
         session.setClusterObject(cluster);
 

@@ -14,8 +14,8 @@ module.exports = {
         return the_matrix_group_mgr_object;
     },
 
-    malloc_group: function (topic_data_val, cluster_id_val) {
-        return the_matrix_group_mgr_object.mallocGroup(topic_data_val, cluster_id_val);
+    malloc_group: function (cluster_id_val, topic_data_val) {
+        return the_matrix_group_mgr_object.mallocGroup(cluster_id_val, topic_data_val);
     },
 
     receive_data: function (group_id_val, data_val) {
@@ -52,7 +52,7 @@ function MatrixGroupMgrClass(root_object_val) {
         return this.rootObject().utilObject();
     };
 
-    this.mallocGroup = function (topic_data_val, cluster_id_val) {
+    this.mallocGroup = function (cluster_id_val, topic_data_val) {
         var group = this.importObject().importGroup().malloc(this.rootObject(), this.groupListObject().allocId(), topic_data_val, cluster_id_val);
         this.groupListObject().enQueue(group);
         return group.groupId();

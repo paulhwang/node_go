@@ -25,9 +25,7 @@ function FabricLinkClass(root_object_val, my_name_val, link_id_val) {
         this.thePendingSessionSetupQueue = this.importObject().mallocQueue();
         this.theNameListChanged = true;
         this.theKeepAliveTimer = null;
-        this.thePrev = null;
-        this.theNext = null;
-        this.debug(true, "init__", "link_id=" + this.linkId());
+        this.debug(true, "init__", "linkId=" + this.linkId());
     };
 
     this.linkTimeoutInterval = function () {

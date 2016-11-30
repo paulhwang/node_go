@@ -53,7 +53,7 @@ function MatrixGroupMgrClass(root_object_val) {
     };
 
     this.mallocGroup = function (cluster_id_val, topic_data_val) {
-        var group = this.importObject().importGroup().malloc(this.rootObject(), this.groupListObject().allocId(), topic_data_val, cluster_id_val);
+        var group = this.importObject().importGroup().malloc(this.rootObject(), this.groupListObject().allocId(), cluster_id_val, topic_data_val);
         this.groupListObject().enQueue(group);
         return group.groupId();
     };

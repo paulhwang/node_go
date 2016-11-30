@@ -10,10 +10,10 @@ module.exports = {
     },
 };
 
-function MatrixGroupObject (root_object_val, group_id_val, topic_data_val, cluster_id_val) {
+function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic_data_val) {
     "use strict";
 
-    this.init__ = function (root_object_val, group_id_val, topic_data_val, cluster_id_val) {
+    this.init__ = function (root_object_val, group_id_val, cluster_id_val, topic_data_val) {
         this.theRootObject = root_object_val;
         this.theJointObject = this.importListMgr().malloc_joint(group_id_val);
         this.theClusterId = cluster_id_val;
@@ -135,5 +135,5 @@ function MatrixGroupObject (root_object_val, group_id_val, topic_data_val, clust
         this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(root_object_val, group_id_val, topic_data_val, cluster_id_val);
+    this.init__(root_object_val, group_id_val, cluster_id_val, topic_data_val);
 }

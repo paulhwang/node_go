@@ -12,13 +12,6 @@ module.exports = {
     malloc_joint: function (entry_id_val, entry_name_val) {
         return new ListjointClass(entry_id_val, entry_name_val);
     },
-
-    head: function (list_mgr_val) {
-        if (list_mgr_val === null) {
-            return null;
-        }
-        return list_mgr_val.head();
-    },
 };
 
 function ListMgrClass(host_object_val, global_id_val) {

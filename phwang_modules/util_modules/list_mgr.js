@@ -40,7 +40,7 @@ function ListMgrClass(host_object_val, global_id_val) {
         this.theHead = null;
         this.theTail = null;
         this.theSize = 0;
-        this.debug(true, "init__", host_object_val.objectName());
+        this.debug(true, "init__", this.hostObject().objectName());
     };
 
     this.objectName = function () {

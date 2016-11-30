@@ -20,7 +20,7 @@ function FabricLinkMgrClass(root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
-        this.theLinkListObject = this.importObject().importListMgr().malloc_mgr(this, 0);
+        this.theLinkListObject = this.importListMgr().malloc_mgr(this, 0);
         this.theNameListChanged = false;
         this.debug(true, "init__", "");
     };

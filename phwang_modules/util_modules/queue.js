@@ -30,10 +30,6 @@ function QueueClass (root_object_val) {
         return "QueueClass";
     };
 
-    this.holderEntryModule = function () {
-        return require("./holder_entry_module.js");
-    };
-
     this.rootObject = function () {
         return this.theRootObject;
     };
@@ -70,14 +66,12 @@ function QueueClass (root_object_val) {
     };
 
     this.deQueue = function () {
-        var data_entry;
-
-        data_entry = this.listObject().deQueue();
-        if (!data_entry) {
+        var entry = this.listObject().deQueue();
+        if (!entry) {
             this.debug(false, "deQueue", "empty: " + this.rootObject().objectName());
             return null;
         }
-        var data = data_entry.data();
+        var data = entry.data();
 
         if (data && this.debugRing()) {
             var i = 10

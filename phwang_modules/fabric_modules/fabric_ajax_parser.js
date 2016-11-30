@@ -84,6 +84,7 @@ function FabricAjaxParserClass(root_object_val) {
 
     this.parseRequest = function (input_val) {
         var go_request = JSON.parse(input_val);
+
         if (go_request.command === "get_link_data") {
             this.debug_(false, this.debugInput(), "switchRequest", "input_val=" + input_val);
         } else {

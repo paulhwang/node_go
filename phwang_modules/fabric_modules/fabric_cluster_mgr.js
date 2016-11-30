@@ -48,10 +48,10 @@ function FabricClusterMgrClass(root_object_val) {
         return this.rootObject().importObject();
     };
 
-    this.mallocCluster = function (data_val, session_val) {
-        var cluster = this.importObject().importCluster().malloc(this.rootObject(),this.clusterListObject().allocId(), data_val, session_val);
+    this.mallocCluster = function (topic_data_val, session_val) {
+        var cluster = this.importObject().importCluster().malloc(this.rootObject(),this.clusterListObject().allocId(), session_val);
         this.clusterListObject().enQueue(cluster);
-        cluster.setGroupId(require("../matrix_modules/matrix_group_mgr.js").malloc_group(data_val, cluster.clusterId()));
+        cluster.setGroupId(require("../matrix_modules/matrix_group_mgr.js").malloc_group(topic_data_val, cluster.clusterId()));
         return cluster;
     };
 

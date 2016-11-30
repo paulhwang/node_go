@@ -96,11 +96,6 @@ function MatrixGroupObject (root_object_val, group_id_val, topic_data_val, clust
         }
     };
 
-    this.addAdditionalSession = function (session_val) {
-        this.theSessionArray[this.sessionArrayLength()] = session_val;
-        this.incrementSessionArrayLength();
-    };
-
     this.enqueueTransmitData = function (data_val) {
         this.debug(false, "enqueueTransmitData", data_val);
         this.transmitQueue().enQueue(data_val);

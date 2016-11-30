@@ -74,12 +74,6 @@ function FabricAjaxClass(root_object_val) {
             return;
         }
 
-        if ((go_request.command !== "keep_alive") &&
-            (go_request.command !== "get_name_list") &&
-            (go_request.command !== "get_session_data")) {
-            this.debug(false, "processGet", "command=" + go_request.command);
-        }
-
         var data = this.ajaxParserObject().parseRequest(req.headers.gorequest);
         var json_str = JSON.stringify({
                         command: go_request.command,

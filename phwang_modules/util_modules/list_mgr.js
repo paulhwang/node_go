@@ -92,9 +92,9 @@ function ListMgrClass(host_object_val, global_id_val) {
         return this.globalId();
     }
 
-    this.enQueue = function (link_val) {
-        if (!link_val) {
-            this.abend("enQueue", "null link_val");
+    this.enQueue = function (entry_val) {
+        if (!entry_val) {
+            this.abend("enQueue", "null entry_val");
             return;
         }
 
@@ -102,45 +102,60 @@ function ListMgrClass(host_object_val, global_id_val) {
 
         this.incrementSize();
         if (!this.head()) {
-            link_val.jointObject().setPrev_(null);
-            link_val.jointObject().setNext_(null);
-            this.setHead(link_val);
-            this.setTail(link_val);
+            entry_val.jointObject().setPrev_(null);
+            entry_val.jointObject().setNext_(null);
+            this.setHead(entry_val);
+            this.setTail(entry_val);
         } else {
-            this.tail().jointObject().setNext_(link_val);
-            link_val.jointObject().setPrev_(this.tail());
-            link_val.jointObject().setNext_(null);
-            this.setTail(link_val);
+            this.tail().jointObject().setNext_(entry_val);
+            entry_val.jointObject().setPrev_(this.tail());
+            entry_val.jointObject().setNext_(null);
+            this.setTail(entry_val);
         }
         this.abendIt();
     };
 
-    this.deQueue = function (link_val) {
+    this.deQueue = function (entry_val) {
     };
 
-    this.unQueue = function (link_val) {
+    this.unQueue = function (entry_val) {
         if (this.size() <= 0) {
             this.abend("unQueue", "size=" + this.size());
             return;
         }
-        if (!this.linkExistInTheList(link_val)) {
-            this.abend("unQueue", "linkExistInTheList is false");
+ 
+        if (!this.searchEntry(entry_val)) {
+            this.abend("unQueue", "entry does not exist in the list");
             return;
         }
 
         this.abendIt();
-        if (link_val.jointObject().prev_()) {
-            link_val.jointObject().prev_().jointObject().setNext_(link_val.next_());
+        if (entry_val.jointObject().prev_()) {
+            entry_val.jointObject().prev_().jointObject().setNext_(entry_val.jointObject().next_());
         } else {
-            this.setHead(link_val.jointObject().next_());
+            this.setHead(entry_val.jointObject().next_());
         }
-        if (link_val.jointObject().next_()) {
-            link_val.jointObject().next_().setPrev_(link_val.jointObject().prev_());
+
+        if (entry_val.jointObject().next_()) {
+            entry_val.jointObject().next_().jointObject().setPrev_(entry_val.jointObject().prev_());
         } else {
-            this.setTail(link_val.jointObject().prev_());
+            this.setTail(entry_val.jointObject().prev_());
         }
+
         this.decrementSize();
         this.abendIt();
+    };
+    
+    this.searchEntry = function (entry_val) {
+        this.debug(true, "searchEntry", "id=" + entry_val.jointObject().entryId() + " name=" + entry_val.jointObject().entryName());
+        var entry = this.head();
+        while (entry) {
+            if (entry === entry_val) {
+                return entry;
+            }
+            entry = entry.jointObject().next_();
+        }
+        return null;
     };
     
     this.searchId = function (id_val) {
@@ -233,7 +248,11 @@ function ListjointClass(entry_id_val, entry_name_val) {
 
     this.init__ = function (entry_id_val, entry_name_val) {
         this.theEntryId = entry_id_val;
-        this.theEntryName = entry_name_val;
+        if (entry_name_val) {
+            this.theEntryName = entry_name_val;
+        } else {
+            this.theEntryName = null;
+        }
         this.thePrev_ = null;
         this.theNext_ = null;
     };

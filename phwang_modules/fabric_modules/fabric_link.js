@@ -142,7 +142,7 @@ function FabricLinkClass(root_object_val, my_name_val, link_id_val) {
         this.debug(false, "resetTimeout", "my_name=" + this.my_name + " link_id=" + this.link_id);
         var time_out = setTimeout(function (link_val) {
             console.log("resetTimeout(***timeout occurs)", "my_name=" + link_val.myName() + " link_id=" + link_val.linkId());
-            link_val.linkMgrObject().freeLink(link_val);
+            link_val.linkMgrObject().unQueueLink(link_val);
         }, this.linkTimeoutInterval(), this);
         return time_out;
     };

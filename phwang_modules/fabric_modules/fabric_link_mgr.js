@@ -52,8 +52,8 @@ function FabricLinkMgrClass(root_object_val) {
         return link;
     };
 
-    this.freeLink = function (link_val) {
-        this.deleteLinkFromList(link_val);
+    this.unQueueLink = function (link_val) {
+        this.linkListObject().unQueue(link_val);
     };
 
     this.searchId = function (id_val) {

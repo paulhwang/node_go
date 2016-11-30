@@ -201,7 +201,7 @@ function FabricAjaxParserClass(root_object_val) {
         if (!cluster) {
             return null;
         }
-        cluster.addAdditionalSession(session);
+        cluster.addSession(session);
         session.setClusterObject(cluster);
 
         if (go_request.my_name !== go_request.his_name) {
@@ -213,7 +213,7 @@ function FabricAjaxParserClass(root_object_val) {
             if (!his_session) {
                 return null;
             }
-            cluster.addAdditionalSession(his_session);
+            cluster.addSession(his_session);
             his_session.setClusterObject(cluster);
             his_link.setPendingSessionSetup(his_session, go_request.topic_data);
         }

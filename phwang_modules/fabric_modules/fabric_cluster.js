@@ -71,7 +71,7 @@ function FabricClusterClass(root_object_val, cluster_id_val) {
         this.theSessionArrayLength += 1;
     };
 
-    this.addAdditionalSession = function (session_val) {
+    this.addSession = function (session_val) {
         this.theSessionArray[this.sessionArrayLength()] = session_val;
         this.incrementSessionArrayLength();
     };

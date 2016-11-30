@@ -197,10 +197,12 @@ function FabricAjaxParserClass(root_object_val) {
             return null;
         }
 
-        var cluster = this.clusterMgrObject().mallocCluster(go_request.topic_data, session);
+        var cluster = this.clusterMgrObject().mallocCluster(go_request.topic_data);
         if (!cluster) {
             return null;
         }
+        cluster.addAdditionalSession(session);
+        session.setClusterObject(cluster);
 
         if (go_request.my_name !== go_request.his_name) {
             var his_link = this.linkMgrObject().searchName(go_request.his_name);

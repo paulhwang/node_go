@@ -5,22 +5,20 @@
  */
 
 module.exports = {
-    malloc: function (root_object_val, cluster_id_val, session_val) {
-        return new FabricClusterClass(root_object_val, cluster_id_val, session_val);
+    malloc: function (root_object_val, cluster_id_val) {
+        return new FabricClusterClass(root_object_val, cluster_id_val);
     },
 };
 
-function FabricClusterClass(root_object_val, cluster_id_val, session_val) {
+function FabricClusterClass(root_object_val, cluster_id_val) {
     "use strict";
 
-    this.init__ = function (root_object_val, cluster_id_val, session_val) {
+    this.init__ = function (root_object_val, cluster_id_val) {
         this.theRootObject  = root_object_val;
         this.theJointObject = this.importListMgr().malloc_joint(cluster_id_val);
-        session_val.setClusterObject(this);
         this.theGroupId = 0;
         this.theSessionArray = [2];
-        this.theSessionArray[0] = session_val;
-        this.theSessionArrayLength = 1;
+        this.theSessionArrayLength = 0;
         this.theTransmitQueue = this.importObject().mallocQueue();
         this.debug(true, "init__", "clusterId=" + this.clusterId());
     };
@@ -114,5 +112,5 @@ function FabricClusterClass(root_object_val, cluster_id_val, session_val) {
         this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(root_object_val, cluster_id_val, session_val);
+    this.init__(root_object_val, cluster_id_val);
 }

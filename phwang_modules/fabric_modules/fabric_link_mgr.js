@@ -41,6 +41,10 @@ function FabricLinkMgrClass(root_object_val) {
         return this.rootObject().importObject();
     };
 
+    this.importListMgr = function () {
+        return this.importObject().importListMgr();
+    };
+
     this.utilObject = function () {
         return this.rootObject().utilObject();
     };
@@ -72,7 +76,7 @@ function FabricLinkMgrClass(root_object_val) {
         var link = this.linkListObject().head();
         while (link) {
             link.setNameListChanged();
-            link = link.next();
+            link = this.importListMgr().next(link);
         }
     };
 
@@ -83,7 +87,7 @@ function FabricLinkMgrClass(root_object_val) {
         while (link) {
             name_array[i] = link.myName();
             i += 1;
-            link = link.next();
+            link = this.importListMgr().next(link);
         }
         return name_array;
     };

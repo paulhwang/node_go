@@ -27,7 +27,7 @@ module.exports = {
         if (host_object_val.jointObject().next_() === null) {
             return null;
         }
-        return host_object_val.jointObject().next_().hostObject();
+        return host_object_val.jointObject().next_();
     },
 };
 

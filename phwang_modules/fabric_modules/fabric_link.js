@@ -102,22 +102,6 @@ function FabricLinkClass(root_object_val, my_name_val, link_id_val) {
         return this.thePendingSessionSetupQueue;
     };
 
-    this.prev = function () {
-        return this.thePrev;
-    };
-
-    this.setPrev = function (val) {
-        this.thePrev = val;
-    };
-
-    this.next = function () {
-        return this.theNext;
-    };
-
-    this.setNext = function (val) {
-        this.theNext = val;
-    };
-
     this.nameListChanged = function () {
         return this.theNameListChanged;
     };

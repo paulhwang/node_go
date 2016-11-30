@@ -50,7 +50,7 @@ function FabricLinkMgrClass(root_object_val) {
     };
 
     this.mallocLink = function (my_name_val) {
-        var link = this.rootObject().importObject().importLink().malloc(this.rootObject(), my_name_val, this.linkListObject().allocId());
+        var link = this.importObject().importLink().malloc(this.rootObject(), my_name_val, this.linkListObject().allocId());
         this.linkListObject().enQueue(link);
         this.setNameListChanged();
         return link;

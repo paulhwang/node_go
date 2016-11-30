@@ -20,6 +20,7 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
         this.theTransmitQueue = this.importObject().mallocQueue();
         this.theTopicBaseId = 0;
         this.createTopic(topic_data_val);
+        this.theTopicMgrObject = this.importObject().importTopicMgr().malloc(this);
         this.debug(false, "init__", "groupId=" + this.groupId());
     };
 
@@ -52,8 +53,8 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
         return this.theJointObject;
     };
 
-    this.topicMgrObject = function () {
-        return this.rootObject().topicMgrObject();
+    this.topicMgrObject111 = function () {
+        return this.rootObject().topicMgrObject111();
     };
 
     this.sessionObject = function () {
@@ -91,7 +92,7 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
     this.createTopic = function (topic_data_val) {
         var topic_data = JSON.parse(topic_data_val);
         if (topic_data.title === "go") {
-            this.setTopicBaseId(this.topicMgrObject().topicMallocBase());
+            this.setTopicBaseId(this.topicMgrObject111().topicMallocBase());
             this.debug(false, "createTopic", "base_id=" + this.topicBaseId());
         }
     };
@@ -116,8 +117,8 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
     };
 
     this.receiveData = function (data_val) {
-        this.topicMgrObject().topicReceiveData(this.topicBaseId(), data_val);
-        var data = this.topicMgrObject().topicTransmitData(this.topicBaseId());
+        this.topicMgrObject111().topicReceiveData(this.topicBaseId(), data_val);
+        var data = this.topicMgrObject111().topicTransmitData(this.topicBaseId());
         require("../fabric_modules/fabric_cluster_mgr.js").receive_data(this.clusterId(), data);
     };
 

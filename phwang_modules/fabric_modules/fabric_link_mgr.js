@@ -56,6 +56,18 @@ function FabricLinkMgrClass(root_object_val) {
         this.deleteLinkFromList(link_val);
     };
 
+    this.searchId = function (id_val) {
+        return this.linkListObject().searchId(id_val);
+    }
+
+    this.searchName = function (name_val) {
+        return this.linkListObject().searchName(name_val);
+    }
+
+    this.searchIdName = function (id_val, name_val) {
+        return this.linkListObject().searchIdName(id_val, name_val);
+    }
+
     this.setNameListChanged = function () {
         var link = this.linkListObject().head();
         while (link) {

@@ -202,7 +202,7 @@ function FabricAjaxParserClass(root_object_val) {
         }
 
         if (go_request.my_name !== go_request.his_name) {
-            var his_link = this.linkMgrObject().searchLinkByName(go_request.his_name);
+            var his_link = this.linkMgrObject().searchName(go_request.his_name);
             if (!his_link) {
                 return null;
             }

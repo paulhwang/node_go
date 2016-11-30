@@ -116,7 +116,7 @@ function HolderEntryClass(queue_object_val, holder_id_val) {
         this.theData = null;
         this.thePrev = null;
         this.theNext = null;
-        this.debug(true, "init__", "holderId=" + this.queueObject().rootObject().objectName() + ":" + this.holderId());
+        this.debug(false, "init__", "holderId=" + this.queueObject().rootObject().objectName() + ":" + this.holderId());
     };
 
     this.objectName = function () {

@@ -15,6 +15,7 @@ function MatrixTopicMgrObject (group_object_val) {
 
     this.init__ = function (group_object_val) {
         this.theGroupObject = group_object_val;
+        this.theTopicListObject = this.importObject().importListMgr().malloc_mgr(this.groupObject(), 100);
         this.debug(false, "init__", "");
     };
 

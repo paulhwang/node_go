@@ -5,17 +5,17 @@
  */
 
 module.exports = {
-    malloc: function (root_object_val, my_name_val, link_id_val) {
-        return new FabricLinkClass(root_object_val, my_name_val, link_id_val);
+    malloc: function (root_object_val, link_id_val, link_name_val) {
+        return new FabricLinkClass(root_object_val, link_id_val, link_name_val);
     },
 };
 
-function FabricLinkClass(root_object_val, my_name_val, link_id_val) {
+function FabricLinkClass(root_object_val, link_id_val, link_name_val) {
     "use strict";
 
-    this.init__ = function (root_object_val, my_name_val, link_id_val) {
+    this.init__ = function (root_object_val, link_id_val, link_name_val) {
         this.theRootObject  = root_object_val;
-        this.theJointObject = this.importListMgr().malloc_joint(link_id_val, my_name_val);
+        this.theJointObject = this.importListMgr().malloc_joint(link_id_val, link_name_val);
         this.theSessionListObject = this.importListMgr().malloc_mgr(this, 10000);
         this.up_seq = 0;
         this.down_seq = 0;
@@ -176,5 +176,5 @@ function FabricLinkClass(root_object_val, my_name_val, link_id_val) {
         this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(root_object_val, my_name_val, link_id_val);
+    this.init__(root_object_val, link_id_val, link_name_val);
 }

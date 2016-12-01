@@ -33,6 +33,10 @@ function MatrixImportClass (root_object_val) {
         return require("./matrix_group.js");
     }
 
+    this.importTopicMgr = function () {
+        return require("./matrix_topic_mgr.js");
+    }
+
     this.importTopic = function () {
         return require("./matrix_topic.js");
     }

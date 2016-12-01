@@ -14,7 +14,7 @@ function MatrixTopicObject (root_object_val, topic_id_val) {
     "use strict";
 
     this.init__ = function (root_object_val, topic_id_val) {
-        this.theRootObject = root_object_val;
+        this.theGroupObject = root_object_val;
         this.theJointObject = this.importListMgr().malloc_joint(topic_id_val);
         this.theTopicBaseId = 0;
         this.debug(true, "init__", "topicId=" + this.topicId());
@@ -24,12 +24,12 @@ function MatrixTopicObject (root_object_val, topic_id_val) {
         return "MatrixTopicObject";
     };
 
-    this.rootObject = function () {
-        return this.theRootObject;
+    this.groupObject = function () {
+        return this.theGroupObject;
     };
 
-    this.clusterObject = function () {
-        return this.theClusterObject;
+    this.rootObject = function () {
+        return this.groupObject().rootObject();
     };
 
     this.jointObject = function () {
@@ -44,16 +44,38 @@ function MatrixTopicObject (root_object_val, topic_id_val) {
         return this.importObject().importListMgr();
     };
 
-    this.topicMgrObject = function () {
-        return this.rootObject().topicMgrObject();
-    };
-
     this.utilObject = function () {
         return this.rootObject().utilObject();
     };
 
+    this.clusterId = function () {
+        return this.groupObject().clusterId();
+    };
+
     this.topicId = function () {
         return this.jointObject().entryId();
+    };
+
+    this.baseId = function () {
+        return this.theBaseId;
+    };
+
+    this.setBaseId = function (val) {
+        this.theBaseId = val;
+    };
+
+    this.createBase = function (topic_data_val) {
+        var topic_data = JSON.parse(topic_data_val);
+        if (topic_data.title === "go") {
+            this.setBaseId(require("../go_modules/go_base_mgr.js").malloc_base());
+        }
+        this.debug(true, "createBase", "topicId=" + this.topicId() + " baseId=" + this.baseId());
+    };
+
+    this.receiveData = function (data_val) {
+        require("../go_modules/go_base_mgr.js").receive_data(this.baseId(), data_val);
+        var data = require("../go_modules/go_base_mgr.js").transmit_data(this.baseId());
+        require("../fabric_modules/fabric_cluster_mgr.js").receive_data(this.clusterId(), data);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

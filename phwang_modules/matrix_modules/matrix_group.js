@@ -76,26 +76,19 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
         return this.jointObject().entryId();
     };
 
-    this.topicBaseId = function () {
-        return this.theTopicBaseId;
-    };
-
-    this.setTopicBaseId = function (val) {
-        this.theTopicBaseId = val;
-    };
-
     this.transmitQueue = function () {
         return this.theTransmitQueue;
     };
 
     this.addTopic = function (topic_data_val) {
-        var topic = this.importObject().importTopic().malloc(this.rootObject(), this.topicListObject().allocId());
+        var topic = this.importObject().importTopic().malloc(this, this.topicListObject().allocId());
         this.topicListObject().enQueue(topic);
-        var topic_data = JSON.parse(topic_data_val);
-        if (topic_data.title === "go") {
-            this.setTopicBaseId(require("../go_modules/go_base_mgr.js").malloc_base());
-        }
-        this.debug(true, "addTopic", "topicId=" + topic.topicId() + " topicBaseId=" + this.topicBaseId());
+        topic.createBase(topic_data_val);
+
+
+
+
+        this.theOnlyTopic = topic;
     };
 
     this.enqueueTransmitData = function (data_val) {
@@ -118,9 +111,7 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
     };
 
     this.receiveData = function (data_val) {
-        require("../go_modules/go_base_mgr.js").receive_data(this.topicBaseId(), data_val);
-        var data = require("../go_modules/go_base_mgr.js").transmit_data(this.topicBaseId());
-        require("../fabric_modules/fabric_cluster_mgr.js").receive_data(this.clusterId(), data);
+        this.theOnlyTopic.receiveData(data_val);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

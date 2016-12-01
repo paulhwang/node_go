@@ -111,7 +111,12 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
     };
 
     this.receiveData = function (data_val) {
-        this.theOnlyTopic.receiveData(data_val);
+        //var topic = this.groupListObject().searchId(group_id_val);
+        var topic = this.theOnlyTopic;
+        if (!topic) {
+            return;
+        }
+        topic.receiveData(data_val);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

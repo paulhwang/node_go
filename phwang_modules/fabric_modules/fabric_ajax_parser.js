@@ -109,7 +109,7 @@ function FabricAjaxParserClass(root_object_val) {
         link.resetKeepAliveTimer();
         this.setLinkUpdateInterval(this.defaultLinkUpdateInterval());
 
-        var output = JSON.stringify({my_name: link.myName(),
+        var output = JSON.stringify({my_name: link.linkName(),
                                link_id: link.linkId(),
                               });
         this.debug_(true, this.debugOutput(), "setupLink", "output=" + output);

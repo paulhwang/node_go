@@ -15,7 +15,6 @@ function FabricLinkClass(root_object_val, my_name_val, link_id_val) {
 
     this.init__ = function (root_object_val, my_name_val, link_id_val) {
         this.theRootObject  = root_object_val;
-        this.theMyName = my_name_val;
         this.theJointObject = this.importListMgr().malloc_joint(link_id_val, my_name_val);
         this.theSessionListObject = this.importListMgr().malloc_mgr(this, 10000);
         this.up_seq = 0;
@@ -24,7 +23,7 @@ function FabricLinkClass(root_object_val, my_name_val, link_id_val) {
         this.thePendingSessionSetupQueue = this.importObject().mallocQueue();
         this.theNameListChanged = true;
         this.theKeepAliveTimer = null;
-        this.debug(true, "init__", "linkId=" + this.linkId());
+        this.debug(true, "init__", "linkId=" + this.linkId() + " linkName=" + this.linkName());
     };
 
     this.linkTimeoutInterval = function () {
@@ -67,12 +66,12 @@ function FabricLinkClass(root_object_val, my_name_val, link_id_val) {
         return this.jointObject().entryId();
     };
 
-    this.myName = function () {
-        return this.theMyName;
+    this.linkName = function () {
+        return this.jointObject().entryName();
     };
 
-    this.setMyName = function (val) {
-        this.theMyName = val;
+    this.myName = function () {
+        return this.linkName();
     };
 
     this.keepAliveTimer = function () {

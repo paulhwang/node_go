@@ -14,9 +14,11 @@ function MatrixThemeMgrObject (root_object_val) {
     "use strict";
 
     this.init__ = function (root_object_val) {
-        this.theRootObject = theme_object_val;
+        this.theRootObject = root_object_val;
         this.theThemeListObject = this.importObject().importListMgr().malloc_mgr(this, 100);
         this.debug(true, "init__", "");
+
+        this.createTheme11111();
     };
 
     this.objectName = function () {
@@ -43,6 +45,10 @@ function MatrixThemeMgrObject (root_object_val) {
         return this.rootObject().utilObject();
     };
 
+    this.createTheme11111 = function () {
+        var theme = this.importObject().importTheme().malloc(this, this.themeListObject().allocId());
+    };
+
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
             this.logit(str1_val, str2_val);
@@ -57,5 +63,5 @@ function MatrixThemeMgrObject (root_object_val) {
         this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(theme_object_val);
+    this.init__(root_object_val);
 }

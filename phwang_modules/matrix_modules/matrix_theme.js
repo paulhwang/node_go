@@ -28,7 +28,7 @@ function MatrixThemeObject (theme_object_val, theme_id_val) {
     };
 
     this.rootObject = function () {
-        return this.groupObject().rootObject();
+        return this.themeObject().rootObject();
     };
 
     this.jointObject = function () {

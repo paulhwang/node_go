@@ -20,6 +20,7 @@ function MatrixRootClass () {
 
     this.init__ = function () {
         this.theImportObject = require("./matrix_import.js").malloc(this);
+        this.theThemeMgrObject = this.importObject().importThemeMgr().malloc(this);
         this.theGroupMgrObject = this.importObject().importGroupMgr().malloc(this);
         this.debug(true, "init__", "");
     };
@@ -30,6 +31,10 @@ function MatrixRootClass () {
 
     this.importObject = function () {
         return this.theImportObject;
+    };
+
+    this.themeMgrObject = function () {
+        return this.theThemeMgrObject;
     };
 
     this.groupMgrObject = function () {

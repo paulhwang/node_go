@@ -46,7 +46,7 @@ function MatrixThemeMgrObject (root_object_val) {
     };
 
     this.createTheme11111 = function () {
-        var theme = this.importObject().importTheme().malloc(this, this.themeListObject().allocId());
+        var theme = this.importObject().importTheme().malloc(this.rootObject(), this.themeListObject().allocId());
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

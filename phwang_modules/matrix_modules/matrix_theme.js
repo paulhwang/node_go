@@ -5,17 +5,18 @@
  */
 
 module.exports = {
-    malloc: function (theme_object_val, theme_id_val) {
-        return new MatrixThemeObject(theme_object_val, theme_id_val);
+    malloc: function (root_object_val, theme_id_val) {
+        return new MatrixThemeObject(root_object_val, theme_id_val);
     },
 };
 
-function MatrixThemeObject (theme_object_val, theme_id_val) {
+function MatrixThemeObject (root_object_val, theme_id_val) {
     "use strict";
 
-    this.init__ = function (theme_object_val, theme_id_val) {
-        this.theThemeObject = theme_object_val;
+    this.init__ = function (root_object_val, theme_id_val) {
+        this.theObjectObject = root_object_val;
         this.theJointObject = this.importListMgr().malloc_joint(theme_id_val);
+        this.theSlotMgrObject = this.importObject().importSlotMgr().malloc(this);
         this.debug(true, "init__", "themeId=" + this.themeId());
     };
 
@@ -23,12 +24,8 @@ function MatrixThemeObject (theme_object_val, theme_id_val) {
         return "MatrixThemeObject";
     };
 
-    this.themeObject = function () {
-        return this.theThemeObject;
-    };
-
     this.rootObject = function () {
-        return this.themeObject().rootObject();
+        return this.theObjectObject;
     };
 
     this.jointObject = function () {
@@ -65,5 +62,5 @@ function MatrixThemeObject (theme_object_val, theme_id_val) {
         this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(theme_object_val, theme_id_val);
+    this.init__(root_object_val, theme_id_val);
 }

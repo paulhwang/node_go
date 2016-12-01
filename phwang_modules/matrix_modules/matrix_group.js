@@ -19,9 +19,7 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
         this.theClusterId = cluster_id_val;
         this.theTransmitQueue = this.importObject().mallocQueue();
         this.theTopicListObject = this.importObject().importListMgr().malloc_mgr(this, 100);
-        this.mallocTopic();
-        this.theTopicBaseId = 0;
-        this.createTopic(topic_data_val);
+        this.addTopic(topic_data_val);
         this.debug(false, "init__", "groupId=" + this.groupId());
     };
 
@@ -90,19 +88,14 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
         return this.theTransmitQueue;
     };
 
-    this.createTopic = function (topic_data_val) {
+    this.addTopic = function (topic_data_val) {
+        var topic = this.importObject().importTopic().malloc(this.rootObject(), this.topicListObject().allocId());
+        this.topicListObject().enQueue(topic);
         var topic_data = JSON.parse(topic_data_val);
         if (topic_data.title === "go") {
             this.setTopicBaseId(require("../go_modules/go_base_mgr.js").malloc_base());
-            this.debug(false, "createTopic", "base_id=" + this.topicBaseId());
         }
-    };
-
-    this.mallocTopic = function () {
-        var topic = this.importObject().importTopic().malloc(this.rootObject(), this.topicListObject().allocId());
-        this.topicListObject().enQueue(topic);
-        this.debug(false, "mallocTopic", "topicId=" + topic.topicId());
-        return topic.topicId();
+        this.debug(true, "addTopic", "topicId=" + topic.topicId() + " topicBaseId=" + this.topicBaseId());
     };
 
     this.enqueueTransmitData = function (data_val) {

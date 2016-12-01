@@ -16,6 +16,7 @@ function MatrixTopicObject (root_object_val, topic_id_val) {
     this.init__ = function (root_object_val, topic_id_val) {
         this.theRootObject = root_object_val;
         this.theJointObject = this.importListMgr().malloc_joint(topic_id_val);
+        this.theTopicBaseId = 0;
         this.debug(true, "init__", "topicId=" + this.topicId());
     };
 

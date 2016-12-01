@@ -6,11 +6,11 @@
 
 module.exports = {
     malloc: function (root_object_val, theme_id_val, theme_name_val) {
-        return new MatrixThemeObject(root_object_val, theme_id_val, theme_name_val);
+        return new MatrixThemeClass(root_object_val, theme_id_val, theme_name_val);
     },
 };
 
-function MatrixThemeObject (root_object_val, theme_id_val, theme_name_val) {
+function MatrixThemeClass (root_object_val, theme_id_val, theme_name_val) {
     "use strict";
 
     this.init__ = function (root_object_val, theme_id_val, theme_name_val) {
@@ -21,7 +21,7 @@ function MatrixThemeObject (root_object_val, theme_id_val, theme_name_val) {
     };
 
     this.objectName = function () {
-        return "MatrixThemeObject";
+        return "MatrixThemeClass";
     };
 
     this.rootObject = function () {

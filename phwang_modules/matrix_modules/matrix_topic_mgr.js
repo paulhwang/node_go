@@ -6,11 +6,11 @@
 
 module.exports = {
     malloc: function (group_object_val) {
-        return new MatrixTopicMgrObject(group_object_val);
+        return new MatrixTopicMgrClass(group_object_val);
     },
 };
 
-function MatrixTopicMgrObject (group_object_val) {
+function MatrixTopicMgrClass (group_object_val) {
     "use strict";
 
     this.init__ = function (group_object_val) {
@@ -20,7 +20,7 @@ function MatrixTopicMgrObject (group_object_val) {
     };
 
     this.objectName = function () {
-        return "MatrixTopicMgrObject";
+        return "MatrixTopicMgrClass";
     };
 
     this.groupObject = function () {

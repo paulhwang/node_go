@@ -6,11 +6,11 @@
 
 module.exports = {
     malloc: function (theme_object_val) {
-        return new MatrixSlotMgrObject(theme_object_val);
+        return new MatrixSlotMgrClass(theme_object_val);
     },
 };
 
-function MatrixSlotMgrObject (theme_object_val) {
+function MatrixSlotMgrClass (theme_object_val) {
     "use strict";
 
     this.init__ = function (theme_object_val) {
@@ -23,7 +23,7 @@ function MatrixSlotMgrObject (theme_object_val) {
     };
 
     this.objectName = function () {
-        return "MatrixSlotMgrObject";
+        return "MatrixSlotMgrClass";
     };
 
     this.themeObject = function () {

@@ -5,17 +5,17 @@
  */
 
 module.exports = {
-    malloc: function (root_object_val, theme_id_val) {
-        return new MatrixThemeObject(root_object_val, theme_id_val);
+    malloc: function (root_object_val, theme_id_val, theme_name_val) {
+        return new MatrixThemeObject(root_object_val, theme_id_val, theme_name_val);
     },
 };
 
-function MatrixThemeObject (root_object_val, theme_id_val) {
+function MatrixThemeObject (root_object_val, theme_id_val, theme_name_val) {
     "use strict";
 
-    this.init__ = function (root_object_val, theme_id_val) {
+    this.init__ = function (root_object_val, theme_id_val, theme_name_val) {
         this.theObjectObject = root_object_val;
-        this.theJointObject = this.importListMgr().malloc_joint(theme_id_val);
+        this.theJointObject = this.importListMgr().malloc_joint(theme_id_val, theme_name_val);
         this.theSlotMgrObject = this.importObject().importSlotMgr().malloc(this);
         this.debug(true, "init__", "themeId=" + this.themeId());
     };
@@ -62,5 +62,5 @@ function MatrixThemeObject (root_object_val, theme_id_val) {
         this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(root_object_val, theme_id_val);
+    this.init__(root_object_val, theme_id_val, theme_name_val);
 }

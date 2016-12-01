@@ -16,9 +16,8 @@ function MatrixThemeMgrObject (root_object_val) {
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
         this.theThemeListObject = this.importObject().importListMgr().malloc_mgr(this, 100);
+        this.createTheme("go");
         this.debug(true, "init__", "");
-
-        this.createTheme11111();
     };
 
     this.objectName = function () {
@@ -45,8 +44,10 @@ function MatrixThemeMgrObject (root_object_val) {
         return this.rootObject().utilObject();
     };
 
-    this.createTheme11111 = function () {
-        var theme = this.importObject().importTheme().malloc(this.rootObject(), this.themeListObject().allocId());
+    this.createTheme = function (theme_name_val) {
+        var theme = this.importObject().importTheme().malloc(this.rootObject(), this.themeListObject().allocId(), theme_name_val);
+
+        return theme;
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

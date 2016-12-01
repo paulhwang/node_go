@@ -25,10 +25,6 @@ function MatrixImportClass (root_object_val) {
         return this.theRootObject;
     };
 
-    this.importTopicMgr = function () {
-        return require("./matrix_topic_mgr.js");
-    }
-
     this.importGroupMgr = function () {
         return require("./matrix_group_mgr.js");
     }

@@ -47,6 +47,16 @@ function MatrixTopicMgrObject (group_object_val) {
         return this.rootObject().utilObject();
     };
 
+    this.addTopic = function (topic_data_val) {
+        var topic = this.importObject().importTopic().malloc(this.groupObject(), this.topicListObject().allocId());
+        this.topicListObject().enQueue(topic);
+        topic.createBase(topic_data_val);
+
+
+
+        return topic;///////////////////////
+    };
+
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
             this.logit(str1_val, str2_val);

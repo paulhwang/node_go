@@ -18,7 +18,9 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
         this.theJointObject = this.importListMgr().malloc_joint(group_id_val);
         this.theClusterId = cluster_id_val;
         this.theTransmitQueue = this.importObject().mallocQueue();
+        this.theTopicListObject = this.importObject().importListMgr().malloc_mgr(this, 100);
         this.theTopicMgrObject111 = this.importObject().importTopicMgr().malloc(this.rootObject());
+        this.mallocTopic();
         this.theTopicBaseId = 0;
         this.createTopic(topic_data_val);
         this.theTopicMgrObject = this.importObject().importTopicMgr().malloc(this);
@@ -40,6 +42,10 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
 
     this.clusterId = function () {
         return this.theClusterId;
+    };
+
+    this.topicListObject = function () {
+        return this.theTopicListObject;
     };
 
     this.importObject = function () {
@@ -93,9 +99,16 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
     this.createTopic = function (topic_data_val) {
         var topic_data = JSON.parse(topic_data_val);
         if (topic_data.title === "go") {
-            this.setTopicBaseId(this.topicMgrObject111().topicMallocBase());
+            this.setTopicBaseId(require("../go_modules/go_base_mgr.js").malloc_base());
             this.debug(false, "createTopic", "base_id=" + this.topicBaseId());
         }
+    };
+
+    this.mallocTopic = function () {
+        var topic = this.importObject().importTopic().malloc(this.rootObject(), this.topicListObject().allocId());
+        this.topicListObject().enQueue(topic);
+        this.debug(false, "mallocTopic", "topicId=" + topic.topicId());
+        return topic.topicId();
     };
 
     this.enqueueTransmitData = function (data_val) {
@@ -118,8 +131,8 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
     };
 
     this.receiveData = function (data_val) {
-        this.topicMgrObject111().topicReceiveData(this.topicBaseId(), data_val);
-        var data = this.topicMgrObject111().topicTransmitData(this.topicBaseId());
+        require("../go_modules/go_base_mgr.js").receive_data(this.topicBaseId(), data_val);
+        var data = require("../go_modules/go_base_mgr.js").transmit_data(this.topicBaseId());
         require("../fabric_modules/fabric_cluster_mgr.js").receive_data(this.clusterId(), data);
     };
 

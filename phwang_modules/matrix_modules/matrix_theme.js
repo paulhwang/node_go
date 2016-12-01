@@ -1,38 +1,38 @@
 /*
  * Copyrights phwang
  * Written by Paul Hwang
- * File name: matrix_topic_mgr.js
+ * File name: matrix_theme.js
  */
 
 module.exports = {
-    malloc: function (group_object_val) {
-        return new MatrixTopicMgrObject(group_object_val);
+    malloc: function (theme_object_val, theme_id_val) {
+        return new MatrixThemeObject(theme_object_val, theme_id_val);
     },
 };
 
-function MatrixTopicMgrObject (group_object_val) {
+function MatrixThemeObject (theme_object_val, theme_id_val) {
     "use strict";
 
-    this.init__ = function (group_object_val) {
-        this.theGroupObject = group_object_val;
-        this.theTopicListObject = this.importObject().importListMgr().malloc_mgr(this.groupObject(), 100);
-        this.debug(true, "init__", "");
+    this.init__ = function (theme_object_val, theme_id_val) {
+        this.theThemeObject = theme_object_val;
+        this.theJointObject = this.importListMgr().malloc_joint(theme_id_val);
+        this.debug(true, "init__", "themeId=" + this.themeId());
     };
 
     this.objectName = function () {
-        return "MatrixTopicMgrObject";
+        return "MatrixThemeObject";
     };
 
-    this.groupObject = function () {
-        return this.theGroupObject;
+    this.themeObject = function () {
+        return this.theThemeObject;
     };
 
     this.rootObject = function () {
         return this.groupObject().rootObject();
     };
 
-    this.topicListObject = function () {
-        return this.theTopicListObject;
+    this.jointObject = function () {
+        return this.theJointObject;
     };
 
     this.importObject = function () {
@@ -47,14 +47,8 @@ function MatrixTopicMgrObject (group_object_val) {
         return this.rootObject().utilObject();
     };
 
-    this.addTopic = function (topic_data_val) {
-        var topic = this.importObject().importTopic().malloc(this.groupObject(), this.topicListObject().allocId());
-        this.topicListObject().enQueue(topic);
-        topic.createBase(topic_data_val);
-
-
-
-        return topic;///////////////////////
+    this.themeId = function () {
+        return this.jointObject().entryId();
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {
@@ -71,5 +65,5 @@ function MatrixTopicMgrObject (group_object_val) {
         this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(group_object_val);
+    this.init__(theme_object_val, theme_id_val);
 }

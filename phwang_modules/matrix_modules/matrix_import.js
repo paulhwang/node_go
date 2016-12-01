@@ -41,6 +41,22 @@ function MatrixImportClass (root_object_val) {
         return require("./matrix_topic.js");
     }
 
+    this.importThemeMgr = function () {
+        return require("./matrix_theme_mgr.js");
+    }
+
+    this.importTheme = function () {
+        return require("./matrix_theme.js");
+    }
+
+    this.importSlotMgr = function () {
+        return require("./matrix_slot_mgr.js");
+    }
+
+    this.importSlot = function () {
+        return require("./matrix_slot.js");
+    }
+
     this.importListMgr = function () {
         return require("../util_modules/list_mgr.js");
     };

@@ -15,8 +15,11 @@ function MatrixSlotMgrObject (theme_object_val) {
 
     this.init__ = function (theme_object_val) {
         this.theThemeObject = theme_object_val;
-        this.theSlotListObject = this.importObject().importListMgr().malloc_mgr(this.themeObject(), 100);
+        this.theSlotListObject = this.importObject().importListMgr().malloc_mgr(this, 500);
         this.debug(true, "init__", "");
+
+
+        this.createSlot11111();
     };
 
     this.objectName = function () {
@@ -45,6 +48,10 @@ function MatrixSlotMgrObject (theme_object_val) {
 
     this.utilObject = function () {
         return this.rootObject().utilObject();
+    };
+
+    this.createSlot11111 = function () {
+        var slot = this.importObject().importSlot().malloc(this, this.slotListObject().allocId());
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

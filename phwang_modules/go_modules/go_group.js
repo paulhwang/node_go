@@ -146,7 +146,7 @@ function GoGroupClass(group_list_val) {
     this.insertStoneToGroup = function (x_val, y_val, dead_val) {
         //GO.goLog("GoGroupObject.insertStoneToGroup", "x=" + x_val + " y=" + y_val + " color=" + this.myColor_());
         if (this.existMatrix(x_val, y_val)) {
-            this.GO().goAbend("insert_stone", "x=" + x_val + " y=" + y_val + " color=" + this.myColor());
+            this.abend("insert_stone", "x=" + x_val + " y=" + y_val + " color=" + this.myColor());
         }
 
         if (this.stoneCount() == 0) {
@@ -205,7 +205,7 @@ function GoGroupClass(group_list_val) {
                 if (group2.existMatrix(i, j)) {
                     this.debug(true, "mergeWithOtherGroup", "i=" + i + " j=" + j);
                     if (this.existMatrix(i, j)) {
-                        this.Go().goAbend("goMergeWithOtherGroup", "already exist");
+                        this.abend("goMergeWithOtherGroup", "already exist");
                     }
                     this.setExistMatrix(i, j, group2.existMatrix(i, j));
                     this.incrementStoneCount();

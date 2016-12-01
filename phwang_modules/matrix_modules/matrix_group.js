@@ -116,7 +116,11 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
         if (!topic) {
             return;
         }
-        topic.receiveData(data_val);
+        topic.transmitData(data_val);
+    };
+
+    this.transmitData = function (data_val) {
+        require("../fabric_modules/fabric_cluster_mgr.js").receive_data(this.clusterId(), data_val);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

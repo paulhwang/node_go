@@ -72,10 +72,17 @@ function MatrixTopicObject (root_object_val, topic_id_val) {
         this.debug(true, "createBase", "topicId=" + this.topicId() + " baseId=" + this.baseId());
     };
 
-    this.receiveData = function (data_val) {
+    this.transmitData = function (data_val) {
         require("../go_modules/go_base_mgr.js").receive_data(this.baseId(), data_val);
-        var data = require("../go_modules/go_base_mgr.js").transmit_data(this.baseId());
-        require("../fabric_modules/fabric_cluster_mgr.js").receive_data(this.clusterId(), data);
+ 
+
+
+        var data = require("../go_modules/go_base_mgr.js").transmit_data(this.baseId());//////
+        this.receiveData(data);////////////////
+    };
+
+    this.receiveData = function (data_val) {
+        this.groupObject().transmitData(data_val);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

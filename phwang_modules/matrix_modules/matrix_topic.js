@@ -5,17 +5,17 @@
  */
 
 module.exports = {
-    malloc: function (root_object_val, topic_id_val) {
-        return new MatrixTopicClass(root_object_val, topic_id_val);
+    malloc: function (root_object_val, topic_id_val, topic_name_val) {
+        return new MatrixTopicClass(root_object_val, topic_id_val, topic_name_val);
     },
 };
 
-function MatrixTopicClass (root_object_val, topic_id_val) {
+function MatrixTopicClass (root_object_val, topic_id_val, topic_name_val) {
     "use strict";
 
-    this.init__ = function (root_object_val, topic_id_val) {
+    this.init__ = function (root_object_val, topic_id_val, topic_name_val) {
         this.theGroupObject = root_object_val;
-        this.theJointObject = this.importListMgr().malloc_joint(topic_id_val);
+        this.theJointObject = this.importListMgr().malloc_joint(topic_id_val, topic_name_val);
         this.theTopicBaseId = 0;
         this.debug(true, "init__", "topicId=" + this.topicId());
     };
@@ -54,6 +54,10 @@ function MatrixTopicClass (root_object_val, topic_id_val) {
 
     this.topicId = function () {
         return this.jointObject().entryId();
+    };
+
+    this.topicName = function () {
+        return this.jointObject().entryName();
     };
 
     this.slotId = function () {
@@ -107,5 +111,5 @@ function MatrixTopicClass (root_object_val, topic_id_val) {
         this.rootObject().ABEND(this.objectName() + "." + str1_val, str2_val);
     };
 
-    this.init__(root_object_val, topic_id_val);
+    this.init__(root_object_val, topic_id_val, topic_name_val);
 }

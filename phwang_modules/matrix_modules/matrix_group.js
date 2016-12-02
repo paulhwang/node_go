@@ -102,9 +102,6 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
         topic.setSlotId(slot.slotId());
         this.debug(true, "addTopic", "slotId=" + topic.slotId());
         slot.createBase(topic_data_val);
-
-
-        this.tempslotId = topic.slotId();
     };
 
     this.enqueueTransmitData = function (data_val) {
@@ -127,13 +124,19 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
     };
 
     this.receiveData = function (data_val) {
+        var topic = this.topicListObject().searchName("go");
+        if (!topic) {
+            this.abend("receiveData", "topic is not found");
+            return;
+        }
+
         var theme = this.themeMgrObject().themeListObject().searchName("go");
         if (!theme) {
             this.abend("receiveData", "theme is not found");
             return;
         }
 
-        var slot = theme.slotMgrObject().slotListObject().searchId(this.tempslotId);
+        var slot = theme.slotMgrObject().slotListObject().searchId(topic.slotId());
         if (!slot) {
             this.abend("receiveData", "slot is not found");
             return;

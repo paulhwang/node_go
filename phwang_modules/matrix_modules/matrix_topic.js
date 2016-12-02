@@ -48,10 +48,6 @@ function MatrixTopicClass (root_object_val, topic_id_val, topic_name_val) {
         return this.rootObject().utilObject();
     };
 
-    this.clusterId = function () {
-        return this.groupObject().clusterId();
-    };
-
     this.topicId = function () {
         return this.jointObject().entryId();
     };

@@ -67,17 +67,10 @@ function MatrixSlotClass (theme_object_val, slot_id_val) {
         this.debug(true, "createBase", "slotId=" + this.slotId() + " baseId=" + this.baseId());
     };
 
-    this.transmitData = function (data_val) {
+    this.transmitData = function (data_val, group_object_val) {
         require("../go_modules/go_base_mgr.js").receive_data(this.baseId(), data_val);
- 
-
-
         var data = require("../go_modules/go_base_mgr.js").transmit_data(this.baseId());//////
-        this.receiveData(data);////////////////
-    };
-
-    this.receiveData = function (data_val) {
-        this.groupObject().transmitData(data_val);
+        group_object_val.transmitData(data);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

@@ -105,13 +105,6 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
 
 
         this.tempslotId = topic.slotId();
-
-        topic.createBase(topic_data_val);
-
-
-
-
-        this.theOnlyTopic = topic;
     };
 
     this.enqueueTransmitData = function (data_val) {
@@ -146,14 +139,7 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
             return;
         }
         this.debug(true, "receiveData", "slotId=" + slot.slotId());
-
-        
-        //var topic = this.groupListObject().searchId(group_id_val);
-        var topic = this.theOnlyTopic;
-        if (!topic) {
-            return;
-        }
-        topic.transmitData(data_val);
+        slot.transmitData(data_val, this);
     };
 
     this.transmitData = function (data_val) {

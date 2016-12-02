@@ -72,7 +72,7 @@ function MatrixTopicClass (root_object_val, topic_id_val) {
         this.theBaseId = val;
     };
 
-    this.createBase = function (topic_data_val) {
+    this.createBase______________ = function (topic_data_val) {
         var topic_data = JSON.parse(topic_data_val);
         if (topic_data.title === "go") {
             this.setBaseId(require("../go_modules/go_base_mgr.js").malloc_base());
@@ -80,7 +80,7 @@ function MatrixTopicClass (root_object_val, topic_id_val) {
         this.debug(true, "createBase", "topicId=" + this.topicId() + " baseId=" + this.baseId());
     };
 
-    this.transmitData = function (data_val) {
+    this.transmitData______________ = function (data_val) {
         require("../go_modules/go_base_mgr.js").receive_data(this.baseId(), data_val);
  
 
@@ -89,7 +89,7 @@ function MatrixTopicClass (root_object_val, topic_id_val) {
         this.receiveData(data);////////////////
     };
 
-    this.receiveData = function (data_val) {
+    this.receiveData_____________ = function (data_val) {
         this.groupObject().transmitData(data_val);
     };
 

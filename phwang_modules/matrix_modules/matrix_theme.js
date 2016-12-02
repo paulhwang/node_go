@@ -28,6 +28,10 @@ function MatrixThemeClass (root_object_val, theme_id_val, theme_name_val) {
         return this.theObjectObject;
     };
 
+    this.slotMgrObject = function () {
+        return this.theSlotMgrObject;
+    };
+
     this.jointObject = function () {
         return this.theJointObject;
     };

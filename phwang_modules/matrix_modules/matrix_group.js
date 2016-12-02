@@ -98,6 +98,8 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
             return;
         }
         this.debug(true, "addTopic", "themeId=" + theme.themeId());
+        var slot_id = theme.slotMgrObject().addSlot();
+        this.debug(true, "addTopic", "slot_id=" + slot_id);
 
         topic.createBase(topic_data_val);
 

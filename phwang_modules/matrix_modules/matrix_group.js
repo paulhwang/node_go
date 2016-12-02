@@ -36,6 +36,10 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
         return this.theRootObject;
     };
 
+    this.themeMgrObject = function () {
+        return this.rootObject().themeMgrObject();
+    };
+
     this.clusterId = function () {
         return this.theClusterId;
     };
@@ -85,8 +89,16 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
     };
 
     this.addTopic = function (topic_data_val) {
-        var topic = this.importObject().importTopic().malloc(this, this.topicListObject().allocId());
+        var topic = this.importObject().importTopic().malloc(this, this.topicListObject().allocId(), "go");
         this.topicListObject().enQueue(topic);
+ 
+        var theme = this.themeMgrObject().themeListObject().searchName("go");
+        if (!theme) {
+            this.abend("addTopic", "theme is not found");
+            return;
+        }
+        this.debug(true, "addTopic", "themeId=" + theme.themeId());
+
         topic.createBase(topic_data_val);
 
 

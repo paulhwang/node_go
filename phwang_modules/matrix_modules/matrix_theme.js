@@ -56,10 +56,11 @@ function MatrixThemeClass (root_object_val, theme_id_val, theme_name_val) {
         return this.jointObject().entryName();
     };
 
-    this.addSlot = function (topic_data_val) {
+    this.addSlot = function (topic_data_val, group_id_val) {
         var slot = this.slotMgrObject().addSlot();
+        slot.setGroupId(group_id_val);
         slot.createBase(topic_data_val);
-        return slot;
+        return slot.slotId();
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

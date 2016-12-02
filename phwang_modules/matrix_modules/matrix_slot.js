@@ -39,6 +39,10 @@ function MatrixSlotClass (theme_object_val, slot_id_val) {
         return this.rootObject().importObject();
     };
 
+    this.groupMgrObject = function () {
+        return this.rootObject().groupMgrObject();
+    };
+
     this.importListMgr = function () {
         return this.importObject().importListMgr();
     };
@@ -49,6 +53,14 @@ function MatrixSlotClass (theme_object_val, slot_id_val) {
 
     this.slotId = function () {
         return this.jointObject().entryId();
+    };
+
+    this.groupId = function () {
+        return this.theGroupId;
+    };
+
+    this.setGroupId = function (val) {
+        this.theGroupId = val;
     };
 
     this.baseId = function () {
@@ -67,10 +79,16 @@ function MatrixSlotClass (theme_object_val, slot_id_val) {
         this.debug(true, "createBase", "slotId=" + this.slotId() + " baseId=" + this.baseId());
     };
 
-    this.transmitData = function (data_val, group_object_val) {
+    this.transmitData = function (data_val) {
         require("../go_modules/go_base_mgr.js").receive_data(this.baseId(), data_val);
         var data = require("../go_modules/go_base_mgr.js").transmit_data(this.baseId());//////
-        group_object_val.transmitData(data);
+        var group = this.groupMgrObject().groupListObject().searchId(this.groupId());
+        if (group) {
+            group.transmitData(data);
+        }
+        else {
+            this.abend("transmitData", "group not found");
+        }
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

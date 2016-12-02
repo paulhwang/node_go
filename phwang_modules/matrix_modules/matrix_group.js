@@ -98,8 +98,11 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
             return;
         }
         this.debug(true, "addTopic", "themeId=" + theme.themeId());
-        var slot_id = theme.slotMgrObject().addSlot();
-        this.debug(true, "addTopic", "slot_id=" + slot_id);
+        topic.setSlotId(theme.slotMgrObject().addSlot());
+        this.debug(true, "addTopic", "slotId=" + topic.slotId());
+
+
+        this.tempslotId = topic.slotId();
 
         topic.createBase(topic_data_val);
 
@@ -129,6 +132,20 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
     };
 
     this.receiveData = function (data_val) {
+        var theme = this.themeMgrObject().themeListObject().searchName("go");
+        if (!theme) {
+            this.abend("receiveData", "theme is not found");
+            return;
+        }
+
+        var slot = theme.slotMgrObject().slotListObject().searchId(this.tempslotId);
+        if (!slot) {
+            this.abend("receiveData", "slot is not found");
+            return;
+        }
+        this.debug(true, "receiveData", "slotId=" + slot.slotId());
+
+        
         //var topic = this.groupListObject().searchId(group_id_val);
         var topic = this.theOnlyTopic;
         if (!topic) {

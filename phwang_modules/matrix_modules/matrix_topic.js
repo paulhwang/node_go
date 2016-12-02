@@ -56,6 +56,14 @@ function MatrixTopicClass (root_object_val, topic_id_val) {
         return this.jointObject().entryId();
     };
 
+    this.slotId = function () {
+        return this.theSLotId;
+    };
+
+    this.setSlotId = function (val) {
+        this.theSLotId = val;
+    };
+
     this.baseId = function () {
         return this.theBaseId;
     };

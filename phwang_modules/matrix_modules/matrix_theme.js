@@ -56,6 +56,12 @@ function MatrixThemeClass (root_object_val, theme_id_val, theme_name_val) {
         return this.jointObject().entryName();
     };
 
+    this.addSlot = function (topic_data_val) {
+        var slot = this.slotMgrObject().addSlot();
+        slot.createBase(topic_data_val);
+        return slot;
+    };
+
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
             this.logit(str1_val, str2_val);

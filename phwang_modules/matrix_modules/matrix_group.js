@@ -96,8 +96,7 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
         }
         this.debug(true, "addTopic", "themeId=" + theme.themeId());
 
-        var slot = theme.slotMgrObject().addSlot();
-        slot.createBase(topic_data_val);
+        var slot = theme.addSlot(topic_data_val);
 
         var topic = this.importObject().importTopic().malloc(this, this.topicListObject().allocId(), "go");
         this.topicListObject().enQueue(topic);

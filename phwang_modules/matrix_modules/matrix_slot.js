@@ -81,6 +81,13 @@ function MatrixSlotClass (theme_object_val, slot_id_val) {
 
     this.transmitData = function (data_val) {
         require("../go_modules/go_base_mgr.js").receive_data(this.baseId(), data_val);
+
+
+
+        this.receiveData();////////////////////////////////
+    };
+
+    this.receiveData = function () {
         var data = require("../go_modules/go_base_mgr.js").transmit_data(this.baseId());//////
         var group = this.groupMgrObject().groupListObject().searchId(this.groupId());
         if (group) {
@@ -88,6 +95,7 @@ function MatrixSlotClass (theme_object_val, slot_id_val) {
         }
         else {
             this.abend("transmitData", "group not found");
+            return;
         }
     };
 

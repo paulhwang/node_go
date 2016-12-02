@@ -138,7 +138,6 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
             this.abend("receiveData", "slot is not found");
             return;
         }
-        this.debug(true, "receiveData", "slotId=" + slot.slotId());
         slot.transmitData(data_val);
     };
 

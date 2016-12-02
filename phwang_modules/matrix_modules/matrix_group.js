@@ -98,8 +98,10 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
             return;
         }
         this.debug(true, "addTopic", "themeId=" + theme.themeId());
-        topic.setSlotId(theme.slotMgrObject().addSlot());
+        var slot = theme.slotMgrObject().addSlot();
+        topic.setSlotId(slot.slotId());
         this.debug(true, "addTopic", "slotId=" + topic.slotId());
+        slot.createBase(topic_data_val);
 
 
         this.tempslotId = topic.slotId();

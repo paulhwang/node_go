@@ -51,6 +51,35 @@ function MatrixSlotClass (theme_object_val, slot_id_val) {
         return this.jointObject().entryId();
     };
 
+    this.baseId = function () {
+        return this.theBaseId;
+    };
+
+    this.setBaseId = function (val) {
+        this.theBaseId = val;
+    };
+
+    this.createBase = function (topic_data_val) {
+        var topic_data = JSON.parse(topic_data_val);
+        if (topic_data.title === "go") {
+            this.setBaseId(require("../go_modules/go_base_mgr.js").malloc_base());
+        }
+        this.debug(true, "createBase", "slotId=" + this.slotId() + " baseId=" + this.baseId());
+    };
+
+    this.transmitData = function (data_val) {
+        require("../go_modules/go_base_mgr.js").receive_data(this.baseId(), data_val);
+ 
+
+
+        var data = require("../go_modules/go_base_mgr.js").transmit_data(this.baseId());//////
+        this.receiveData(data);////////////////
+    };
+
+    this.receiveData = function (data_val) {
+        this.groupObject().transmitData(data_val);
+    };
+
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
             this.logit(str1_val, str2_val);

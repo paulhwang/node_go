@@ -50,7 +50,7 @@ function MatrixSlotMgrClass (theme_object_val) {
     this.addSlot = function () {
         var slot = this.importObject().importSlot().malloc(this, this.slotListObject().allocId());
         this.slotListObject().enQueue(slot);
-        return slot.slotId();
+        return slot;
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

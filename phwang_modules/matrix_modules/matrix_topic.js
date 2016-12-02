@@ -68,35 +68,6 @@ function MatrixTopicClass (root_object_val, topic_id_val, topic_name_val) {
         this.theSLotId = val;
     };
 
-    this.baseId = function () {
-        return this.theBaseId;
-    };
-
-    this.setBaseId = function (val) {
-        this.theBaseId = val;
-    };
-
-    this.createBase______________ = function (topic_data_val) {
-        var topic_data = JSON.parse(topic_data_val);
-        if (topic_data.title === "go") {
-            this.setBaseId(require("../go_modules/go_base_mgr.js").malloc_base());
-        }
-        this.debug(true, "createBase", "topicId=" + this.topicId() + " baseId=" + this.baseId());
-    };
-
-    this.transmitData______________ = function (data_val) {
-        require("../go_modules/go_base_mgr.js").receive_data(this.baseId(), data_val);
- 
-
-
-        var data = require("../go_modules/go_base_mgr.js").transmit_data(this.baseId());//////
-        this.receiveData(data);////////////////
-    };
-
-    this.receiveData_____________ = function (data_val) {
-        this.groupObject().transmitData(data_val);
-    };
-
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
             this.logit(str1_val, str2_val);

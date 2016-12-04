@@ -17,7 +17,6 @@ function MatrixThemeClass (root_object_val, theme_id_val, theme_name_val) {
         this.theObjectObject = root_object_val;
         this.theThemeId = theme_id_val;
         this.theThemeName = theme_name_val;
-        this.theJointObject = this.importListMgr().malloc_joint(theme_id_val, theme_name_val);
         this.theSlotMgrObject = this.importObject().importSlotMgr().malloc(this);
         this.debug(true, "init__", "themeId=" + this.themeId() + " themeName=" + this.themeName());
     };
@@ -30,12 +29,16 @@ function MatrixThemeClass (root_object_val, theme_id_val, theme_name_val) {
         return this.theObjectObject;
     };
 
-    this.slotMgrObject = function () {
-        return this.theSlotMgrObject;
+    this.themeId = function () {
+        return this.theThemeId;
     };
 
-    this.jointObject = function () {
-        return this.theJointObject;
+    this.themeName = function () {
+        return this.theThemeName;
+    };
+
+    this.slotMgrObject = function () {
+        return this.theSlotMgrObject;
     };
 
     this.importObject = function () {
@@ -48,14 +51,6 @@ function MatrixThemeClass (root_object_val, theme_id_val, theme_name_val) {
 
     this.utilObject = function () {
         return this.rootObject().utilObject();
-    };
-
-    this.themeId = function () {
-        return this.theThemeId;
-    };
-
-    this.themeName = function () {
-        return this.theThemeName;
     };
 
     this.addSlot = function (topic_data_val, group_id_val) {

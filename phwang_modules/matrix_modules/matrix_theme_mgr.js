@@ -42,8 +42,8 @@ function MatrixThemeMgrClass (root_object_val) {
         return this.rootObject().importObject();
     };
 
-    this.importListMgr = function () {
-        return this.importObject().importListMgr();
+    this.themeIndexArrayLength = function () {
+        return this.themeIndexArray().length;
     };
 
     this.utilObject = function () {
@@ -51,7 +51,7 @@ function MatrixThemeMgrClass (root_object_val) {
     };
 
     this.createTheme = function (theme_name_val) {
-        var theme = this.importObject().importTheme().malloc(this.rootObject(), this.themeIndexArray().length, theme_name_val);
+        var theme = this.importObject().importTheme().malloc(this.rootObject(), this.themeIndexArrayLength(), theme_name_val);
         this.themeIndexArray().push(theme_name_val);
         this.themeTableArray().push(theme);
     };

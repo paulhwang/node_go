@@ -89,9 +89,18 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
     };
 
     this.addTopic = function (topic_data_val) {
-        var theme = this.themeMgrObject().themeListObject().searchName("go");
+        var theme = this.themeMgrObject().getTheme("go");
+        var theme1 = this.themeMgrObject().themeListObject().searchName("go");
         if (!theme) {
             this.abend("addTopic", "theme is not found");
+            return;
+        }
+        if (!theme1) {
+            this.abend("addTopic", "theme is not found");
+            return;
+        }
+        if (theme !== theme1) {
+            this.abend("addTopic", "theme not match");
             return;
         }
 

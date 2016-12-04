@@ -15,8 +15,8 @@ function MatrixThemeMgrClass (root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
-        this.theThemeIndexArray = [];
-        this.theThemeTableArray = [];
+        this.theThemeIndexArray = ["dummy"];
+        this.theThemeTableArray = [null];
         this.createTheme("chat");
         this.createTheme("go");
         this.debug(true, "init__", "");

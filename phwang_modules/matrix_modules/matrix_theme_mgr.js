@@ -15,8 +15,8 @@ function MatrixThemeMgrClass (root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
-        this.theThemeName = [];
-        this.theThemeTable = [];
+        this.theThemeIndexArray = [];
+        this.theThemeTableArray = [];
         this.createTheme("chat");
         this.createTheme("go");
         this.debug(true, "init__", "");
@@ -30,12 +30,12 @@ function MatrixThemeMgrClass (root_object_val) {
         return this.theRootObject;
     };
 
-    this.themeName = function () {
-        return this.theThemeName;
+    this.themeIndexArray = function () {
+        return this.theThemeIndexArray;
     };
 
-    this.themeTable = function () {
-        return this.theThemeTable;
+    this.themeTableArray = function () {
+        return this.theThemeTableArray;
     };
 
     this.importObject = function () {
@@ -51,17 +51,17 @@ function MatrixThemeMgrClass (root_object_val) {
     };
 
     this.createTheme = function (theme_name_val) {
-        var theme = this.importObject().importTheme().malloc(this.rootObject(), this.themeName().length, theme_name_val);
-        this.themeName().push(theme_name_val);
-        this.themeTable().push(theme);
+        var theme = this.importObject().importTheme().malloc(this.rootObject(), this.themeIndexArray().length, theme_name_val);
+        this.themeIndexArray().push(theme_name_val);
+        this.themeTableArray().push(theme);
     };
 
     this.getTheme = function (theme_name_val) {
-        var index = this.themeName().indexOf(theme_name_val);
+        var index = this.themeIndexArray().indexOf(theme_name_val);
         if (index === -1) {
             return null;
         } else {
-            var theme =this.themeTable()[index];
+            var theme =this.themeTableArray()[index];
             return theme;
         }
     };

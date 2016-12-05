@@ -15,19 +15,19 @@ module.exports = {
     },
 
     post: function (req, res) {
-        the_fabric_ajax_object.processPost(req, res);
+        the_fabric_ajax_object.processHttp(req, res, 0);
     },
 
     get: function (req, res) {
-        the_fabric_ajax_object.processGet(req, res);
+        the_fabric_ajax_object.processHttp(req, res, 1);
     },
 
     put: function (req, res) {
-        the_fabric_ajax_object.processPut(req, res);
+        the_fabric_ajax_object.processHttp(req, res, 2);
     },
 
     delete: function (req, res) {
-        the_fabric_ajax_object.processDelete(req, res);
+        the_fabric_ajax_object.processHttp(req, res, 3);
     },
 
     not_found: function (req, res) {
@@ -68,7 +68,7 @@ function FabricAjaxClass(root_object_val) {
         return this.utilObject().utilObject();
     };
 
-    this.processPost = function (req, res) {
+    this.processHttp = function (req, res, command_index_val) {
         if (!req.headers.gorequest) {
             this.abend("processGet", "null gorequest");
             return;
@@ -82,76 +82,7 @@ function FabricAjaxClass(root_object_val) {
             return;
         }
 
-        var data = this.ajaxParserObject().parsePostRequest(req.headers.gorequest);
-        var json_str = JSON.stringify({
-                        command: go_request.command,
-                        data: data,
-                    });
-        res.type('application/json');
-        res.send(json_str);
-    };
-
-    this.processGet = function (req, res) {
-        if (!req.headers.gorequest) {
-            this.abend("processGet", "null gorequest");
-            return;
-        }
-
-        this.debug(false, "processGet", "gorequest=" + req.headers.gorequest);
-
-        var go_request = JSON.parse(req.headers.gorequest);
-        if (!go_request) {
-            this.abend("processGet", "null go_request");
-            return;
-        }
-
-        var data = this.ajaxParserObject().parseGetRequest(req.headers.gorequest);
-        var json_str = JSON.stringify({
-                        command: go_request.command,
-                        data: data,
-                    });
-        res.type('application/json');
-        res.send(json_str);
-    };
-
-    this.processPut = function (req, res) {
-        if (!req.headers.gorequest) {
-            this.abend("processGet", "null gorequest");
-            return;
-        }
-
-        this.debug(false, "processGet", "gorequest=" + req.headers.gorequest);
-
-        var go_request = JSON.parse(req.headers.gorequest);
-        if (!go_request) {
-            this.abend("processGet", "null go_request");
-            return;
-        }
-
-        var data = this.ajaxParserObject().parsePutRequest(req.headers.gorequest);
-        var json_str = JSON.stringify({
-                        command: go_request.command,
-                        data: data,
-                    });
-        res.type('application/json');
-        res.send(json_str);
-    };
-
-    this.processDelete = function (req, res) {
-        if (!req.headers.gorequest) {
-            this.abend("processGet", "null gorequest");
-            return;
-        }
-
-        this.debug(false, "processGet", "gorequest=" + req.headers.gorequest);
-
-        var go_request = JSON.parse(req.headers.gorequest);
-        if (!go_request) {
-            this.abend("processGet", "null go_request");
-            return;
-        }
-
-        var data = this.ajaxParserObject().parseDeleteRequest(req.headers.gorequest);
+        var data = this.ajaxParserObject().parseGetRequest(req.headers.gorequest, command_index_val);
         var json_str = JSON.stringify({
                         command: go_request.command,
                         data: data,

@@ -20,7 +20,7 @@ function FabricAjaxParserClass(root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
-        this.initSwitchTables();
+        this.initSwitchTableArray();
         this.debug(true, "init__", "");
     };
 
@@ -68,28 +68,16 @@ function FabricAjaxParserClass(root_object_val) {
         this.theLinkUpdateInterval = val;
     };
 
-    this.postSwitchTable = function () {
-        return this.theGetSwitchTable;
+    this.httpSwitchTableArray = function (index_val) {
+        return this.theHttpSwitchTableArray[index_val];
     };
 
-    this.getSwitchTable = function () {
-        return this.theGetSwitchTable;
-    };
-
-    this.putSwitchTable = function () {
-        return this.theGetSwitchTable;
-    };
-
-    this.deleteSwitchTable = function () {
-        return this.theGetSwitchTable;
-    };
-
-    this.initSwitchTables = function () {
-        this.thePostSwitchTable = {
+    this.initSwitchTableArray = function () {
+        var post_switch_table = {
             "setup_link": this.setupLink,
             "setup_session": this.setupSession,
         };
-        this.theGetSwitchTable = {
+        var get_switch_table = {
             "setup_link": this.setupLink,
             "get_link_data": this.getLinkData,
             "put_link_data": this.putLinkData,
@@ -100,17 +88,22 @@ function FabricAjaxParserClass(root_object_val) {
             "put_session_data": this.putSessionData,
             "keep_alive": this.keepAlive,
         };
-        this.thePutSwitchTable = {
+        var put_switch_table = {
             "put_link_data": this.putLinkData,
             "put_session_data": this.putSessionData,
         };
-        this.theDeleteSwitchTable = {
+        var delete_switch_table = {
             "delete_link": this.setupLink,
             "delete_session": this.setupSession,
         };
+        this.theHttpSwitchTableArray = [post_switch_table,
+                                        get_switch_table,
+                                        put_switch_table,
+                                        delete_switch_table,
+                                        ];
     };
 
-    this.parsePostRequest = function (input_val) {
+    this.parseGetRequest = function (input_val, command_index_val) {
         var go_request = JSON.parse(input_val);
 
         if (go_request.command === "get_link_data") {
@@ -119,61 +112,7 @@ function FabricAjaxParserClass(root_object_val) {
             this.debug_(true, this.debugInput(), "switchRequest", "input_val=" + input_val);
         }
 
-        var func = this.postSwitchTable()[go_request.command];
-        if (func) {
-            return func.bind(this)(go_request);
-        } else {
-            this.abend("switchRequest", "bad command=" + go_request.command);
-            return null;
-        }
-    }
-
-    this.parseGetRequest = function (input_val) {
-        var go_request = JSON.parse(input_val);
-
-        if (go_request.command === "get_link_data") {
-            this.debug_(false, this.debugInput(), "switchRequest", "input_val=" + input_val);
-        } else {
-            this.debug_(true, this.debugInput(), "switchRequest", "input_val=" + input_val);
-        }
-
-        var func = this.getSwitchTable()[go_request.command];
-        if (func) {
-            return func.bind(this)(go_request);
-        } else {
-            this.abend("switchRequest", "bad command=" + go_request.command);
-            return null;
-        }
-    }
-
-    this.parsePutRequest = function (input_val) {
-        var go_request = JSON.parse(input_val);
-
-        if (go_request.command === "get_link_data") {
-            this.debug_(false, this.debugInput(), "switchRequest", "input_val=" + input_val);
-        } else {
-            this.debug_(true, this.debugInput(), "switchRequest", "input_val=" + input_val);
-        }
-
-        var func = this.putSwitchTable()[go_request.command];
-        if (func) {
-            return func.bind(this)(go_request);
-        } else {
-            this.abend("switchRequest", "bad command=" + go_request.command);
-            return null;
-        }
-    }
-
-    this.parseDeleteRequest = function (input_val) {
-        var go_request = JSON.parse(input_val);
-
-        if (go_request.command === "get_link_data") {
-            this.debug_(false, this.debugInput(), "switchRequest", "input_val=" + input_val);
-        } else {
-            this.debug_(true, this.debugInput(), "switchRequest", "input_val=" + input_val);
-        }
-
-        var func = this.deleteSwitchTable()[go_request.command];
+        var func = this.httpSwitchTableArray(command_index_val)[go_request.command];
         if (func) {
             return func.bind(this)(go_request);
         } else {

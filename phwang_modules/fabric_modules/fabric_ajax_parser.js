@@ -87,14 +87,7 @@ function FabricAjaxParserClass(root_object_val) {
     this.initSwitchTables = function () {
         this.thePostSwitchTable = {
             "setup_link": this.setupLink,
-            "get_link_data": this.getLinkData,
-            "put_link_data": this.putLinkData,
-            "get_name_list": this.getNameList,
             "setup_session": this.setupSession,
-            "setup_session_reply": this.setupSessionReply,
-            "get_session_data": this.getSessionData,
-            "put_session_data": this.putSessionData,
-            "keep_alive": this.keepAlive,
         };
         this.theGetSwitchTable = {
             "setup_link": this.setupLink,
@@ -108,26 +101,12 @@ function FabricAjaxParserClass(root_object_val) {
             "keep_alive": this.keepAlive,
         };
         this.thePutSwitchTable = {
-            "setup_link": this.setupLink,
-            "get_link_data": this.getLinkData,
             "put_link_data": this.putLinkData,
-            "get_name_list": this.getNameList,
-            "setup_session": this.setupSession,
-            "setup_session_reply": this.setupSessionReply,
-            "get_session_data": this.getSessionData,
             "put_session_data": this.putSessionData,
-            "keep_alive": this.keepAlive,
         };
         this.theDeleteSwitchTable = {
-            "setup_link": this.setupLink,
-            "get_link_data": this.getLinkData,
-            "put_link_data": this.putLinkData,
-            "get_name_list": this.getNameList,
-            "setup_session": this.setupSession,
-            "setup_session_reply": this.setupSessionReply,
-            "get_session_data": this.getSessionData,
-            "put_session_data": this.putSessionData,
-            "keep_alive": this.keepAlive,
+            "delete_link": this.setupLink,
+            "delete_session": this.setupSession,
         };
     };
 

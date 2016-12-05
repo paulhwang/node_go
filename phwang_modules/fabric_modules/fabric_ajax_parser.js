@@ -20,7 +20,7 @@ function FabricAjaxParserClass(root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
-        this.initSwitchTable();
+        this.initSwitchTables();
         this.debug(true, "init__", "");
     };
 
@@ -68,8 +68,57 @@ function FabricAjaxParserClass(root_object_val) {
         this.theLinkUpdateInterval = val;
     };
 
-    this.initSwitchTable = function () {
-        this.switch_table = {
+    this.postSwitchTable = function () {
+        return this.theGetSwitchTable;
+    };
+
+    this.getSwitchTable = function () {
+        return this.theGetSwitchTable;
+    };
+
+    this.putSwitchTable = function () {
+        return this.theGetSwitchTable;
+    };
+
+    this.deleteSwitchTable = function () {
+        return this.theGetSwitchTable;
+    };
+
+    this.initSwitchTables = function () {
+        this.thePostSwitchTable = {
+            "setup_link": this.setupLink,
+            "get_link_data": this.getLinkData,
+            "put_link_data": this.putLinkData,
+            "get_name_list": this.getNameList,
+            "setup_session": this.setupSession,
+            "setup_session_reply": this.setupSessionReply,
+            "get_session_data": this.getSessionData,
+            "put_session_data": this.putSessionData,
+            "keep_alive": this.keepAlive,
+        };
+        this.theGetSwitchTable = {
+            "setup_link": this.setupLink,
+            "get_link_data": this.getLinkData,
+            "put_link_data": this.putLinkData,
+            "get_name_list": this.getNameList,
+            "setup_session": this.setupSession,
+            "setup_session_reply": this.setupSessionReply,
+            "get_session_data": this.getSessionData,
+            "put_session_data": this.putSessionData,
+            "keep_alive": this.keepAlive,
+        };
+        this.thePutSwitchTable = {
+            "setup_link": this.setupLink,
+            "get_link_data": this.getLinkData,
+            "put_link_data": this.putLinkData,
+            "get_name_list": this.getNameList,
+            "setup_session": this.setupSession,
+            "setup_session_reply": this.setupSessionReply,
+            "get_session_data": this.getSessionData,
+            "put_session_data": this.putSessionData,
+            "keep_alive": this.keepAlive,
+        };
+        this.theDeleteSwitchTable = {
             "setup_link": this.setupLink,
             "get_link_data": this.getLinkData,
             "put_link_data": this.putLinkData,
@@ -82,7 +131,7 @@ function FabricAjaxParserClass(root_object_val) {
         };
     };
 
-    this.parseRequest = function (input_val) {
+    this.parsePostRequest = function (input_val) {
         var go_request = JSON.parse(input_val);
 
         if (go_request.command === "get_link_data") {
@@ -91,7 +140,61 @@ function FabricAjaxParserClass(root_object_val) {
             this.debug_(true, this.debugInput(), "switchRequest", "input_val=" + input_val);
         }
 
-        var func = this.switch_table[go_request.command];
+        var func = this.postSwitchTable()[go_request.command];
+        if (func) {
+            return func.bind(this)(go_request);
+        } else {
+            this.abend("switchRequest", "bad command=" + go_request.command);
+            return null;
+        }
+    }
+
+    this.parseGetRequest = function (input_val) {
+        var go_request = JSON.parse(input_val);
+
+        if (go_request.command === "get_link_data") {
+            this.debug_(false, this.debugInput(), "switchRequest", "input_val=" + input_val);
+        } else {
+            this.debug_(true, this.debugInput(), "switchRequest", "input_val=" + input_val);
+        }
+
+        var func = this.getSwitchTable()[go_request.command];
+        if (func) {
+            return func.bind(this)(go_request);
+        } else {
+            this.abend("switchRequest", "bad command=" + go_request.command);
+            return null;
+        }
+    }
+
+    this.parsePutRequest = function (input_val) {
+        var go_request = JSON.parse(input_val);
+
+        if (go_request.command === "get_link_data") {
+            this.debug_(false, this.debugInput(), "switchRequest", "input_val=" + input_val);
+        } else {
+            this.debug_(true, this.debugInput(), "switchRequest", "input_val=" + input_val);
+        }
+
+        var func = this.putSwitchTable()[go_request.command];
+        if (func) {
+            return func.bind(this)(go_request);
+        } else {
+            this.abend("switchRequest", "bad command=" + go_request.command);
+            return null;
+        }
+    }
+
+    this.parseDeleteRequest = function (input_val) {
+        var go_request = JSON.parse(input_val);
+
+        if (go_request.command === "get_link_data") {
+            this.debug_(false, this.debugInput(), "switchRequest", "input_val=" + input_val);
+        } else {
+            this.debug_(true, this.debugInput(), "switchRequest", "input_val=" + input_val);
+        }
+
+        var func = this.deleteSwitchTable()[go_request.command];
         if (func) {
             return func.bind(this)(go_request);
         } else {

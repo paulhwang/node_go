@@ -261,7 +261,7 @@ function FabricAjaxParserClass(root_object_val) {
             return null;
         }
 
-        var session = link.searchSessionBySessionId(go_request.session_id);
+        var session = link.getSession(go_request.session_id);
         if (!session) {
             this.logit("getSessionObject", "session not found" + " session_id=" + go_request.session_id);
             return null;

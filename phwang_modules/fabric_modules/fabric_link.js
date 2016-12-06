@@ -162,7 +162,17 @@ function FabricLinkClass(root_object_val, link_id_val, link_name_val) {
         this.sessionTableArray().push(session1);
         var session = this.importObject().importSession().malloc(this, this.sessionListObject().allocId());
         this.sessionListObject().enQueue(session);
-        return session;
+        return session1;
+    };
+
+    this.getSession = function (session_id_val) {
+        var index = this.sessionIndexArray().indexOf(session_id_val);
+        if (index === -1) {
+            return null;
+        } else {
+            var session =this.sessionTableArray()[index];
+            return session;
+        }
     };
 
     this.getPendingSessionData = function () {

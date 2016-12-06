@@ -15,6 +15,7 @@ function FabricSessionClass(link_object_val, session_id_val) {
 
     this.init__ = function (link_object_val, session_id_val) {
         this.theLinkObject = link_object_val;
+        this.theSessionId = session_id_val;
         this.theJointObject = this.rootObject().importObject().importListMgr().malloc_joint(session_id_val);
         this.theSessionId = session_id_val;
         this.theHisSession = null;

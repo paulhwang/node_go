@@ -15,6 +15,9 @@ function MatrixSlotMgrClass (theme_object_val) {
 
     this.init__ = function (theme_object_val) {
         this.theThemeObject = theme_object_val;
+        this.theGlobalSlotId = 0;
+        this.theSlotIndexArray = [0];
+        this.theSlotTableArray = [null];
         this.theSlotListObject = this.importObject().importListMgr().malloc_mgr(this, 500);
         this.debug(true, "init__", "");
     };

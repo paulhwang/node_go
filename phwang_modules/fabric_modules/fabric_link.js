@@ -17,7 +17,6 @@ function FabricLinkClass(root_object_val, link_id_val, link_name_val) {
         this.theRootObject  = root_object_val;
         this.theLinkId = link_id_val;
         this.theLinkName = link_name_val;
-        this.theSessionListObject = this.importListMgr().malloc_mgr(this, 10000);
         this.theGlobalSessionId = 1000;
         this.theSessionIndexArray = [0];
         this.theSessionTableArray = [null];
@@ -175,16 +174,20 @@ function FabricLinkClass(root_object_val, link_id_val, link_name_val) {
 
     this.getPendingSessionData = function () {
         var data = [];
-        var i = 0;
-        var session = this.sessionListObject().head();
-        while (session) {
-            if (session.transmitQueue().size() > 0) {
-                data[i] =  session.sessionId();
-                i += 1;
+        var j = 0;
+        var i = this.sessionTableArrayLength() - 1;
+        while (i > 0) {
+            var session = this.sessionTableArrayElement(i);
+            if (session) {
+                if (session.transmitQueue().size() > 0) {
+                    data[j] = session.sessionId();
+                    j += 1;
+                }
             }
-            session = session.jointObject().next_();
+            i -= 1;
         }
-        if (i === 0) {
+
+        if (j === 0) {
             return null;
         }
         else {

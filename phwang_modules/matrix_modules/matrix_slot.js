@@ -85,7 +85,7 @@ function MatrixSlotClass (theme_object_val, slot_id_val) {
 
     this.receiveData = function () {
         var data = require("../go_modules/go_base_mgr.js").transmit_data(this.baseId());//////
-        var group = this.groupMgrObject().groupListObject().searchId(this.groupId());
+        var group = this.groupMgrObject().getGroup(this.groupId());
         if (group) {
             group.transmitData(data);
         }

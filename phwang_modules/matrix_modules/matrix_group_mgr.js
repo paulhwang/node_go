@@ -85,11 +85,9 @@ function MatrixGroupMgrClass(root_object_val) {
     }
 
     this.mallocGroup = function (cluster_id_val, topic_data_val) {
-        var group1 = this.importObject().importGroup().malloc(this.rootObject(), this.allocGroupId(), cluster_id_val, topic_data_val);
-        this.groupIndexArray().push(group1.groupId());
-        this.groupTableArray().push(group1);
-        var group = this.importObject().importGroup().malloc(this.rootObject(), this.groupListObject().allocId(), cluster_id_val, topic_data_val);
-        this.groupListObject().enQueue(group);
+        var group = this.importObject().importGroup().malloc(this.rootObject(), this.allocGroupId(), cluster_id_val, topic_data_val);
+        this.groupIndexArray().push(group.groupId());
+        this.groupTableArray().push(group);
         return group.groupId();
     };
 
@@ -104,7 +102,7 @@ function MatrixGroupMgrClass(root_object_val) {
     };
 
     this.receiveData = function (group_id_val, data_val) {
-        var group = this.groupListObject().searchId(group_id_val);
+        var group = this.getGroup(group_id_val);
         if (!group) {
             return;
         }

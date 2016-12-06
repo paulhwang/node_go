@@ -17,7 +17,6 @@ function FabricLinkClass(root_object_val, link_id_val, link_name_val) {
         this.theRootObject  = root_object_val;
         this.theLinkId = link_id_val;
         this.theLinkName = link_name_val;
-        this.theJointObject = this.importListMgr().malloc_joint(link_id_val, link_name_val);
         this.theSessionListObject = this.importListMgr().malloc_mgr(this, 10000);
         this.up_seq = 0;
         this.down_seq = 0;
@@ -46,10 +45,6 @@ function FabricLinkClass(root_object_val, link_id_val, link_name_val) {
 
     this.linkName = function () {
         return this.theLinkName;
-    };
-
-    this.jointObject = function () {
-        return this.theJointObject;
     };
 
     this.importObject = function () {

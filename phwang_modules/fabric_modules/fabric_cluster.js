@@ -16,7 +16,6 @@ function FabricClusterClass(root_object_val, cluster_id_val) {
     this.init__ = function (root_object_val, cluster_id_val) {
         this.theRootObject  = root_object_val;
         this.theClusterId = cluster_id_val;
-        this.theJointObject = this.importListMgr().malloc_joint(cluster_id_val);
         this.theGroupId = 0;
         this.theSessionArray = [2];
         this.theSessionArrayLength = 0;
@@ -34,10 +33,6 @@ function FabricClusterClass(root_object_val, cluster_id_val) {
 
     this.clusterId = function () {
         return this.theClusterId;
-    };
-
-    this.jointObject = function () {
-        return this.theJointObject;
     };
 
     this.importObject = function () {

@@ -15,7 +15,7 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
 
     this.init__ = function (root_object_val, group_id_val, cluster_id_val, topic_data_val) {
         this.theRootObject = root_object_val;
-        this.theJointObject = this.importListMgr().malloc_joint(group_id_val);
+        this.theGroupId = group_id_val;
         this.theClusterId = cluster_id_val;
         this.theTopicMgrObject = this.importObject().importTopicMgr().malloc(this);
         this.theTransmitQueue = this.importObject().mallocQueue();
@@ -36,12 +36,16 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
         return this.theRootObject;
     };
 
-    this.themeMgrObject = function () {
-        return this.rootObject().themeMgrObject();
+    this.groupId = function () {
+        return this.theGroupId;
     };
 
     this.clusterId = function () {
         return this.theClusterId;
+    };
+
+    this.themeMgrObject = function () {
+        return this.rootObject().themeMgrObject();
     };
 
     this.topicListObject = function () {
@@ -60,10 +64,6 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
         return this.importObject().importListMgr();
     };
 
-    this.jointObject = function () {
-        return this.theJointObject;
-    };
-
     this.sessionObject = function () {
         return this.sessionArray(0);
     };
@@ -78,10 +78,6 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
 
     this.setTopicObject = function (val) {
         this.theTopicObject = val;
-    };
-
-    this.groupId = function () {
-        return this.jointObject().entryId();
     };
 
     this.transmitQueue = function () {

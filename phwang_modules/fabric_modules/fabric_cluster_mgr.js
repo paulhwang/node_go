@@ -24,6 +24,9 @@ function FabricClusterMgrClass(root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
+        this.theGlobalClusterId = 0;
+        this.theClusterIndexArray = [0];
+        this.theClusterTableArray = [null];
         this.theClusterListObject = this.importObject().importListMgr().malloc_mgr(this, 100);
         this.debug(true, "init__", "");
     };
@@ -47,6 +50,35 @@ function FabricClusterMgrClass(root_object_val) {
     this.importObject = function () {
         return this.rootObject().importObject();
     };
+
+    this.clusterIndexArray = function () {
+        return this.theClusterIndexArray;
+    };
+
+    this.clusterTableArray = function () {
+        return this.theClusterTableArray;
+    };
+
+    this.clusterTableArrayLength = function () {
+        return this.clusterTableArray().length;
+    };
+
+    this.clusterTableArrayElement = function (val) {
+        return this.clusterTableArray()[val];
+    };
+
+    this.globalClusterId = function () {
+        return this.theGlobalClusterId;
+    };
+
+    this.incrementGlobalClusterId = function () {
+        this.theGlobalClusterId += 1;
+    };
+
+    this.allocClusterId = function () {
+        this.incrementGlobalClusterId();
+        return this.globalClusterId();
+    }
 
     this.mallocCluster = function (topic_data_val) {
         var cluster = this.importObject().importCluster().malloc(this.rootObject(),this.clusterListObject().allocId());

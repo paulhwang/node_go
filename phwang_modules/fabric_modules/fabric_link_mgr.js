@@ -23,7 +23,6 @@ function FabricLinkMgrClass(root_object_val) {
         this.theGlobalLinkId = 0;
         this.theLinkIndexArray = [0];
         this.theLinkTableArray = [null];
-        this.theLinkListObject = this.importListMgr().malloc_mgr(this, 0);
         this.theNameListChanged = false;
         this.debug(true, "init__", "");
     };

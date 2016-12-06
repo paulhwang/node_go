@@ -16,7 +16,6 @@ function MatrixSlotClass (theme_object_val, slot_id_val) {
     this.init__ = function (theme_object_val, slot_id_val) {
         this.theThemeObject = theme_object_val;
         this.theSlotId = slot_id_val;
-        this.theJointObject = this.importListMgr().malloc_joint(slot_id_val);
         this.debug(true, "init__", "slotId=" + this.slotId());
     };
 
@@ -34,10 +33,6 @@ function MatrixSlotClass (theme_object_val, slot_id_val) {
 
     this.rootObject = function () {
         return this.themeObject().rootObject();
-    };
-
-    this.jointObject = function () {
-        return this.theJointObject;
     };
 
     this.importObject = function () {

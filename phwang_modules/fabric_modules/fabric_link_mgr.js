@@ -20,6 +20,8 @@ function FabricLinkMgrClass(root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
+        this.theLinkIndexArray = [0];
+        this.theLinkTableArray = [null];
         this.theLinkListObject = this.importListMgr().malloc_mgr(this, 0);
         this.theNameListChanged = false;
         this.debug(true, "init__", "");
@@ -31,6 +33,14 @@ function FabricLinkMgrClass(root_object_val) {
 
     this.rootObject = function () {
         return this.theRootObject;
+    };
+
+    this.linkIndexArray = function () {
+        return this.theLinkIndexArray;
+    };
+
+    this.linkTableArray = function () {
+        return this.theLinkTableArray;
     };
 
     this.linkListObject = function () {
@@ -49,11 +59,36 @@ function FabricLinkMgrClass(root_object_val) {
         return this.rootObject().utilObject();
     };
 
+    this.linkIndexArrayLength = function () {
+        return this.linkIndexArray().length;
+    };
+
     this.mallocLink = function (my_name_val) {
         var link = this.importObject().importLink().malloc(this.rootObject(), this.linkListObject().allocId(), my_name_val);
-        this.linkListObject().enQueue(link);
+        this.linkIndexArray().push(link.linkId());
+        this.linkTableArray().push(link);
         this.setNameListChanged();
         return link;
+    };
+
+    this.getLinkByIdName = function (link_id_val, link_name_val) {
+        var index = this.linkIndexArray().indexOf(link_id_val);
+        if (index === -1) {
+            return null;
+        } else {
+            var link =this.linkTableArray()[index];
+            return link;
+        }
+    };
+
+    this.getLinkById = function (link_id_val) {
+        var index = this.linkIndexArray().indexOf(link_id_val);
+        if (index === -1) {
+            return null;
+        } else {
+            var link =this.linkTableArray()[index];
+            return link;
+        }
     };
 
     this.unQueueLink = function (link_val) {
@@ -73,23 +108,29 @@ function FabricLinkMgrClass(root_object_val) {
     }
 
     this.setNameListChanged = function () {
-        var link = this.linkListObject().head();
-        while (link) {
-            link.setNameListChanged();
-            link = link.jointObject().next_();
+        var i = this.linkIndexArrayLength() - 1;
+        while (i > 0) {
+            var link = this.linkTableArray()[i];
+            if (link) {
+                link.setNameListChanged();
+            }
+            i -= 1;
         }
     };
 
     this.getNameList = function () {
         var name_array = [];
-        var i = 0;
-        var link = this.linkListObject().head();
-        while (link) {
-            name_array[i] = link.myName();
-            i += 1;
-            link = link.jointObject().next_();
+        var j = 0;
+        var i = this.linkIndexArrayLength() - 1;
+        while (i > 0) {
+            var link = this.linkTableArray()[i];
+            if (link) {
+                name_array[j] = link.myName();
+                j += 1;
+            }
+            i -= 1;
         }
-        return name_array;
+       return name_array;
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

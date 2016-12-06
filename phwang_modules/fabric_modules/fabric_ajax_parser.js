@@ -138,7 +138,7 @@ function FabricAjaxParserClass(root_object_val) {
     };
 
     this.getLinkObject = function (go_request) {
-        var link = this.linkListObject().searchIdName(go_request.link_id, go_request.my_name);
+        var link = this.linkMgrObject().getLinkByIdName(go_request.link_id, go_request.my_name);
         if (!link) {
             this.debug(true, "getLinkObject", "null link: link_id=" + go_request.link_id + " my_name=" + go_request.my_name);
             return null;
@@ -255,7 +255,7 @@ function FabricAjaxParserClass(root_object_val) {
     };
 
     this.getSessionObject = function (go_request) {
-        var link = this.linkListObject().searchId(go_request.link_id);
+        var link = this.linkMgrObject().getLinkById(go_request.link_id);
         if (!link) {
             this.logit("getSessionObject", "link not found: link_id=" + go_request.link_id);
             return null;

@@ -43,10 +43,6 @@ function FabricLinkMgrClass(root_object_val) {
         return this.theLinkTableArray;
     };
 
-    this.linkListObject = function () {
-        return this.theLinkListObject;
-    };
-
     this.importObject = function () {
         return this.rootObject().importObject();
     };

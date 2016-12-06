@@ -20,6 +20,7 @@ function FabricLinkMgrClass(root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
+        this.theGlobalLinkId = 0;
         this.theLinkIndexArray = [0];
         this.theLinkTableArray = [null];
         this.theLinkListObject = this.importListMgr().malloc_mgr(this, 0);
@@ -67,8 +68,21 @@ function FabricLinkMgrClass(root_object_val) {
         return this.linkTableArray()[val];
     };
 
+    this.globalLinkId = function () {
+        return this.theGlobalLinkId;
+    };
+
+    this.incrementGlobalLinkId = function () {
+        this.theGlobalLinkId += 1;
+    };
+
+    this.allocLinkId = function () {
+        this.incrementGlobalLinkId();
+        return this.globalLinkId();
+    }
+
     this.mallocLink = function (my_name_val) {
-        var link = this.importObject().importLink().malloc(this.rootObject(), this.linkListObject().allocId(), my_name_val);
+        var link = this.importObject().importLink().malloc(this.rootObject(), this.allocLinkId(), my_name_val);
         this.linkIndexArray().push(link.linkId());
         this.linkTableArray().push(link);
         this.setNameListChanged();

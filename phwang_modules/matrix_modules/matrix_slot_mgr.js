@@ -85,7 +85,17 @@ function MatrixSlotMgrClass (theme_object_val) {
         this.slotTableArray().push(slot1);
         var slot = this.importObject().importSlot().malloc(this, this.slotListObject().allocId());
         this.slotListObject().enQueue(slot);
-        return slot;
+        return slot1;
+    };
+
+    this.getSlot = function (slot_id_val) {
+        var index = this.slotIndexArray().indexOf(slot_id_val);
+        if (index === -1) {
+            return null;
+        } else {
+            var slot =this.slotTableArray()[index];
+            return slot;
+        }
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

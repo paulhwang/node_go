@@ -133,7 +133,7 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
             return;
         }
 
-        var slot = theme.slotMgrObject().slotListObject().searchId(topic.slotId());
+        var slot = theme.slotMgrObject().getSlot(topic.slotId());
         if (!slot) {
             this.abend("receiveData", "slot is not found");
             return;

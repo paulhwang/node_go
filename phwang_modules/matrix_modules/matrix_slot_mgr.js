@@ -46,9 +46,38 @@ function MatrixSlotMgrClass (theme_object_val) {
         return this.importObject().importListMgr();
     };
 
-    this.utilObject = function () {
+    this.slotObject = function () {
         return this.rootObject().utilObject();
     };
+
+    this.slotIndexArray = function () {
+        return this.theSlotIndexArray;
+    };
+
+    this.slotTableArray = function () {
+        return this.theSlotTableArray;
+    };
+
+    this.slotTableArrayLength = function () {
+        return this.slotTableArray().length;
+    };
+
+    this.slotTableArrayElement = function (val) {
+        return this.slotTableArray()[val];
+    };
+
+    this.globalSlotId = function () {
+        return this.theGlobalSlotId;
+    };
+
+    this.incrementGlobalSlotId = function () {
+        this.theGlobalSlotId += 1;
+    };
+
+    this.allocSlotId = function () {
+        this.incrementGlobalLinkId();
+        return this.globalLinkId();
+    }
 
     this.addSlot = function () {
         var slot = this.importObject().importSlot().malloc(this, this.slotListObject().allocId());

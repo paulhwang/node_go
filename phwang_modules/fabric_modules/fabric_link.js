@@ -151,15 +151,11 @@ function FabricLinkClass(root_object_val, link_id_val, link_name_val) {
         return time_out;
     };
 
-    this.searchSessionBySessionId = function (session_id_val) {
-        return this.sessionListObject().searchId(session_id_val);
-    };
-
     this.mallocSession = function () {
-        var session1 = this.importObject().importSession().malloc(this, this.allocSessionId());
-        this.sessionIndexArray().push(session1.sessionId());
-        this.sessionTableArray().push(session1);
-        return session1;
+        var session = this.importObject().importSession().malloc(this, this.allocSessionId());
+        this.sessionIndexArray().push(session.sessionId());
+        this.sessionTableArray().push(session);
+        return session;
     };
 
     this.getSession = function (session_id_val) {

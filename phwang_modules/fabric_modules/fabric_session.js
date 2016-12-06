@@ -16,8 +16,6 @@ function FabricSessionClass(link_object_val, session_id_val) {
     this.init__ = function (link_object_val, session_id_val) {
         this.theLinkObject = link_object_val;
         this.theSessionId = session_id_val;
-        this.theJointObject = this.rootObject().importObject().importListMgr().malloc_joint(session_id_val);
-        this.theSessionId = session_id_val;
         this.theHisSession = null;
         this.up_seq = 0;
         this.down_seq = 0;
@@ -34,8 +32,8 @@ function FabricSessionClass(link_object_val, session_id_val) {
         return this.theLinkObject;
     };
 
-    this.jointObject = function () {
-        return this.theJointObject;
+    this.sessionId = function () {
+        return this.theSessionId;
     };
 
     this.rootObject = function () {
@@ -52,10 +50,6 @@ function FabricSessionClass(link_object_val, session_id_val) {
 
     this.setClusterObject = function (val) {
         this.theClusterObject = val;
-    };
-
-    this.sessionId = function () {
-        return this.theSessionId;
     };
 
     this.setSessionId = function (val) {

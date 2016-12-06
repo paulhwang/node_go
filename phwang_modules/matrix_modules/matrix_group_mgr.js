@@ -93,6 +93,16 @@ function MatrixGroupMgrClass(root_object_val) {
         return group.groupId();
     };
 
+    this.getGroup = function (group_id_val) {
+        var index = this.groupIndexArray().indexOf(group_id_val);
+        if (index === -1) {
+            return null;
+        } else {
+            var group =this.groupTableArray()[index];
+            return group;
+        }
+    };
+
     this.receiveData = function (group_id_val, data_val) {
         var group = this.groupListObject().searchId(group_id_val);
         if (!group) {

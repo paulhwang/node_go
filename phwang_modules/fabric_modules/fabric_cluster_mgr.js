@@ -27,7 +27,6 @@ function FabricClusterMgrClass(root_object_val) {
         this.theGlobalClusterId = 0;
         this.theClusterIndexArray = [0];
         this.theClusterTableArray = [null];
-        this.theClusterListObject = this.importObject().importListMgr().malloc_mgr(this, 100);
         this.debug(true, "init__", "");
     };
 
@@ -37,10 +36,6 @@ function FabricClusterMgrClass(root_object_val) {
 
     this.rootObject = function () {
         return this.theRootObject;
-    };
-
-    this.clusterListObject = function () {
-        return this.theClusterListObject;
     };
 
     this.utilObject = function () {
@@ -81,17 +76,25 @@ function FabricClusterMgrClass(root_object_val) {
     }
 
     this.mallocCluster = function (topic_data_val) {
-        var cluster1 = this.importObject().importCluster().malloc(this.rootObject(), this.allocClusterId());
-        this.clusterIndexArray().push(cluster1.clusterId());
-        this.clusterTableArray().push(cluster1);
-        var cluster = this.importObject().importCluster().malloc(this.rootObject(),this.clusterListObject().allocId());
-        this.clusterListObject().enQueue(cluster);
+        var cluster = this.importObject().importCluster().malloc(this.rootObject(), this.allocClusterId());
+        this.clusterIndexArray().push(cluster.clusterId());
+        this.clusterTableArray().push(cluster);
         cluster.setGroupId(require("../matrix_modules/matrix_group_mgr.js").malloc_group(cluster.clusterId(), topic_data_val));
         return cluster;
     };
 
+    this.getCluster = function (cluster_id_val) {
+        var index = this.clusterIndexArray().indexOf(cluster_id_val);
+        if (index === -1) {
+            return null;
+        } else {
+            var cluster =this.clusterTableArray()[index];
+            return cluster;
+        }
+    };
+
     this.receiveData = function (cluster_id_val, data_val) {
-        var cluster = this.clusterListObject().searchId(cluster_id_val);
+        var cluster = this.getCluster(cluster_id_val);
         if (!cluster) {
             return;
         }

@@ -80,12 +80,10 @@ function MatrixSlotMgrClass (theme_object_val) {
     }
 
     this.addSlot = function () {
-        var slot1 = this.importObject().importSlot().malloc(this, this.allocSlotId());
-        this.slotIndexArray().push(slot1.slotId());
-        this.slotTableArray().push(slot1);
-        var slot = this.importObject().importSlot().malloc(this, this.slotListObject().allocId());
-        this.slotListObject().enQueue(slot);
-        return slot1;
+        var slot = this.importObject().importSlot().malloc(this, this.allocSlotId());
+        this.slotIndexArray().push(slot.slotId());
+        this.slotTableArray().push(slot);
+        return slot;
     };
 
     this.getSlot = function (slot_id_val) {

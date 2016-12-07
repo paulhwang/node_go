@@ -116,7 +116,7 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
     };
 
     this.receiveData = function (data_val) {
-        var topic = this.topicListObject().searchName("go");
+        var topic = this.topicMgrObject().getTopic(0, "go");
         if (!topic) {
             this.abend("receiveData", "topic is not found");
             return;

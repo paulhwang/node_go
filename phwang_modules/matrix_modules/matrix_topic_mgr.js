@@ -89,15 +89,20 @@ function MatrixTopicMgrClass (group_object_val) {
     }
 
     this.addTopic = function (topic_data_val) {
-        var topic1 = this.importObject().importTopic().malloc(this.groupObject(), this.allocTopicId());
-        this.topicIndexArray().push(topic1.topicId());
-        this.topicTableArray().push(topic1);
+        var topic = this.importObject().importTopic().malloc(this.groupObject(), this.allocTopicId(), "go");
+        this.topicIndexArray().push("go");/////////////////////////topic.topicId());
+        this.topicTableArray().push(topic);
+        return topic;
+    };
 
-        var topic = this.importObject().importTopic().malloc(this.groupObject(), this.topicListObject().allocId(), "go");
-        this.topicListObject().enQueue(topic);
-
-
-        return topic;///////////////////////
+    this.getTopic = function (topic_id_val, topic_name_val) {
+        var index = this.topicIndexArray().indexOf(topic_name_val);
+        if (index === -1) {
+            return null;
+        } else {
+            var topic =this.topicTableArray()[index];
+            return topic;
+        }
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

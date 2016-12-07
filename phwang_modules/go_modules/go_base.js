@@ -16,7 +16,6 @@ function GoBaseClass (root_object_val, base_id_val) {
     this.init__ = function (root_object_val, base_id_val) {
         this.theRootObject = root_object_val;
         this.theBaseId = base_id_val;
-        this.theJointObject = this.importListMgr().malloc_joint(base_id_val);
         this.theConfigObject = this.importObject().importConfig().malloc(this);
         this.theBoardObject = this.importObject().importBoard().malloc(this);
         this.theEngineObject = this.importObject().importEngine().malloc(this);
@@ -39,10 +38,6 @@ function GoBaseClass (root_object_val, base_id_val) {
 
     this.baseId = function () {
         return this.theBaseId;
-    };
-
-    this.jointObject = function () {
-        return this.theJointObject;
     };
 
     this.importObject = function () {

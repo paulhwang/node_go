@@ -15,6 +15,10 @@ function MatrixTopicMgrClass (group_object_val) {
 
     this.init__ = function (group_object_val) {
         this.theGroupObject = group_object_val;
+        this.theTopicIndexArray = ["dummy"];
+        this.theTopicTableArray = [null];
+        //this.createTopic("chat");
+        //this.createTopic("go");
         this.theTopicListObject = this.importObject().importListMgr().malloc_mgr(this.groupObject(), 100);
         this.debug(true, "init__", "");
     };
@@ -25,6 +29,14 @@ function MatrixTopicMgrClass (group_object_val) {
 
     this.groupObject = function () {
         return this.theGroupObject;
+    };
+
+    this.topicIndexArray = function () {
+        return this.theTopicIndexArray;
+    };
+
+    this.topicTableArray = function () {
+        return this.theTopicTableArray;
     };
 
     this.rootObject = function () {
@@ -47,7 +59,40 @@ function MatrixTopicMgrClass (group_object_val) {
         return this.rootObject().utilObject();
     };
 
+    this.topicIndexArray = function () {
+        return this.theTopicIndexArray;
+    };
+
+    this.topicTableArray = function () {
+        return this.theTopicTableArray;
+    };
+
+    this.topicTableArrayLength = function () {
+        return this.topicTableArray().length;
+    };
+
+    this.topicTableArrayElement = function (val) {
+        return this.topicTableArray()[val];
+    };
+
+    this.globalTopicId = function () {
+        return this.theGlobalTopicId;
+    };
+
+    this.incrementGlobalTopicId = function () {
+        this.theGlobalTopicId += 1;
+    };
+
+    this.allocTopicId = function () {
+        this.incrementGlobalTopicId();
+        return this.globalTopicId();
+    }
+
     this.addTopic = function (topic_data_val) {
+        var topic1 = this.importObject().importTopic().malloc(this.groupObject(), this.allocTopicId());
+        this.topicIndexArray().push(topic1.topicId());
+        this.topicTableArray().push(topic1);
+
         var topic = this.importObject().importTopic().malloc(this.groupObject(), this.topicListObject().allocId());
         this.topicListObject().enQueue(topic);
         topic.createBase(topic_data_val);

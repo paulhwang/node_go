@@ -72,18 +72,6 @@ function GoBaseClass (root_object_val, base_id_val) {
         return this.thePortObject;
     };
 
-    this.setHisContainerObject = function (container2_val) {
-        this.theConfigObject2 = container2_val;
-    };
-
-    this.lastGame = function () {
-        return window.localStorage.lastGame;
-    }
-
-    this.setLastGame = function (str_val) {
-        window.localStorage.lastGame = str_val;
-    }
-
     this.resetContainerObjectForNewGame = function () {
         this.goLog("resetContainerObjectForNewGame", "");
         this.setLastGame(0);

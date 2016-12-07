@@ -91,8 +91,9 @@ function MatrixGroupObject (root_object_val, group_id_val, cluster_id_val, topic
             return;
         }
 
-        var topic = this.importObject().importTopic().malloc(this, this.topicListObject().allocId(), "go");
-        this.topicListObject().enQueue(topic);
+        var topic = this.topicMgrObject().addTopic1();
+        //var topic = this.importObject().importTopic().malloc(this, this.topicListObject().allocId(), "go");
+        //this.topicListObject().enQueue(topic);
         topic.setSlotId(theme.addSlot(topic_data_val, this.groupId()));
         this.debug(true, "addTopic", "slotId=" + topic.slotId());
     };

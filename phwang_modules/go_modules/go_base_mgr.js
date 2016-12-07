@@ -94,12 +94,22 @@ function GoBaseMgrClass(root_object_val) {
         this.baseTableArray().push(base1);
         var base = this.importObject().importBase().malloc(this.rootObject(), this.baseListObject().allocId());
         this.baseListObject().enQueue(base);
-        return base.baseId();
+        return base1.baseId();
+    };
+
+    this.getBase = function (base_id_val) {
+        var index = this.baseIndexArray().indexOf(base_id_val);
+        if (index === -1) {
+            return null;
+        } else {
+            var base =this.baseTableArray()[index];
+            return base;
+        }
     };
 
     this.receiveData = function (base_id_val, data_val) {
         this.debug(false, "receiveData", "data=" + data_val);
-        var base = this.baseListObject().searchId(base_id_val);
+        var base = this.getBase(base_id_val);
         if (!base) {
             return;
         }
@@ -107,7 +117,7 @@ function GoBaseMgrClass(root_object_val) {
     };
 
     this.transmitData = function (base_id_val) {
-        var base = this.baseListObject().searchId(base_id_val);
+        var base = this.getBase(base_id_val);
         if (!base) {
             return null;
         }

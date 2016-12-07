@@ -15,11 +15,9 @@ function MatrixTopicMgrClass (group_object_val) {
 
     this.init__ = function (group_object_val) {
         this.theGroupObject = group_object_val;
+        this.theGlobalTopicId = 0;
         this.theTopicIndexArray = ["dummy"];
         this.theTopicTableArray = [null];
-        //this.createTopic("chat");
-        //this.createTopic("go");
-        this.theTopicListObject = this.importObject().importListMgr().malloc_mgr(this.groupObject(), 100);
         this.debug(true, "init__", "");
     };
 

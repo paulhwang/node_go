@@ -89,12 +89,10 @@ function GoBaseMgrClass(root_object_val) {
     }
 
     this.mallocBase = function () {
-        var base1 = this.importObject().importBase().malloc(this.rootObject(), this.allocBaseId());
-        this.baseIndexArray().push(base1.baseId());
-        this.baseTableArray().push(base1);
-        var base = this.importObject().importBase().malloc(this.rootObject(), this.baseListObject().allocId());
-        this.baseListObject().enQueue(base);
-        return base1.baseId();
+        var base = this.importObject().importBase().malloc(this.rootObject(), this.allocBaseId());
+        this.baseIndexArray().push(base.baseId());
+        this.baseTableArray().push(base);
+        return base.baseId();
     };
 
     this.getBase = function (base_id_val) {

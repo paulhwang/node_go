@@ -321,12 +321,12 @@ function FabricAjaxParserClass(root_object_val) {
             if (go_request.xmt_seq === 0) {
                 session.clusterObject().TransmitData(go_request.data);
                 session.up_seq = 1;
-                this.logit("putSessionData", go_request.data + " post " + go_request.xmt_seq + " reset");
+                this.logit("putSessionData", go_request.data + " xmt_seq=" + go_request.xmt_seq + " reset");
             } else {
                 this.logit("putSessionData", "(" + link_id + "," + session_id + ") "  + go_request.my_name + "=>" + go_request.his_name + " {" + go_request.data + "} " + go_request.xmt_seq + " dropped");
             }
         } else {
-            this.logit("***abend: putSessionData", go_request.data + " post seq=" + xmt_seq + " dropped");
+            this.abend("putSessionData", go_request.data + " xmt_seq=" + go_request.xmt_seq + " up_seq=" + session.up_seq);
         }
 
         var res_data = session.dequeueTransmitData();

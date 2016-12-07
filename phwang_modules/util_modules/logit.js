@@ -44,5 +44,6 @@ var ABEND = function(str1_val, str2_val) {
         str2_val = "NULL";
     }
     console.log("***ABEND*** " + str1_val + "() " + str2_val);
+    console.log("***ABEND*** " + junk);
     this.doCrash();
 };

@@ -56,10 +56,6 @@ function GoBaseClass (root_object_val, base_id_val) {
         return this.theUiObject;
     };
 
-    this.containerIndex = function () {
-        return this.theContainerIndex;
-    };
-
     this.boardObject = function () {
         return this.theBoardObject;
     };
@@ -70,10 +66,6 @@ function GoBaseClass (root_object_val, base_id_val) {
 
     this.gameObject = function () {
         return this.theGameObject;
-    };
-
-    this.handlerObject = function () {
-        return this.theHandlerObject;
     };
 
     this.portObject = function () {

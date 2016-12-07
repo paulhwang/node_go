@@ -32,6 +32,9 @@ function GoBaseMgrClass(root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
+        this.theGlobalBaseId = 1000;
+        this.theBaseIndexArray = [0];
+        this.theBaseTableArray = [null];
         this.theBaseListObject = this.importObject().importListMgr().malloc_mgr(this, 2000);
         this.debug(true, "init__", "");
     };
@@ -55,6 +58,35 @@ function GoBaseMgrClass(root_object_val) {
     this.utilObject = function () {
         return this.rootObject().utilObject();
     };
+
+    this.baseIndexArray = function () {
+        return this.theBaseIndexArray;
+    };
+
+    this.baseTableArray = function () {
+        return this.theBaseTableArray;
+    };
+
+    this.baseTableArrayLength = function () {
+        return this.baseTableArray().length;
+    };
+
+    this.baseTableArrayElement = function (val) {
+        return this.baseTableArray()[val];
+    };
+
+    this.globalBaseId = function () {
+        return this.theGlobalBaseId;
+    };
+
+    this.incrementGlobalBaseId = function () {
+        this.theGlobalBaseId += 1;
+    };
+
+    this.allocBaseId = function () {
+        this.incrementGlobalBaseId();
+        return this.globalBaseId();
+    }
 
     this.mallocBase = function () {
         var base = this.importObject().importBase().malloc(this.rootObject(), this.baseListObject().allocId());

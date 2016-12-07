@@ -59,8 +59,16 @@ function FabricLinkMgrClass(root_object_val) {
         return this.linkTableArray().length;
     };
 
-    this.linkTableArrayElement = function (val) {
-        return this.linkTableArray()[val];
+    this.linkTableArrayElement = function (index_val) {
+        return this.linkTableArray()[index_val];
+    };
+
+    this.setLinkTableArrayElement = function (index_val, data_val) {
+        return this.linkTableArray()[index_val] = data_val;
+    };
+
+    this.setLinkIndexArrayElement = function (index_val, data_val) {
+        return this.linkIndexArray()[index_val] = data_val;
     };
 
     this.globalLinkId = function () {
@@ -82,6 +90,14 @@ function FabricLinkMgrClass(root_object_val) {
         this.linkTableArray().push(link);
         this.setNameListChanged();
         return link;
+    }
+
+    this.freeLink = function (link_object_val) {
+        var index = this.linkIndexArray().indexOf(link_object_val.linkId());
+        if (index && index !== -1) {
+            this.setLinkIndexArrayElement(index, undefined);
+            this.setLinkTableArrayElement(index, null);
+        }
     };
 
     this.getLinkByIdName = function (link_id_val, link_name_val) {

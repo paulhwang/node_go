@@ -23,6 +23,10 @@ function GoEngineClass(base_object_val) {
         return "GoEngineClass";
     };
 
+    this.abendEngineOn = function () {
+        return true;
+    };
+
     this.GO = function () {
         return this.baseObject().GO();
     };
@@ -244,7 +248,6 @@ function GoEngineClass(base_object_val) {
                 this.abend("enterWar", "color=" + move_val.myColor());
             }
         }
-        this.abendEngine();
     };
 
     this.insertStoneToGroupList = function (move_val) {
@@ -614,10 +617,15 @@ function GoEngineClass(base_object_val) {
     };
 
     this.abendEngine = function () {
+        if (!this.abendEngineOn()) {
+            return;
+        }
+        this.debug(false, "abendEngine", "is ON ***");
+
         var stones_count = 0;
         var i = 0;
         while (i < 7) {
-            //this.groupListArray(i).abendGroupList();
+            this.groupListArray(i).abendGroupList();
             stones_count += this.groupListArray(i).totalStoneCount();
             i += 1;
         }
@@ -628,14 +636,15 @@ function GoEngineClass(base_object_val) {
                 this.abend("abendEngine", "stones_count=" + stones_count);
             }
         }
+
         /*
+        this.emptyGroupList().abendGroupList();
         this.blackGroupList().abendGroupList();
         this.whiteGroupList().abendGroupList();
         this.blackDeadGroupList().abendGroupList();
         this.whiteDeadGroupList().abendGroupList();
         this.blackEmptyGroupList().abendGroupList();
         this.whiteEmptyGroupList().abendGroupList();
-        this.emptyGroupList().abendGroupList();
         */
     };
 

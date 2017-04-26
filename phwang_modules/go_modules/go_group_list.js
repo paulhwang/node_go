@@ -222,22 +222,23 @@ function GoGroupListClass(engine_val, index_val, color_val, dead_val, big_stone_
             d = "*";
         }
 
-        this.goLog("abendGroupList", "" + this.indexNumber() + " color=" + this.myColor() + " count=" + this.groupCount() + ":" + this.totalStoneCount());
+        this.debug(false, "abendGroupList", "" + this.indexNumber() + " color=" + this.myColor() + " count=" + this.groupCount() + ":" + this.totalStoneCount());
         var i = 0;
         while (i < this.groupCount()) {
-            if (!this.listArray(i)) {
+            var group = this.listArray(i);
+            if (!group) {
                 this.goAbend("abendGroupList", "null group " + this.groupCount() + " " + i);
                 return;
             }
-            if (this.listArray(i).groupListObject() != this) {
+            if (group.groupListObject() != this) {
                 this.goAbend("abendGroupList", "groupListObject");
                 return;
             }
-            if (this.listArray(i).indexNumber() != i) {
-                this.goAbend("abendGroupList", "index " + this.listArray(i).indexNumber() + "!=" + i);
+            if (group.indexNumber() != i) {
+                this.goAbend("abendGroupList", "index " + group.indexNumber() + "!=" + i);
                 return;
             }
-            this.listArray(i).abendGroup();
+            group.abendGroup();
             i += 1;
         }
     };

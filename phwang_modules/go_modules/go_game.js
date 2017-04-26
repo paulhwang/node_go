@@ -181,6 +181,7 @@ function GoGameClass(base_object_val) {
         this.insertMoveToMoveList(move_val);
         this.engineObject().enterWar(move_val);
         this.setNextColor(this.GO().getOppositeColor(move_val.myColor()));
+        this.engineObject().abendEngine();
     };
 
     this.addNewMoveWithoutFight = function (x_val, y_val, color_val, turn_val) {

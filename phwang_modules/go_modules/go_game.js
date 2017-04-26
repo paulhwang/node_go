@@ -140,11 +140,11 @@ function GoGameClass(base_object_val) {
         return false;
     };
 
-    this.enterGameFromUi = function (x_val, y_val) {
-        //this.goLog("GoGameObject.enterGameFromUi", "(" + x_val + "," + y_val + ")");
+    this.enterGameFromUi___________ = function (x_val, y_val) {
+        this.debug(true, "enterGameFromUi", "(" + x_val + "," + y_val + ")");
 
         if (this.gameIsOver()) {
-            this.goLog("enterGameFromUi", "game is over");
+            this.debug(true, "enterGameFromUi", "game is over");
             this.engineObject().markDeadGroup(x_val, y_val);
             this.engineObject().abendEngine();
             this.displayResult();
@@ -170,7 +170,7 @@ function GoGameClass(base_object_val) {
     };
 
     this.addNewMoveAndFight = function (move_val) {
-        //this.goLog("addNewMoveAndFight", "");
+        this.debug(true, "addNewMoveAndFight", "(" + move_val.xX() + "," + move_val.yY() + ")");
 
         if (this.gameIsOver()) {
             this.goLog("addNewMoveAndFight", "two pass have entered");

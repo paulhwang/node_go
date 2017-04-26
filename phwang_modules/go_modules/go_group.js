@@ -144,7 +144,7 @@ function GoGroupClass(group_list_val) {
     };
 
     this.insertStoneToGroup = function (x_val, y_val, dead_val) {
-        //GO.goLog("GoGroupObject.insertStoneToGroup", "x=" + x_val + " y=" + y_val + " color=" + this.myColor_());
+        this.debug(true, "insertStoneToGroup", "x=" + x_val + " y=" + y_val + " color=" + this.myColor());
         if (this.existMatrix(x_val, y_val)) {
             this.abend("insert_stone", "x=" + x_val + " y=" + y_val + " color=" + this.myColor());
         }
@@ -175,14 +175,14 @@ function GoGroupClass(group_list_val) {
     };
 
     this.isCandidateGroup = function (x_val, y_val) {
-        //GO.goLog("GoGroupObject.isCandidateGroup", "(" + x_val + "," + y_val + ")");
+        this.debug(false, "isCandidateGroup", "(" + x_val + "," + y_val + ")");
         var i, j;
         i = this.minX();
         while (i <=  this.maxX()) {
             j = this.minY();
             while (j <=  this.maxY()) {
                 if (this.existMatrix(i, j)) {
-                    //GO.goLog("GoGroupObject.isCandidateGroup", "(" + x_val + "," + y_val + ") (" + i + "," + j + ")");
+                    this.debug(false, "isCandidateGroup", "(" + x_val + "," + y_val + ") (" + i + "," + j + ")");
                     if (this.GO().isNeighborStone(i, j, x_val, y_val)) {
                         return true;
                     }
@@ -197,10 +197,10 @@ function GoGroupClass(group_list_val) {
     this.mergeWithOtherGroup = function (group2) {
         this.debug(true, "mergeWithOtherGroup", "");
         //this.debugGroupObject();
-        var i, j;
-        i = group2.minX();
+
+        var i = group2.minX();
         while (i <= group2.maxX()) {
-            j = group2.minY();
+            var j = group2.minY();
             while (j <= group2.maxY()) {
                 if (group2.existMatrix(i, j)) {
                     this.debug(true, "mergeWithOtherGroup", "i=" + i + " j=" + j);
@@ -532,10 +532,8 @@ function GoGroupClass(group_list_val) {
     };
 
     this.createMatrix = function (board_size_val) {
-        var i;
-
         var matrix = new Array(board_size_val);
-        i = 0;
+        var i = 0;
         while (i < board_size_val) {
             matrix[i] = new Array(board_size_val);
             i += 1;

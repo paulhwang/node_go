@@ -636,6 +636,8 @@ function GoEngineClass(base_object_val) {
         }
 
         /* check if a stone exist in both black and white group_lists */
+        var black_stone_count = 0;
+        var white_stone_count = 0;
         var x = 0;
         while (x < this.boardSize()) {
             var y = 0;
@@ -644,12 +646,22 @@ function GoEngineClass(base_object_val) {
                     if (this.whiteGroupList().stoneExistWithinMe(x, y)) {
                         this.abend("abendEngine", "(" + x + "," + y + ")");
                     }
+                    black_stone_count += 1;
+                }
+                if (this.whiteGroupList().stoneExistWithinMe(x, y)) {
+                   white_stone_count += 1;
                 }
                 y += 1;
             }
             x += 1;
         }
 
+        if (this.blackGroupList().totalStoneCount() != black_stone_count) {
+            this.abend("abendEngine", "black_stone: " + this.blackGroupList().totalStoneCount() + "<>" + black_stone_count);
+        }
+        if (this.whiteGroupList().totalStoneCount() != white_stone_count) {
+            this.abend("abendEngine", "black_stone: " + this.whiteGroupList().totalStoneCount() + "<>" + white_stone_count);
+        }
 
         //this.goLog("abendEngine", this.gameObject().gameIsOver());
         if (this.gameObject().gameIsOver()) {

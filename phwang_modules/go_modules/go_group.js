@@ -497,11 +497,10 @@ function GoGroupClass(group_list_val) {
     this.abendGroup = function () {
         this.debug(true, "abendGroup", "color=" + this.myColor() + " count=" + this.stoneCount() + " index=" + this.indexNumber());
         var count = 0;
-        var i, j;
 
-        i = 0;
+        var i = 0;
         while (i < this.boardSize()) {
-            j = 0;
+            var j = 0;
             while (j < this.boardSize()) {
                 if (this.existMatrix(i, j)) {
                     //this.goLog("abendGroup", "(" + i + "," + j + ") color=" + this.myColor());
@@ -517,6 +516,23 @@ function GoGroupClass(group_list_val) {
             this.abend("abendGroup", this.stoneCount() + "!=" + count);
         }
         //this.printGroup();
+    };
+
+    this.abendOnGroupConflict = function(other_group_val) {
+        this.debug(true, "abendOnGroupConflict", this.indexNumber() + " vs " + other_group_val.indexNumber());
+        var i = 0;
+        while (i < this.boardSize()) {
+            var j = 0;
+            while (j < this.boardSize()) {
+                if (this.existMatrix(i, j)) {
+                    if (other_group_val.existMatrix(i, j)) {
+                        this.abend("abendOnGroupConflict", "(" + i + "," + j + ") color=" + this.myColor());
+                    }
+                }
+                j += 1;
+            }
+            i += 1;
+        }
     };
 
     this.printGroup = function () {

@@ -238,7 +238,15 @@ function GoGroupListClass(engine_val, index_val, color_val, dead_val, big_stone_
                 this.goAbend("abendGroupList", "index " + group.indexNumber() + "!=" + i);
                 return;
             }
+
             group.abendGroup();
+
+            var j = i + 1;
+            while (j < this.groupCount()) {
+                group.abendOnGroupConflict(this.listArray(j));
+                j = j + 1;
+            }
+
             i += 1;
         }
     };

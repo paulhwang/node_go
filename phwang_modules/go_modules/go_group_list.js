@@ -214,6 +214,18 @@ function GoGroupListClass(engine_val, index_val, color_val, dead_val, big_stone_
         }
     };
 
+    this.stoneExistWithinMe = function (x_val, y_val) {
+        var i = 0;
+        while (i < this.groupCount()) {
+            var group = this.listArray(i);
+            if (group.stoneExistWithinMe(x_val, y_val)) {
+                return true;
+            }
+            i += 1;
+        }
+        return false;
+    };
+
     this.abendGroupList = function () {
         var d;
         if (this.isDead()) {
@@ -222,7 +234,7 @@ function GoGroupListClass(engine_val, index_val, color_val, dead_val, big_stone_
             d = "*";
         }
 
-        this.debug(false, "abendGroupList", "" + this.indexNumber() + " color=" + this.myColor() + " count=" + this.groupCount() + ":" + this.totalStoneCount());
+        this.debug(true, "abendGroupList", "" + this.indexNumber() + " color=" + this.myColor() + " count=" + this.groupCount() + ":" + this.totalStoneCount());
         var i = 0;
         while (i < this.groupCount()) {
             var group = this.listArray(i);

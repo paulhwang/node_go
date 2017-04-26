@@ -63,6 +63,10 @@ function GoEngineClass(base_object_val) {
         return this.configObject().boardSize();
     };
 
+    this.groupListCount = function () {
+        return this.theGroupListCount;
+    };
+
     this.groupListArray = function (index_val) {
         return this.theGroupListArray[index_val];
     };
@@ -620,15 +624,32 @@ function GoEngineClass(base_object_val) {
         if (!this.abendEngineOn()) {
             return;
         }
-        this.debug(false, "abendEngine", "is ON ***");
+        this.debug(true, "abendEngine", "is ON ***");
 
         var stones_count = 0;
         var i = 0;
-        while (i < 7) {
-            this.groupListArray(i).abendGroupList();
-            stones_count += this.groupListArray(i).totalStoneCount();
+        while (i < this.groupListCount()) {
+            var group_list = this.groupListArray(i);
+            group_list.abendGroupList();
+            stones_count += group_list.totalStoneCount();
             i += 1;
         }
+
+        /* check if a stone exist in both black and white group_lists */
+        var x = 0;
+        while (x < this.boardSize()) {
+            var y = 0;
+            while (y < this.boardSize()) {
+                if (this.blackGroupList().stoneExistWithinMe(x, y)) {
+                    if (this.whiteGroupList().stoneExistWithinMe(x, y)) {
+                        this.abend("abendEngine", "(" + x + "," + y + ")");
+                    }
+                }
+                y += 1;
+            }
+            x += 1;
+        }
+
 
         //this.goLog("abendEngine", this.gameObject().gameIsOver());
         if (this.gameObject().gameIsOver()) {
@@ -649,7 +670,8 @@ function GoEngineClass(base_object_val) {
     };
 
     this.resetEngineObjectData = function () {
-        this.theGroupListArray = [7];
+        this.theGroupListCount = 7;
+        this.theGroupListArray = [this.groupListCount()];
         this.theGroupListArray[1] = this.mallocGroupList(this, 1, this.GO().BLACK_STONE(), false, null, null);
         this.theGroupListArray[2] = this.mallocGroupList(this, 2, this.GO().WHITE_STONE(), false, null, null);
         this.resetMarkedGroupLists();

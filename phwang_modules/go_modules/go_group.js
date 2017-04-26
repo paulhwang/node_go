@@ -494,6 +494,10 @@ function GoGroupClass(group_list_val) {
         }
     };
 
+    this.stoneExistWithinMe = function (x_val, y_val) {
+        return this.existMatrix(x_val, y_val);
+    };
+
     this.abendGroup = function () {
         this.debug(true, "abendGroup", "color=" + this.myColor() + " count=" + this.stoneCount() + " index=" + this.indexNumber());
         var count = 0;

@@ -173,7 +173,7 @@ function GoGameClass(base_object_val) {
         this.debug(true, "addNewMoveAndFight", "(" + move_val.xX() + "," + move_val.yY() + ")");
 
         if (this.gameIsOver()) {
-            this.goLog("addNewMoveAndFight", "two pass have entered");
+            this.debug(true, "addNewMoveAndFight", "two pass have entered");
             return;
         }
 

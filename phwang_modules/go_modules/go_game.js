@@ -170,7 +170,7 @@ function GoGameClass(base_object_val) {
     };
 
     this.addNewMoveAndFight = function (move_val) {
-        this.debug(true, "addNewMoveAndFight", "(" + move_val.xX() + "," + move_val.yY() + ")");
+        this.debug(true, "addNewMoveAndFight", "(" + move_val.xX() + "," + move_val.yY() + "," + move_val.myColor() + "," + move_val.turnIndex() + ")");
 
         if (this.gameIsOver()) {
             this.debug(true, "addNewMoveAndFight", "two pass have entered");
@@ -181,7 +181,6 @@ function GoGameClass(base_object_val) {
         this.insertMoveToMoveList(move_val);
         this.engineObject().enterWar(move_val);
         this.setNextColor(this.GO().getOppositeColor(move_val.myColor()));
-        this.engineObject().abendEngine();
     };
 
     this.addNewMoveWithoutFight = function (x_val, y_val, color_val, turn_val) {

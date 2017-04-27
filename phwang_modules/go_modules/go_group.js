@@ -144,9 +144,9 @@ function GoGroupClass(group_list_val) {
     };
 
     this.insertStoneToGroup = function (x_val, y_val, dead_val) {
-        this.debug(true, "insertStoneToGroup", "x=" + x_val + " y=" + y_val + " color=" + this.myColor());
+        this.debug(true, "insertStoneToGroup", "(" + x_val + "," + y_val + "," + this.myColor() + ")");
         if (this.existMatrix(x_val, y_val)) {
-            this.abend("insert_stone", "x=" + x_val + " y=" + y_val + " color=" + this.myColor());
+            this.abend("insertStoneToGroup", "stone (" + x_val + "," + y_val + "," + this.myColor() + ") already exists in group");
         }
 
         if (this.stoneCount() == 0) {
@@ -530,7 +530,7 @@ function GoGroupClass(group_list_val) {
             while (j < this.boardSize()) {
                 if (this.existMatrix(i, j)) {
                     if (other_group_val.existMatrix(i, j)) {
-                        this.abend("abendOnGroupConflict", "(" + i + "," + j + ") color=" + this.myColor());
+                        this.abend("abendOnGroupConflict", "stone (" + i + "," + j + ") exists in 2 groups, color=" + this.myColor() + ":" + other_group_val.myColor() + " index=" + this.indexNumber() + ":" + other_group_val.indexNumber());
                     }
                 }
                 j += 1;

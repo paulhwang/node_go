@@ -24,7 +24,7 @@ function GoMoveClass(str_val, x_val, y_val, color_val, turn_val, base_object_val
         } else {
             this.moveObjectDecode(str_val);
         }
-        this.debug(true, "init__", "(" + this.xX() + "," + this.yY() + ") color=" + this.myColor() + " turn=" + this.turnIndex());
+        this.debug(true, "init__", "new move created: (" + this.xX() + "," + this.yY() + "," + this.myColor() + "," + this.turnIndex() + ")");
     };
 
     this.objectName = function () {

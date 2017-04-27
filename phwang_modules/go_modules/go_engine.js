@@ -233,7 +233,7 @@ function GoEngineClass(base_object_val) {
     };
 
     this.enterWar = function (move_val) {
-        this.debug(true, "goEnterWar", "(" + move_val.xX() + "," + move_val.yY() + ") color=" + move_val.myColor() + " turn=" + move_val.turnIndex());
+        this.debug(true, "enterWar", "(" + move_val.xX() + "," + move_val.yY() + "," + move_val.myColor() + "," + move_val.turnIndex() + ")");
 
         var group = this.insertStoneToGroupList(move_val);
         this.boardObject().addStoneToBoard(move_val.xX(), move_val.yY(), move_val.myColor());
@@ -252,6 +252,7 @@ function GoEngineClass(base_object_val) {
                 this.abend("enterWar", "color=" + move_val.myColor());
             }
         }
+        this.abendEngine();
     };
 
     this.insertStoneToGroupList = function (move_val) {

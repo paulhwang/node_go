@@ -59,6 +59,18 @@ function GoMoveClass(str_val, x_val, y_val, color_val, turn_val, base_object_val
         return this.theTurnIndex;
     };
 
+    this.isSameMove = function (move_val) {
+        if ((this.xX() === move_val.xX()) &&
+            (this.yY() === move_val.yY()) &&
+            (this.myColor() === move_val.myColor()) &&
+            (this.turnIndex() === move_val.turnIndex())) {
+            return true;
+            }
+        else {
+            return false;
+        }
+    };
+
     this.encodeMove = function () {
         var buf = "";
         if (this.xX() < 10) {
@@ -86,7 +98,7 @@ function GoMoveClass(str_val, x_val, y_val, color_val, turn_val, base_object_val
     };
 
     this.moveObjectDecode = function (str_val) {
-        //this.debug(false, "moveObjectDecode", "input=" + str_val);
+        this.debug(false, "moveObjectDecode", "input=" + str_val);
         var index = 0;
         this.theX = (str_val.charAt(index++) - '0') * 10;
         this.theX += (str_val.charAt(index++) - '0');

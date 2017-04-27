@@ -499,7 +499,7 @@ function GoGroupClass(group_list_val) {
     };
 
     this.abendGroup = function () {
-        this.debug(true, "abendGroup", "group=(" + this.myColor() + ":" + this.indexNumber() + ":" + this.stoneCount()  + ")");
+        this.debug(false, "abendGroup", "group=(" + this.myColor() + ":" + this.indexNumber() + ":" + this.stoneCount()  + ")");
         var count = 0;
 
         var i = 0;
@@ -530,7 +530,8 @@ function GoGroupClass(group_list_val) {
             while (j < this.boardSize()) {
                 if (this.existMatrix(i, j)) {
                     if (other_group_val.existMatrix(i, j)) {
-                        this.abend("abendOnGroupConflict", "stone (" + i + "," + j + ") exists in 2 groups, color=" + this.myColor() + ":" + other_group_val.myColor() + " index=" + this.indexNumber() + ":" + other_group_val.indexNumber());
+                        this.abend("abendOnGroupConflict", "stone (" + i + "," + j + ") exists in 2 groups: (" + this.myColor() + ":" + this.indexNumber() + ":" + this.stoneCount() + ") ("
+                            + other_group_val.myColor() + ":" + other_group_val.indexNumber() + ":" + other_group_val.stoneCount() + ")");
                     }
                 }
                 j += 1;

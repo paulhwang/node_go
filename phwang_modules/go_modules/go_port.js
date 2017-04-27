@@ -86,6 +86,21 @@ function GoPortClass(base_object_val) {
         return this.theTransmitQueue;
     };
 
+    this.setLastReceivedMove = function(move_val) {
+        this.theLastReceivedMove = move_val;
+    };
+
+    this.lastReceivedMove = function() {
+        return this.theLastReceivedMove;
+    };
+
+    this.isLastReceivedMove = function (move_val) {
+        if (!this.lastReceivedMove()) {
+            return false;
+        }
+        return (this.lastReceivedMove().isSameMove(move_val));
+    };
+
     this.thansmitBoardData = function () {
         var board_data = this.GO_PROTOCOL_CODE_BOARD_DATA + this.boardObject().encodeBoard();
         var data = JSON.stringify({
@@ -149,7 +164,13 @@ function GoPortClass(base_object_val) {
             this.thansmitBoardData();
         } else {
             var move = this.mallocMove(str_val, 0, 0, 0, 0, this.baseObject());
-            this.gameObject().addNewMoveAndFight(move);
+            if (this.isLastReceivedMove(move)) {
+                this.debug(true, "aMoveIsPlayed", "duplicated move received *****************");
+            }
+            else {
+                this.setLastReceivedMove(move);
+                this.gameObject().addNewMoveAndFight(move);
+            }
             this.thansmitBoardData();
         }
     };

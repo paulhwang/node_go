@@ -499,7 +499,7 @@ function GoGroupClass(group_list_val) {
     };
 
     this.abendGroup = function () {
-        this.debug(true, "abendGroup", "color=" + this.myColor() + " count=" + this.stoneCount() + " index=" + this.indexNumber());
+        this.debug(true, "abendGroup", "group=(" + this.myColor() + ":" + this.indexNumber() + ":" + this.stoneCount()  + ")");
         var count = 0;
 
         var i = 0;
@@ -523,7 +523,7 @@ function GoGroupClass(group_list_val) {
     };
 
     this.abendOnGroupConflict = function(other_group_val) {
-        this.debug(true, "abendOnGroupConflict", this.indexNumber() + " vs " + other_group_val.indexNumber());
+        this.debug(false, "abendOnGroupConflict", this.indexNumber() + " vs " + other_group_val.indexNumber());
         var i = 0;
         while (i < this.boardSize()) {
             var j = 0;

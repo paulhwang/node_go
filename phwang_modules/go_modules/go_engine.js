@@ -625,7 +625,7 @@ function GoEngineClass(base_object_val) {
         if (!this.abendEngineOn()) {
             return;
         }
-        this.debug(true, "abendEngine", "is ON ***");
+        this.debug(false, "abendEngine", "is ON ***");
 
         var stones_count = 0;
         var i = 0;

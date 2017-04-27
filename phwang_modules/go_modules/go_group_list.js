@@ -234,7 +234,7 @@ function GoGroupListClass(engine_val, index_val, color_val, dead_val, big_stone_
             d = "*";
         }
 
-        this.debug(true, "abendGroupList", "" + this.indexNumber() + " color=" + this.myColor() + " count=" + this.groupCount() + ":" + this.totalStoneCount());
+        this.debug(false, "abendGroupList", "" + this.indexNumber() + " color=" + this.myColor() + " count=" + this.groupCount() + ":" + this.totalStoneCount());
         var i = 0;
         while (i < this.groupCount()) {
             var group = this.listArray(i);

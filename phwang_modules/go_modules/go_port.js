@@ -113,7 +113,7 @@ function GoPortClass(base_object_val) {
                         white_score: this.engineObject().whiteScoreString(),
                         final_score: this.engineObject().finalScoreString(),
                     });
-        this.debug(false, "transmitData", data);
+        this.debug(true, "transmitData", data);
         this.transmitQueue().enQueue(data);
     };
 

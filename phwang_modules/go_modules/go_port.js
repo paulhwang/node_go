@@ -101,7 +101,7 @@ function GoPortClass(base_object_val) {
         return (this.lastReceivedMove().isSameMove(move_val));
     };
 
-    this.thansmitBoardData = function () {
+    this.transmitBoardData = function () {
         var board_data = this.GO_PROTOCOL_CODE_BOARD_DATA + this.boardObject().encodeBoard();
         var data = JSON.stringify({
                         board_data: board_data,
@@ -113,7 +113,7 @@ function GoPortClass(base_object_val) {
                         white_score: this.engineObject().whiteScoreString(),
                         final_score: this.engineObject().finalScoreString(),
                     });
-        this.debug(true, "thansmitBoardData", data);
+        this.debug(true, "transmitBoardData", data);
         this.transmitQueue().enQueue(data);
     };
 
@@ -167,9 +167,11 @@ function GoPortClass(base_object_val) {
             if (this.isLastReceivedMove(move)) {
                 this.debug(true, "aMoveIsPlayed", "duplicated move received *****************");
             }
-            this.setLastReceivedMove(move);
-            this.gameObject().addNewMoveAndFight(move);
-            this.thansmitBoardData();
+            else {
+                this.setLastReceivedMove(move);
+                this.gameObject().addNewMoveAndFight(move);
+            }
+            this.transmitBoardData();
         }
     };
 

@@ -238,27 +238,27 @@ function GoGameClass(base_object_val) {
         this.debug(true, "receiveSpecialMoveFromOpponent", data_val);
         if (data_val === this.FORWARD_MOVE()) {
             this.processForwardMove();
-            this.portObject().thansmitBoardData();
+            this.portObject().transmitBoardData();
             return;
         }
         if (data_val === this.DOUBLE_FORWARD_MOVE()) {
             this.processDoubleForwardMove();
-            this.portObject().thansmitBoardData();
+            this.portObject().transmitBoardData();
             return;
         }
         if (data_val === this.BACKWARD_MOVE()) {
             this.processBackwardMove();
-            this.portObject().thansmitBoardData();
+            this.portObject().transmitBoardData();
             return;
         }
         if (data_val === this.DOUBLE_BACKWARD_MOVE()) {
             this.processDoubleBackwardMove();
-            this.portObject().thansmitBoardData();
+            this.portObject().transmitBoardData();
             return;
         }
         if (data_val === this.PASS_MOVE()) {
             this.processPassMove();
-            this.portObject().thansmitBoardData();
+            this.portObject().transmitBoardData();
             return;
         }
         if (data_val === this.RESIGN_MOVE()) {
@@ -271,7 +271,7 @@ function GoGameClass(base_object_val) {
         }
         if (data_val === this.CONFIRM_MOVE()) {
             this.processConfirmMove();
-            this.portObject().thansmitBoardData();
+            this.portObject().transmitBoardData();
             return;
         }
         if (data_val === this.PLAY_ANOTHER_GAME_MOVE()) {

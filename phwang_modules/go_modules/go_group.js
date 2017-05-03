@@ -203,7 +203,7 @@ function GoGroupClass(group_list_val) {
             var j = group2.minY();
             while (j <= group2.maxY()) {
                 if (group2.existMatrix(i, j)) {
-                    this.debug(true, "mergeWithOtherGroup", "i=" + i + " j=" + j);
+                    this.debug(false, "mergeWithOtherGroup", "i=" + i + " j=" + j);
                     if (this.existMatrix(i, j)) {
                         this.abend("mergeWithOtherGroup", "already exist");
                     }

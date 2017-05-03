@@ -30,7 +30,7 @@ function FabricLinkClass(root_object_val, link_id_val, link_name_val) {
     };
 
     this.linkTimeoutInterval = function () {
-        return 30000;
+        return 7200000; //2 hours
     };
 
     this.objectName = function () {

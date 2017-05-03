@@ -144,7 +144,7 @@ function GoGroupClass(group_list_val) {
     };
 
     this.insertStoneToGroup = function (x_val, y_val, dead_val) {
-        this.debug(true, "insertStoneToGroup", "(" + x_val + "," + y_val + "," + this.myColor() + ")");
+        this.debug(false, "insertStoneToGroup", "(" + x_val + "," + y_val + "," + this.myColor() + ")");
         if (this.existMatrix(x_val, y_val)) {
             this.abend("insertStoneToGroup", "stone (" + x_val + "," + y_val + "," + this.myColor() + ") already exists in group");
         }
@@ -195,7 +195,7 @@ function GoGroupClass(group_list_val) {
     };
 
     this.mergeWithOtherGroup = function (group2) {
-        this.debug(true, "mergeWithOtherGroup", "");
+        this.debug(false, "mergeWithOtherGroup", "");
         //this.debugGroupObject();
 
         var i = group2.minX();

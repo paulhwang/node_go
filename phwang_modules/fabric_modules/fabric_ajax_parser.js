@@ -158,6 +158,7 @@ function FabricAjaxParserClass(root_object_val) {
         if (!link) {
             return null;
         }
+        link.resetKeepAliveTimer();
 
         if (link.nameListChanged()) {
             this.debug(true, "getLinkData", "link.nameListChanged()=" + link.nameListChanged());
@@ -198,6 +199,7 @@ function FabricAjaxParserClass(root_object_val) {
         if (!link) {
             return null;
         }
+        link.resetKeepAliveTimer();
 
         link.clearNameListChanged();
         var output = JSON.stringify({link_id: link.linkId(),
@@ -212,6 +214,7 @@ function FabricAjaxParserClass(root_object_val) {
         if (!link) {
             return null;
         }
+        link.resetKeepAliveTimer();
 
         var cluster = this.clusterMgrObject().mallocCluster(go_request.topic_data);
         if (!cluster) {
@@ -260,6 +263,7 @@ function FabricAjaxParserClass(root_object_val) {
             this.logit("getSessionObject", "link not found: link_id=" + go_request.link_id);
             return null;
         }
+        link.resetKeepAliveTimer();
 
         var session = link.getSession(go_request.session_id);
         if (!session) {

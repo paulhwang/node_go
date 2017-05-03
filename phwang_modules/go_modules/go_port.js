@@ -86,24 +86,11 @@ function GoPortClass(base_object_val) {
         return this.theTransmitQueue;
     };
 
-    this.setLastReceivedMove = function(move_val) {
-        this.theLastReceivedMove = move_val;
-    };
-
-    this.lastReceivedMove = function() {
-        return this.theLastReceivedMove;
-    };
-
     this.isLastReceivedMove = function (move_val) {
         if (!this.gameObject().lastMoveInMovesArray()) {
             return false;
         }
         return this.gameObject().lastMoveInMovesArray().isSameMove(move_val);
-
-        if (!this.lastReceivedMove()) {
-            return false;
-        }
-        return (this.lastReceivedMove().isSameMove(move_val));
     };
 
     this.transmitBoardData = function () {
@@ -173,7 +160,6 @@ function GoPortClass(base_object_val) {
                 this.debug(true, "aMoveIsPlayed", "duplicated move received *****************");
             }
             else {
-                this.setLastReceivedMove(move);
                 this.gameObject().addNewMoveAndFight(move);
             }
             this.transmitBoardData();

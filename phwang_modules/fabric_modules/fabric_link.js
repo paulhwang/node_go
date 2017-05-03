@@ -135,7 +135,7 @@ function FabricLinkClass(root_object_val, link_id_val, link_name_val) {
     };
 
     this.resetKeepAliveTimer = function () {
-        this.debug(true, "resetKeepAliveTimer", "linkName=" + this.linkName() + " linkId=" + this.linkId());
+        this.debug(false, "resetKeepAliveTimer", "linkName=" + this.linkName() + " linkId=" + this.linkId());
         this.setKeepAliveTimer(this.resetTimeout());
     };
 
@@ -143,7 +143,7 @@ function FabricLinkClass(root_object_val, link_id_val, link_name_val) {
         if (this.keepAliveTimer()) {
             clearTimeout(this.keepAliveTimer());
         }
-        this.debug(true, "resetTimeout", "linkName=" + this.linkName() + " linkId=" + this.linkId());
+        this.debug(false, "resetTimeout", "linkName=" + this.linkName() + " linkId=" + this.linkId());
         var time_out = setTimeout(function (link_val) {
             console.log("resetTimeout(***timeout occurs)", "linkName=" + link_val.linkName() + " linkId=" + link_val.linkId());
             link_val.linkMgrObject().freeLink(link_val);

@@ -205,7 +205,7 @@ function GoGroupClass(group_list_val) {
                 if (group2.existMatrix(i, j)) {
                     this.debug(true, "mergeWithOtherGroup", "i=" + i + " j=" + j);
                     if (this.existMatrix(i, j)) {
-                        this.abend("goMergeWithOtherGroup", "already exist");
+                        this.abend("mergeWithOtherGroup", "already exist");
                     }
                     this.setExistMatrix(i, j, group2.existMatrix(i, j));
                     this.incrementStoneCount();
@@ -233,7 +233,7 @@ function GoGroupClass(group_list_val) {
         }
 
         if (group2.groupListObject().listArray(group2.indexNumber()) != group2) {
-            this.abend("merge_with_other_group", "group2");
+            this.abend("mergeWithOtherGroup", "group2");
         }
     };
 
@@ -268,7 +268,7 @@ function GoGroupClass(group_list_val) {
             while (j <= this.maxY()) {
                 if (this.existMatrix(i, j)) {
                     this.boardObject().setBoardArray(i, j, this.GO().EMPTY_STONE());
-                    this.debug(true, "removeDeadStoneFromBoard", "(" + i + "," + ")" + j);
+                    this.debug(false, "removeDeadStoneFromBoard", "(" + i + "," + j + ")");
                 }
                 j += 1;
             }
@@ -338,7 +338,7 @@ function GoGroupClass(group_list_val) {
 
         this.score_color = this.emptyGroupFindNeighborsColor();
         if (this.score_color == this.GO().EMPTY_STONE) {
-            this.abend("score_an_empty_group", " " + this.index + " " + this.stone_count);
+            this.abend("scoreAnEmptyGroup", " " + this.index + " " + this.stone_count);
             return;
         }
 

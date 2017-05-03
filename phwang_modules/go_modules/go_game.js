@@ -83,6 +83,13 @@ function GoGameClass(base_object_val) {
         this.theMovesArray[i] = val;
     };
 
+    this.lastMoveInMovesArray = function () {
+        if (this.totalMoves() === 0) {
+            return null;
+        }
+        return this.theMovesArray[this.totalMoves() - 1];
+    };
+
     this.nextColor = function () {
         return this.theNextColor;
     };

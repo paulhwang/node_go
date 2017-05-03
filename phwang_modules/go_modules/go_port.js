@@ -95,6 +95,11 @@ function GoPortClass(base_object_val) {
     };
 
     this.isLastReceivedMove = function (move_val) {
+        if (!this.gameObject().lastMoveInMovesArray()) {
+            return false;
+        }
+        return this.gameObject().lastMoveInMovesArray().isSameMove(move_val);
+
         if (!this.lastReceivedMove()) {
             return false;
         }

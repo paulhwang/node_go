@@ -98,6 +98,7 @@ function GoPortClass(base_object_val) {
         var data = JSON.stringify({
                         board_data: board_data,
                         next_color: this.gameObject().nextColor(),
+                        total_moves: this.gameObject().totalMoves(),
                         last_dead_stone: this.engineObject().lastDeadStone(),
                         capture_count: this.engineObject().captureCount(),
                         game_is_over: this.gameObject().gameIsOver(),

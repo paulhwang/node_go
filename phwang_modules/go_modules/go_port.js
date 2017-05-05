@@ -157,12 +157,22 @@ function GoPortClass(base_object_val) {
             this.thansmitBoardData();
         } else {
             var move = this.mallocMove(str_val, 0, 0, 0, 0, this.baseObject());
+            if (move.turnIndex() !== this.gameObject().totalMoves() + 1) {
+                this.debug(true, "aMoveIsPlayed", "duplicated move received *****************");
+            }
+            else {
+                this.gameObject().addNewMoveAndFight(move);
+            }
+
+            /*
             if (this.isLastReceivedMove(move)) {
                 this.debug(true, "aMoveIsPlayed", "duplicated move received *****************");
             }
             else {
                 this.gameObject().addNewMoveAndFight(move);
             }
+            */
+
             this.transmitBoardData();
         }
     };

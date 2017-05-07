@@ -120,6 +120,20 @@ function FabricLinkMgrClass(root_object_val) {
         }
     };
 
+    this.getLinkByName = function (name_val) {
+        var i = this.linkTableArrayLength() - 1;
+        while (i > 0) {
+            var link = this.linkTableArrayElement(i);
+            if (link) {
+                if (link.linkName() === name_val) {
+                    return link;
+                }
+            }
+            i -= 1;
+        }
+        return null;
+    };
+
     this.setNameListChanged = function () {
         var i = this.linkTableArrayLength() - 1;
         while (i > 0) {

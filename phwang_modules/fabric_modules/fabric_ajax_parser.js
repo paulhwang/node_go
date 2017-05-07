@@ -230,7 +230,7 @@ function FabricAjaxParserClass(root_object_val) {
         session.setClusterObject(cluster);
 
         if (go_request.my_name !== go_request.his_name) {
-            var his_link = this.linkMgrObject().searchName(go_request.his_name);
+            var his_link = this.linkMgrObject().getLinkByName(go_request.his_name);
             if (!his_link) {
                 return null;
             }

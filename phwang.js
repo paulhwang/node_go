@@ -1,5 +1,20 @@
 var net = require("net");
-const TESTING_PORT = 8124;
+
+/*
+var client = new net.Socket();
+client.setEncoding('utf8');
+client.connect('8006', 'localhost', function() {
+	console.log*('connect to server');
+	client.write("Lphwang");
+});
+client.on('error', function() {
+	console.log("errorrr");
+});
+client.on('data', function(data) {
+	console.log('client receive: ' + data + ' from ' + client.remoteAddress + ':' + client.remotePort);
+});
+
+const TESTING_PORT = 8010;
 
 var server = net.createServer(function(conn) {
 	console.log('connected from ' + conn.remoteAddress + ":" + conn.remotePort);
@@ -14,17 +29,10 @@ server.on('listening', function() {
 	console.log('listening on ' + TESTING_PORT);
 })
 
-var client = new net.Socket();
-client.setEncoding('utf8');
-client.connect('8124', 'localhost', function() {
-	client.write("hello");
-});
-client.on('error', function() {
-	console.log("errorrr");
-});
-client.on('data', function(data) {
-	console.log('client receive: ' + data + ' from ' + client.remoteAddress + ':' + client.remotePort);
-});
+server.on('error', function(err) {
+	console.log('error');
+})
+*/
 
 var express = require('express');
 var bodyParser = require('body-parser');

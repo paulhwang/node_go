@@ -61,6 +61,10 @@ function FabricImportClass (root_object_val) {
         return require("../util_modules/logit.js");
     }
 
+    this.importNetClient = function () {
+        return require("../util_modules/net_client.js");
+    }
+
     this.mallocQueue = function () {
         return require("../util_modules/queue.js").malloc(this.rootObject());
     };

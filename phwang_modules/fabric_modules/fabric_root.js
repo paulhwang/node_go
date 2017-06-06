@@ -20,6 +20,7 @@ function FabricRootClass () {
 
     this.init__ = function () {
         this.theImportObject = require("./fabric_import.js").malloc(this);
+        this.theNetClientObject = this.importObject().importNetClient().malloc(this);
         this.theClusterMgrObject = this.importObject().importClusterMgr().malloc(this);
         this.theLinkMgrObject = this.importObject().importLinkMgr().malloc(this);
         this.theAjaxObject = this.importObject().importAjax().malloc(this);

@@ -79,12 +79,16 @@ function LinkMgrServiceClass(root_object_val) {
         this.debug(true, "receiveCloseFromLinkMgr", "");
     };
 
-
     this.mallocLink = function (my_name_val, go_request_val, res_val) {
         this.theGoRequest = go_request_val;
         this.theRes = res_val;
         this.netClientOjbect().write("L" + my_name_val);
-    }
+    };
+
+    this.getLinkByIdIndexName = function (link_id_index_val, link_name_val) {
+        this.debug(true, "getLinkByIdIndexName", "link_id_index_val=" + link_id_index_val);
+    };
+
 
 /*
 

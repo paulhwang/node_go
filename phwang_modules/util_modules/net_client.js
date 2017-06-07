@@ -17,6 +17,11 @@ function NetClientClass(root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
+
+        this.theNet = require("net");
+        this.theClient = new this.theNet.Socket();///////////////////////////////////
+		this.client().setEncoding('utf8');
+
         this.debug(true, "init__", "");
     };
 
@@ -26,6 +31,18 @@ function NetClientClass(root_object_val) {
 
     this.rootObject = function () {
         return this.theRootObject;
+    };
+
+    this.net123 = function () {
+        return this.theNet;
+    };
+
+    this.client = function () {
+        return this.theClient;
+    };
+
+    this.connect = function (port_val, host_name_val, func_val) {
+    	this.client().connect(port_val, host_name_val, func_val);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

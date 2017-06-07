@@ -46,7 +46,12 @@ function NetClientClass(root_object_val) {
     };
 
     this.connect = function (port_val, host_name_val, func_val) {
-    	this.client().connect(port_val, host_name_val, func_val);
+        this.client().connect(port_val, host_name_val, func_val);
+    };
+
+    this.write = function (data_val) {
+        this.debug(true, "********write", data_val);
+        this.client().write(data_val);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

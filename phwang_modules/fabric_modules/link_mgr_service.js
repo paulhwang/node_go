@@ -57,6 +57,10 @@ function LinkMgrServiceClass(root_object_val) {
         return this.rootObject().importObject();
     };
 
+    this.mallocLink = function (my_name_val) {
+        this.netClientOjbect().write("L" + my_name_val);
+    }
+
 /*
 
 

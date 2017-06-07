@@ -52,6 +52,10 @@ function FabricAjaxParserClass(root_object_val) {
         return this.rootObject().linkMgrObject();
     };
 
+    this.linkMgrServiceObject = function () {
+        return this.rootObject().linkMgrServiceObject();
+    };
+
     this.clusterMgrObject = function () {
         return this.rootObject().clusterMgrObject();
     };
@@ -130,6 +134,8 @@ function FabricAjaxParserClass(root_object_val) {
     };
 
     this.setupLink = function (go_request, res) {
+        this.linkMgrServiceObject().mallocLink(go_request.my_name);
+
         if (this.useLinkMgrService()) {
             var link = this.linkMgrObject().mallocLink(go_request.my_name);
             return this.setupLinkResponse(go_request, res, link);

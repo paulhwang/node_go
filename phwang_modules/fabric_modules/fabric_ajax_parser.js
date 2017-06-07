@@ -33,11 +33,11 @@ function FabricAjaxParserClass(root_object_val) {
     };
 
     this.debugInput = function () {
-        return true;
+        return false;
     };
 
     this.debugOutput = function () {
-        return true;
+        return false;
     };
 
     this.objectName = function () {

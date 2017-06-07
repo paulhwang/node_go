@@ -50,8 +50,11 @@ function NetClientClass(root_object_val) {
     };
 
     this.write = function (data_val) {
-        this.debug(true, "********write", data_val);
         this.client().write(data_val);
+    };
+
+    this.onData = function (func_val) {
+        this.client().on("data", func_val);
     };
 
     this.debug = function (debug_val, str1_val, str2_val) {

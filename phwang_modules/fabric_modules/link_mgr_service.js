@@ -24,14 +24,8 @@ function LinkMgrServiceClass(root_object_val) {
 
     this.init__ = function (root_object_val) {
         this.theRootObject = root_object_val;
-        this.debug(true, "init__", this.rootObject().objectName());
-
-
         this.theNetClientObject = this.importObject().importNetClient().malloc(this.rootObject());
-        var this0 = this;
-        this.netClientOjbect().connect(LINK_MGR_SERVICE_IP_PORT, LINK_MGR_SERVICE_IP_ADDRESS, function () {
-            this0.debug(true, "init__", "LinkMgrService is connected");
-        });
+        this.setupConnectionToLinkMgr();
 
 
         this.theGlobalLinkId = 0;
@@ -55,6 +49,20 @@ function LinkMgrServiceClass(root_object_val) {
 
     this.importObject = function () {
         return this.rootObject().importObject();
+    };
+
+    this.setupConnectionToLinkMgr = function () {
+        var this0 = this;
+        this.netClientOjbect().connect(LINK_MGR_SERVICE_IP_PORT, LINK_MGR_SERVICE_IP_ADDRESS, function () {
+            this0.debug(true, "init__", "LinkMgrService is connected");
+        });
+        this.netClientOjbect().onData(function (data_val) {
+            this0.receiveDataFromLinkMgr(data_val);
+        });
+    };
+
+    this.receiveDataFromLinkMgr = function (data_val) {
+        this.debug(true, "receiveDataFromLinkMgr", data_val);
     };
 
     this.mallocLink = function (my_name_val) {

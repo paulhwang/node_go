@@ -84,17 +84,9 @@ function FabricAjaxClass(root_object_val) {
 
         var data = this.ajaxParserObject().parseGetRequest(req.headers.gorequest, command_index_val, res);
 
-        if (!this.ajaxParserObject().useLinkMgrService() && (go_request.command !== "setup_link") ) {
+        if (!this.ajaxParserObject().useLinkMgrService() && (go_request.command !== "setup_link")) {
             this.sendHttpResponse(go_request, res, data);
         }
-        /*
-        var json_str = JSON.stringify({
-                        command: go_request.command,
-                        data: data,
-                    });
-        res.type('application/json');
-        res.send(json_str);
-        */
     };
 
     this.sendHttpResponse = function (request_val, res, data_val) {
@@ -102,6 +94,7 @@ function FabricAjaxClass(root_object_val) {
                         command: request_val.command,
                         data: data_val,
                     });
+        this.debug(false, "sendHttpResponse", json_str);
         res.type('application/json');
         res.send(json_str);
     };

@@ -134,34 +134,28 @@ function FabricAjaxParserClass(root_object_val) {
     };
 
     this.setupLink = function (go_request, res) {
-        this.linkMgrServiceObject().mallocLink(go_request.my_name);
-
-        if (this.useLinkMgrService()) {
-            var link = this.linkMgrObject().mallocLink(go_request.my_name);
-            return this.setupLinkResponse(go_request, res, link);
-        }
-        else {
-            var link = this.linkMgrObject().mallocLink(go_request.my_name);
-            return this.setupLinkResponse(go_request, res, link);
-        }
+        this.linkMgrServiceObject().mallocLink(go_request.my_name, go_request, res);
     };
 
-    this.setupLinkResponse = function (go_request, res, link_val) {
-        if (!link_val) {
-            this.abend("setupLinkResponse", "null link_val");
+    this.setupLinkResponse = function (this0, go_request, res, data_val) {
+        var link = this0.linkMgrObject().mallocLink(go_request.my_name);
+        if (!link) {
+            this0.abend("setupLinkResponse", "null link");
             return null;
         }
-        link_val.resetKeepAliveTimer();
-        this.setLinkUpdateInterval(this.defaultLinkUpdateInterval());
+        link.resetKeepAliveTimer();
+        this0.setLinkUpdateInterval(this0.defaultLinkUpdateInterval());
 
-        var output = JSON.stringify({my_name: link_val.linkName(),
-                               link_id: link_val.linkId(),
+        var output = JSON.stringify({my_name: link.linkName(),
+                               link_id: link.linkId(),
+                               link_id_index: data_val,
                               });
-        this.debug_(true, this.debugOutput(), "setupLinkResponse", "output=" + output);
+        this0.debug_(true, this0.debugOutput(), "setupLinkResponse", "output=" + output);
+        this0.debug(true, "setupLinkResponse", "output=" + output);
 
-        this.ajaxObject().sendHttpResponse(go_request, res, output);
+        this0.ajaxObject().sendHttpResponse(go_request, res, output);
 
-        return output;
+        //return output;
     };
 
     this.getLinkObject = function (go_request) {

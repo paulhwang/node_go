@@ -47,6 +47,10 @@ function LinkMgrServiceClass(root_object_val) {
         return this.theNetClientObject;
     };
 
+    this.ajaxParserObject = function () {
+        return this.rootObject().ajaxParserObject();
+    };
+
     this.importObject = function () {
         return this.rootObject().importObject();
     };
@@ -56,16 +60,29 @@ function LinkMgrServiceClass(root_object_val) {
         this.netClientOjbect().connect(LINK_MGR_SERVICE_IP_PORT, LINK_MGR_SERVICE_IP_ADDRESS, function () {
             this0.debug(true, "init__", "LinkMgrService is connected");
         });
+
         this.netClientOjbect().onData(function (data_val) {
             this0.receiveDataFromLinkMgr(data_val);
+        });
+
+        this.netClientOjbect().onClose(function () {
+            this0.receiveCloseFromLinkMgr();
         });
     };
 
     this.receiveDataFromLinkMgr = function (data_val) {
         this.debug(true, "receiveDataFromLinkMgr", data_val);
+        this.ajaxParserObject().setupLinkResponse(this.ajaxParserObject(), this.theGoRequest, this.theRes, data_val);
     };
 
-    this.mallocLink = function (my_name_val) {
+    this.receiveCloseFromLinkMgr = function () {
+        this.debug(true, "receiveCloseFromLinkMgr", "");
+    };
+
+
+    this.mallocLink = function (my_name_val, go_request_val, res_val) {
+        this.theGoRequest = go_request_val;
+        this.theRes = res_val;
         this.netClientOjbect().write("L" + my_name_val);
     }
 

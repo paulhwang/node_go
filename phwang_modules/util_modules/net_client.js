@@ -57,6 +57,10 @@ function NetClientClass(root_object_val) {
         this.client().on("data", func_val);
     };
 
+    this.onClose = function (func_val) {
+        this.client().on("close", func_val);
+    };
+
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
             this.logit(str1_val, str2_val);

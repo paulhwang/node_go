@@ -51,6 +51,10 @@ function FabricRootClass () {
         return this.theAjaxObject;
     };
 
+    this.ajaxParserObject = function () {
+        return this.ajaxObject().ajaxParserObject();
+    };
+
     this.debug = function (debug_val, str1_val, str2_val) {
         if (debug_val) {
             this.logit(str1_val, str2_val);

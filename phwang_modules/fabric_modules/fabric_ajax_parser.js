@@ -28,12 +28,16 @@ function FabricAjaxParserClass(root_object_val) {
         return 3000;
     };
 
-    this.debugInput = function () {
+    this.useLinkMgrService = function () {
         return false;
     };
 
+    this.debugInput = function () {
+        return true;
+    };
+
     this.debugOutput = function () {
-        return false;
+        return true;
     };
 
     this.objectName = function () {
@@ -58,6 +62,10 @@ function FabricAjaxParserClass(root_object_val) {
 
     this.clusterMgrObject = function () {
         return this.rootObject().clusterMgrObject();
+    };
+
+    this.ajaxObject = function () {
+        return this.rootObject().ajaxObject();
     };
 
     this.linkUpdateInterval = function () {
@@ -103,37 +111,50 @@ function FabricAjaxParserClass(root_object_val) {
                                         ];
     };
 
-    this.parseGetRequest = function (input_val, command_index_val) {
-        var go_request = JSON.parse(input_val);
+    this.parseGetRequest = function (go_request_json_val, command_index_val, res) {
+        var go_request = JSON.parse(go_request_json_val);
 
         if (go_request.command === "get_link_data") {
-            this.debug_(false, this.debugInput(), "switchRequest", "input_val=" + input_val);
+            this.debug_(false, this.debugInput(), "switchRequest", "go_request_json_val=" + go_request_json_val);
         } else {
-            this.debug_(true, this.debugInput(), "switchRequest", "input_val=" + input_val);
+            this.debug_(true, this.debugInput(), "switchRequest", "go_request_json_val=" + go_request_json_val);
         }
 
         var func = this.httpSwitchTableArray(command_index_val)[go_request.command];
         if (func) {
-            return func.bind(this)(go_request);
+            return func.bind(this)(go_request, res);
         } else {
             this.abend("switchRequest", "bad command=" + go_request.command);
             return null;
         }
-    }
+    };
 
-    this.setupLink = function (go_request) {
-        var link = this.linkMgrObject().mallocLink(go_request.my_name);
-        if (!link) {
-            this.abend("setupLink", "null link");
+    this.setupLink = function (go_request, res) {
+        if (this.useLinkMgrService()) {
+            var link = this.linkMgrObject().mallocLink(go_request.my_name);
+            return this.setupLinkResponse(go_request, res, link);
+        }
+        else {
+            var link = this.linkMgrObject().mallocLink(go_request.my_name);
+            return this.setupLinkResponse(go_request, res, link);
+        }
+    };
+
+    this.setupLinkResponse = function (go_request, res, link_val) {
+        if (!link_val) {
+            this.abend("setupLinkResponse", "null link_val");
             return null;
         }
-        link.resetKeepAliveTimer();
+        link_val.resetKeepAliveTimer();
         this.setLinkUpdateInterval(this.defaultLinkUpdateInterval());
 
-        var output = JSON.stringify({my_name: link.linkName(),
-                               link_id: link.linkId(),
+        var output = JSON.stringify({my_name: link_val.linkName(),
+                               link_id: link_val.linkId(),
                               });
-        this.debug_(true, this.debugOutput(), "setupLink", "output=" + output);
+        this.debug_(true, this.debugOutput(), "setupLinkResponse", "output=" + output);
+
+        this.ajaxObject().sendHttpResponse(go_request, res, output);
+
         return output;
     };
 

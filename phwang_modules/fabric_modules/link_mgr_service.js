@@ -4,6 +4,9 @@
  * File name: link_mgr_serveric.js
  */
 
+var LINK_MGR_SERVICE_IP_ADDRESS = "52.24.162.133";
+var LINK_MGR_SERVICE_IP_PORT = 8006;
+
 var the_link_mgr_service_object = null;
 
 module.exports = {
@@ -25,9 +28,10 @@ function LinkMgrServiceClass(root_object_val) {
 
 
         this.theNetClientObject = this.importObject().importNetClient().malloc(this.rootObject());
-        //this.netClientOjbect().connect(8006, '52.24.162.133', function () {
-       // 	console.log("jsdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdfdf");
-       // });
+        var this0 = this;
+        this.netClientOjbect().connect(LINK_MGR_SERVICE_IP_PORT, LINK_MGR_SERVICE_IP_ADDRESS, function () {
+            this0.debug(true, "init__", "LinkMgrService is connected");
+        });
 
 
         this.theGlobalLinkId = 0;

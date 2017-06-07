@@ -10,6 +10,10 @@ module.exports = {
         return net_client;
     },
 
+    connect: function (net_client_object_val, port_val, host_name_val, func_val) {
+        net_client_object_val.connect(port_val, host_name_val, func_val);
+    },
+
 };
 
 function NetClientClass(root_object_val) {

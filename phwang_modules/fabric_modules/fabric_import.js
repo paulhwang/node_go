@@ -37,6 +37,10 @@ function FabricImportClass (root_object_val) {
         return require("./fabric_link_mgr.js");
     }
 
+    this.importLinkMgrService = function () {
+        return require("./link_mgr_service.js");
+    }
+
     this.importAjaxParser = function () {
         return require("./fabric_ajax_parser.js");
     };

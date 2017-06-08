@@ -134,7 +134,7 @@ function FabricAjaxParserClass(root_object_val) {
     };
 
     this.setupLink = function (go_request, res) {
-        this.linkMgrServiceObject().mallocLink(go_request.my_name, go_request, res);
+        this.linkMgrServiceObject().mallocLink(go_request.my_name, this.setupLinkResponse, go_request, res);
     };
 
     this.setupLinkResponse = function (this0, go_request, res, data_val) {

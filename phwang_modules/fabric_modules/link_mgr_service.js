@@ -72,14 +72,15 @@ function LinkMgrServiceClass(root_object_val) {
 
     this.receiveDataFromLinkMgr = function (data_val) {
         this.debug(true, "receiveDataFromLinkMgr", data_val);
-        this.ajaxParserObject().setupLinkResponse(this.ajaxParserObject(), this.theGoRequest, this.theRes, data_val);
+        this.callbackFunc.bind(this.ajaxParserObject())(this.ajaxParserObject(), this.theGoRequest, this.theRes, data_val);
     };
 
     this.receiveCloseFromLinkMgr = function () {
         this.debug(true, "receiveCloseFromLinkMgr", "");
     };
 
-    this.mallocLink = function (my_name_val, go_request_val, res_val) {
+    this.mallocLink = function (my_name_val, callback_func_val, go_request_val, res_val) {
+        this.callbackFunc = callback_func_val;
         this.theGoRequest = go_request_val;
         this.theRes = res_val;
         this.netClientOjbect().write("L" + my_name_val);

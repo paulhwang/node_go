@@ -72,7 +72,7 @@ function LinkMgrServiceClass(root_object_val) {
 
     this.receiveDataFromLinkMgr = function (data_val) {
         this.debug(true, "receiveDataFromLinkMgr", data_val);
-        this.callbackFunc.bind(this.ajaxParserObject())(this.ajaxParserObject(), this.theGoRequest, this.theRes, data_val);
+        this.callbackFunc.bind(this.ajaxParserObject())(this.ajaxParserObject(), this.theGoRequest, this.theRes, data_val.slice(1));
     };
 
     this.receiveCloseFromLinkMgr = function () {
@@ -97,7 +97,10 @@ function LinkMgrServiceClass(root_object_val) {
 
     this.mallocSession = function (link_id_index_val, his_name_val, callback_func_val, go_request_val, res_val) {
         this.debug(true, "mallocSession", "link_id_index_val=" + link_id_index_val + " his_name_val=" + his_name_val);
-
+        this.callbackFunc = callback_func_val;
+        this.theGoRequest = go_request_val;
+        this.theRes = res_val;
+        this.netClientOjbect().write("S" + link_id_index_val + his_name_val);
     };
 
     this.getSessionData = function (link_id_index_val, session_id_index_val, callback_func_val, go_request_val, res_val) {

@@ -161,7 +161,7 @@ function FabricAjaxParserClass(root_object_val) {
     this.getLinkObject = function (go_request) {
         this.debug(false, "getLinkObject", "link_id=" + go_request.link_id + " link_id_index=" + go_request.link_id_index + " my_name=" + go_request.my_name);
 
-        var link0 = this.linkMgrServiceObject().getLinkByIdIndexName(go_request.link_id_index, go_request.my_name);
+        //var link0 = this.linkMgrServiceObject().getLinkByIdIndexName(go_request.link_id_index, go_request.my_name);
 
         var link = this.linkMgrObject().getLinkByIdName(go_request.link_id, go_request.my_name);
         if (!link) {
@@ -181,7 +181,7 @@ function FabricAjaxParserClass(root_object_val) {
 
     this.getLinkData = function (go_request, res) {
         this.debug(false, "getLinkData", "link_id=" + go_request.link_id + " my_name=" + go_request.my_name + " ajax_id=" + go_request.ajax_id);
-        this.linkMgrServiceObject().getLinkData(go_request.link_id_index, go_request.my_name, this.getLinkDataResponse, go_request, res);
+        //this.linkMgrServiceObject().getLinkData(go_request.link_id_index, go_request.my_name, this.getLinkDataResponse, go_request, res);
 
         var link = this.getLinkObject(go_request);
         if (!link) {
@@ -324,7 +324,12 @@ function FabricAjaxParserClass(root_object_val) {
         return output;
     };
 
-    this.getSessionData = function (go_request) {
+    this.getSessionDataResponse = function () {
+    };
+
+    this.getSessionData = function (go_request, res) {
+        this.linkMgrServiceObject().getSessionData(go_request.link_id_index, go_request.session_id_index, this.getSessionDataResponse, go_request, res);
+
         var session = this.getSessionObject(go_request);
         if (!session) {
             return null;
@@ -346,7 +351,12 @@ function FabricAjaxParserClass(root_object_val) {
         return output;
     };
 
-    this.putSessionData = function (go_request) {
+    this.putSessionDataResponse = function () {
+    };
+
+    this.putSessionData = function (go_request, res) {
+        this.linkMgrServiceObject().putSessionData(go_request.link_id_index, go_request.session_id_index, this.putSessionDataResponse, go_request, res);
+
         var session = this.getSessionObject(go_request);
         if (!session) {
             return null;
@@ -386,7 +396,7 @@ function FabricAjaxParserClass(root_object_val) {
         return output;
     };
 
-    this.keepAlive = function (go_request) {
+    this.keepAlive = function (go_request, res) {
         this.abend("keepAlive", "keepAlive is not implemented");
         var my_link_id = go_request.link_id;
         this.debug(false, "keepAlive", "link_id=" + my_link_id + " my_name=" + go_request.my_name);

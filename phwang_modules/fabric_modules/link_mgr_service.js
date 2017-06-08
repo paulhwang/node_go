@@ -91,12 +91,22 @@ function LinkMgrServiceClass(root_object_val) {
     };
 
     this.getLinkData = function (link_id_index_val, my_name_val, callback_func_val, go_request_val, res_val) {
-        this.debug(true, "getLinkData", "link_id_index_val=" + link_id_index_val + " my_name_val=" + my_name_val);
+        this.debug(false, "getLinkData", "link_id_index_val=" + link_id_index_val + " my_name_val=" + my_name_val);
 
     };
 
     this.mallocSession = function (link_id_index_val, my_name_val, callback_func_val, go_request_val, res_val) {
         this.debug(true, "mallocSession", "link_id_index_val=" + link_id_index_val + " my_name_val=" + my_name_val);
+
+    };
+
+    this.getSessionData = function (link_id_index_val, session_id_index_val, callback_func_val, go_request_val, res_val) {
+        this.debug(true, "getSessionData", "link_id_index_val=" + link_id_index_val + " session_id_index_val=" + session_id_index_val);
+
+    };
+
+    this.putSessionData = function (link_id_index_val, session_id_index_val, callback_func_val, go_request_val, res_val) {
+        this.debug(true, "putSessionData", "link_id_index_val=" + link_id_index_val + " session_id_index_val=" + session_id_index_val);
 
     };
 

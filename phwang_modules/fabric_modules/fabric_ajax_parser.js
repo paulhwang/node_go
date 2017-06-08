@@ -283,7 +283,9 @@ function FabricAjaxParserClass(root_object_val) {
 
         var output = JSON.stringify({
                             link_id: link.linkId(),
+                            link_id_index: go_request.link_id_index,
                             session_id: session.sessionId(),
+                            session_id_index: "TBD",
                             his_name: go_request.his_name,
                             topic_data: go_request.topic_data,
                             });

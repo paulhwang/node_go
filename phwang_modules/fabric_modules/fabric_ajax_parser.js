@@ -181,7 +181,7 @@ function FabricAjaxParserClass(root_object_val) {
 
     this.getLinkData = function (go_request, res) {
         this.debug(false, "getLinkData", "link_id=" + go_request.link_id + " my_name=" + go_request.my_name + " ajax_id=" + go_request.ajax_id);
-        //this.linkMgrServiceObject().getLinkData(go_request.link_id_index, go_request.my_name, this.getLinkDataResponse, go_request, res);
+        this.linkMgrServiceObject().getLinkData(go_request.link_id_index, this.getLinkDataResponse, go_request, res);
 
         var link = this.getLinkObject(go_request);
         if (!link) {

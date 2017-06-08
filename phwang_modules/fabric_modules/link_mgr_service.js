@@ -90,13 +90,13 @@ function LinkMgrServiceClass(root_object_val) {
         this.debug(true, "getLinkByIdIndexName", "link_id_index_val=" + link_id_index_val);
     };
 
-    this.getLinkData = function (link_id_index_val, my_name_val, callback_func_val, go_request_val, res_val) {
-        this.debug(false, "getLinkData", "link_id_index_val=" + link_id_index_val + " my_name_val=" + my_name_val);
+    this.getLinkData = function (link_id_index_val, callback_func_val, go_request_val, res_val) {
+        this.debug(false, "getLinkData", "link_id_index_val=" + link_id_index_val);
 
     };
 
-    this.mallocSession = function (link_id_index_val, my_name_val, callback_func_val, go_request_val, res_val) {
-        this.debug(true, "mallocSession", "link_id_index_val=" + link_id_index_val + " my_name_val=" + my_name_val);
+    this.mallocSession = function (link_id_index_val, his_name_val, callback_func_val, go_request_val, res_val) {
+        this.debug(true, "mallocSession", "link_id_index_val=" + link_id_index_val + " his_name_val=" + his_name_val);
 
     };
 

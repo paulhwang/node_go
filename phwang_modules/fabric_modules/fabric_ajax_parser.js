@@ -238,19 +238,16 @@ function FabricAjaxParserClass(root_object_val) {
         return output;
     };
 
-    this.setupSessionResponse = function () {
-    };
+    this.setupSessionResponse = function (this0, go_request, res, data_val) {
+        this0.debug(true, "setupSessionResponse", "data_val=" + data_val);
 
-    this.setupSession = function (go_request, res) {
-        this.linkMgrServiceObject().mallocSession(go_request.link_id_index, go_request.my_name, this.setupSessionResponse, go_request, res);
-
-        var link = this.getLinkObject(go_request);
+        var link = this0.getLinkObject(go_request);
         if (!link) {
             return null;
         }
         link.resetKeepAliveTimer();
 
-        var cluster = this.clusterMgrObject().mallocCluster(go_request.topic_data);
+        var cluster = this0.clusterMgrObject().mallocCluster(go_request.topic_data);
         if (!cluster) {
             return null;
         }
@@ -264,7 +261,7 @@ function FabricAjaxParserClass(root_object_val) {
         session.setClusterObject(cluster);
 
         if (go_request.my_name !== go_request.his_name) {
-            var his_link = this.linkMgrObject().getLinkByName(go_request.his_name);
+            var his_link = this0.linkMgrObject().getLinkByName(go_request.his_name);
             if (!his_link) {
                 return null;
             }
@@ -289,8 +286,14 @@ function FabricAjaxParserClass(root_object_val) {
                             his_name: go_request.his_name,
                             topic_data: go_request.topic_data,
                             });
-        this.debug_(true, this.debugOutput(), "setupSession", "output=" + output);
-        return output;
+        this0.debug_(true, this0.debugOutput(), "setupSession", "output=" + output);
+        //return output;
+        this0.debug(true, "setupSessionResponse", "3data_val=" + data_val);
+        this0.ajaxObject().sendHttpResponse(go_request, res, output);
+    };
+
+    this.setupSession = function (go_request, res) {
+        this.linkMgrServiceObject().mallocSession(go_request.link_id_index, go_request.my_name, this.setupSessionResponse, go_request, res);
     };
 
     this.getSessionObject = function (go_request) {

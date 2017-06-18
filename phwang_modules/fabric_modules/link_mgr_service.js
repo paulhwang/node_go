@@ -110,6 +110,10 @@ function LinkMgrServiceClass(root_object_val) {
 
     this.putSessionData = function (link_id_index_val, session_id_index_val, callback_func_val, go_request_val, res_val) {
         this.debug(true, "putSessionData", "link_id_index_val=" + link_id_index_val + " session_id_index_val=" + session_id_index_val);
+        this.callbackFunc = callback_func_val;
+        this.theGoRequest = go_request_val;
+        this.theRes = res_val;
+        this.netClientOjbect().write("P" + link_id_index_val + session_id_index_val);
 
     };
 

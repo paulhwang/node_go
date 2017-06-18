@@ -356,13 +356,10 @@ function FabricAjaxParserClass(root_object_val) {
         return output;
     };
 
-    this.putSessionDataResponse = function () {
-    };
+    this.putSessionDataResponse = function (this0, go_request, res, data_val) {
+        this0.debug(true, "putSessionDataResponse", "data_val=" + data_val);
 
-    this.putSessionData = function (go_request, res) {
-        this.linkMgrServiceObject().putSessionData(go_request.link_id_index, go_request.session_id_index, this.putSessionDataResponse, go_request, res);
-
-        var session = this.getSessionObject(go_request);
+        var session = this0.getSessionObject(go_request);
         if (!session) {
             return null;
         }
@@ -374,12 +371,12 @@ function FabricAjaxParserClass(root_object_val) {
             if (go_request.xmt_seq === 0) {
                 session.clusterObject().TransmitData(go_request.data);
                 session.up_seq = 1;
-                this.logit("putSessionData", go_request.data + " xmt_seq=" + go_request.xmt_seq + " reset");
+                this0.logit("putSessionData", go_request.data + " xmt_seq=" + go_request.xmt_seq + " reset");
             } else {
-                this.logit("putSessionData", "(" + link_id + "," + session_id + ") "  + go_request.my_name + "=>" + go_request.his_name + " {" + go_request.data + "} " + go_request.xmt_seq + " dropped");
+                this0.logit("putSessionData", "(" + link_id + "," + session_id + ") "  + go_request.my_name + "=>" + go_request.his_name + " {" + go_request.data + "} " + go_request.xmt_seq + " dropped");
             }
         } else {
-            this.abend("putSessionData", go_request.data + " xmt_seq=" + go_request.xmt_seq + " up_seq=" + session.up_seq + "IS FIXED!!!");
+            this0.abend("putSessionData", go_request.data + " xmt_seq=" + go_request.xmt_seq + " up_seq=" + session.up_seq + "IS FIXED!!!");
             if (go_request.xmt_seq === session.up_seq + 1) {
                 session.clusterObject().TransmitData(go_request.data);
                 session.up_seq += 2;
@@ -388,7 +385,7 @@ function FabricAjaxParserClass(root_object_val) {
 
         var res_data = session.dequeueTransmitData();
         if (!res_data) {
-            this.debug(false, "putSessionData", "no data");
+            this0.debug(false, "putSessionData", "no data");
             return null;
         }
 
@@ -397,8 +394,15 @@ function FabricAjaxParserClass(root_object_val) {
                     session_id: session.sessionId(),
                     res_data: res_data,
                     });
-        this.debug_(true, this.debugOutput(), "getSessionData", "output=" + output);
-        return output;
+        this0.debug_(true, this0.debugOutput(), "getSessionData", "output=" + output);
+        //return output;
+
+        this0.debug(true, "putSessionDataResponse", "3data_val=" + data_val);
+        this0.ajaxObject().sendHttpResponse(go_request, res, output);
+    };
+
+    this.putSessionData = function (go_request, res) {
+        this.linkMgrServiceObject().putSessionData(go_request.link_id_index, go_request.session_id_index, this.putSessionDataResponse, go_request, res);
     };
 
     this.keepAlive = function (go_request, res) {

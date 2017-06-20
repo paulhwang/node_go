@@ -33,7 +33,7 @@ function FabricAjaxParserClass(root_object_val) {
     };
 
     this.debugInput = function () {
-        return false;
+        return true;
     };
 
     this.debugOutput = function () {
@@ -282,13 +282,12 @@ function FabricAjaxParserClass(root_object_val) {
                             link_id: link.linkId(),
                             link_id_index: go_request.link_id_index,
                             session_id: session.sessionId(),
-                            session_id_index: "TBD",
+                            session_id_index: data_val,
                             his_name: go_request.his_name,
                             topic_data: go_request.topic_data,
                             });
         this0.debug_(true, this0.debugOutput(), "setupSession", "output=" + output);
         //return output;
-        this0.debug(true, "setupSessionResponse", "3data_val=" + data_val);
         this0.ajaxObject().sendHttpResponse(go_request, res, output);
     };
 

@@ -388,10 +388,18 @@ function FabricAjaxParserClass(root_object_val) {
             return null;
         }
 
+
+        var link_id_index = data_val.slice(0, 8);
+        var session_id_index = data_val.slice(8, 16);
+        var c_data = data_val.slice(16);
+
         var output = JSON.stringify({
                     link_id: session.linkObject().linkId(),
                     session_id: session.sessionId(),
+                    link_id_index: link_id_index,
+                    session_id_index: session_id_index,
                     res_data: res_data,
+                    c_data: c_data,
                     });
         this0.debug_(true, this0.debugOutput(), "getSessionData", "output=" + output);
         //return output;
@@ -401,7 +409,7 @@ function FabricAjaxParserClass(root_object_val) {
     };
 
     this.putSessionData = function (go_request, res) {
-        this.linkMgrServiceObject().putSessionData(go_request.link_id_index, go_request.session_id_index, this.putSessionDataResponse, go_request, res);
+        this.linkMgrServiceObject().putSessionData(go_request.link_id_index, go_request.session_id_index, go_request.data, this.putSessionDataResponse, go_request, res);
     };
 
     this.keepAlive = function (go_request, res) {

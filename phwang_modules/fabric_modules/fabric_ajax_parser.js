@@ -292,7 +292,7 @@ function FabricAjaxParserClass(root_object_val) {
     };
 
     this.setupSession = function (go_request, res) {
-        this.linkMgrServiceObject().mallocSession(go_request.link_id_index, go_request.my_name, this.setupSessionResponse, go_request, res);
+        this.linkMgrServiceObject().mallocSession(go_request.link_id_index, go_request.my_name, go_request.theme_data, this.setupSessionResponse, go_request, res);
     };
 
     this.getSessionObject = function (go_request) {

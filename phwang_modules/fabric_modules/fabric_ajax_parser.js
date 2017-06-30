@@ -213,8 +213,8 @@ function FabricAjaxParserClass(root_object_val) {
                                interval: this0.linkUpdateInterval(),
                                });
         this0.debug_(false, this0.debugOutput(), "getLinkData", "output=" + output);
-        //this0.ajaxObject().sendHttpResponse(go_request, res, output);
-        return output;
+        this0.ajaxObject().sendHttpResponse(go_request, res, output);
+        //return output;
     };
 
     this.getLinkData = function (go_request, res) {
@@ -239,12 +239,10 @@ function FabricAjaxParserClass(root_object_val) {
                                      });
         this0.debug_(true, this0.debugOutput(), "getNameList", "output=" + output);
         this0.ajaxObject().sendHttpResponse(go_request, res, output);
-        //return output;
    };
 
     this.getNameList = function (go_request, res) {
         this.linkMgrServiceObject().getNameList(go_request.link_id_index, this.getNameListResponse, go_request, res);
-        //return this.getNameListResponse(this, go_request, res, "junk");
     };
 
     this.setupSessionResponse = function (this0, go_request, res, data_val) {

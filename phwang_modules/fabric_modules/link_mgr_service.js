@@ -105,7 +105,7 @@ function LinkMgrServiceClass(root_object_val) {
         this.callbackFunc = callback_func_val;
         this.theGoRequest = go_request_val;
         this.theRes = res_val;
-        this.netClientOjbect().write("G" +  link_id_index_val);
+        //this.netClientOjbect().write("G" +  link_id_index_val);
 
     };
 

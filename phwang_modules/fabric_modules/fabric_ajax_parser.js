@@ -177,10 +177,6 @@ function FabricAjaxParserClass(root_object_val) {
     };
 
     this.getLinkDataResponse = function (this0, go_request, res, data_val) {
-    };
-
-    this.getLinkData = function (go_request, res) {
-        this.linkMgrServiceObject().getLinkData(go_request.link_id_index, this.getLinkDataResponse, go_request, res);
 
         this.debug(false, "getLinkData", "link_id=" + go_request.link_id + " my_name=" + go_request.my_name + " ajax_id=" + go_request.ajax_id);
         this.linkMgrServiceObject().getLinkData(go_request.link_id_index, this.getLinkDataResponse, go_request, res);
@@ -219,6 +215,11 @@ function FabricAjaxParserClass(root_object_val) {
                                });
         this.debug_(false, this.debugOutput(), "getLinkData", "output=" + output);
         return output;
+    };
+
+    this.getLinkData = function (go_request, res) {
+        this.linkMgrServiceObject().getLinkData(go_request.link_id_index, this.getLinkDataResponse, go_request, res);
+        return this.getLinkDataResponse(this, go_request, res, "junk");
     };
 
     this.putLinkData = function (go_request) {

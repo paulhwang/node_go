@@ -86,6 +86,8 @@ function FabricAjaxClass(root_object_val) {
 
         if (!this.ajaxParserObject().useLinkMgrService() 
             && (go_request.command !== "setup_link")
+            //&& (go_request.command !== "get_link_data")
+            && (go_request.command !== "get_name_list")
             && (go_request.command !== "setup_session")
             && (go_request.command !== "put_session_data")) {
             this.sendHttpResponse(go_request, res, data);

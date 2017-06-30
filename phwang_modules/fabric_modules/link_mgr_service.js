@@ -91,8 +91,21 @@ function LinkMgrServiceClass(root_object_val) {
         this.debug(true, "getLinkByIdIndexName", "link_id_index_val=" + link_id_index_val);
     };
 
+    this.getNameList = function (link_id_index_val, callback_func_val, go_request_val, res_val) {
+        this.debug(false, "getNameList", "link_id_index_val=" + link_id_index_val);
+        this.callbackFunc = callback_func_val;
+        this.theGoRequest = go_request_val;
+        this.theRes = res_val;
+        this.netClientOjbect().write("N" +  link_id_index_val);
+
+    };
+
     this.getLinkData = function (link_id_index_val, callback_func_val, go_request_val, res_val) {
         this.debug(false, "getLinkData", "link_id_index_val=" + link_id_index_val);
+        this.callbackFunc = callback_func_val;
+        this.theGoRequest = go_request_val;
+        this.theRes = res_val;
+        this.netClientOjbect().write("G" +  link_id_index_val);
 
     };
 

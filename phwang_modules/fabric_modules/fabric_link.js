@@ -163,7 +163,7 @@ function FabricLinkClass(root_object_val, link_id_val, link_name_val) {
         if (index === -1) {
             return null;
         } else {
-            var session =this.sessionTableArray()[index];
+            var session = this.sessionTableArray()[index];
             return session;
         }
     };

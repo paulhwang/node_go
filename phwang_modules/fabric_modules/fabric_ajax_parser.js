@@ -227,11 +227,6 @@ function FabricAjaxParserClass(root_object_val) {
     };
 
     this.getNameListResponse = function (this0, go_request, res, data_val) {
-    };
-
-    this.getNameList = function (go_request, res) {
-        this.linkMgrServiceObject().getNameList(go_request.link_id_index, this.getNameListResponse, go_request, res);
-
         var link = this.getLinkObject(go_request);
         if (!link) {
             return null;
@@ -244,6 +239,11 @@ function FabricAjaxParserClass(root_object_val) {
                                      });
         this.debug_(true, this.debugOutput(), "getNameList", "output=" + output);
         return output;
+   };
+
+    this.getNameList = function (go_request, res) {
+        this.linkMgrServiceObject().getNameList(go_request.link_id_index, this.getNameListResponse, go_request, res);
+        return this.getNameListResponse(this, go_request, res, "junk");
     };
 
     this.setupSessionResponse = function (this0, go_request, res, data_val) {

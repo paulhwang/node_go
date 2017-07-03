@@ -99,12 +99,12 @@ function LinkMgrServiceClass(root_object_val) {
         this.netClientOjbect().write("G" +  link_id_index_val);
     };
 
-    this.getNameList = function (link_id_index_val, callback_func_val, go_request_val, res_val) {
+    this.getNameList = function (link_id_index_val, name_list_tag_val, callback_func_val, go_request_val, res_val) {
         this.debug(false, "getNameList", "link_id_index_val=" + link_id_index_val);
         this.callbackFunc = callback_func_val;
         this.theGoRequest = go_request_val;
         this.theRes = res_val;
-        this.netClientOjbect().write("N" +  link_id_index_val);
+        this.netClientOjbect().write("N" +  link_id_index_val + name_list_tag_val);
     };
 
     this.mallocSession = function (link_id_index_val, his_name_val, theme_data_val, callback_func_val, go_request_val, res_val) {

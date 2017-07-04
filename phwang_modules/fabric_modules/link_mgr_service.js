@@ -115,6 +115,14 @@ function LinkMgrServiceClass(root_object_val) {
         this.netClientOjbect().write("S" + link_id_index_val + theme_data_val + his_name_val);
     };
 
+    this.setupSessionReply = function (link_id_index_val, session_id_index_val, callback_func_val, go_request_val, res_val) {
+        this.debug(true, "setupSessionReply", "link_id_index_val=" + link_id_index_val + " session_id_index_val=" + session_id_index_val);
+        this.callbackFunc = callback_func_val;
+        this.theGoRequest = go_request_val;
+        this.theRes = res_val;
+        this.netClientOjbect().write("R" + link_id_index_val + session_id_index_val);
+    };
+
     this.getSessionData = function (link_id_index_val, session_id_index_val, callback_func_val, go_request_val, res_val) {
         this.debug(true, "getSessionData", "link_id_index_val=" + link_id_index_val + " session_id_index_val=" + session_id_index_val);
 

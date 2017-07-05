@@ -356,31 +356,38 @@ function FabricAjaxParserClass(root_object_val) {
         this.linkMgrServiceObject().setupSessionReply(go_request.link_id_index, go_request.session_id_index , this.setupSessionReplyResponse, go_request, res);
     };
 
-    this.getSessionDataResponse = function () {
-    };
-
-    this.getSessionData = function (go_request, res) {
-        this.linkMgrServiceObject().getSessionData(go_request.link_id_index, go_request.session_id_index, this.getSessionDataResponse, go_request, res);
-
-        var session = this.getSessionObject(go_request);
+    this.getSessionDataResponse = function (this0, go_request, res, data_val) {
+        var session = this0.getSessionObject(go_request);
         if (!session) {
             return null;
         }
 
         var res_data = session.dequeueTransmitData();
         if (!res_data) {
-            this.debug(true, "getSessionData", "no data");
-            return null;
+            this0.debug(true, "getSessionDataResponse", "no data");
+            ///////return null;
         }
-        this.debug(false, "getSessionData", "res_data=" + res_data);
+        this0.debug(false, "getSessionDataResponse", "res_data=" + res_data);
+
+        var link_id_index = data_val.slice(0, 8);
+        var session_id_index = data_val.slice(8, 16);
+        var c_data = data_val.slice(16);
 
         var output = JSON.stringify({
                     link_id: session.linkObject().linkId(),
                     session_id: session.sessionId(),
                     res_data: res_data,
+                    link_id_index: link_id_index,
+                    session_id_index: session_id_index,
+                    c_data: c_data,
                     });
-        this.debug_(true, this.debugOutput(), "getSessionData", "output=" + output);
-        return output;
+        this0.debug_(true, this0.debugOutput(), "getSessionDataResponse", "output=" + output);
+        //return output;
+        this0.ajaxObject().sendHttpResponse(go_request, res, output);
+    };
+
+    this.getSessionData = function (go_request, res) {
+        this.linkMgrServiceObject().getSessionData(go_request.link_id_index, go_request.session_id_index, this.getSessionDataResponse, go_request, res);
     };
 
     this.putSessionDataResponse = function (this0, go_request, res, data_val) {
